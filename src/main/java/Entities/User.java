@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
-   long ID;
-   String Nom;
-   String Prenom;
-   LocalDate Birthday;
-
-   ArrayList<Long> ActorsList;
-
-   ArrayList<String> GenreList;
+   private long ID;
+   private String Nom;
+   private String Prenom;
+   private LocalDate Birthday;
+   private ArrayList<Long> ActorsList;
+   private ArrayList<String> GenreList;
 
     public User(long ID, String nom, String prenom, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
         this.ID = ID;
