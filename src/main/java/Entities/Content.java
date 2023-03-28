@@ -3,12 +3,10 @@ package Entities;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class content {
+public class Content {
     long id;
    private String nom;
     private String realisateur;
@@ -18,7 +16,7 @@ public class content {
     private List<String> listegenre;
     private Image img;
 
-    public content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+    public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
         this.id = id;
         this.nom = nom;
         this.realisateur = realisateur;
@@ -33,7 +31,7 @@ public class content {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        content content = (content) o;
+        Content content = (Content) o;
         return id == content.id ;
     }
 
