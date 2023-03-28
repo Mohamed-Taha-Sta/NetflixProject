@@ -28,5 +28,8 @@ public class HelloApplication extends Application {
         us.afficher();
       /*commentaire*/
         launch();
+
+
+
     }
 }
