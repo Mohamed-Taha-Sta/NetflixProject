@@ -41,4 +41,68 @@ public class content {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getRealisateur() {
+        return realisateur;
+    }
+
+    public void setRealisateur(String realisateur) {
+        this.realisateur = realisateur;
+    }
+
+    public LocalDate getAnnerdesortie() {
+        return annerdesortie;
+    }
+
+    public void setAnnerdesortie(LocalDate annerdesortie) {
+        this.annerdesortie = annerdesortie;
+    }
+
+    public String getLangue() {
+        return langue;
+    }
+
+    public void setLangue(String langue) {
+        this.langue = langue;
+    }
+
+    public String getPaysorigine() {
+        return paysorigine;
+    }
+
+    public void setPaysorigine(String paysorigine) {
+        this.paysorigine = paysorigine;
+    }
+
+    public List<String> getListegenre() {
+        return listegenre;
+    }
+
+    public void setListegenre(List<String> listegenre) {
+        this.listegenre = listegenre;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public void setImg(Image img) {
+        this.img = img;
+    }
 }
