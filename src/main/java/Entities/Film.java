@@ -1,7 +1,9 @@
 package Entities;
 
+import Utils.ConxDB;
 import javafx.scene.image.Image;
 
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -25,6 +27,30 @@ private LocalTime duree;
     public void setDuree(LocalTime duree) {
         this.duree = duree;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
