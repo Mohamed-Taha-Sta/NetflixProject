@@ -1,5 +1,6 @@
 package com.example.netflixproject1;
 
+import Entity.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,6 +24,8 @@ public class HelloApplication extends Application {
         System.out.printf("Hello TAHA");
         System.out.printf("Banjourrat");
         System.out.printf("Ban");
+        User us=new User();
+        us.afficher();
 
         launch();
     }
