@@ -11,17 +11,22 @@ public class User {
    private LocalDate Birthday;
    private ArrayList<Long> ActorsList;
    private ArrayList<String> GenreList;
+   private String Password;
+
+   private String Mail;
 
     public User() {
     }
 
-    public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
+    public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, String password, String mail) {
         this.ID = ID;
         Name = name;
         Prename = prename;
         Birthday = birthday;
         ActorsList = actorsList;
         GenreList = genreList;
+        Password = password;
+        Mail = mail;
     }
 
     public long getID() {
@@ -77,11 +82,27 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return ID == user.ID;
+        return Mail.equals(user.Mail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(Mail);
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getMail() {
+        return Mail;
+    }
+
+    public void setMail(String mail) {
+        Mail = mail;
     }
 }

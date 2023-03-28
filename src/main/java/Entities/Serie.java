@@ -3,12 +3,16 @@ package Entities;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Serie extends Content{
-    long SeasonNumber;
+    private long SeasonNumber;
 
-    public Serie() {
+    private List<Season> seasonList;
+
+    public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
     }
 
     public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, long SeasonNumber) {
@@ -22,6 +26,10 @@ public class Serie extends Content{
 
     public void setSeasonNumber(long seasonNumber) {
         SeasonNumber = seasonNumber;
+    }
+
+    public void addSeason(Season season){
+        seasonList.add(season);
     }
 
 }
