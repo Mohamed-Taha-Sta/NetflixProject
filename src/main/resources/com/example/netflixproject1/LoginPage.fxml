@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controllers.LoginPage"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="97.0" layoutY="161.0" prefHeight="49.0" prefWidth="78.0" text="Email">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="218.0" prefHeight="49.0" prefWidth="111.0" text="Password">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField layoutX="238.0" layoutY="230.0" prefHeight="25.0" prefWidth="241.0" />
+      <TextField layoutX="238.0" layoutY="173.0" prefHeight="25.0" prefWidth="241.0" />
+      <Button layoutX="427.0" layoutY="320.0" mnemonicParsing="false" text="Log In" />
+      <Label alignment="CENTER" layoutX="185.0" layoutY="57.0" prefHeight="72.0" prefWidth="230.0" text="Login Page" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="43.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

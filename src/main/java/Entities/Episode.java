@@ -14,13 +14,21 @@ public class Episode {
     private Image image;
     private Resume resume;
 
-    public Episode(long ID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume) {
+    private long VueNbr;
+    private long Score;
+    private long Votes;
+
+
+    public Episode(long ID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, long vueNbr, long score, long votes) {
         this.ID = ID;
         Number = number;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.image = image;
         this.resume = resume;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
     }
 
     public Episode() {
@@ -72,5 +80,29 @@ public class Episode {
 
     public void setResume(Resume resume) {
         this.resume = resume;
+    }
+
+    public long getVueNbr() {
+        return VueNbr;
+    }
+
+    public void setVueNbr(long vueNbr) {
+        VueNbr = vueNbr;
+    }
+
+    public long getScore() {
+        return Score;
+    }
+
+    public void setScore(long score) {
+        Score = score;
+    }
+
+    public long getVotes() {
+        return Votes;
+    }
+
+    public void setVotes(long votes) {
+        Votes = votes;
     }
 }

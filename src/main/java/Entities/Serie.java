@@ -20,6 +20,11 @@ public class Serie extends Content{
         this.SeasonNumber=SeasonNumber;
     }
 
+    public Serie(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, long seasonNumber) {
+        super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+        SeasonNumber = seasonNumber;
+    }
+
     public long getSeasonNumber() {
         return SeasonNumber;
     }
@@ -32,4 +37,11 @@ public class Serie extends Content{
         seasonList.add(season);
     }
 
+    public List<Season> getSeasonList() {
+        return seasonList;
+    }
+
+    public void setSeasonList(List<Season> seasonList) {
+        this.seasonList = seasonList;
+    }
 }

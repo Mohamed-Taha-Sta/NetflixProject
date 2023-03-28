@@ -31,6 +31,16 @@ public class Content {
         this.img = img;
     }
 
+    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+        this.nom = nom;
+        this.realisateur = realisateur;
+        this.annerdesortie = annerdesortie;
+        this.langue = langue;
+        this.paysorigine = paysorigine;
+        this.listegenre = listegenre;
+        this.img = img;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
