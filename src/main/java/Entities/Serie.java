@@ -37,4 +37,11 @@ public class Serie extends Content{
         seasonList.add(season);
     }
 
+    public List<Season> getSeasonList() {
+        return seasonList;
+    }
+
+    public void setSeasonList(List<Season> seasonList) {
+        this.seasonList = seasonList;
+    }
 }
