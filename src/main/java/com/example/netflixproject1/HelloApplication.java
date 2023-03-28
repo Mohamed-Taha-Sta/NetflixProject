@@ -17,7 +17,9 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+
     public static void main(String[] args) {
+        System.out.printf("HEllo MFS");
         launch();
     }
 }
