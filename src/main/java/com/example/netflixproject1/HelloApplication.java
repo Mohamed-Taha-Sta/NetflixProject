@@ -1,6 +1,6 @@
 package com.example.netflixproject1;
 
-import Enteties.User;
+import Entities.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

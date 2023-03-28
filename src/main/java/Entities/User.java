@@ -1,4 +1,4 @@
-package Enteties;
+package Entities;
 
 public class User {
     public void afficher(){
