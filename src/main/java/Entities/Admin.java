@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.Objects;
+
 public class Admin {
     private long ID;
     private String Mail;
@@ -33,5 +35,18 @@ public class Admin {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Admin admin = (Admin) o;
+        return Mail.equals(admin.Mail);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Mail);
     }
 }

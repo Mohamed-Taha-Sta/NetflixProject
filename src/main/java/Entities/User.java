@@ -82,12 +82,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return ID == user.ID;
+        return Mail.equals(user.Mail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(Mail);
     }
 
     public String getPassword() {
