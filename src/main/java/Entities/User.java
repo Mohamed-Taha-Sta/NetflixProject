@@ -12,9 +12,9 @@ public class User {
    private ArrayList<Long> ActorsList;
    private ArrayList<String> GenreList;
 
-    public User(long ID, String nom, String prenom, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
+    public User(long ID, String name, String prenom, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
         this.ID = ID;
-        Nom = nom;
+        Name = name;
         Prenom = prenom;
         Birthday = birthday;
         ActorsList = actorsList;
@@ -29,12 +29,12 @@ public class User {
         this.ID = ID;
     }
 
-    public String getNom() {
-        return Nom;
+    public String getName() {
+        return Name;
     }
 
-    public void setNom(String nom) {
-        Nom = nom;
+    public void setName(String name) {
+        Name = name;
     }
 
     public String getPrenom() {
