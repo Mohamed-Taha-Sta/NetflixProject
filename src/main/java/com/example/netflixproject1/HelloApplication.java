@@ -19,10 +19,7 @@ public class HelloApplication extends Application {
 
 
     public static void main(String[] args) {
-        System.out.printf("HEllo Bitches");
-        System.out.printf("Hello TAHA");
-        System.out.printf("Banjourrat");
-        System.out.printf("Ban");
+
 
         launch();
     }
