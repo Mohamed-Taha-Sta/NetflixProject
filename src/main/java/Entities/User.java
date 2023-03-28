@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class User {
    private long ID;
-   private String Nom;
+   private String Name;
    private String Prenom;
    private LocalDate Birthday;
    private ArrayList<Long> ActorsList;

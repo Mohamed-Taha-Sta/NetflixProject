@@ -21,4 +21,5 @@ public class Serie extends Content{
     public void setSeasonNumber(long seasonNumber) {
         SeasonNumber = seasonNumber;
     }
+
 }
