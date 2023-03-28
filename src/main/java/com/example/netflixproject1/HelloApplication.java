@@ -27,6 +27,8 @@ public class HelloApplication extends Application {
         User us=new User();
         us.afficher();
 
+//        Commentaire
+
         launch();
     }
 }
