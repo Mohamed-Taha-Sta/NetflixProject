@@ -12,6 +12,9 @@ public class User {
    private ArrayList<Long> ActorsList;
    private ArrayList<String> GenreList;
 
+    public User() {
+    }
+
     public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
         this.ID = ID;
         Name = name;

@@ -17,6 +17,9 @@ public class Content {
     protected List<String> listegenre;
     protected Image img;
 
+    public Content() {
+    }
+
     public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
         this.id = id;
         this.nom = nom;

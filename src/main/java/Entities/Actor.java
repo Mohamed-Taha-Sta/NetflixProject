@@ -5,6 +5,9 @@ public class Actor {
     protected String Name;
     protected String Prename;
 
+    public Actor() {
+    }
+
     public Actor(long ID, String name, String prename) {
         this.ID = ID;
         Name = name;
