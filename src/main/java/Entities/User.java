@@ -7,15 +7,15 @@ import java.util.Objects;
 public class User {
    private long ID;
    private String Name;
-   private String Prenom;
+   private String Prename;
    private LocalDate Birthday;
    private ArrayList<Long> ActorsList;
    private ArrayList<String> GenreList;
 
-    public User(long ID, String name, String prenom, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
+    public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
         this.ID = ID;
         Name = name;
-        Prenom = prenom;
+        Prename = prename;
         Birthday = birthday;
         ActorsList = actorsList;
         GenreList = genreList;
@@ -37,12 +37,12 @@ public class User {
         Name = name;
     }
 
-    public String getPrenom() {
-        return Prenom;
+    public String getPrename() {
+        return Prename;
     }
 
-    public void setPrenom(String prenom) {
-        Prenom = prenom;
+    public void setPrename(String prename) {
+        Prename = prename;
     }
 
     public LocalDate getBirthday() {
