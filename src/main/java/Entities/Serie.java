@@ -11,7 +11,11 @@ public class Serie extends Content{
 
     private List<Season> seasonList;
 
-    public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img,long SeasonNumber) {
+    public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+    }
+
+    public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, long SeasonNumber) {
         super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
         this.SeasonNumber=SeasonNumber;
     }
