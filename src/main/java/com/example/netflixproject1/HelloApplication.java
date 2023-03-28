@@ -22,6 +22,8 @@ public class HelloApplication extends Application {
         System.out.printf("HEllo Bitches");
         System.out.printf("Hello TAHA");
         System.out.printf("Banjourrat");
+        System.out.printf("Ban");
+
         launch();
     }
 }
