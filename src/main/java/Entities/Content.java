@@ -8,13 +8,13 @@ import java.util.Objects;
 
 public class Content {
     long id;
-   private String nom;
-    private String realisateur;
-    private LocalDate annerdesortie;
-    private String langue;
-    private String paysorigine;
-    private List<String> listegenre;
-    private Image img;
+   protected String nom;
+    protected String realisateur;
+    protected LocalDate annerdesortie;
+    protected String langue;
+    protected String paysorigine;
+    protected List<String> listegenre;
+    protected Image img;
 
     public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
         this.id = id;
