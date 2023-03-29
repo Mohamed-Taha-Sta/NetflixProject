@@ -5,10 +5,9 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.Objects;
 
 public class Actor {
-    protected long ID;
+     static protected  long ID=1;
     protected String Name;
     protected String Prename;
-
     protected String Mail;
     protected String password;
 
