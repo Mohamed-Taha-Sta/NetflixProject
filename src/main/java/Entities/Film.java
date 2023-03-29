@@ -15,12 +15,31 @@ public class Film extends Content{
 private LocalTime duree;
 private ArrayList<Actor>acteur;
 private File file;
+private ArrayList<String>genre;
+
+    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree, ArrayList<Actor> acteur, File file, ArrayList<String> genre) {
+        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        this.acteur = acteur;
+        this.file = file;
+        this.genre = genre;
+    }
+
+
+    public ArrayList<String> getGenre() {
+        return genre;
+    }
+
+    public void setGenre(ArrayList<String> genre) {
+        this.genre = genre;
+    }
 
     public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree, ArrayList<Actor> acteur, File file) {
         super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
         this.duree = duree;
         this.acteur = acteur;
         this.file = file;
+
     }
 
     public File getFile() {
