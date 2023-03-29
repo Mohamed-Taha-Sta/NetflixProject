@@ -6,54 +6,40 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginPage">
+<AnchorPane fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginPage">
    <children>
-      <Button fx:id="login" layoutX="410.0" layoutY="285.0" mnemonicParsing="false" text="Log In" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="290.0">
-         <font>
-            <Font name="Lucida Bright" size="14.0" />
-         </font></Button>
-      <Label alignment="CENTER" layoutX="187.0" layoutY="36.0" text="Login Page" textAlignment="CENTER" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="36.0">
-         <font>
-            <Font name="Lucida Bright" size="24.0" />
-         </font>
-         <padding>
-            <Insets left="50.0" right="50.0" />
-         </padding>
-      </Label>
-      <Button fx:id="signup" layoutX="353.0" layoutY="340.0" mnemonicParsing="false" onAction="#onSignUp" prefHeight="23.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="330.0">
-         <font>
-            <Font name="Lucida Bright" size="12.0" />
-         </font></Button>
-      <GridPane layoutX="200.0" layoutY="137.0" vgap="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox alignment="CENTER" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="30.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="E-Mail" wrappingWidth="100.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="200.0" text="Login" textAlignment="CENTER">
                <font>
-                  <Font name="Lucida Bright" size="20.0" />
+                  <Font name="Lucida Bright" size="24.0" />
                </font>
-            </Text>
-            <Text layoutX="80.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="100.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="mail" promptText="E-Mail">
                <font>
-                  <Font name="Lucida Bright" size="20.0" />
+                  <Font name="Lucida Bright" size="12.0" />
+               </font></TextField>
+            <PasswordField fx:id="Password" promptText="Password">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font></PasswordField>
+            <Button fx:id="login" mnemonicParsing="false" text="Log In">
+               <font>
+                  <Font name="Lucida Bright" size="14.0" />
                </font>
-            </Text>
-            <TextField fx:id="mail" GridPane.columnIndex="1" />
-            <PasswordField fx:id="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </Button>
+            <Button fx:id="signup" mnemonicParsing="false" onAction="#onSignUp" prefHeight="23.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Button>
          </children>
-      </GridPane>
+      </VBox>
    </children>
 </AnchorPane>
