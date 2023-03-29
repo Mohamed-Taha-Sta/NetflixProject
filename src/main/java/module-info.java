@@ -9,4 +9,6 @@ module com.example.netflixproject {
     exports com.example.netflixproject;
     exports Controllers;
     opens Controllers to javafx.fxml;
+    exports Entities;
+    opens Entities to javafx.fxml;
 }

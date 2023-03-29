@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
    <children>
-      <ListView fx:id="ActorsList" layoutX="62.0" layoutY="52.0" prefHeight="325.0" prefWidth="200.0" />
-      <Line endX="-100.0" endY="319.0" layoutX="400.0" layoutY="81.0" startX="-100.0" startY="-81.0" />
+      <Line endX="-100.0" endY="329.6999816894531" layoutX="400.0" layoutY="95.0" startX="-100.0" startY="-81.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <TableView fx:id="ActorTable" layoutX="14.0" layoutY="14.0">
+        <columns>
+          <TableColumn fx:id="ActorColumn" prefWidth="178.39996337890625" text="Actor" />
+          <TableColumn prefWidth="68.00006103515625" text="Selected" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>
