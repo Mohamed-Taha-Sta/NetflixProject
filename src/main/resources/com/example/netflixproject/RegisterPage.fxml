@@ -31,11 +31,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" />
+            <DatePicker fx:id="UserBirthday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="UserPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="UserEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="UserPrename" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="UserName" GridPane.columnIndex="1" />
             <Text boundsType="LOGICAL_VERTICAL_CENTER" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="100.0" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <font>
                   <Font name="Lucida Bright" size="20.0" />
@@ -72,7 +72,7 @@
             <Insets left="20.0" />
          </opaqueInsets>
       </GridPane>
-      <Button layoutX="410.0" layoutY="372.0" mnemonicParsing="false" text="Sign Up" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="372.0">
+      <Button layoutX="410.0" layoutY="372.0" mnemonicParsing="false" onAction="#OnSignUp" text="Sign Up" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="372.0">
          <font>
             <Font name="Lucida Bright" size="14.0" />
          </font>
