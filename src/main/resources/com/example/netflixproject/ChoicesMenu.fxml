@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
    <children>
       <Line endX="-100.0" endY="329.6999816894531" layoutX="400.0" layoutY="95.0" startX="-100.0" startY="-81.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <TableView fx:id="ActorTable" layoutX="14.0" layoutY="14.0">

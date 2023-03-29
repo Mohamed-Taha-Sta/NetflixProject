@@ -24,8 +24,8 @@ public class EpisodeDAO {
                 sql = "INSERT INTO EPISODES (Name,SEASON_ID,NUM,DEBUT_DATE,PREMIERE_DATE,IMAGE,TEXTE,VIEW_NBR,SCORE,VOTES,VIDEO) VALUES ("+episode.getName()+episode.getSeasonParentID()+","+episode.getNumber()+","
                         +episode.getDebutDate().toString()+","+episode.getPremiereDate()+","+episode.getImage()+","+episode.getResume() +","+episode.getVueNbr()+","+episode.getVotes() +","+episode.getMedia() +")";
             else
-                sql = "INSERT INTO EPISODES (Name,SEASON_ID,NUM,DEBUT_DATE,PREMIERE_DATE,IMAGE,SYNOPSIS,VIEW_NBR,SCORE,VOTES,VIDEO) VALUES ("+episode.getName()+episode.getSeasonParentID()+","+episode.getNumber()+","
-                        +episode.getDebutDate().toString()+","+episode.getPremiereDate()+","+episode.getImage()+","+episode.getResume() +","+episode.getVueNbr()+","+episode.getVotes() +","+episode.getMedia() +")";
+                sql = "INSERT INTO EPISODES (Name,SEASON_ID,NUM,DEBUT_DATE,PREMIERE_DATE,IMAGE,SYNOPSIS,VIEW_NBR,SCORE,VOTES,VIDEO) VALUES (" + episode.getName() + episode.getSeasonParentID() + "," + episode.getNumber() + ","
+                        + episode.getDebutDate().toString() + "," + episode.getPremiereDate() + "," + episode.getImage() + "," + episode.getResume() + "," + episode.getVueNbr() + "," + episode.getVotes() + "," + episode.getMedia() + ")";
 
             pstmt = conn.prepareStatement(sql);
 

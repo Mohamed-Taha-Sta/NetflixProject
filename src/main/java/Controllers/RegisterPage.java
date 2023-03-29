@@ -2,6 +2,7 @@ package Controllers;
 
 import Entities.Actor;
 import com.example.netflixproject.HelloApplication;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +20,9 @@ public class RegisterPage implements Initializable {
     public TextField UserEmail;
     public TextField UserPrename;
     public TextField UserName;
-    public TableView<String> ActorTable = new TableView<>();
-    public TableColumn<Actor, String> ActorColumn;
+    public TableView<Actor> ActorTable = new TableView<>();
+    @FXML
+    public TableColumn<?, ?> ActorColumn=new TableColumn<>();
 
     @FXML
     private Button SignUp;
@@ -44,11 +46,15 @@ public class RegisterPage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] actors = {"Tom Hanks", "Meryl Streep", "Leonardo DiCaprio", "Emma Stone", "Robert Downey Jr.", "Robert Downey Jr.", "Robert Downey Jr."};
-        ObservableList<String> data = observableArrayList();
-        data.addAll(actors);
+
+        //ObservableList<String> data = observableArrayList("Tom Hanks", "Meryl Streep", "Leonardo DiCaprio", "Emma Stone", "Robert Downey Jr.", "Robert Downey Jr.", "Robert Downey Jr.");
         //these have problem dont touch
-//        ActorColumn.setCellValueFactory(new PropertyValueFactory<>(""));
-//        ActorTable.setItems(data);
+
+        Actor ac=new Actor(11,"Tom hanks","","dd","sssa");
+        ObservableList<Actor> data = FXCollections.observableArrayList();
+        data.add(ac);
+        ActorColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        ActorTable.setItems(data);
+        //   ActorTable.setItems(data);
     }
 }

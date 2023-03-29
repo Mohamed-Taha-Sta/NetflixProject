@@ -1,5 +1,7 @@
 package Entities;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.util.Objects;
 
 public class Actor {
@@ -13,7 +15,7 @@ public class Actor {
 
     public Actor(long ID, String name, String prename, String mail, String password) {
         this.ID = ID;
-        Name = name;
+        Name =name ;
         Prename = prename;
         Mail = mail;
         this.password = password;
