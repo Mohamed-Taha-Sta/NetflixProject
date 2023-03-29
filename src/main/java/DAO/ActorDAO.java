@@ -14,13 +14,17 @@ public class ActorDAO {
     {
         List<Long> vues=new ArrayList<>();
 
-        if (content instanceof Serie) {
-            Serie serie = (Serie) content;
+        if (content instanceof Serie serie) {
             if (season != null) {
+                Season seas;
                 for (Season se : serie.getSeasonList()) {
                     if (se.equals(season)) {
-
+                        seas =se;
                     }
+                }
+                if(episode !=null){
+
+                    for
                 }
 
             }

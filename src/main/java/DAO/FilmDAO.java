@@ -12,22 +12,7 @@ import java.util.List;
 
 public class FilmDAO {
 
-
-
-
-
-
-
-
-
-
-
-
-
     private static final Connection conn = ConxDB.getInstance();
-
-
-
 
     public static boolean ajout_film(Film film) {
         boolean etat = true;

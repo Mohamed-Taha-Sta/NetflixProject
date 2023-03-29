@@ -81,8 +81,11 @@ public class Season {
         episodeList.add(episode);
     }
 
+    public List<Episode> getEpisodeList() {
+        return episodeList;
+    }
 
-
-
-
+    public void setEpisodeList(List<Episode> episodeList) {
+        this.episodeList = episodeList;
+    }
 }
