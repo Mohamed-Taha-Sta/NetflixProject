@@ -1,8 +1,8 @@
 package Entities;
 
 public class MainActor extends Actor {
-    public MainActor() {
-    }
+//    public MainActor() {
+//    }
 
 
     public MainActor(long ID, String name, String prename, String mail, String password) {

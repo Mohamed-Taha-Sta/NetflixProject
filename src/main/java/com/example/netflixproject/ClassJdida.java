@@ -1,4 +1,4 @@
-package com.example.netflixproject1;
+package com.example.netflixproject;
 
 public class ClassJdida {
 

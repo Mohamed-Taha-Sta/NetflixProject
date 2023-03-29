@@ -10,6 +10,7 @@ public class Actor {
     protected String Mail;
     protected String password;
 
+
     public Actor(long ID, String name, String prename, String mail, String password) {
         this.ID = ID;
         Name = name;
@@ -17,6 +18,7 @@ public class Actor {
         Mail = mail;
         this.password = password;
     }
+
 
     public long getID() {
         return ID;

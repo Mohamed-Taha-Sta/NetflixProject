@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>NetflixProject1</artifactId>
+    <artifactId>NetflixProject</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>NetflixProject1</name>
 
@@ -61,7 +61,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.netflixproject1/com.example.netflixproject1.HelloApplication
+                            <mainClass>com.example.netflixproject1/com.example.netflixproject.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

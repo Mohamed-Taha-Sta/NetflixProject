@@ -1,4 +1,4 @@
-package com.example.netflixproject1;
+package com.example.netflixproject;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
