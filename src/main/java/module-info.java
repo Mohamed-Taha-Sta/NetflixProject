@@ -4,6 +4,8 @@ module com.example.netflixproject {
     requires javafx.media;
     requires java.sql;
     requires org.apache.commons.io;
+    requires java.desktop;
+    requires javafx.swing;
 
     opens com.example.netflixproject to javafx.fxml;
     exports com.example.netflixproject;
