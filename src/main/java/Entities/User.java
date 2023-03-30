@@ -15,7 +15,14 @@ public class User {
 
    private String Mail;
 
-    public User() {
+    public User(String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, String password, String mail) {
+        Name = name;
+        Prename = prename;
+        Birthday = birthday;
+        ActorsList = actorsList;
+        GenreList = genreList;
+        Password = password;
+        Mail = mail;
     }
 
     public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, String password, String mail) {

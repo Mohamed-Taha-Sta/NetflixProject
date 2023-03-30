@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChoicesController">
    <children>
       <Line endY="329.6999816894531" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox alignment="CENTER" layoutX="22.0" layoutY="40.0" prefHeight="420.0" prefWidth="269.0" spacing="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="30.0">
