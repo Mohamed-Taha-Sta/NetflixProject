@@ -105,4 +105,18 @@ public class User {
     public void setMail(String mail) {
         Mail = mail;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", Name='" + Name + '\'' +
+                ", Prename='" + Prename + '\'' +
+                ", Birthday=" + Birthday +
+                ", ActorsList=" + ActorsList +
+                ", GenreList=" + GenreList +
+                ", Password='" + Password + '\'' +
+                ", Mail='" + Mail + '\'' +
+                '}';
+    }
 }

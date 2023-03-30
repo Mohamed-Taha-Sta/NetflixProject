@@ -2,6 +2,7 @@ package Controllers;
 
 import Entities.Actor;
 import Entities.Genre;
+import Entities.User;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,6 +20,17 @@ import java.util.ResourceBundle;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class RegisterPage implements Initializable {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    LocalDate date;
+    User user;
+     String Name;
+    String prename;
+
+    String Email;
+    String Birthday;
+    String Password;
+
+
     public DatePicker UserBirthday;
     public TextField UserPassword;
     public TextField UserEmail;
@@ -47,6 +61,12 @@ public class RegisterPage implements Initializable {
 
     @FXML
     protected void OnSignUp() throws Exception {
+        Name= UserName.getText();
+        System.out.printf(Name);
+        prename=UserPrename.getText();
+        Email=UserEmail.getText();
+        Birthday=String.valueOf(UserBirthday);
+        Password=UserPassword.getText();
         HelloApplication.SetRoot("ChoicesMenu");
     }
 
@@ -57,21 +77,32 @@ public class RegisterPage implements Initializable {
 
     @FXML
     protected void OnDone() throws Exception {
-        List<Actor> selectedActors = new ArrayList<>();
-        List<Genre> selectedGenres = new ArrayList<>();
+        ArrayList<Long> selectedActors = new ArrayList<>();
+        ArrayList<String> selectedGenres = new ArrayList<>();
         for (Actor actor : data) {
             if (actor.getSelect().isSelected()) {
-                selectedActors.add(actor);
+                selectedActors.add(actor.getID());
             }
         }
         for (Genre genre: data2){
             if(genre.getSelect().isSelected()){
-                selectedGenres.add(genre);
+                selectedGenres.add(genre.getNom());
             }
         }
-
+        try {
+            date = LocalDate.parse(Birthday, formatter);
+        }catch (Exception e){
+            System.out.printf(String.valueOf(e));
+        }
+        System.out.println("name"+Name);
+        user=new User(11,Name,prename,date ,selectedActors,selectedGenres,Password,Email);
+        user.setName(Name);
+        user.setPrename(prename);
+        user.setMail(Email);
+        user.setPassword(Password);
         System.out.println("Selected Actors: "+selectedActors);
         System.out.println("Selected Genres: "+selectedGenres);
+        System.out.println("User: "+user);
     }
 
     ObservableList<Actor> data = observableArrayList(new Actor(11, "Tom hanks", "", "dd", "sssa"), new Actor(12, "Jr", "", "dd", "sssa"), new Actor(13, "Emm", "", "dd", "sssa"));

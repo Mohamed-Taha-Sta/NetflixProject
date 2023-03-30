@@ -34,7 +34,7 @@
                   <Font name="Lucida Bright" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="signup" mnemonicParsing="false" onAction="#onSignUp" prefHeight="23.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here">
+            <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here" textAlignment="CENTER" underline="true">
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font>
