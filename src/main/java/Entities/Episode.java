@@ -2,9 +2,8 @@ package Entities;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.time.LocalDate;
-import javafx.scene.media.*;
-import java.util.PrimitiveIterator;
 
 public class Episode {
 
@@ -16,14 +15,28 @@ public class Episode {
     private LocalDate PremiereDate;
     private Image image;
     private Resume resume;
-    private Media media;
+    private File media;
 
     private long VueNbr;
     private long Score;
     private long Votes;
 
+    @Override
+    public String toString() {
+        return "Episode{" +
+                "ID=" + ID +
+                ", SeasonParentID=" + SeasonParentID +
+                ", Name='" + Name + '\'' +
+                ", Number=" + Number +
+                ", DebutDate=" + DebutDate +
+                ", PremiereDate=" + PremiereDate +
+                ", VueNbr=" + VueNbr +
+                ", Score=" + Score +
+                ", Votes=" + Votes +
+                '}';
+    }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, Media media, long vueNbr, long score, long votes) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
@@ -49,8 +62,34 @@ public class Episode {
         Score = score;
         Votes = votes;
     }
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, long vueNbr, long score, long votes,File file) {
+        this.ID = ID;
+        SeasonParentID = seasonParentID;
+        Name = name;
+        Number = number;
+        DebutDate = debutDate;
+        PremiereDate = premiereDate;
+        this.image = image;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
+        media = file;
+    }
 
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, Media media, long vueNbr, long score, long votes) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, long vueNbr, long score, long votes, File file) {
+        SeasonParentID = seasonParentID;
+        Name = name;
+        Number = number;
+        DebutDate = debutDate;
+        PremiereDate = premiereDate;
+        this.resume = resume;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
+        media = file;
+    }
+
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Name = name;
@@ -65,15 +104,8 @@ public class Episode {
         Votes = votes;
     }
 
-    public String getName() {
-        return Name;
-    }
 
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, Media media, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Number = number;
@@ -87,17 +119,6 @@ public class Episode {
         Votes = votes;
     }
 
-    public Episode(long ID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, long vueNbr, long score, long votes) {
-        this.ID = ID;
-        Number = number;
-        DebutDate = debutDate;
-        PremiereDate = premiereDate;
-        this.image = image;
-        this.resume = resume;
-        VueNbr = vueNbr;
-        Score = score;
-        Votes = votes;
-    }
 
     public Episode() {
     }
@@ -182,11 +203,19 @@ public class Episode {
         SeasonParentID = seasonParentID;
     }
 
-    public Media getMedia() {
+    public File getMedia() {
         return media;
     }
 
-    public void setMedia(Media media) {
+    public void setMedia(File media) {
         this.media = media;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
     }
 }

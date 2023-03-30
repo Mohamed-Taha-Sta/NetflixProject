@@ -11,4 +11,18 @@ public class Text extends Resume{
 
     public Text() {
     }
+
+    public String getTexte() {
+        return texte;
+    }
+
+    public void setTexte(String texte) {
+        this.texte = texte;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: "+title+
+                "Texte: "+texte;
+    }
 }

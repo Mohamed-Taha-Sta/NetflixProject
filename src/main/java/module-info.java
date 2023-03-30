@@ -3,6 +3,7 @@ module com.example.netflixproject {
     requires javafx.fxml;
     requires javafx.media;
     requires java.sql;
+    requires org.apache.commons.io;
 
 
     opens com.example.netflixproject to javafx.fxml;
