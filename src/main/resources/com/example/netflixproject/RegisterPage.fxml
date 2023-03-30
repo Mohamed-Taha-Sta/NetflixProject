@@ -39,6 +39,11 @@
                   <Font name="Lucida Bright" size="12.0" />
                </font></TextField>
             <DatePicker fx:id="UserBirthday" prefHeight="26.0" prefWidth="238.0" promptText="Birthday" />
+            <Text fx:id="Alerttext" fill="RED" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must fill all the fields" textAlignment="CENTER" wrappingWidth="218.936767578125">
+               <font>
+                  <Font name="Lucida Bright" size="12.0" />
+               </font>
+            </Text>
             <Button mnemonicParsing="false" onAction="#OnSignUp" text="Sign Up">
                <font>
                   <Font name="Lucida Bright" size="14.0" />

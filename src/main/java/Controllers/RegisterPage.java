@@ -4,6 +4,7 @@ import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import static javafx.collections.FXCollections.observableArrayList;
 public class RegisterPage {
 
 
+    public Text Alerttext;
     String Name;
     String prename;
 
@@ -46,13 +48,18 @@ public class RegisterPage {
 
     @FXML
     protected void OnSignUp() throws Exception {
-        DataHolder.setName(UserName.getText());
-        DataHolder.setPrename(UserPrename.getText());
-        DataHolder.setEmail(UserEmail.getText());
-        DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
-        System.out.println(String.valueOf(UserBirthday.getValue()));
-        DataHolder.setPassword(UserPassword.getText());
-        HelloApplication.SetRoot("ChoicesMenu");
+        if( UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserBirthday.getValue() == null || UserPassword.getText().isEmpty()){
+            Alerttext.setOpacity(1);
+        }
+        else {
+            DataHolder.setName(UserName.getText());
+            DataHolder.setPrename(UserPrename.getText());
+            DataHolder.setEmail(UserEmail.getText());
+            DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
+            DataHolder.setPassword(UserPassword.getText());
+            HelloApplication.SetRoot("ChoicesMenu");
+        }
+
     }
 
 
