@@ -2,6 +2,7 @@ package DAO;
 
 import Entities.Episode;
 import Entities.Resume;
+import Entities.Synopsis;
 import Entities.Text;
 import Utils.ConxDB;
 import javafx.scene.image.Image;
@@ -24,12 +25,23 @@ public class EpisodeDAO2 {
     }
     public static boolean ajout_episode(Episode episode) throws SQLException, FileNotFoundException {
 
+        String sql;
+        InputStream inputStreamSynopsis = null;
 
-        String sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, texte,IMAGE,VIDEO) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        if (episode.getResume() instanceof Text) {
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, texte,IMAGE,VIDEO) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        }
+        else
+        {
+            inputStreamSynopsis = new FileInputStream(((Synopsis) episode.getResume()).getTinyVideo());
+
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, SYNOPSIS,IMAGE,VIDEO) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        }
 
         InputStream inputStream = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
-        InputStream inputStreamVideo = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\VideoTest.mp4");
+        InputStream inputStreamVideo = new FileInputStream(episode.getMedia());
 
         try {
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -40,11 +52,14 @@ public class EpisodeDAO2 {
         pstmt.setString(3, episode.getName()); // replace "Episode Title" with the actual episode name value
         pstmt.setDate(4, java.sql.Date.valueOf(episode.getDebutDate())); // replace "2023-03-30" with the actual diffusion date value
         pstmt.setDate(5, java.sql.Date.valueOf(episode.getPremiereDate())); // replace "2023-03-30" with the actual premiere date value
-        pstmt.setString(6, ((Text)episode.getResume()).getTexte()); // replace "Episode description" with the actual episode text value
+        if (episode.getResume() instanceof Text)
+            pstmt.setString(6, ((Text)episode.getResume()).getTexte());// replace "Episode description" with the actual episode text value
+        else {
+            pstmt.setBlob(6, inputStreamSynopsis); // replace "Episode description" with the actual episode text value
+        }
         pstmt.setBlob(7, inputStream); // replace inputStream with the actual image data
         pstmt.setBlob(8, inputStreamVideo); // replace "https://example.com/video.mp4" with the actual video URL value
             int affectedRows = pstmt.executeUpdate();
-
 
         } catch(SQLException se) {
             // Handle errors for JDBC
@@ -64,6 +79,10 @@ public class EpisodeDAO2 {
 
         List<Episode> episodeList = new ArrayList<>();
 
+        Episode episode = null;
+
+        Resume resume = null;
+
         String sql = "SELECT * FROM episodes WHERE id = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -71,18 +90,19 @@ public class EpisodeDAO2 {
         pstmt.setLong(1, ID);
 
         ResultSet rs = pstmt.executeQuery();
-        if (rs.next()) {
+        while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
             Long seasonID = rs.getLong("season_ID");
             int episodeNumber = rs.getInt("NUM");
             long episodeViews = rs.getInt("VIEW_NBR");
             long episodeScore = rs.getInt("SCORE");
             long episodeVotes = rs.getInt("VOTES");
-            String episodeName = rs.getString("name");
+            String EpisodeName = rs.getString("Name");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImage = rs.getBlob("image");
             String episodeText = rs.getString("texte");
+            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
             InputStream episodeVideo = rs.getBinaryStream("video");
 
             //Converting Blob into An Image
@@ -91,16 +111,16 @@ public class EpisodeDAO2 {
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 
             //DO NOT DELETE THIS CODE
-//            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
-//
-//            try {
-//                ImageIO.write(bufferedImage, "jpeg", outputFile);
-//            } catch (IOException e) {
-//                // Handle the exception
-//            }
+            //            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
+            //
+            //            try {
+            //                ImageIO.write(bufferedImage, "jpeg", outputFile);
+            //            } catch (IOException e) {
+            //                // Handle the exception
+            //            }
 
             //Handeling the Video, from inputStream
-            Path outputFilePath = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+episodeName+".mp4");
+            Path outputFilePath = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+".mp4");
             try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -108,12 +128,31 @@ public class EpisodeDAO2 {
                     outputStream.write(buffer, 0, bytesRead);
                 }
             } catch (IOException e) {
-                // Handle the exception
+                System.out.println("Error Handelling the video");
             }
-            File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+episodeName+".mp4");
-            Resume resume = new Text("",episodeText);
+            File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + ".mp4");
 
-            Episode episode = new Episode(ID,seasonID,episodeName,episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(),image,resume,file,episodeViews,episodeScore,episodeVotes);
+            if (episodeSynopsis == null) {
+                resume = new Text(EpisodeName+" Resume", episodeText);
+
+                episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+            }
+            else
+            {
+                Path outputFilePathSynopsis = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+"Synopsis.mp4");
+                try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+                        outputStreamSynopsis.write(buffer, 0, bytesRead);
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error Handelling the Synopsis");
+                }
+                File fileSynopsis = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + "Synopsis.mp4");
+                resume = new Synopsis(EpisodeName+" Synopsis",fileSynopsis);
+            }
+            episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
 
             episodeList.add(episode);
 
@@ -126,6 +165,10 @@ public class EpisodeDAO2 {
 
                 List<Episode> episodeList = new ArrayList<>();
 
+                Episode episode=null;
+
+                Resume resume=null;
+
                 String sql = "SELECT * FROM episodes WHERE NAME like ?";
 
                 PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -133,7 +176,7 @@ public class EpisodeDAO2 {
                 pstmt.setString(1, "%"+EpisodeName+"%");
 
                 ResultSet rs = pstmt.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
                     // Retrieve the values from the ResultSet and store them in variables
                     Long seasonID = rs.getLong("season_ID");
                     int episodeNumber = rs.getInt("NUM");
@@ -145,6 +188,7 @@ public class EpisodeDAO2 {
                     Date premiereDate = rs.getDate("premiere_Date");
                     Blob episodeImage = rs.getBlob("image");
                     String episodeText = rs.getString("texte");
+                    InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
                     InputStream episodeVideo = rs.getBinaryStream("video");
 
                     //Converting Blob into An Image
@@ -170,12 +214,31 @@ public class EpisodeDAO2 {
                             outputStream.write(buffer, 0, bytesRead);
                         }
                     } catch (IOException e) {
-                        // Handle the exception
+                        System.out.println("Error Handelling the video");
                     }
-                    File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+".mp4");
-                    Resume resume = new Text("",episodeText);
+                    File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + ".mp4");
 
-                    Episode episode = new Episode(ID,seasonID,EpisodeName,episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(),image,resume,file,episodeViews,episodeScore,episodeVotes);
+                    if (episodeSynopsis == null) {
+                        resume = new Text(EpisodeName+" Resume", episodeText);
+
+                        episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+                    }
+                    else
+                    {
+                        Path outputFilePathSynopsis = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+"Synopsis.mp4");
+                        try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                            byte[] buffer = new byte[4096];
+                            int bytesRead;
+                            while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+                                outputStreamSynopsis.write(buffer, 0, bytesRead);
+                            }
+                        } catch (IOException e) {
+                            System.out.println("Error Handelling the Synopsis");
+                        }
+                        File fileSynopsis = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + "Synopsis.mp4");
+                        resume = new Synopsis(EpisodeName+" Synopsis",fileSynopsis);
+                    }
+                    episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
 
                     episodeList.add(episode);
 

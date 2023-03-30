@@ -10,16 +10,27 @@ import java.util.Objects;
 public class Season {
 
     private long ID;
+
+    private long SERIE_ID;
     private int Number;
     private LocalDate DebutDate;
     private Image Thumbnail;
     List<Episode> episodeList;
 
-    public Season(long ID, int number, LocalDate debutDate, Image thumbnail) {
-        this.ID = ID;
+    public Season(long SERIE_ID, int number, LocalDate debutDate, Image thumbnail) {
+        this.SERIE_ID = SERIE_ID;
         Number = number;
         DebutDate = debutDate;
         Thumbnail = thumbnail;
+    }
+
+    public Season(long ID, long SERIE_ID, int number, LocalDate debutDate, Image thumbnail, List<Episode> episodeList) {
+        this.ID = ID;
+        this.SERIE_ID = SERIE_ID;
+        Number = number;
+        DebutDate = debutDate;
+        Thumbnail = thumbnail;
+        this.episodeList = episodeList;
     }
 
     public long getID() {
@@ -88,4 +99,6 @@ public class Season {
     public void setEpisodeList(List<Episode> episodeList) {
         this.episodeList = episodeList;
     }
+
+
 }
