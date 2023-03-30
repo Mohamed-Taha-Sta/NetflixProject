@@ -44,22 +44,36 @@ public class ActorDAO {
     public static boolean ajout_acteur(Actor act) {
         boolean etat = true;
         PreparedStatement pstmt = null;
-        String type="main";//get_from_jasser()
+        String type="sec";//get_from_jasser()
         String sql;
         Long compteur=act.getID();
+
         try {
+
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-        if(type=="main") {
-             sql = "INSERT INTO mainactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(act.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
-        }else{
-             sql = "INSERT INTO supportingactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(act.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
+            if(type=="main") {
+                sql = "INSERT INTO mainactor (nom,prenome,mail,password) VALUES (?,?,?,?)";
+
+            // sql = "INSERT INTO mainactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(Actor.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
+            }else{
+               //  sql = "INSERT INTO supportingactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(act.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
+                sql = "INSERT INTO SUPPORTINGACTOR (nom,prenom,mail,password) VALUES (?,?,?,?)";
 
 
-        }
+            }
+
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, act.getName());
+            pstmt.setString(2, act.getPrename());
+            pstmt.setString(3, act.getMail());
+            pstmt.setString(4, act.getPassword());
+
+
+
+
+            //pstmt = conn.prepareStatement(sql);
 
             pstmt.executeUpdate();
-            act.setID(compteur+1);
 
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -69,50 +83,103 @@ public class ActorDAO {
     }
 public static long  getactid(String nom,String prenom ){
     PreparedStatement pstmt = null;
-    PreparedStatement pstmt1 = null;
-    String sql2;
     String sql1;
     ResultSet rs;
-    ResultSet rs1;
  try {
-         sql1="select id_act from mainactor where mainactor.nom="+nom+" and mainactor.prenome="+prenom;
-     pstmt = conn.prepareStatement(sql1);
-     pstmt.executeUpdate();
-     rs = pstmt.getGeneratedKeys();
-         sql2="select id_act from supportingactor where supportingactor.nom="+nom+" and supportingactor.prenome="+prenom;
-     pstmt1 = conn.prepareStatement(sql2);
-     pstmt.executeUpdate();
-     rs1 = pstmt.getGeneratedKeys();
-    if(rs.getString(1)==null || rs.getString(1)=="" || rs.getString(1).length()<1){
-        return rs1.getLong(1);
-    }
-     return rs.getLong(1);
+       //  sql1="select id_act from MAINACTOR where mainactor.nom="+nom+"and mainactor.prenome="+prenom;
+
+     int test=0;
+     try{
+         sql1="SELECT id_act FROM MAINACTOR WHERE mainactor.nom='" + nom + "' AND mainactor.prenome='" + prenom + "'";
+         pstmt = conn.prepareStatement(sql1);
+         rs=pstmt.executeQuery();
+         rs.next();
+         return rs.getLong(1);
+     }catch(Exception e){
+         sql1="select id_act from SUPPORTINGACTOR where SUPPORTINGACTOR.nom="+nom+" and SUPPORTINGACTOR.prenom="+prenom;
+         pstmt = conn.prepareStatement(sql1);
+         rs=pstmt.executeQuery();
+         rs.next();
+         return rs.getLong(1);
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  }catch (SQLException ex){
-     System.out.println(ex.getMessage());
+     System.out.println("acteur nexiste pas");
+     return -1;
+
+
  }
- return 0;
-}/*
-    public static List<String> recherche_filmActor(String filmname) {
+
+}    public static List<ArrayList<String>> recherche_actjasser() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        ResultSet rs1 = null;
-        List<String>list=new ArrayList<>();
+        List<ArrayList<String>>list=new ArrayList<>();
+     //  ArrayList<String>list1=new ArrayList<>();
+
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+            String sql="select id_act,nom,prenome,Mail,password from mainactor";
 
-            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,duree from Film where Film.nom like%"+filmname+"%";
             pstmt = conn.prepareStatement(sql);
 
             pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             while (rs.next()) {
-            rs = pstmt.getGeneratedKeys();
-            list.add(rs.getString(1));
-            list.add(rs.getString(2));
-            list.add(rs.getString(3));
-            list.add(rs.getString(4));
-            list.add(rs.getString(5));
-            list.add(rs.getString(6));
-            list.add(rs.getString(7));}
+                ArrayList<String>list1=new ArrayList<>();
+
+                list1.add(rs.getString(1));
+                list1.add(rs.getString(2));
+                list1.add(rs.getString(3));
+                list1.add(rs.getString(4));
+                list1.add(rs.getString(5));
+                list.add(list1);
+                //System.out.println(list1);
+               // System.out.println(list);
+
+                list1.remove(0)  ;
+               // System.out.println(list);
+
+
+
+                ;}
+             sql="select id_act,nom,prenom,Mail,password from SUPPORTINGACTOR";
+
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.executeQuery();
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ArrayList<String>list1=new ArrayList<>();
+
+                list1.add(rs.getString(1));
+                list1.add(rs.getString(2));
+                list1.add(rs.getString(3));
+                list1.add(rs.getString(4));
+                list1.add(rs.getString(5));
+                list.add(list1);
+                //System.out.println(list1);
+                // System.out.println(list);
+
+                list1.remove(0)  ;
+                // System.out.println(list);
+
+
+
+                ;}
 
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -120,8 +187,7 @@ public static long  getactid(String nom,String prenom ){
 
 
         return list;
-    }*/
-
+    }
 
 
 

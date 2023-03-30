@@ -6,13 +6,24 @@ import javafx.scene.control.CheckBox;
 import java.util.Objects;
 
 public class Actor {
-     static protected  long ID=1;
+    private static   long ID=9;
     protected String Name;
     protected String Prename;
     protected String Mail;
     protected String password;
     protected CheckBox select;
 
+    public static void setID(long ID) {
+        Actor.ID = ID;
+    }
+
+    public Actor(String name, String prename, String mail, String password) {
+        Name = name;
+        Prename = prename;
+        Mail = mail;
+        this.password = password;
+        this.select = select;
+    }
 
     public Actor(long ID, String name, String prename, String mail, String password) {
         this.ID = ID;
@@ -24,14 +35,11 @@ public class Actor {
     }
 
 
-    public long getID() {
+    public static long getID() {
         return ID;
     }
 
-    public void setID(long ID) {
-/*jasser miboun*/
-        this.ID = ID;
-    }
+
 
     public String getName() {
         return Name;
