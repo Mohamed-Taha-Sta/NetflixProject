@@ -25,6 +25,7 @@ public class LoginPage {
         if(mail.getText().isEmpty()||Password.getText().isEmpty()){
             AlertText.setOpacity(1);
         }
+        HelloApplication.SetRoot("HomePage");
 
     }
 

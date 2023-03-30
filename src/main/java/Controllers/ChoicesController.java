@@ -59,6 +59,7 @@ public class ChoicesController implements Initializable {
         System.out.println("Selected Actors: "+selectedActors);
         System.out.println("Selected Genres: "+selectedGenres);
         System.out.println(user);
+        HelloApplication.SetRoot("HomePage");
     }
 
     ObservableList<Actor> data = observableArrayList(new Actor(11, "Tom hanks", "", "dd", "sssa"), new Actor(12, "Jr", "", "dd", "sssa"), new Actor(13, "Emm", "", "dd", "sssa"));
