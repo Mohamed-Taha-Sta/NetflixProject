@@ -1,6 +1,7 @@
 package Entities;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.CheckBox;
 
 import java.util.Objects;
 
@@ -10,6 +11,7 @@ public class Actor {
     protected String Prename;
     protected String Mail;
     protected String password;
+    protected CheckBox select;
 
 
     public Actor(long ID, String name, String prename, String mail, String password) {
@@ -18,6 +20,7 @@ public class Actor {
         Prename = prename;
         Mail = mail;
         this.password = password;
+        this.select=new CheckBox();
     }
 
 
@@ -62,6 +65,14 @@ public class Actor {
         this.password = password;
     }
 
+    public CheckBox getSelect() {
+        return select;
+    }
+
+    public void setSelect(CheckBox select) {
+        this.select = select;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,5 +84,16 @@ public class Actor {
     @Override
     public int hashCode() {
         return Objects.hash(ID);
+    }
+
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "Name='" + Name + '\'' +
+                ", Prename='" + Prename + '\'' +
+                ", Mail='" + Mail + '\'' +
+                ", password='" + password + '\'' +
+                ", select=" + select +
+                '}';
     }
 }

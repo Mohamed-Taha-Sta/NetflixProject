@@ -5,7 +5,6 @@ module com.example.netflixproject {
     requires java.sql;
     requires org.apache.commons.io;
 
-
     opens com.example.netflixproject to javafx.fxml;
     exports com.example.netflixproject;
     exports Controllers;

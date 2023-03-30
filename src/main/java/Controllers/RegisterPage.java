@@ -21,9 +21,12 @@ public class RegisterPage implements Initializable {
     public TextField UserEmail;
     public TextField UserPrename;
     public TextField UserName;
-    public TableView<Actor> ActorTable = new TableView<Actor>();
+    public TableView<Actor> ActorTable=new TableView<>();
     @FXML
-    public TableColumn<?, ?> ActorColumn=new TableColumn<>();
+    public TableColumn<Actor, String> ActorColumn=new TableColumn<>();
+    public TableColumn<Actor,CheckBox> SelectedActor=new TableColumn<>();
+    public TableColumn GenreColumn;
+    public TableColumn SelectedGenre;
 
     @FXML
     private Button SignUp;
@@ -42,24 +45,32 @@ public class RegisterPage implements Initializable {
     @FXML
     protected void OnSignUp() throws Exception {
         HelloApplication.SetRoot("ChoicesMenu");
-        initialize(ul, BN);
     }
+
+    @FXML
+    protected void OnReturnBtn() throws Exception{
+        HelloApplication.SetRoot("RegisterPage");
+    }
+
+    @FXML
+    protected void OnDone() throws Exception{
+        List<Actor> selectedActors = new ArrayList<>();
+
+        for (Actor actor : data) {
+            if (actor.getSelect().isSelected()) {
+                selectedActors.add(actor);
+            }
+        }
+
+        System.out.printf(selectedActors.toString());
+    }
+    ObservableList<Actor> data = observableArrayList(new Actor(11,"Tom hanks","","dd","sssa"),new Actor(12,"Jr","","dd","sssa"),new Actor(13,"Emm","","dd","sssa"));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        ObservableList<Actor> data = observableArrayList();
-        //these have problem dont touch
-
-        Actor ac=new Actor(11,"Tom hanks","","dd","sssa");
-        Actor ac1=new Actor(12,"Jr","","dd","sssa");
-        Actor ac2=new Actor(13,"Emm","","dd","sssa");
-        ArrayList<Actor> acto=new ArrayList<>();
-        acto.add(ac);
-        acto.add(ac1);
-        acto.add(ac2);
-        data.addAll(acto);
+        
         ActorColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        SelectedActor.setCellValueFactory(new PropertyValueFactory<>("select"));
         ActorTable.setItems(data);
 
     }
