@@ -13,7 +13,7 @@ public class Episode {
     private int Number;
     private LocalDate DebutDate;
     private LocalDate PremiereDate;
-    private Image image;
+    private File image;
     private Resume resume;
     private File media;
 
@@ -36,7 +36,7 @@ public class Episode {
                 '}';
     }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
@@ -50,7 +50,7 @@ public class Episode {
         Votes = votes;
     }
 
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Name = name;
@@ -62,7 +62,7 @@ public class Episode {
         Score = score;
         Votes = votes;
     }
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, long vueNbr, long score, long votes,File file) {
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, long vueNbr, long score, long votes,File file) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Name = name;
@@ -76,7 +76,7 @@ public class Episode {
         media = file;
     }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, long vueNbr, long score, long votes, File file) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, long vueNbr, long score, long votes, File file,File Image) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
@@ -87,9 +87,10 @@ public class Episode {
         Score = score;
         Votes = votes;
         media = file;
+        image = Image;
     }
 
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Name = name;
@@ -105,7 +106,7 @@ public class Episode {
     }
 
 
-    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Number = number;
@@ -155,11 +156,11 @@ public class Episode {
         PremiereDate = premiereDate;
     }
 
-    public Image getImage() {
+    public File getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(File image) {
         this.image = image;
     }
 

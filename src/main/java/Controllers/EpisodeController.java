@@ -1,13 +1,16 @@
 package Controllers;
 
-import DAO.EpisodeDAO;
 import DAO.EpisodeDAO2;
 import Entities.Episode;
 import Entities.Resume;
 import Entities.Synopsis;
 import Entities.Text;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,20 +28,22 @@ public class EpisodeController {
         ((Text)resume).setTexte("This is an Episode");
 
         File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\VideoTest.mp4");
-
+        File imageFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
         Resume resume2 = new Synopsis(file);
 
 
         Episode episode = new Episode(1,"EpisodeFamilyGuy",5, LocalDate.of(2012,10,12),
-                LocalDate.of(2012,10,10),resume,1500,50,150,file);
+                LocalDate.of(2012,10,10),resume,1500,50,150,file,imageFile);
 
-        Episode episode2 = new Episode(1,"HajaJdida",2, LocalDate.of(2023,12,14),
-                LocalDate.of(2023,12,15),resume2,1500,50,150,file);
+        Episode episode2 = new Episode(2,"FaresSEpisode",2, LocalDate.of(2023,12,14),
+                LocalDate.of(2023,12,15),resume2,1500,50,150,file,imageFile);
 
 
 //        System.out.println(episodeDAO.ajout_episode(episode));
 //        System.out.println(episodeDAO.ajout_episode(episode2));
-        System.out.println(episodeDAO.FindEpisodeName("HajaJdida"));
+//        System.out.println(episodeDAO.FindEpisodeID(54L));
+        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
+
 
 
 

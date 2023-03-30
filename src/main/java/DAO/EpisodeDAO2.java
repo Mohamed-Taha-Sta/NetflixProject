@@ -40,7 +40,8 @@ public class EpisodeDAO2 {
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         }
 
-        InputStream inputStream = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
+//        InputStream inputStream = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
+        InputStream inputStream = new FileInputStream(episode.getImage());
         InputStream inputStreamVideo = new FileInputStream(episode.getMedia());
 
         try {
@@ -100,15 +101,27 @@ public class EpisodeDAO2 {
             String EpisodeName = rs.getString("Name");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
-            Blob episodeImage = rs.getBlob("image");
+            Blob episodeImageB = rs.getBlob("image");
+            InputStream episodeImage = episodeImageB.getBinaryStream();
+//            InputStream episodeImage = rs.getBinaryStream("image");
             String episodeText = rs.getString("texte");
             InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
             InputStream episodeVideo = rs.getBinaryStream("video");
 
             //Converting Blob into An Image
-            byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
-            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+//            byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
+//            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
+//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+
+            //Converting Blob into An JPEG File
+            File fileImg = new File("src/main/java/Test/ImgEp"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileImg);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = episodeImage.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
 
             //DO NOT DELETE THIS CODE
             //            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
@@ -120,7 +133,7 @@ public class EpisodeDAO2 {
             //            }
 
             //Handeling the Video, from inputStream
-            Path outputFilePath = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+".mp4");
+            Path outputFilePath = Paths.get("src/main/java/Test/VideoEp" + ID + ".mp4");
             try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -130,29 +143,32 @@ public class EpisodeDAO2 {
             } catch (IOException e) {
                 System.out.println("Error Handelling the video");
             }
-            File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + ".mp4");
+            File file = new File("src/main/java/Test/VideoEp" + ID + ".mp4");
+            File fileImage = new File("src/main/java/Test/ImgEp"+ID+".jpeg");
+
+            System.out.println(episodeSynopsis);
 
             if (episodeSynopsis == null) {
                 resume = new Text(EpisodeName+" Resume", episodeText);
 
-                episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+                episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, resume, file, episodeViews, episodeScore, episodeVotes);
             }
             else
             {
-                Path outputFilePathSynopsis = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+"Synopsis.mp4");
+                Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisEp"+ID+".mp4");
                 try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
-                    while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+                    while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
                         outputStreamSynopsis.write(buffer, 0, bytesRead);
                     }
                 } catch (IOException e) {
                     System.out.println("Error Handelling the Synopsis");
                 }
-                File fileSynopsis = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + "Synopsis.mp4");
+                File fileSynopsis = new File("src/main/java/Test/SynopsisEp"+ID+".mp4");
                 resume = new Synopsis(EpisodeName+" Synopsis",fileSynopsis);
             }
-            episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+            episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, resume, file, episodeViews, episodeScore, episodeVotes);
 
             episodeList.add(episode);
 
@@ -186,15 +202,25 @@ public class EpisodeDAO2 {
                     long ID = rs.getLong("ID");
                     Date diffusionDate = rs.getDate("DEBUT_DATE");
                     Date premiereDate = rs.getDate("premiere_Date");
-                    Blob episodeImage = rs.getBlob("image");
+                    Blob episodeImageB = rs.getBlob("image");
+                    InputStream episodeImage = episodeImageB.getBinaryStream();
                     String episodeText = rs.getString("texte");
                     InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
                     InputStream episodeVideo = rs.getBinaryStream("video");
 
                     //Converting Blob into An Image
-                    byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
-                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+//                    byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
+//                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
+//                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+                    //Converting Blob Image to Jpeg File
+                    File fileImg = new File("src/main/java/Test/ImgEp"+ID+".jpeg");
+                    OutputStream outS = new FileOutputStream(fileImg);
+                    byte[] bufferImg = new byte[1024];
+                    int length;
+                    while ((length = episodeImage.read(bufferImg)) != -1) {
+                        outS.write(bufferImg, 0, length);
+                    }
 
                     //DO NOT DELETE THIS CODE
         //            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
@@ -206,7 +232,7 @@ public class EpisodeDAO2 {
         //            }
 
                     //Handeling the Video, from inputStream
-                    Path outputFilePath = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+".mp4");
+                    Path outputFilePath = Paths.get("src/main/java/Test/VideoEp"+ID+".mp4");
                     try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                         byte[] buffer = new byte[4096];
                         int bytesRead;
@@ -216,29 +242,31 @@ public class EpisodeDAO2 {
                     } catch (IOException e) {
                         System.out.println("Error Handelling the video");
                     }
-                    File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + ".mp4");
+                    File file = new File("src/main/java/Test/VideoEp" + ID + ".mp4");
+                    File fileImage = new File("src/main/java/Test/ImgEp"+ID+".jpeg");
+
 
                     if (episodeSynopsis == null) {
                         resume = new Text(EpisodeName+" Resume", episodeText);
 
-                        episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+                        episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, resume, file, episodeViews, episodeScore, episodeVotes);
                     }
                     else
                     {
-                        Path outputFilePathSynopsis = Paths.get("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\"+EpisodeName+"Synopsis.mp4");
+                        Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisEp"+ID+".mp4");
                         try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
                             byte[] buffer = new byte[4096];
                             int bytesRead;
-                            while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+                            while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
                                 outputStreamSynopsis.write(buffer, 0, bytesRead);
                             }
                         } catch (IOException e) {
                             System.out.println("Error Handelling the Synopsis");
                         }
-                        File fileSynopsis = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\" + EpisodeName + "Synopsis.mp4");
+                        File fileSynopsis = new File("src/main/java/Test/SynopsisEp"+ID+".mp4");
                         resume = new Synopsis(EpisodeName+" Synopsis",fileSynopsis);
                     }
-                    episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), image, resume, file, episodeViews, episodeScore, episodeVotes);
+                    episode = new Episode(ID, seasonID, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, resume, file, episodeViews, episodeScore, episodeVotes);
 
                     episodeList.add(episode);
 
