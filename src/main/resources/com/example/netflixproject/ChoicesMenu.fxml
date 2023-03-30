@@ -23,7 +23,7 @@
             <TableView fx:id="ActorTable">
               <columns>
                 <TableColumn fx:id="ActorColumn" prefWidth="195.2000732421875" text="Actor" />
-                <TableColumn fx:id="SelectedActor" prefWidth="62.39996337890625" text="SelectedActor" />
+                <TableColumn fx:id="SelectedActor" prefWidth="62.39996337890625" text="Select" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -44,7 +44,7 @@
             <TableView fx:id="GenreTable">
                <columns>
                   <TableColumn fx:id="GenreColumn" prefWidth="195.2000732421875" text="Genre" />
-                  <TableColumn fx:id="SelectedGenre" prefWidth="62.39996337890625" text="SelectedGenre" />
+                  <TableColumn fx:id="SelectedGenre" prefWidth="62.39996337890625" text="Select" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

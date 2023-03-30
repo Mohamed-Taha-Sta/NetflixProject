@@ -93,7 +93,6 @@ public class Actor {
                 ", Prename='" + Prename + '\'' +
                 ", Mail='" + Mail + '\'' +
                 ", password='" + password + '\'' +
-                ", select=" + select +
                 '}';
     }
 }
