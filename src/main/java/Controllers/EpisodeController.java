@@ -27,8 +27,8 @@ public class EpisodeController {
         Resume resume = new Text();
         ((Text)resume).setTexte("This is an Episode");
 
-        File file = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\VideoTest.mp4");
-        File imageFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
+        File file = new File("src/main/java/Test/VideoTest.mp4");
+        File imageFile = new File("src/main/java/Test/LionTest.jpeg");
         Resume resume2 = new Synopsis(file);
 
 
