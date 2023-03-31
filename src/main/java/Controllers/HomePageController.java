@@ -26,8 +26,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleImageClick(javafx.scene.input.MouseEvent event) {
         ImageView clickedImage = (ImageView) event.getSource();
-        System.out.println("Clicked image: " + clickedImage.getImage().toString());
-        // Do something with the clicked image
+        System.out.println("Clicked image: " + clickedImage.getImage().getUrl());
     }
 
     @Override
@@ -42,8 +41,6 @@ public class HomePageController implements Initializable {
         Resume resume2 = new Synopsis(file);
         Episode episode = new Episode(1, "EpisodeFamilyGuy", 5, LocalDate.of(2012, 10, 12),
                 LocalDate.of(2012, 10, 10), resume, 1500, 50, 150, file, imageFile);
-        System.out.println(episode);
-        System.out.println(episode.getImage());
         Episode episode2 = new Episode(2, "FaresSEpisode", 2, LocalDate.of(2023, 12, 14),
                 LocalDate.of(2023, 12, 15), resume2, 1500, 50, 150, file, imageFile);
         episodes.add(episode);
