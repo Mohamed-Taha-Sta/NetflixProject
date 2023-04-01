@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.UserDAO;
 import Entities.Actor;
 import Entities.Genre;
 import Entities.User;
@@ -59,6 +60,7 @@ public class ChoicesController implements Initializable {
         System.out.println("Selected Actors: "+selectedActors);
         System.out.println("Selected Genres: "+selectedGenres);
         System.out.println(user);
+        UserDAO.ajout_User(user);
         HelloApplication.SetRoot("HomePage");
     }
 

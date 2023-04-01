@@ -1,5 +1,7 @@
 package Utils;
 
+import Entities.User;
+
 public  class DataHolder {
     private static String Name;
     private static String prename;
@@ -7,6 +9,7 @@ public  class DataHolder {
     private static String Email;
     private static String Birthday;
     private static String Password;
+    private static User user;
 
 
     public static String getName() {
