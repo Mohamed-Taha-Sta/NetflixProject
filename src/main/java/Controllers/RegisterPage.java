@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.UserDAO;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
@@ -49,6 +50,11 @@ public class RegisterPage {
     @FXML
     protected void OnSignUp() throws Exception {
         if( UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserBirthday.getValue() == null || UserPassword.getText().isEmpty()){
+            Alerttext.setText("Must fill all the fields");
+            Alerttext.setOpacity(1);
+        }
+        else if(!UserDAO.check_Mail(UserEmail.getText())){
+            Alerttext.setText("another user with same mail exists");
             Alerttext.setOpacity(1);
         }
         else {

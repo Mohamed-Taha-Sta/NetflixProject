@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static javafx.collections.FXCollections.checkedObservableList;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ChoicesController implements Initializable {
@@ -60,8 +61,13 @@ public class ChoicesController implements Initializable {
         System.out.println("Selected Actors: "+selectedActors);
         System.out.println("Selected Genres: "+selectedGenres);
         System.out.println(user);
-        UserDAO.ajout_User(user);
-        HelloApplication.SetRoot("HomePage");
+        if(UserDAO.ajout_User(user)){
+            HelloApplication.SetRoot("HomePage");
+        }
+        else{
+            HelloApplication.SetRoot("RegisterPage");
+        }
+
     }
 
     ObservableList<Actor> data = observableArrayList(new Actor(11, "Tom hanks", "", "dd", "sssa"), new Actor(12, "Jr", "", "dd", "sssa"), new Actor(13, "Emm", "", "dd", "sssa"));

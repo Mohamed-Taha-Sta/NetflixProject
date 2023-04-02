@@ -49,7 +49,7 @@
                   </Button>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="158.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="ProfileBtn" mnemonicParsing="false" prefHeight="58.0" prefWidth="58.0" style="-fx-background-radius: 100; -fx-border-color: #000; -fx-border-radius: 100; -fx-background-color: transparent;" text="Profile">
+                        <Button fx:id="ProfileBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-border-color: #000; -fx-border-radius: 100; -fx-background-color: transparent;" text="User">
                            <font>
                               <Font name="Lucida Bright" size="12.0" />
                            </font>
@@ -59,7 +59,7 @@
                         </Button>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
                   </VBox>
                </children>
