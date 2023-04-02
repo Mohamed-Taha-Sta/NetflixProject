@@ -1,0 +1,69 @@
+*{
+    -fx-font-family: "Lucida Sans","Lucida Bright";
+}
+#button{
+    -fx-background-color:  #6f8cf6;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12px;
+
+}
+#button:hover{
+    -fx-background-color: #7a97ff;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12px;
+}
+#button:pressed{
+    -fx-background-color: #a5b8fd;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 12px;
+}
+#MiniAnchor{
+    -fx-background-color: #405bbf;
+    -fx-effect: glow;
+}
+#Anchor{
+    -fx-background-color: #1e1c41;
+}
+#TextFields{
+    -fx-border-color: #6f8cf6;
+    -fx-border-width: 3px;
+    -fx-background-color: #e4e8ef;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 11px;
+}
+#Table{
+    -fx-background-color: #405bbf;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 11px;
+}
+#TableColumn{
+    -fx-border-radius: 10px;
+    -fx-background-radius: 11px;
+    -fx-background-color: #7a97ff;
+    -fx-border-color: #7a97ff ;
+    -fx-alignment: center;
+
+}
+#checkBox{
+    -fx-background-color: #7a97ff ;
+    -fx-border-color:#1e1c41 ;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+}
+.table-view .table-cell{
+    -fx-background-color: transparent;
+}
+.table-row-cell{
+    -fx-background-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}

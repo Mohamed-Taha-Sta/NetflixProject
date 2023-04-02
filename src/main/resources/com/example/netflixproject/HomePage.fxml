@@ -14,16 +14,16 @@
 
 <AnchorPane style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #e0e0e0;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <VBox alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" prefHeight="550.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Logo.jpg" />
+                        <Image url="@../../../Images/Logo.jpg" />
                      </image>
                   </ImageView>
-                  <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="246.0" style="-fx-border-color: #000; -fx-background-color: transparent;" text="Home" textAlignment="CENTER">
+                  <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="246.0" style="-fx-border-color: #fff; -fx-background-color: transparent;" text="Home" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Lucida Bright" size="14.0" />
                      </font>
@@ -49,7 +49,7 @@
                   </Button>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="158.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="ProfileBtn" mnemonicParsing="false" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-border-color: #000; -fx-border-radius: 100; -fx-background-color: transparent;" text="User">
+                        <Button fx:id="ProfileBtn" mnemonicParsing="false" onAction="#OnProfileClick" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-border-color: #000; -fx-border-radius: 100; -fx-background-color: transparent;" text="User">
                            <font>
                               <Font name="Lucida Bright" size="12.0" />
                            </font>
@@ -84,7 +84,4 @@
          </font>
       </Label>
    </children>
-   <padding>
-      <Insets bottom="10.0" right="10.0" top="10.0" />
-   </padding>
 </AnchorPane>

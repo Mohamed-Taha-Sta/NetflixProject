@@ -4,6 +4,7 @@ import Entities.Episode;
 import Entities.Resume;
 import Entities.Synopsis;
 import Entities.Text;
+import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,6 +28,11 @@ public class HomePageController implements Initializable {
     public void handleImageClick(javafx.scene.input.MouseEvent event) {
         ImageView clickedImage = (ImageView) event.getSource();
         System.out.println("Clicked image: " + clickedImage.getImage().getUrl());
+    }
+
+    @FXML
+    public void OnProfileClick()throws Exception{
+        HelloApplication.SetRoot("ProfilePage");
     }
 
     @Override

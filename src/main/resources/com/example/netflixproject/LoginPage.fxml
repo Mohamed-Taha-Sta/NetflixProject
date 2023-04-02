@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginPageController">
+<AnchorPane id="Anchor" fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginPageController">
    <children>
       <VBox alignment="CENTER" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="30.0">
          <children>
-            <Label alignment="CENTER" prefHeight="85.0" prefWidth="200.0" text="Login" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="85.0" prefWidth="200.0" text="Login" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Bright" size="24.0" />
                </font>
@@ -22,11 +22,11 @@
                   <Insets left="50.0" right="50.0" />
                </padding>
             </Label>
-            <TextField fx:id="mail" promptText="E-Mail">
+            <TextField id="TextFields" fx:id="mail" promptText="E-Mail" stylesheets="@../../../Style.css">
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font></TextField>
-            <PasswordField fx:id="Password" promptText="Password">
+            <PasswordField id="TextFields" fx:id="Password" promptText="Password" stylesheets="@../../../Style.css">
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font></PasswordField>
@@ -35,12 +35,12 @@
                   <Font name="Lucida Bright" size="12.0" />
                </font>
             </Text>
-            <Button fx:id="login" mnemonicParsing="false" onAction="#onSignIn" text="Log In">
+            <Button id="button" fx:id="login" mnemonicParsing="false" onAction="#onSignIn" stylesheets="@../../../Style.css" text="Log In" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Lucida Bright" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here" textAlignment="CENTER" underline="true">
+            <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here" textAlignment="CENTER" textFill="WHITE" underline="true">
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font>
