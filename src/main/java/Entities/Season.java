@@ -2,6 +2,7 @@ package Entities;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -10,22 +11,45 @@ import java.util.Objects;
 public class Season {
 
     private long ID;
-
+    private String name;
+    private File Synopsis;
     private long SERIE_ID;
     private int Number;
     private LocalDate DebutDate;
-    private Image Thumbnail;
+    private File Thumbnail;
     List<Episode> episodeList;
 
-    public Season(long SERIE_ID, int number, LocalDate debutDate, Image thumbnail) {
+
+    public Season(long ID, File synopsis, long SERIE_ID, int number,
+                  LocalDate debutDate, File thumbnail, List<Episode> episodeList) {
+        this.ID = ID;
+        Synopsis = synopsis;
+        this.SERIE_ID = SERIE_ID;
+        Number = number;
+        DebutDate = debutDate;
+        Thumbnail = thumbnail;
+        this.episodeList = episodeList;
+    }
+
+    public Season(String name, File synopsis, long SERIE_ID, int number, LocalDate debutDate, File thumbnail) {
+
+        this.name = name;
+        Synopsis = synopsis;
         this.SERIE_ID = SERIE_ID;
         Number = number;
         DebutDate = debutDate;
         Thumbnail = thumbnail;
     }
 
-    public Season(long ID, long SERIE_ID, int number, LocalDate debutDate, Image thumbnail, List<Episode> episodeList) {
-        this.ID = ID;
+    public Season(long SERIE_ID, int number, LocalDate debutDate, File thumbnail) {
+        this.SERIE_ID = SERIE_ID;
+        Number = number;
+        DebutDate = debutDate;
+        Thumbnail = thumbnail;
+    }
+
+    public Season(File synopsis, long SERIE_ID, int number, LocalDate debutDate, File thumbnail, List<Episode> episodeList) {
+        Synopsis = synopsis;
         this.SERIE_ID = SERIE_ID;
         Number = number;
         DebutDate = debutDate;
@@ -57,12 +81,36 @@ public class Season {
         DebutDate = debutDate;
     }
 
-    public Image getThumbnail() {
+    public File getThumbnail() {
         return Thumbnail;
     }
 
-    public void setThumbnail(Image thumbnail) {
+    public void setThumbnail(File thumbnail) {
         Thumbnail = thumbnail;
+    }
+
+
+    public File getSynopsis() {
+        return Synopsis;
+    }
+
+    public void setSynopsis(File synopsis) {
+        Synopsis = synopsis;
+    }
+
+    public long getSERIE_ID() {
+        return SERIE_ID;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSERIE_ID(long SERIE_ID) {
+        this.SERIE_ID = SERIE_ID;
     }
 
     @Override
@@ -71,7 +119,6 @@ public class Season {
                 "ID=" + ID +
                 ", Number=" + Number +
                 ", DebutDate=" + DebutDate +
-                ", Thumbnail=" + Thumbnail +
                 '}';
     }
 

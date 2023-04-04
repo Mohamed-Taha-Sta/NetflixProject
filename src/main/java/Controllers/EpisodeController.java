@@ -32,17 +32,17 @@ public class EpisodeController {
         Resume resume2 = new Synopsis(file);
 
 
-        Episode episode = new Episode(1,"EpisodeFamilyGuy",5, LocalDate.of(2012,10,12),
-                LocalDate.of(2012,10,10),resume,1500,50,150,file,imageFile);
+        Episode episode = new Episode(21,"JesserEpisode",5, LocalDate.of(2015,11,11),
+                LocalDate.of(2015,12,10),resume,1500,50,150,file,imageFile);
 
-        Episode episode2 = new Episode(2,"FaresSEpisode",2, LocalDate.of(2023,12,14),
+        Episode episode2 = new Episode(21,"FaresSEpisode",2, LocalDate.of(2023,12,14),
                 LocalDate.of(2023,12,15),resume2,1500,50,150,file,imageFile);
 
 
-//        System.out.println(episodeDAO.ajout_episode(episode));
+        System.out.println(episodeDAO.ajout_episode(episode));
 //        System.out.println(episodeDAO.ajout_episode(episode2));
 //        System.out.println(episodeDAO.FindEpisodeID(54L));
-        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
+//        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
 
 
 
