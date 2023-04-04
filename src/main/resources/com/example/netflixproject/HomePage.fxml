@@ -14,39 +14,15 @@
 
 <AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="200.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="0.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" prefHeight="550.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox id="Vbox" alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" prefHeight="558.0" prefWidth="40.0" spacing="20.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Images/Logo.jpg" />
+                        <Image url="@../../../Images/Logo.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="246.0" style="-fx-border-color: #fff; -fx-background-color: transparent;" text="Home" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Lucida Bright" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="SeriesButton" layoutX="20.0" layoutY="107.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="246.0" style="-fx-border-color: #000; -fx-background-color: transparent;" text="Series" textAlignment="CENTER">
-                     <font>
-                        <Font name="Lucida Bright" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="FilmsButton" layoutX="20.0" layoutY="157.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="246.0" style="-fx-border-color: #000; -fx-background-color: transparent;" text="Films" textAlignment="CENTER">
-                     <font>
-                        <Font name="Lucida Bright" size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </Button>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="158.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button fx:id="ProfileBtn" mnemonicParsing="false" onAction="#OnProfileClick" prefHeight="45.0" prefWidth="45.0" style="-fx-background-radius: 100; -fx-border-color: #000; -fx-border-radius: 100; -fx-background-color: transparent;" text="User">
@@ -66,7 +42,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <ScrollPane id="scroll-pane" layoutX="216.0" layoutY="101.0" prefWidth="682.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+      <ScrollPane id="scroll-pane" layoutX="216.0" layoutY="101.0" maxWidth="1.7976931348623157E308" stylesheets="@../../../Style.css" vbarPolicy="NEVER" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
         <content>
           <AnchorPane id="MiniAnchor" layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../Style.css">
                <children>
@@ -78,9 +54,9 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label layoutX="220.0" layoutY="101.0" text="You might like" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="90.0">
+      <Label layoutX="220.0" layoutY="101.0" text="You might like" textFill="WHITE" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="80.0">
          <font>
-            <Font name="Lucida Bright" size="18.0" />
+            <Font name="Roboto" size="18.0" />
          </font>
       </Label>
    </children>
