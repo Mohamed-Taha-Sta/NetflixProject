@@ -33,6 +33,7 @@ public class LoginPageController {
             AlertText.setOpacity(1);
         }
         else{
+            HelloApplication.resize=true;
             HelloApplication.SetRoot("HomePage");
         }
 

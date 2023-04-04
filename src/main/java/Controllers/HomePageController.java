@@ -38,6 +38,7 @@ public class HomePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
         List<Episode> episodes = new ArrayList<>();
         Resume resume = new Text();
         ((Text) resume).setTexte("This is an Episode");
@@ -65,5 +66,7 @@ public class HomePageController implements Initializable {
                 ThumbnailViewer.getChildren().add(imageView);
             }
         }
+
+
     }
 }

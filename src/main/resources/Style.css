@@ -1,5 +1,5 @@
 *{
-    -fx-font-family: "Lucida Sans","Lucida Bright";
+    -fx-font-family: Roboto;
 }
 #button{
     -fx-background-color:  #6f8cf6;
@@ -22,10 +22,11 @@
 }
 #MiniAnchor{
     -fx-background-color: #405bbf;
-    -fx-effect: glow;
+    -fx-border-radius: 10px;
+
 }
 #Anchor{
-    -fx-background-color: #1e1c41;
+    -fx-background-color: linear-gradient(#170970,#422fbd,#4d36e0) no repeat fixed;
 }
 #TextFields{
     -fx-border-color: #6f8cf6;
@@ -34,36 +35,144 @@
     -fx-border-radius: 10px;
     -fx-background-radius: 11px;
 }
-#Table{
-    -fx-background-color: #405bbf;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 11px;
+#largerPANE{
+    -fx-background-color: transparent;
 }
-#TableColumn{
-    -fx-border-radius: 10px;
-    -fx-background-radius: 11px;
-    -fx-background-color: #7a97ff;
-    -fx-border-color: #7a97ff ;
+
+.table-view .table-cell {
+    -fx-text-fill: white;
+    -fx-text-alignment: center;
     -fx-alignment: center;
+}
+
+.table-view {
+    -fx-background-color: transparent;
 
 }
-#checkBox{
-    -fx-background-color: #7a97ff ;
-    -fx-border-color:#1e1c41 ;
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: white;
+    -fx-background-radius: 0 10 10 0;
 }
 
 .table-view .column-header-background .filler {
+    -fx-background-color: white;
+}
+
+.table-view .column-header .label {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.table-view .table-cell {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table-view .column-header .sort-icon {
+    -fx-opacity: 0.5;
+}
+
+.table-view .column-header .sort-order-icon {
+    -fx-opacity: 0.8;
+}
+
+
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-view .table-row-cell:filled:odd:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.table-view .table-row-cell:filled:even:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.15);
+}
+
+
+
+.table-view .column-header .label:empty {
     -fx-background-color: transparent;
 }
-.table-view .column-header-background{
+
+.table-view .column-header .arrow:empty {
     -fx-background-color: transparent;
 }
-.table-view .table-cell{
+
+.table-view .column-header .arrow-down:empty {
     -fx-background-color: transparent;
 }
-.table-row-cell{
+
+.table-view .column-header .arrow-up:empty {
     -fx-background-color: transparent;
 }
-.table-view .column-header {
+
+.table-view .column-header .filler:empty {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:filled {
+    -fx-background-radius: 0 0 10 10;
+}
+
+.check-box {
+    -fx-background-color: #7a97ff;
+    -fx-border-color: #1e1c41;
+    -fx-cursor: hand;
+
+}
+
+.check-box .box {
+    -fx-background-color: #7a97ff;
+
+}
+.check-box:selected > .box > .mark {
+    -fx-background-color: white;
+}
+
+#hbow{
+    -fx-border-radius: 10px;
+    -fx-background-color: transparent;
+}
+#scroll-pane {
+    -fx-background-color: #e4e8ef;
+    -fx-background-radius: 10px;
+    -fx-padding: 0px;
+    -fx-border-color: #6f8cf6;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+}
+#scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+#scroll-pane .scroll-bar {
+    -fx-background-color: #6f8cf6;
+}
+#scroll-pane .scroll-bar .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+#scroll-pane .scroll-bar .increment-button,
+#scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: #7a97ff;
+}
+#scroll-pane .scroll-bar .increment-arrow,
+#scroll-pane .scroll-bar .decrement-arrow {
+    -fx-background-color: white;
+}
+#scroll-pane .corner {
     -fx-background-color: transparent;
 }

@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
+<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="558.0" prefWidth="200.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" prefHeight="550.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -66,11 +66,11 @@
             </VBox>
          </children>
       </AnchorPane>
-      <ScrollPane layoutX="216.0" layoutY="101.0" style="-fx-background-color: #fff;" vbarPolicy="NEVER" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
+      <ScrollPane id="scroll-pane" layoutX="216.0" layoutY="101.0" prefWidth="682.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #fff;">
+          <AnchorPane id="MiniAnchor" layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../Style.css">
                <children>
-                  <HBox fx:id="ThumbnailViewer" layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="646.0" spacing="10.0" />
+                  <HBox id="hbox" fx:id="ThumbnailViewer" layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="646.0" spacing="10.0" stylesheets="@../../../Style.css" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

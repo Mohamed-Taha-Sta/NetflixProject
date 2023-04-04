@@ -10,9 +10,11 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private static Scene scene;
+    public static boolean resize=true;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("LoginPage"),600,480);
+        scene = new Scene(LoadFxml("LoginPage"),600,600);
+        stage.setResizable(resize);
         stage.setScene(scene);
         stage.show();
 

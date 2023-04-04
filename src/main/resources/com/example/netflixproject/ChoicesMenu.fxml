@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChoicesController">
+<AnchorPane id="Anchor" maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChoicesController">
    <children>
       <Line endY="329.6999816894531" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <GridPane alignment="TOP_CENTER" layoutX="-55.0" layoutY="-115.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,7 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <AnchorPane>
+            <AnchorPane id="A" stylesheets="@../../../Style.css">
                <children>
                   <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                      <children>
@@ -37,7 +37,7 @@
                         <TableView id="Table" fx:id="ActorTable" stylesheets="@../../../Style.css">
                           <columns>
                             <TableColumn id="TableColumn" fx:id="ActorColumn" prefWidth="195.2000732421875" text="Actor" />
-                            <TableColumn id="TableColumn" fx:id="SelectedActor" prefWidth="62.39996337890625" text="Select" />
+                            <TableColumn id="TableColumn" fx:id="SelectedActor" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -62,7 +62,7 @@
                         <TableView id="Table" fx:id="GenreTable" stylesheets="@../../../Style.css">
                            <columns>
                               <TableColumn id="TableColumn" fx:id="GenreColumn" prefWidth="195.2000732421875" text="Genre" />
-                              <TableColumn id="TableColumn" fx:id="SelectedGenre" prefWidth="62.39996337890625" text="Select" />
+                              <TableColumn id="TableColumn" fx:id="SelectedGenre" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

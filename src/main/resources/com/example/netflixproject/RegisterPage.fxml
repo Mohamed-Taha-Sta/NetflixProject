@@ -9,13 +9,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
+<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.RegisterPage">
    <children>
-      <VBox alignment="CENTER" layoutX="184.0" layoutY="29.0" prefHeight="420.0" prefWidth="254.0" spacing="30.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="30.0">
+      <VBox id="hbox" alignment="CENTER" layoutX="184.0" layoutY="29.0" maxHeight="600.0" maxWidth="600.0" spacing="30.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="30.0">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Account">
                <font>
-                  <Font name="Lucida Bright" size="24.0" />
+                  <Font name="Roboto" size="24.0" />
                </font>
                <VBox.margin>
                   <Insets top="40.0" />
@@ -41,13 +41,13 @@
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font></TextField>
-            <DatePicker id="TextFields" fx:id="UserBirthday" editable="false" promptText="Birthday" snapToPixel="false" stylesheets="@../../../Style.css">
+            <DatePicker id="TextFields" fx:id="UserBirthday" editable="false" maxWidth="1.7976931348623157E308" promptText="Birthday" snapToPixel="false" stylesheets="@../../../Style.css">
                <VBox.margin>
                   <Insets />
                </VBox.margin></DatePicker>
-            <Text fx:id="Alerttext" fill="RED" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must fill all the fields" textAlignment="CENTER" wrappingWidth="218.936767578125">
+            <Text fx:id="Alerttext" fill="#ff3434" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must fill all the fields" textAlignment="CENTER" wrappingWidth="218.936767578125">
                <font>
-                  <Font name="Lucida Bright" size="12.0" />
+                  <Font name="Lucida Bright" size="18.0" />
                </font>
             </Text>
             <Button id="button" mnemonicParsing="false" onAction="#OnSignUp" stylesheets="@../../../Style.css" text="Sign Up" textFill="WHITE">
