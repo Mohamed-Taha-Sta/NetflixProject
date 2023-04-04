@@ -191,3 +191,9 @@
 #scroll-pane .corner {
     -fx-background-color: transparent;
 }
+.image-view {
+
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+}

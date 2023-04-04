@@ -8,7 +8,9 @@ import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.io.File;
@@ -23,6 +25,8 @@ public class HomePageController implements Initializable {
 
     public HBox ThumbnailViewer;
     public Button ProfileBtn;
+    public ImageView TopWatched;
+
 
     @FXML
     public void handleImageClick(javafx.scene.input.MouseEvent event) {
@@ -37,7 +41,8 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        String imagePath = "file:src/main/java/Test/LionTest.jpeg";
+        TopWatched.setImage(new Image(imagePath));
 
         List<Episode> episodes = new ArrayList<>();
         Resume resume = new Text();
@@ -52,13 +57,13 @@ public class HomePageController implements Initializable {
                 LocalDate.of(2023, 12, 15), resume2, 1500, 50, 150, file, imageFile);
         episodes.add(episode);
         episodes.add(episode2);
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i < 8; i++) {
             for (Episode epi : episodes) {
                 ImageView imageView = null;
                 try {
                     imageView = new ImageView(String.valueOf(epi.getImage().toURL()));
-                    imageView.setFitHeight(150);
-                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(100);
+                    imageView.setFitWidth(150);
                     imageView.setOnMouseClicked(this::handleImageClick);
                 } catch (MalformedURLException e) {
                     throw new RuntimeException(e);
