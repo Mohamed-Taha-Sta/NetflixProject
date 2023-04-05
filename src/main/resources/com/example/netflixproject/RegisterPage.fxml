@@ -41,7 +41,7 @@
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font></TextField>
-            <DatePicker id="TextFields" fx:id="UserBirthday" editable="false" maxWidth="1.7976931348623157E308" promptText="Birthday" snapToPixel="false" stylesheets="@../../../Style.css">
+            <DatePicker fx:id="UserBirthday" editable="false" maxWidth="1.7976931348623157E308" promptText="Birthday" snapToPixel="false" stylesheets="@../../../Style.css">
                <VBox.margin>
                   <Insets />
                </VBox.margin></DatePicker>
