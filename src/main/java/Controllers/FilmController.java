@@ -35,8 +35,9 @@ public class FilmController {
         File imageFile = new File("src/main/java/Test/LionTest.jpeg");
         File film=new File("src/main/java/Test/VideoTest.mp4");
 
+           // public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
 
-      //  FilmDAO.ajout_film(new F);
+            FilmDAO.ajout_film(new Film("tahamachhour","taha",LocalDate.now(),"arabic","tunisie",list,imageFile,LocalTime.now(),liste1,11,11,11,synop,film));
 
 
     }
