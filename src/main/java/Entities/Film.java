@@ -14,33 +14,69 @@ import java.util.Objects;
 public class Film extends Content{
 private LocalTime duree;
 private ArrayList<Actor>acteur;
-private File file;
-private ArrayList<String>genre;
 
-    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree, ArrayList<Actor> acteur, File file, ArrayList<String> genre) {
-        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
-        this.duree = duree;
-        this.acteur = acteur;
-        this.file = file;
-        this.genre = genre;
+//private ArrayList<String>genre;
+    private long VueNbr;
+    private long Score;
+    private long Votes;
+    private File file;
+    private File synopsis;
+    private File film;
+
+
+
+
+
+    public long getVueNbr() {
+        return VueNbr;
     }
 
+    public void setVueNbr(long vueNbr) {
+        VueNbr = vueNbr;
+    }
 
-    public ArrayList<String> getGenre() {
+    public long getScore() {
+        return Score;
+    }
+
+    public void setScore(long score) {
+        Score = score;
+    }
+
+    public long getVotes() {
+        return Votes;
+    }
+
+    public void setVotes(long votes) {
+        Votes = votes;
+    }
+
+    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
+        super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        this.acteur = acteur;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
+        this.synopsis = synopsis;
+        this.film = film;
+    }
+
+   /* public ArrayList<String> getGenre() {
         return genre;
     }
 
     public void setGenre(ArrayList<String> genre) {
         this.genre = genre;
-    }
+    }*/
 
-    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree, ArrayList<Actor> acteur, File file) {
-        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
-        this.duree = duree;
-        this.acteur = acteur;
-        this.file = file;
 
-    }
+
+
+
+
+
+
 
     public File getFile() {
         return file;
@@ -50,11 +86,6 @@ private ArrayList<String>genre;
         this.file = file;
     }
 
-    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree, ArrayList<Actor> acteur) {
-        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
-        this.duree = duree;
-        this.acteur = acteur;
-    }
 
     public ArrayList<Actor> getActeur() {
         return acteur;
@@ -67,10 +98,7 @@ private ArrayList<String>genre;
     public Film() {
     }
 
-    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img, LocalTime duree) {
-        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
-        this.duree = duree;
-    }
+
 
     public LocalTime getDuree() {
         return duree;

@@ -5,7 +5,6 @@ import Entities.User;
 public  class DataHolder {
     private static String Name;
     private static String prename;
-
     private static String Email;
     private static String Birthday;
     private static String Password;

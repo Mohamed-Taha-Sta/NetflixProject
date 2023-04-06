@@ -1,6 +1,7 @@
 package DAO;
 
 import Entities.Actor;
+import Entities.Content;
 import Entities.Film;
 import Utils.ConxDB;
 
@@ -21,26 +22,50 @@ public class FilmDAO {
         java.sql.Time sqlTime = java.sql.Time.valueOf(film.getDuree());
         ResultSet rs;
         String sql3;
+
+        /*    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, , long vueNbr, long score, long votes, File file, File synopsis, File film) {
+         */
         try {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-
-            String sql = "INSERT INTO Film (id_film,nom,realisateur,annerdesortie,langue,paysorigine,duree,media) VALUES ("+Long.toString(film.getId())+","+film.getNom()+","+film.getRealisateur()+","+film.getAnnerdesortie().toString()+","+film.toString()+","+film.getPaysorigine()+","+"0 "+film.getDuree().toString()+"null"+")";
+            String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
+            System.out.println(1);
+            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1="select id_film from Film where Film.nom="+film.getNom()+"and Film.realisateur="+film.getRealisateur();
-
             pstmt = conn.prepareStatement(sql);
 
+            pstmt.setString(1,film.getNom());
+            pstmt.setString(2,film.getRealisateur());
+            pstmt.setString(3,film.getAnnerdesortie().toString());
+            pstmt.setString(4,film.getLangue());
+            pstmt.setString(5,film.getPaysorigine());
+            pstmt.setString(6,genreListString);
+            pstmt.setString(7,film.getImg());
+            pstmt.setString(8,film.getDuree().toString());
+            pstmt.setString(9,film.getVueNbr());
+            pstmt.setString(10,film.getScore());
+            pstmt.setString(11,film.getVotes());
+            pstmt.setString(12,film.get);
+            pstmt.setString(13,film.get);
+
+
+
+            System.out.println(2);
+
+            System.out.println(3);
+
             pstmt.executeUpdate();
+            System.out.println(4);
 
 
             pstmt = conn.prepareStatement(sql1);
 
             pstmt.executeQuery();
-            rs = pstmt.getGeneratedKeys();
+            rs = pstmt.executeQuery();
             int idfilm=rs.getInt(1);
             ArrayList<Actor> act=film.getActeur();
             for(int i=0;i<act.size();i++){
-                sql3 = "INSERT INTO relation (id_act,id_film) VALUES ("+Long.toString(act.get(i).getID())+","+Integer.toString(idfilm)+")";
-                pstmt = conn.prepareStatement(sql);
+                sql3 = "INSERT INTO Acteurprinc_Film (id_act,id_film) VALUES ("+Long.toString(act.get(i).getID())+","+Integer.toString(idfilm)+")";
+                pstmt = conn.prepareStatement(sql3);
 
                 pstmt.executeUpdate();
                 ActorDAO.ajout_acteur(act.get(i));

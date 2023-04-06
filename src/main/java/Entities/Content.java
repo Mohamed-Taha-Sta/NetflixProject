@@ -2,6 +2,7 @@ package Entities;
 
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -15,12 +16,12 @@ public class Content {
     protected String langue;
     protected String paysorigine;
     protected List<String> listegenre;
-    protected Image img;
+    protected File img;
 
     public Content() {
     }
 
-    public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+    public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
         this.id = id;
         this.nom = nom;
         this.realisateur = realisateur;
@@ -31,7 +32,7 @@ public class Content {
         this.img = img;
     }
 
-    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, Image img) {
+    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
         this.nom = nom;
         this.realisateur = realisateur;
         this.annerdesortie = annerdesortie;
@@ -39,6 +40,15 @@ public class Content {
         this.paysorigine = paysorigine;
         this.listegenre = listegenre;
         this.img = img;
+    }
+
+    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre) {
+        this.nom = nom;
+        this.realisateur = realisateur;
+        this.annerdesortie = annerdesortie;
+        this.langue = langue;
+        this.paysorigine = paysorigine;
+        this.listegenre = listegenre;
     }
 
     @Override
@@ -110,11 +120,11 @@ public class Content {
         this.listegenre = listegenre;
     }
 
-    public Image getImg() {
+    public File getImg() {
         return img;
     }
 
-    public void setImg(Image img) {
+    public void setImg(File img) {
         this.img = img;
     }
 }
