@@ -98,7 +98,21 @@ private ArrayList<Actor>acteur;
     public Film() {
     }
 
+    public File getSynopsis() {
+        return synopsis;
+    }
 
+    public void setSynopsis(File synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public File getFilm() {
+        return film;
+    }
+
+    public void setFilm(File film) {
+        this.film = film;
+    }
 
     public LocalTime getDuree() {
         return duree;

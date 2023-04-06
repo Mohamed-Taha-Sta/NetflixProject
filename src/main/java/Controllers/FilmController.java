@@ -5,6 +5,7 @@ import DAO.FilmDAO;
 import Entities.Actor;
 import Entities.Film;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -30,7 +31,12 @@ public class FilmController {
         liste1.add(new Actor("fares","makki","faresmakki21@gmail.com","tahajasser"));
         liste1.add(new Actor("ahmed","makki","faresmakki21@gmail.com","tahajasser"));
 
-        FilmDAO.ajout_film(new Film("dont breath","3amirajel", LocalDate.now(),"arabic","tunis",list, LocalTime.now(),liste1));
+        File synop = new File("src/main/java/Test/VideoTest.mp4");
+        File imageFile = new File("src/main/java/Test/LionTest.jpeg");
+        File film=new File("src/main/java/Test/VideoTest.mp4");
+
+
+      //  FilmDAO.ajout_film(new F);
 
 
     }

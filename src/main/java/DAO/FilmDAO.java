@@ -3,8 +3,12 @@ package DAO;
 import Entities.Actor;
 import Entities.Content;
 import Entities.Film;
+import Entities.Synopsis;
 import Utils.ConxDB;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,19 +37,28 @@ public class FilmDAO {
             String sql1="select id_film from Film where Film.nom="+film.getNom()+"and Film.realisateur="+film.getRealisateur();
             pstmt = conn.prepareStatement(sql);
 
+            InputStream inputStreamSynopsisimg = null;
+            InputStream inputStreamSynopsissynops = null;
+            InputStream inputStreamSynopsisfilm= null;
+
+            inputStreamSynopsisimg = new FileInputStream(film.getImg());
+            inputStreamSynopsisfilm=new FileInputStream(film.getFilm());
+            inputStreamSynopsissynops=new FileInputStream(film.getSynopsis());
+
+
             pstmt.setString(1,film.getNom());
             pstmt.setString(2,film.getRealisateur());
             pstmt.setString(3,film.getAnnerdesortie().toString());
             pstmt.setString(4,film.getLangue());
             pstmt.setString(5,film.getPaysorigine());
             pstmt.setString(6,genreListString);
-            pstmt.setString(7,film.getImg());
+            pstmt.setBlob(7,inputStreamSynopsisimg);
             pstmt.setString(8,film.getDuree().toString());
-            pstmt.setString(9,film.getVueNbr());
-            pstmt.setString(10,film.getScore());
-            pstmt.setString(11,film.getVotes());
-            pstmt.setString(12,film.get);
-            pstmt.setString(13,film.get);
+            pstmt.setLong(9,film.getVueNbr());
+            pstmt.setLong(10,film.getScore());
+            pstmt.setLong(11,film.getVotes());
+            pstmt.setBlob(12,inputStreamSynopsisfilm);
+            pstmt.setBlob(13,inputStreamSynopsissynops);
 
 
 
@@ -75,6 +88,8 @@ public class FilmDAO {
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
             etat=false;
+        } catch (FileNotFoundException e) {
+
         }
         return etat;
     }
