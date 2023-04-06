@@ -25,11 +25,11 @@
                   <Glow level="1.0" />
                </effect>
             </Text>
-            <TextField id="TextFields" fx:id="UserName" promptText="Name" stylesheets="@../../../Style.css">
+            <TextField id="TextFields" fx:id="UserName" promptText="Last Name" stylesheets="@../../../Style.css">
                <font>
                   <Font name="Lucida Bright" size="12.0" />
                </font></TextField>
-            <TextField id="TextFields" fx:id="UserPrename" prefHeight="26.0" prefWidth="220.0" promptText="Prename" stylesheets="@../../../Style.css" VBox.vgrow="ALWAYS">
+            <TextField id="TextFields" fx:id="UserPrename" prefHeight="26.0" prefWidth="220.0" promptText="First Name" stylesheets="@../../../Style.css" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

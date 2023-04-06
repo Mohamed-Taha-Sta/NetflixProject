@@ -10,18 +10,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfilePageController">
    <children>
       <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="49.0" prefHeight="400.0" prefWidth="178.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ProfileIamge" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfile" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Images/profilepicture.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName">
+                  <Text fx:id="ProfileName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName">
                      <font>
                         <Font name="Lucida Bright" size="14.0" />
                      </font>

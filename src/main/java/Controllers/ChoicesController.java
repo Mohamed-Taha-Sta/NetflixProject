@@ -57,7 +57,7 @@ public class ChoicesController implements Initializable {
             }
         }
         date=LocalDate.parse(DataHolder.getBirthday(),formatter);
-        user=new User(DataHolder.getName(),DataHolder.getPrename(),date,selectedActors,selectedGenres,DataHolder.getPassword(),DataHolder.getEmail());
+        user=new User(DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword(),date,selectedActors,selectedGenres);
         System.out.println("Selected Actors: "+selectedActors);
         System.out.println("Selected Genres: "+selectedGenres);
         System.out.println(user);
