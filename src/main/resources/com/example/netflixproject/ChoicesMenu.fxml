@@ -36,8 +36,8 @@
                         </TextField>
                         <TableView id="Table" fx:id="ActorTable" stylesheets="@../../../Style.css">
                           <columns>
-                            <TableColumn id="TableColumn" fx:id="ActorColumn" prefWidth="195.2000732421875" text="Actor" />
-                            <TableColumn id="TableColumn" fx:id="SelectedActor" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
+                            <TableColumn fx:id="ActorColumn" prefWidth="195.2000732421875" text="Actor" />
+                            <TableColumn fx:id="SelectedActor" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -61,8 +61,8 @@
                         </TextField>
                         <TableView id="Table" fx:id="GenreTable" stylesheets="@../../../Style.css">
                            <columns>
-                              <TableColumn id="TableColumn" fx:id="GenreColumn" prefWidth="195.2000732421875" text="Genre" />
-                              <TableColumn id="TableColumn" fx:id="SelectedGenre" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
+                              <TableColumn fx:id="GenreColumn" prefWidth="195.2000732421875" text="Genre" />
+                              <TableColumn fx:id="SelectedGenre" maxWidth="1100.0" prefWidth="62.39996337890625" text="Select" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
