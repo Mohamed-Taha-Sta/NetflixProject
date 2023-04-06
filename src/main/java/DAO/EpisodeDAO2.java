@@ -196,9 +196,9 @@ public class EpisodeDAO2 {
                     // Retrieve the values from the ResultSet and store them in variables
                     Long seasonID = rs.getLong("season_ID");
                     int episodeNumber = rs.getInt("NUM");
-                    long episodeViews = rs.getInt("VIEW_NBR");
-                    long episodeScore = rs.getInt("SCORE");
-                    long episodeVotes = rs.getInt("VOTES");
+                    long episodeViews = rs.getLong("VIEW_NBR");
+                    long episodeScore = rs.getLong("SCORE");
+                    long episodeVotes = rs.getLong("VOTES");
                     long ID = rs.getLong("ID");
                     Date diffusionDate = rs.getDate("DEBUT_DATE");
                     Date premiereDate = rs.getDate("premiere_Date");

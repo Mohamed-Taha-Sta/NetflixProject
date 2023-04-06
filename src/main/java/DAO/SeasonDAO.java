@@ -110,6 +110,62 @@ public class SeasonDAO {
     }
 
 
+    public static List<Season> FindSeasonSerieID(Long SerieID) throws SQLException, IOException {
+
+        List<Season> SeasonList = new ArrayList<>();
+
+        Season season = null;
+
+        String sql = "SELECT * FROM SEASON WHERE ID_SERIE = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, SerieID);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            long ID = rs.getLong("ID");
+            String name = rs.getString("NAME");
+            int num = rs.getInt("NUM");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
+            InputStream SeasonThumbnail = ThumbnailBlob.getBinaryStream();
+            InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SeasonThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisSeason"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SeasonSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Test/SynopsisSeason"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+
+            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
+
+            season = new Season(ID,fileSynopsis,SerieID,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+
+            SeasonList.add(season);
+        }
+
+    return SeasonList;
+
+    }
 
 
 
