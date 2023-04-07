@@ -9,10 +9,7 @@ import Utils.ConxDB;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class FilmDAO {
     public static boolean ajout_film(Film film) {
         boolean etat = true;
         PreparedStatement pstmt = null;
-        java.sql.Time sqlTime = java.sql.Time.valueOf(film.getDuree());
+        //java.sql.Time sqlTime = java.sql.Time.valueOf(film.getDuree());
         ResultSet rs;
         String sql3;
 
@@ -33,8 +30,8 @@ public class FilmDAO {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
             System.out.println(1);
-            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,vuenbr,score,vote,synopsis,film) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql1="select id_film from Film where Film.nom="+film.getNom()+"and Film.realisateur="+film.getRealisateur();
+            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getRealisateur() + "'";
             pstmt = conn.prepareStatement(sql);
 
             InputStream inputStreamSynopsisimg = null;
@@ -53,12 +50,12 @@ public class FilmDAO {
             pstmt.setString(5,film.getPaysorigine());
             pstmt.setString(6,genreListString);
             pstmt.setBlob(7,inputStreamSynopsisimg);
-            //pstmt.setString(8,film.getDuree().toString());
-            pstmt.setLong(8,film.getVueNbr());
-            pstmt.setLong(9,film.getScore());
-            pstmt.setLong(10,film.getVotes());
-            pstmt.setBlob(11,inputStreamSynopsisfilm);
-            pstmt.setBlob(12,inputStreamSynopsissynops);
+            pstmt.setString(8, film.getDuree());
+            pstmt.setLong(9,film.getVueNbr());
+            pstmt.setLong(10,film.getScore());
+            pstmt.setLong(11,film.getVotes());
+            pstmt.setBlob(12,inputStreamSynopsisfilm);
+            pstmt.setBlob(13,inputStreamSynopsissynops);
 
 
 
@@ -71,12 +68,22 @@ public class FilmDAO {
 
 
             pstmt = conn.prepareStatement(sql1);
+            System.out.println(sql1);
 
-            pstmt.executeQuery();
+
             rs = pstmt.executeQuery();
+            System.out.println(5);
+            rs.next();
+
             int idfilm=rs.getInt(1);
+            System.out.println(6);
+
             ArrayList<Actor> act=film.getActeur();
+            System.out.println(7);
+
             for(int i=0;i<act.size();i++){
+                System.out.println(8);
+
                 sql3 = "INSERT INTO Acteurprinc_Film (id_act,id_film) VALUES ("+Long.toString(act.get(i).getID())+","+Integer.toString(idfilm)+")";
                 pstmt = conn.prepareStatement(sql3);
 
