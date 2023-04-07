@@ -50,13 +50,21 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try{
-            System.out.println("Profile_img: "+DataHolder.getUser().getImage());
-            Profile_Image =new ImageView(String.valueOf(DataHolder.getUser().getImage()));
-        }catch (Exception e){
+        try {
+            UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
+            File imageFile = DataHolder.getImage();
+            System.out.println("image file: "+imageFile);
+            if (imageFile != null) {
+                Image profileImage = new Image(imageFile.toURI().toString());
+                System.out.println("Profile image in profilepage: "+profileImage);
+                Profile_Image.setImage(profileImage);
+            } else {
+                System.out.println("No image found for user.");
+            }
+        } catch (Exception e) {
             System.out.println("image not found");
         }
 
-        ProfileName.setText(DataHolder.getUser().getName()+" "+DataHolder.getUser().getPrename());
+        ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
     }
 }

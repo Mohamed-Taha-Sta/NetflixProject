@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import javafx.scene.control.CheckBox;
 
 public class FilmController {
     public static void main(String[] args) {

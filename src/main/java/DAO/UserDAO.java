@@ -81,6 +81,7 @@ public class UserDAO {
                 }
 
                 User user = new User(userId, rs.getString("Last_Name"), rs.getString("First_Name"), mail, pass, birthday, actorList, genreList, subscription, imageFile);
+                System.out.println("inUserDao image:" +imageFile);
                 DataHolder.setUser(user);
                 return true;
             } else {
@@ -142,7 +143,7 @@ public class UserDAO {
             String fileName = "image_" + DataHolder.getUser().getID() + ".png";
             File targetFile = new File("src/main/resources/Images/" + fileName);
             Files.copy(imageFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
+            DataHolder.setImage(targetFile);
             // Update the image in the database
             sql = "UPDATE Utilisateurs SET image=? WHERE id=?";
             InputStream inputStream = new FileInputStream(targetFile);
@@ -168,4 +169,24 @@ public class UserDAO {
             }
         }
     }
+
+    public static void retrieve_Image(int userId) {
+        try {
+            String sql = "SELECT image FROM Utilisateurs WHERE id=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                Blob blob = rs.getBlob("image");
+                InputStream inputStream = blob.getBinaryStream();
+                File file = new File("temp.jpg");
+                Path path = Paths.get(file.getAbsolutePath());
+                Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+                DataHolder.setImage(file);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
