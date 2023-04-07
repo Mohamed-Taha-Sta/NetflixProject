@@ -124,12 +124,12 @@ public static long  getactid(String nom,String prenom ){
 
  }
 
-}    public static List<ArrayList<String>> recherche_actjasser() {
+}    public static List<Actor> recherche_actjasser() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        List<ArrayList<String>>list=new ArrayList<>();
+        List<Actor>list=new ArrayList<>();
      //  ArrayList<String>list1=new ArrayList<>();
-
+        Actor act=null;
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String sql="select id_act,nom,prenome,Mail,password from mainactor";
@@ -139,19 +139,11 @@ public static long  getactid(String nom,String prenom ){
             pstmt.executeQuery();
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                ArrayList<String>list1=new ArrayList<>();
+                act=new Actor(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
 
-                list1.add(rs.getString(1));
-                list1.add(rs.getString(2));
-                list1.add(rs.getString(3));
-                list1.add(rs.getString(4));
-                list1.add(rs.getString(5));
-                list.add(list1);
-                //System.out.println(list1);
-               // System.out.println(list);
 
-                list1.remove(0)  ;
-               // System.out.println(list);
+                list.add(act);
+
 
 
 
@@ -163,21 +155,9 @@ public static long  getactid(String nom,String prenom ){
             pstmt.executeQuery();
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                ArrayList<String>list1=new ArrayList<>();
+                act=new Actor(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
 
-                list1.add(rs.getString(1));
-                list1.add(rs.getString(2));
-                list1.add(rs.getString(3));
-                list1.add(rs.getString(4));
-                list1.add(rs.getString(5));
-                list.add(list1);
-                //System.out.println(list1);
-                // System.out.println(list);
-
-                list1.remove(0)  ;
-                // System.out.println(list);
-
-
+                list.add(act);
 
                 ;}
 

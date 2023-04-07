@@ -5,14 +5,16 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Film extends Content{
-private LocalTime duree;
+private String duree;
 private ArrayList<Actor>acteur;
 
 //private ArrayList<String>genre;
@@ -51,7 +53,7 @@ private ArrayList<Actor>acteur;
         Votes = votes;
     }
 
-    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
+    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
         super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
         this.duree = duree;
         this.acteur = acteur;
@@ -114,11 +116,11 @@ private ArrayList<Actor>acteur;
         this.film = film;
     }
 
-    public LocalTime getDuree() {
+    public String getDuree() {
         return duree;
     }
 
-    public void setDuree(LocalTime duree) {
+    public void setDuree(String duree) {
         this.duree = duree;
     }
 
