@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Actor {
     private  long ID=9;
+    private int x;
     protected String Name;
     protected String Prename;
     protected String Mail;
@@ -15,6 +16,16 @@ public class Actor {
 
     public  void setID(long ID) {
         this.ID = ID;
+    }
+
+    public Actor(long ID, int x, String name, String prename, String mail, String password, CheckBox select) {
+        this.ID = ID;
+        this.x = x;
+        Name = name;
+        Prename = prename;
+        Mail = mail;
+        this.password = password;
+        this.select = select;
     }
 
     public Actor(String name, String prename, String mail, String password) {

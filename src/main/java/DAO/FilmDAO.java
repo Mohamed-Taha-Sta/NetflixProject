@@ -85,10 +85,17 @@ public class FilmDAO {
                 System.out.println(8);
 
                 sql3 = "INSERT INTO Acteurprinc_Film (id_act,id_film) VALUES ("+Long.toString(act.get(i).getID())+","+Integer.toString(idfilm)+")";
+                System.out.println(9);
+
                 pstmt = conn.prepareStatement(sql3);
+                System.out.println(10);
 
                 pstmt.executeUpdate();
+                System.out.println(11);
+
                 ActorDAO.ajout_acteur(act.get(i));
+                System.out.println(12);
+
 
             }
 
