@@ -5,11 +5,13 @@ import Utils.ConxDB;
 import Utils.DataHolder;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,8 +32,7 @@ public class UserDAO {
             if (!rs.next()) {
                 System.out.println("its unique");
                 return true;
-            } else
-            {
+            } else {
                 System.out.println("its not unique");
                 return false;
             }
@@ -57,7 +58,6 @@ public class UserDAO {
             if (rs.next()) {
                 int userId = rs.getInt("ID");
                 System.out.println("User found: " + userId);
-
                 String genreListString = rs.getString("GENRELIST");
                 String[] genreArray = genreListString.split(",");
                 ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
@@ -92,7 +92,6 @@ public class UserDAO {
             return false;
         }
     }
-
 
     public static boolean ajout_User(User user) {
         PreparedStatement pstmt;
@@ -133,6 +132,40 @@ public class UserDAO {
         }
     }
 
+    public static void adding_Image(File imageFile) {
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
 
+        try {
+            // Copy the selected image to the target directory
+            String fileName = "image_" + DataHolder.getUser().getID() + ".png";
+            File targetFile = new File("src/main/resources/Images/" + fileName);
+            Files.copy(imageFile.toPath(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Update the image in the database
+            sql = "UPDATE Utilisateurs SET image=? WHERE id=?";
+            InputStream inputStream = new FileInputStream(targetFile);
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBlob(1, inputStream);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            int rowsUpdated = pstmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Image updated successfully.");
+            } else {
+                System.out.println("Image update failed.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error updating image: " + e.getMessage());
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
-

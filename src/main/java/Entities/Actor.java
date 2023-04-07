@@ -34,7 +34,11 @@ public class Actor {
         Mail = mail;
         this.password = password;
         this.select = select;
+        this.select=new CheckBox();
+        this.select.setId("checkBox");
     }
+
+
 
    /* public Actor(long ID, String name, String prename, String mail, String password) {
         this.ID = ID;

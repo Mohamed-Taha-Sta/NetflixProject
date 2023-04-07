@@ -16,7 +16,7 @@
          <children>
             <VBox alignment="TOP_CENTER" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fx:id="ProfileIamge" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfile" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfile" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Images/profilepicture.png" />
                      </image>

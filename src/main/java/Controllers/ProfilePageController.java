@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.UserDAO;
 import Utils.DataHolder;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class ProfilePageController implements Initializable {
 
-    public ImageView ProfileIamge;
+    public ImageView Profile_Image;
     public Text ProfileName;
 
     @FXML
@@ -32,7 +33,9 @@ public class ProfilePageController implements Initializable {
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
             if (width <= 512 && height <= 512) {
-                ProfileIamge.setImage(image);
+                Profile_Image.setImage(image);
+                UserDAO.adding_Image(selectedFile);
+
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -47,6 +50,13 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try{
+            System.out.println("Profile_img: "+DataHolder.getUser().getImage());
+            Profile_Image =new ImageView(String.valueOf(DataHolder.getUser().getImage()));
+        }catch (Exception e){
+            System.out.println("image not found");
+        }
+
         ProfileName.setText(DataHolder.getUser().getName()+" "+DataHolder.getUser().getPrename());
     }
 }

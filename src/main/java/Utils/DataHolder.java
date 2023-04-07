@@ -3,6 +3,8 @@ package Utils;
 import Entities.User;
 import javafx.scene.image.Image;
 
+import java.io.File;
+
 public  class DataHolder {
     private static String Name;
     private static String prename;
@@ -10,7 +12,7 @@ public  class DataHolder {
     private static String Birthday;
     private static String Password;
 
-    private static Image image;
+    private static File image;
     private static User user;
 
 
@@ -61,5 +63,13 @@ public  class DataHolder {
 
     public static void setUser(User user) {
         DataHolder.user = user;
+    }
+
+    public static File getImage() {
+        return image;
+    }
+
+    public static void setImage(File image) {
+        DataHolder.image = image;
     }
 }
