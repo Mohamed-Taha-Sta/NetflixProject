@@ -23,15 +23,15 @@ public class FilmController {
        //System.out.println(   ActorDAO.recherche_actjasser());
         //System.out.println(Actor.getID());
       //  Actor.ID=Actor.ID+1;
-      //  System.out.println(Actor.getID());
+      //  System.out.println(Actor.getID());/*
         ArrayList<String>list=new ArrayList<>();
         list.add("fares");
         list.add("zaza");
         list.add("jasser");
         ArrayList<Actor>liste1=new ArrayList<>();
-        liste1.add(new Actor(8,"jasser","hamdi","taha@gmail.com","zzzz"));
-        liste1.add(new Actor(7,"fares","makki","faresmakki21@gmail.com","tahajasser"));
-        liste1.add(new Actor(10,"ahmed","makki","faresmakki21@gmail.com","tahajasser"));
+        liste1.add(new Actor(9,"jasser","hamdi","taha@gmail.com","zzzz"));
+       // liste1.add(new Actor(7,"fares","makki","faresmakki21@gmail.com","tahajasser"));
+        //liste1.add(new Actor(10,"ahmed","makki","faresmakki21@gmail.com","tahajasser"));
 
         File synop = new File("src/main/java/Test/VideoTest.mp4");
         File imageFile = new File("src/main/java/Test/LionTest.jpeg");
