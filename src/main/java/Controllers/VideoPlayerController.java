@@ -2,6 +2,7 @@ package Controllers;
 
 import DAO.EpisodeDAO2;
 import Utils.DataHolder;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
@@ -44,21 +46,31 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivVolume;
     private ImageView ivMute;
     private ImageView ivFullScreen;
+    @FXML
+    public void handleButtonAction() throws Exception{
+        FileChooser fc= new FileChooser();
+        File file= fc.showOpenDialog(null);
+        String filePath = file.toURI().toString();
 
+        if(filePath!= null) {
+            System.out.println("FilePath is- "+filePath);
+            Media media= new Media(filePath);
+            mpVideo= new MediaPlayer(media);
 
+            // move initialization of mvVideo after creating the MediaPlayer
+            mvVideo= new MediaView(mpVideo);
+            mvVideo.setFitWidth(600);
+            mvVideo.setFitHeight(600);
+            mvVideo.setPreserveRatio(false);
+            mvVideo.setSmooth(true);
+
+            mpVideo.setAutoPlay(true);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("inVideoPlayerController");
-        final int IV_SIZE = 25;
-        mediaVideo = new Media("file:src/main/java/Test/VideoTest.mp4");
-        mpVideo = new MediaPlayer(mediaVideo);
-        mvVideo.setMediaPlayer(mpVideo);
-        Image imagePlay = new Image(new File("src/main/resources/Images/VideoPlayer/Play.png").toURI().toString());
-        ivPlay = new ImageView(imagePlay);
-        ivPlay.setFitHeight(IV_SIZE);
-        ivPlay.setFitWidth(IV_SIZE);
-    }
 
-    // private ImageView
+
+    }
 }

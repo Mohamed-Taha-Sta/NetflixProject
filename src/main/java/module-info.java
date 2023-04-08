@@ -1,6 +1,6 @@
 module com.example.netflixproject {
-    requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.controls;
     requires javafx.media;
     requires java.sql;
     requires org.apache.commons.io;

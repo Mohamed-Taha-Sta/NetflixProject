@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class AdminDAO {
     private static final Connection conn = ConxDB.getInstance();
 
-    public static void createadmin(Admin admin){
+    public static void createadmin(Admin admin) {
         boolean etat = true;
         PreparedStatement pstmt = null;
         String sql;
@@ -19,7 +19,6 @@ public class AdminDAO {
 
         try {
             sql = "INSERT INTO Admin (nom,prenom,mail,password) VALUES (?,?,?,?)";
-
 
 
             pstmt = conn.prepareStatement(sql);
@@ -35,13 +34,16 @@ public class AdminDAO {
         }
 
     }
-public static Long consult_nbrvue_film(Film film){
+
+    public static Long consult_nbrvue_film(Film film) {
         return FilmDAO.getnbrvue(film);
-}
-    public static Long consult_score_film(Film film){
+    }
+
+    public static Long consult_score_film(Film film) {
         return FilmDAO.getscore(film);
     }
-    public static Long consult_vote_film(Film film){
+
+    public static Long consult_vote_film(Film film) {
         return FilmDAO.getvote(film);
     }
 }

@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public static boolean resize=true;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("LoginPage"),600,600);
+        scene = new Scene(LoadFxml("VideoPlayer"),600,600);
         stage.setResizable(resize);
         stage.setScene(scene);
         stage.show();

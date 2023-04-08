@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-
 <VBox fx:id="Vboxplayer" alignment="BOTTOM_CENTER" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VideoPlayerController">
    <children>
       <MediaView fx:id="mvVideo" fitHeight="200.0" fitWidth="200.0" />
@@ -22,7 +21,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Button fx:id="ButtonPPR" mnemonicParsing="false" text="Button">
+            <Button fx:id="ButtonPPR" mnemonicParsing="false" onAction="#handleButtonAction" text="Button">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
