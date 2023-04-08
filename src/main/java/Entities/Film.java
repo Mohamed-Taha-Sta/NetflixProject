@@ -21,7 +21,6 @@ private ArrayList<Actor>acteur;
     private long VueNbr;
     private long Score;
     private long Votes;
-    private File file;
     private File synopsis;
     private File film;
 
@@ -73,20 +72,17 @@ private ArrayList<Actor>acteur;
     }*/
 
 
-
-
-
-
-
-
-
-    public File getFile() {
-        return file;
+    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, long vueNbr, long score, long votes, File synopsis, File film) {
+        super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
+        this.synopsis = synopsis;
+        this.film = film;
     }
 
-    public void setFile(File file) {
-        this.file = file;
-    }
+
 
 
     public ArrayList<Actor> getActeur() {
@@ -124,30 +120,23 @@ private ArrayList<Actor>acteur;
         this.duree = duree;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Film{" +
+                "duree='" + duree + '\'' +
+                ", acteur=" + acteur +
+                ", VueNbr=" + VueNbr +
+                ", Score=" + Score +
+                ", Votes=" + Votes +
+                ", synopsis=" + synopsis +
+                ", film=" + film +
+                ", nom='" + nom + '\'' +
+                ", realisateur='" + realisateur + '\'' +
+                ", annerdesortie=" + annerdesortie +
+                ", langue='" + langue + '\'' +
+                ", paysorigine='" + paysorigine + '\'' +
+                ", listegenre=" + listegenre +
+                ", img=" + img +
+                '}';
+    }
 }

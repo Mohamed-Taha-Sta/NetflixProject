@@ -3,6 +3,7 @@ package DAO;
 import Entities.*;
 import Utils.ConxDB;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,14 +45,13 @@ public class ActorDAO {
     public static boolean ajout_acteur(Actor act) {
         boolean etat = true;
         PreparedStatement pstmt = null;
-        String type="sec";//get_from_jasser()
         String sql;
         Long compteur=act.getID();
 
         try {
 
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            if(type=="main") {
+            if(act instanceof MainActor) {
                 sql = "INSERT INTO mainactor (nom,prenome,mail,password) VALUES (?,?,?,?)";
 
             // sql = "INSERT INTO mainactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(Actor.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
@@ -81,7 +81,7 @@ public class ActorDAO {
         }
         return etat;
     }
-public static long  getactid(String nom,String prenom ){
+public static long  getactid(String nom,String prenom ){/*pour le recherche des film avec nom acteur saisie*/
     PreparedStatement pstmt = null;
     String sql1;
     ResultSet rs;
