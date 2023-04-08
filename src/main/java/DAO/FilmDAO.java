@@ -404,6 +404,68 @@ public class FilmDAO {
 
 
 
+    public static Long getvote(Film film){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Film>list=new ArrayList<>();
+        try {
+            String sql="select vote from Film where Film.id_film="+film.getId();
+            pstmt = conn.prepareStatement(sql);
+            rs=pstmt.executeQuery();
+            rs.next();
+            return rs.getLong(1);
+        }catch (Exception e){
+            System.out.println("film nexiste pas");
+            return Long.valueOf(-1);
+        }
+
+
+
+
+
+}
+    public static Long getscore(Film film){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Film>list=new ArrayList<>();
+        try {
+            String sql="select score from Film where Film.id_film="+film.getId();
+            pstmt = conn.prepareStatement(sql);
+            rs=pstmt.executeQuery();
+            rs.next();
+            return rs.getLong(1);
+        }catch (Exception e){
+            System.out.println("film nexiste pas");
+            return Long.valueOf(-1);
+        }
+
+
+
+
+
+    }
+    public static Long getnbrvue(Film film){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Film>list=new ArrayList<>();
+        try {
+            String sql="select vuenbr from Film where Film.id_film="+film.getId();
+            pstmt = conn.prepareStatement(sql);
+            rs=pstmt.executeQuery();
+            rs.next();
+            return rs.getLong(1);
+        }catch (Exception e){
+            System.out.println("film nexiste pas");
+            return Long.valueOf(-1);
+        }
+
+
+
+
+
+    }
+
+
 
 
 

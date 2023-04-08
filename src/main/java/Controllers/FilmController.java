@@ -1,6 +1,7 @@
 package Controllers;
 
 import DAO.ActorDAO;
+import DAO.AdminDAO;
 import DAO.FilmDAO;
 import DAO.ProducerDAO;
 import Entities.*;
@@ -56,7 +57,11 @@ public class FilmController {
        // System.out.println(ActorDAO.recherche_actjasser());;
         //FilmDAO.ajout_film(new Film("caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film));
        // System.out.println(FilmDAO.recherche_filmact(new Actor(41,"hamadi","a7mer","hamadiahmer@gmail.com","zzzz"))); ;
-       System.out.println(ActorDAO.getact("","")  );
+     //  System.out.println(ActorDAO.getact("","")  );
         //System.out.println(        FilmDAO.recherche_filmnom("caff"));
+       // AdminDAO.createadmin(new Admin("fares","makki","faresmakki21@gmail.com","fares123"));
+        //System.out.println(FilmDAO.getnbrvue(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
+
+
     }
 }

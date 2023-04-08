@@ -82,8 +82,16 @@ private ArrayList<Actor>acteur;
         this.film = film;
     }
 
-
-
+    public Film(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
+        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        this.acteur = acteur;
+        VueNbr = vueNbr;
+        Score = score;
+        Votes = votes;
+        this.synopsis = synopsis;
+        this.film = film;
+    }
 
     public ArrayList<Actor> getActeur() {
         return acteur;
