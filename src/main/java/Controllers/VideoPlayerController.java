@@ -46,6 +46,7 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivFullScreen;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("inVideoPlayerController");
