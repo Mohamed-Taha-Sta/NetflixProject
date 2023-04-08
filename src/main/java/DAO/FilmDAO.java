@@ -228,8 +228,6 @@ public class FilmDAO {
                 for (String s : array) {
                     genrelist.add(s);
                 }
-                System.out.println(annerdesortie);
-
 
 
                 Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio);
@@ -343,38 +341,51 @@ public class FilmDAO {
         ResultSet rs = null;
         ArrayList<Film> list=new ArrayList<>();
         ArrayList<Film>list1=new ArrayList<>();
-        Long idact=ActorDAO.getactid(act.getName(),act.getPrename());
+        Long idact=ActorDAO.getActId(act.getName(),act.getPrename());
+
+        String sql;
         try {
 
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select MAINACTOR from relation where relation.id_act="+Long.toString(idact);
+            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+            try{sql = "SELECT id_film FROM acteursec_film WHERE id_act = ?";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,idact);
             rs = pstmt.executeQuery();
-            while (rs.next()) {
+
+                while (rs.next()) {
+
+                    list= (ArrayList<Film>) recherche_film(rs.getLong(1));
+                for (int i = 0; i < list.size(); i++) {
+                    list1.add(list.get(i));
+                }
+            }}catch (Exception e){
+                System.out.println("ce acteur a aucun acteur secandaire");
+            }
+
+            try{ sql = "SELECT id_film FROM Acteurprinc_Film WHERE id_act = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,idact);
+
+            rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+
                 list= (ArrayList<Film>) recherche_film(rs.getLong(1));
                 for (int i = 0; i < list.size(); i++) {
                     list1.add(list.get(i));
                 }
-            }
-            sql="select id_film from SUPPORTINGACTOR where relation.id_act="+Long.toString(idact);
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                list= (ArrayList<Film>) recherche_film(rs.getLong(1));
-                for (int i = 0; i < list.size(); i++) {
-                    list1.add(list.get(i));
-                }
-
+            }}catch (Exception e){
+                System.out.println("ce acteur a aucun acteur principale");
             }
 
 
-        }catch (SQLException ex) {
+        }catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
         return list1;
 
     }
-
 
 
 
