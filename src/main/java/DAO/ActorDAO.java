@@ -80,7 +80,7 @@ public class ActorDAO {
         }
         return etat;
     }
-public static long  getactid(String nom,String prenom ){
+public static long  getactid(String nom,String prenom ){/*pour le recherche des film avec nom acteur saisie*/
     PreparedStatement pstmt = null;
     String sql1;
     ResultSet rs;
