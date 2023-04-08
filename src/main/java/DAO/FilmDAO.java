@@ -254,7 +254,10 @@ public class FilmDAO {
         ArrayList<Film>list=new ArrayList<>();
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom="+filmnom;
+            //String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom like %"+filmnom+"%";
+            String sql="SELECT id_film, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film " +
+                    "FROM Film " +
+                    "WHERE Film.nom LIKE '%" + filmnom + "%'";
             pstmt = conn.prepareStatement(sql);
 
 
