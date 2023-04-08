@@ -62,7 +62,7 @@ public class SerieDAO {
 
     public static boolean InsertMainActSerie(long idSerie,List<Long> listMainAct) throws SQLException {
 
-        String sql = "INSERT INTO SERIE_ACTEURPRINC (SERIE_ID,ACTEURPRINC_ID) VALUES (?,?)";
+        String sql = "INSERT INTO SERIEACTORPRINC (ID_SERIE,ID_ACT) VALUES (?,?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         try {
@@ -86,7 +86,7 @@ public class SerieDAO {
     }
     public static boolean InsertSuppActSerie(long idSerie,List<Long> listSuppAct) throws SQLException {
 
-        String sql = "INSERT INTO SERIE_ACTEURSUPPORT (SERIE_ID,ACTEURSUPP_ID) VALUES (?,?)";
+        String sql = "INSERT INTO SERIEACTORSUPP (ID_SERIE,ID_ACT) VALUES (?,?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         try {
@@ -201,7 +201,7 @@ public class SerieDAO {
 
         List<Long> listIDActor = new ArrayList<>();
 
-        String sqlGetID = "SELECT ACTEURPRINC_ID FROM SERIE_ACTEURPRINC WHERE SERIE_ID = ?";
+        String sqlGetID = "SELECT ID_ACT FROM SERIEACTORPRINC WHERE ID_SERIE = ?";
 
         PreparedStatement pstmtGetID = conn.prepareStatement(sqlGetID);
 
@@ -210,9 +210,10 @@ public class SerieDAO {
         ResultSet rs = pstmtGetID.executeQuery();
 
         while (rs.next()) {
-            long IDActeurPrinc = rs.getLong("ACTEURPRINC_ID");
+            long IDActeurPrinc = rs.getLong("ID_ACT");
             listIDActor.add(IDActeurPrinc);
         }
+        System.out.println("Got Main Actors = "+listIDActor);
         return listIDActor;
     }
 
@@ -220,7 +221,7 @@ public class SerieDAO {
 
         List<Long> listIDActor = new ArrayList<>();
 
-        String sqlGetID = "SELECT ACTEURSUPP_ID FROM SERIE_ACTEURSUPPORT WHERE SERIE_ID = ?";
+        String sqlGetID = "SELECT ID_ACT FROM SERIEACTORSUPP WHERE ID_SERIE = ?";
 
         PreparedStatement pstmtGetID = conn.prepareStatement(sqlGetID);
 
@@ -229,9 +230,10 @@ public class SerieDAO {
         ResultSet rs = pstmtGetID.executeQuery();
 
         while (rs.next()) {
-            long IDActeurSupp = rs.getLong("ACTEURSUPP_ID");
+            long IDActeurSupp = rs.getLong("ID_ACT");
             listIDActor.add(IDActeurSupp);
         }
+        System.out.println("Got Support Actors = "+listIDActor);
         return listIDActor;
     }
 
@@ -239,7 +241,7 @@ public class SerieDAO {
     {
         List<Actor> actorList = new ArrayList<>();
 
-        String sql = "SELECT * FROM MAINACTOR WHERE ID_ACT = ?";
+        String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
 
         PreparedStatement pstmtGetID = conn.prepareStatement(sql);
 
@@ -267,11 +269,11 @@ public class SerieDAO {
 
     }
 
-    public static List<Actor> getSuppActorSerie(List<Long> IDactors) throws SQLException, IOException
+    public static List<Actor> getSuppActorSerie(List<Long> IDactors) throws SQLException
     {
         List<Actor> actorList = new ArrayList<>();
 
-        String sql = "SELECT * FROM SUPPORTINGACTOR WHERE ID_ACT = ?";
+        String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
 
         PreparedStatement pstmtGetID = conn.prepareStatement(sql);
 

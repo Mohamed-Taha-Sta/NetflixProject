@@ -31,12 +31,12 @@ public class SerieController {
         listGenre.add("Comedie");
         listGenre.add("Drama");
 
-        Serie serie = new Serie("Hajet9dom","Fares", LocalDate.of(2016,8,3),
-                "Arabic","France",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
+        Serie serie = new Serie("SerieNumDra9adeh","Ahmed", LocalDate.of(2009,3,12),
+                "Chel7a","Germany",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
 
-//        SerieDAO.AddSerie(serie);
+        SerieDAO.AddSerie(serie);
 
-        System.out.println(SerieDAO.GetSerieByName("Hajet9dom"));
+//        System.out.println(SerieDAO.GetSerieByName("Hajet9dom"));
 
     }
 
