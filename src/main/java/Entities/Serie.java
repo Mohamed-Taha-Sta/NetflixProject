@@ -12,6 +12,8 @@ public class Serie extends Content{
     private File synopsis;
     private List<Season> seasonList;
     private List<Actor> actorList;
+    private List<Long> IDMainactorList;
+    private List<Long> IDSuppactorList;
 
     public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
         super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
@@ -21,16 +23,33 @@ public class Serie extends Content{
         this.actorList = actorList;
     }
 
-    public Serie(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
+    public Serie(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
         super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
         SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
-        this.seasonList = seasonList;
-        this.actorList = actorList;
+        this.IDMainactorList = IDMainactorList;
+        this.IDSuppactorList = IDSuppactorList;
     }
 
     public long getSeasonNumber() {
         return SeasonNumber;
+    }
+
+    public List<Long> getIDMainactorList() {
+        return IDMainactorList;
+    }
+
+    public void setIDMainactorList(List<Long> IDMainactorList) {
+        this.IDMainactorList = IDMainactorList;
+    }
+
+
+    public List<Long> getIDSuppactorList() {
+        return IDSuppactorList;
+    }
+
+    public void setIDSuppactorList(List<Long> IDSuppactorList) {
+        this.IDSuppactorList = IDSuppactorList;
     }
 
     public void setSeasonNumber(long seasonNumber) {
@@ -62,5 +81,19 @@ public class Serie extends Content{
 
     public void setActorList(List<Actor> actorList) {
         this.actorList = actorList;
+    }
+
+    @Override
+    public String toString() {
+        return "Serie{" +
+                "actorList=" + actorList + "\n" +
+                ", id=" + id + "\n" +
+                ", nom='" + nom + '\'' + "\n" +
+                ", realisateur='" + realisateur + '\'' + "\n" +
+                ", annerdesortie=" + annerdesortie + "\n" +
+                ", langue='" + langue + '\'' + "\n" +
+                ", paysorigine='" + paysorigine + '\'' + "\n" +
+                ", listegenre=" + listegenre + "\n" +
+                '}';
     }
 }
