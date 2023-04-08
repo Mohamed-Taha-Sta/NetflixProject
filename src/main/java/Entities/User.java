@@ -1,40 +1,64 @@
 package Entities;
 
+import javafx.scene.image.Image;
+
+import java.io.File;
+import java.sql.Blob;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class User {
-   private long ID;
-   private String Name;
-   private String Prename;
-   private LocalDate Birthday;
-   private ArrayList<Long> ActorsList;
-   private ArrayList<String> GenreList;
-   private String Password;
+    private long ID;
+    private String Name;
+    private String Prename;
+    private String Mail;
+    private String Password;
+    private LocalDate Birthday;
+    private ArrayList<Long> ActorsList;
+    private ArrayList<String> GenreList;
 
-   private String Mail;
+    private LocalDate subscription;
 
-    public User(String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, String password, String mail) {
+    private File image;
+
+    public User(String name, String prename, String mail, String password, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList) {
         Name = name;
         Prename = prename;
+        Mail = mail;
+        Password = password;
         Birthday = birthday;
         ActorsList = actorsList;
         GenreList = genreList;
-        Password = password;
-        Mail = mail;
     }
 
-    public User(long ID, String name, String prename, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, String password, String mail) {
+    public User(String name, String prename, String mail, String password, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, LocalDate subscription, File image) {
+        Name = name;
+        Prename = prename;
+        Mail = mail;
+        Password = password;
+        Birthday = birthday;
+        ActorsList = actorsList;
+        GenreList = genreList;
+        this.subscription = subscription;
+        this.image = image;
+    }
+
+    public User(long ID, String name, String prename, String mail, String password, LocalDate birthday, ArrayList<Long> actorsList, ArrayList<String> genreList, LocalDate subscription, File image) {
         this.ID = ID;
         Name = name;
         Prename = prename;
+        Mail = mail;
+        Password = password;
         Birthday = birthday;
         ActorsList = actorsList;
         GenreList = genreList;
-        Password = password;
-        Mail = mail;
+        this.subscription = subscription;
+        this.image = image;
     }
+
+
 
     public long getID() {
         return ID;
@@ -111,6 +135,22 @@ public class User {
 
     public void setMail(String mail) {
         Mail = mail;
+    }
+
+    public LocalDate getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(LocalDate subscription) {
+        this.subscription = subscription;
+    }
+
+    public File getImage() {
+        return image;
+    }
+
+    public void setImage(File image) {
+        this.image = image;
     }
 
     @Override

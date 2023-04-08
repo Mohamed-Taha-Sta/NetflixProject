@@ -33,7 +33,7 @@
 }
 
 #Anchor {
-    -fx-background-color: linear-gradient(to bottom right, #100552, #0b0077, #1300a9, #3118ff) no repeat fixed;
+    -fx-background-color: linear-gradient(#100552, #0b0077, #1300a9, #3118ff) no repeat fixed;
 
 }
 

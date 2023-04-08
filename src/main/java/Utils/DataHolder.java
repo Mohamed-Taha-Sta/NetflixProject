@@ -1,6 +1,9 @@
 package Utils;
 
 import Entities.User;
+import javafx.scene.image.Image;
+
+import java.io.File;
 
 public  class DataHolder {
     private static String Name;
@@ -8,8 +11,19 @@ public  class DataHolder {
     private static String Email;
     private static String Birthday;
     private static String Password;
+
+    private static File image;
     private static User user;
 
+    private static int EpidodeId;
+
+    public static int getEpidodeId() {
+        return EpidodeId;
+    }
+
+    public static void setEpidodeId(int epidodeId) {
+        EpidodeId = epidodeId;
+    }
 
     public static String getName() {
         return Name;
@@ -49,5 +63,21 @@ public  class DataHolder {
 
     public static void setPassword(String password) {
         Password = password;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        DataHolder.user = user;
+    }
+
+    public static File getImage() {
+        return image;
+    }
+
+    public static void setImage(File image) {
+        DataHolder.image = image;
     }
 }

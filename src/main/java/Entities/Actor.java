@@ -18,41 +18,26 @@ public class Actor {
         this.ID = ID;
     }
 
-    public Actor(long ID, int x, String name, String prename, String mail, String password, CheckBox select) {
-        this.ID = ID;
-        this.x = x;
-        Name = name;
-        Prename = prename;
-        Mail = mail;
-        this.password = password;
-        this.select = select;
-    }
+
 
     public Actor(String name, String prename, String mail, String password) {
         Name = name;
         Prename = prename;
         Mail = mail;
         this.password = password;
-        this.select = select;
-    }
-
-   /* public Actor(long ID, String name, String prename, String mail, String password) {
-        this.ID = ID;
-        Name =name ;
-        Prename = prename;
-        Mail = mail;
-        this.password = password;
         this.select=new CheckBox();
         this.select.setId("checkBox");
-    }*/
+    }
+
+
    public Actor(long ID, String name, String prename, String mail, String password) {
        this.ID = ID;
        Name =name ;
        Prename = prename;
        Mail = mail;
        this.password = password;
-       //this.select=new CheckBox();
-       //this.select.setId("checkBox");
+       this.select=new CheckBox();
+       this.select.setId("checkBox");
    }
 
 
