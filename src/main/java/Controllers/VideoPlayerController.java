@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class VideoPlayerController implements Initializable {
-
+    public MediaView mvVideo;
     @FXML
     public MediaPlayer mpVideo;
     @FXML
@@ -34,9 +34,9 @@ public class VideoPlayerController implements Initializable {
     public Label LabelSpeed;
     public Label LabelFullScreen;
 
-    private boolean atEndOfVideo=false;
-    private boolean isPalying=false;
-    private boolean isMuted=false;
+    private boolean atEndOfVideo = false;
+    private boolean isPalying = false;
+    private boolean isMuted = false;
 
     private ImageView ivPlay;
     private ImageView ivPause;
@@ -49,11 +49,12 @@ public class VideoPlayerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("inVideoPlayerController");
-        final int IV_SIZE=25;
-        mediaVideo =new Media(new File("src/main/java/Test/VideoTest.mp4").toURI().toString());
-        mpVideo =new MediaPlayer(mediaVideo);
-        Image imagePlay=new Image(new File("src/main/resources/Images/VideoPlayer/Play.png").toURI().toString());
-        ivPlay=new ImageView(imagePlay);
+        final int IV_SIZE = 25;
+        mediaVideo = new Media("file:src/main/java/Test/VideoTest.mp4");
+        mpVideo = new MediaPlayer(mediaVideo);
+        mvVideo.setMediaPlayer(mpVideo);
+        Image imagePlay = new Image(new File("src/main/resources/Images/VideoPlayer/Play.png").toURI().toString());
+        ivPlay = new ImageView(imagePlay);
         ivPlay.setFitHeight(IV_SIZE);
         ivPlay.setFitWidth(IV_SIZE);
     }
