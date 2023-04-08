@@ -34,10 +34,18 @@ public class HomePageController implements Initializable {
 
 
     @FXML
+
     public void handleImageClick(javafx.scene.input.MouseEvent event) {
-        ImageView clickedImage = (ImageView) event.getSource();
-        System.out.println("Clicked image: " + clickedImage.getImage().getUrl());
+        try {
+            ImageView clickedImage = (ImageView) event.getSource();
+            System.out.println("Clicked image: " + clickedImage.getImage().getUrl());
+            HelloApplication.SetRoot("VideoPlayer");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     public void OnProfileClick()throws Exception{

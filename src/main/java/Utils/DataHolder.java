@@ -15,7 +15,15 @@ public  class DataHolder {
     private static File image;
     private static User user;
 
+    private static int EpidodeId;
 
+    public static int getEpidodeId() {
+        return EpidodeId;
+    }
+
+    public static void setEpidodeId(int epidodeId) {
+        EpidodeId = epidodeId;
+    }
 
     public static String getName() {
         return Name;
