@@ -42,7 +42,7 @@ public class FilmController {
             Date dat=null;
          //FilmDAO.ajout_film(new Film("caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film));
            //FilmDAO.ajout_film(new Film("tahamachhour","taha",3, dat,"arabic","tunisie",list,imageFile, "2heurs30minute",liste1,11,11,11,synop,film));
-       ArrayList<Film>t= (ArrayList<Film>) FilmDAO.recherche_film(13L);
+       ArrayList<Film>t= (ArrayList<Film>) FilmDAO.recherche_filmnom("");
         for (int i = 0; i < t.size(); i++) {
             System.out.println(t.get(i));
         }
