@@ -4,11 +4,22 @@ import java.util.Objects;
 
 public class Admin {
     private long ID;
+    private String name;
+    private String prename;
     private String Mail;
     private String Password;
 
-    public Admin(long ID, String mail, String password) {
+    public Admin(long ID, String name, String prename, String mail, String password) {
         this.ID = ID;
+        this.name = name;
+        this.prename = prename;
+        Mail = mail;
+        Password = password;
+    }
+
+    public Admin(String name, String prename, String mail, String password) {
+        this.name = name;
+        this.prename = prename;
         Mail = mail;
         Password = password;
     }

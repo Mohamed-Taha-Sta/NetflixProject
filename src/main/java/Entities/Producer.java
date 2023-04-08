@@ -9,6 +9,13 @@ public class Producer {
     String email;
     String password;
 
+    public Producer(String nom, String prenom, String email, String password) {
+        this.nom = nom;
+        Prenom = prenom;
+        this.email = email;
+        this.password = password;
+    }
+
     public Producer(Long id, String nom, String prenom, String email, String password) {
         this.id = id;
         this.nom = nom;
@@ -71,5 +78,16 @@ public class Producer {
     @Override
     public int hashCode() {
         return Objects.hash(email);
+    }
+
+    @Override
+    public String toString() {
+        return "Producer{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", Prenom='" + Prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
