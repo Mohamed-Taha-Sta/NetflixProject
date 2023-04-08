@@ -1,8 +1,6 @@
 package DAO;
 
-import Entities.Episode;
-import Entities.Season;
-import Entities.Serie;
+import Entities.*;
 import Utils.ConxDB;
 
 import java.io.*;
@@ -18,9 +16,11 @@ public class SerieDAO {
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public static boolean ajout_Serie(Serie Serie) throws SQLException, FileNotFoundException {
+    public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
 
-        String sql = "INSERT INTO Season (Name, Director, DEBUT_DATE, LANGUAGE, COUNTRY, Image, NUMS_SEASONS, SYNOPSIS, ListeGenre) " +
+        long SerieID=-1;
+
+        String sql = "INSERT INTO SERIE (Name, Director, DEBUT_DATE, LANGUAGE, COUNTRY, Image, NUM_SEASONS, SYNOPSIS, ListeGenre) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -36,9 +36,67 @@ public class SerieDAO {
             pstmt.setBlob(6,inputStreamThumbnail);
             pstmt.setLong(7,Serie.getSeasonNumber());
             pstmt.setBlob(8,inputStreamSynopsis);
-            pstmt.setString(9,String.join(",", Serie.getActorList().stream().map(Object::toString).toArray(String[]::new)));
+            pstmt.setString(9,String.join(",", Serie.getListegenre().stream().map(Object::toString).toArray(String[]::new)));
             int affectedRows = pstmt.executeUpdate();
+//            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+//            if (generatedKeys.next()) {
+//                id = generatedKeys.getLong(1);
+//            }
 
+            SerieID = getSerieID(Serie);
+
+
+        } catch(SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+            return -1;
+        } catch(Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+            return -1;
+        }
+        InsertMainActSerie(SerieID,Serie.getIDMainactorList());
+        InsertSuppActSerie(SerieID,Serie.getIDSuppactorList());
+        return SerieID;
+    }
+
+    public static boolean InsertMainActSerie(long idSerie,List<Long> listMainAct) throws SQLException {
+
+        String sql = "INSERT INTO SERIE_ACTEURPRINC (SERIE_ID,ACTEURPRINC_ID) VALUES (?,?)";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try {
+        for (Long lo : listMainAct)
+            {
+                pstmt.setLong(1,idSerie);
+                pstmt.setLong(2,lo);
+                int affectedRows = pstmt.executeUpdate();
+
+            }
+        } catch(SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+            return false;
+        } catch(Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    public static boolean InsertSuppActSerie(long idSerie,List<Long> listSuppAct) throws SQLException {
+
+        String sql = "INSERT INTO SERIE_ACTEURSUPPORT (SERIE_ID,ACTEURSUPP_ID) VALUES (?,?)";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        try {
+        for (Long lo : listSuppAct)
+            {
+                pstmt.setLong(1,idSerie);
+                pstmt.setLong(2,lo);
+                int affectedRows = pstmt.executeUpdate();
+
+            }
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
@@ -52,13 +110,33 @@ public class SerieDAO {
     }
 
 
-    public List<Serie> FindSeasonName(String SerieName) throws SQLException, IOException {
+    public static long getSerieID(Serie Serie) throws SQLException {
+        String sql = "Select * from SERIE where NAME = ? and DIRECTOR = ? and LANGUAGE = ?";
+        long SerieID=-1;
+        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        pstmt.setString(1,Serie.getNom());
+        pstmt.setString(2,Serie.getRealisateur());
+        pstmt.setString(3,Serie.getLangue());
+
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next())
+            SerieID = rs.getLong("ID_SERIE");
+        else
+            System.out.println("Error getting SerieID");
+
+        return SerieID;
+    }
+
+
+    public static List<Serie> GetSerieByName(String SerieName) throws SQLException, IOException {
 
         Serie serie = null;
 
         List<Serie> serieList = new ArrayList<>();
 
-        String sql = "SELECT * FROM SEASON WHERE NAME like ?";
+        String sql = "SELECT * FROM SERIE WHERE NAME like ?";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -74,7 +152,7 @@ public class SerieDAO {
             String Language = rs.getString("LANGUAGE");
             String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-            int numsSeasons= rs.getInt("NUMS_SEASONS");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
@@ -106,12 +184,121 @@ public class SerieDAO {
 
             List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
 
-//            serie = new Serie(ID,SerieName,Director,DebutDate,Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,);
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
+            ActorList.addAll(SuppActorList);
+
+            serie = new Serie(ID,SerieName,Director,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+
+            serieList.add(serie);
         }
 
         return serieList;
     }
+
+    public static List<Long> getPrincActorIDSerie(long IDSerie) throws SQLException {
+
+        List<Long> listIDActor = new ArrayList<>();
+
+        String sqlGetID = "SELECT ACTEURPRINC_ID FROM SERIE_ACTEURPRINC WHERE SERIE_ID = ?";
+
+        PreparedStatement pstmtGetID = conn.prepareStatement(sqlGetID);
+
+        pstmtGetID.setLong(1, IDSerie);
+
+        ResultSet rs = pstmtGetID.executeQuery();
+
+        while (rs.next()) {
+            long IDActeurPrinc = rs.getLong("ACTEURPRINC_ID");
+            listIDActor.add(IDActeurPrinc);
+        }
+        return listIDActor;
+    }
+
+    public static List<Long> getSuppActorIDSerie(long IDSerie) throws SQLException {
+
+        List<Long> listIDActor = new ArrayList<>();
+
+        String sqlGetID = "SELECT ACTEURSUPP_ID FROM SERIE_ACTEURSUPPORT WHERE SERIE_ID = ?";
+
+        PreparedStatement pstmtGetID = conn.prepareStatement(sqlGetID);
+
+        pstmtGetID.setLong(1, IDSerie);
+
+        ResultSet rs = pstmtGetID.executeQuery();
+
+        while (rs.next()) {
+            long IDActeurSupp = rs.getLong("ACTEURSUPP_ID");
+            listIDActor.add(IDActeurSupp);
+        }
+        return listIDActor;
+    }
+
+    public static List<Actor> getPrincActorSerie(List<Long> IDactors) throws SQLException, IOException
+    {
+        List<Actor> actorList = new ArrayList<>();
+
+        String sql = "SELECT * FROM MAINACTOR WHERE ID_ACT = ?";
+
+        PreparedStatement pstmtGetID = conn.prepareStatement(sql);
+
+        for(Long lo : IDactors)
+        {
+            pstmtGetID.setLong(1, lo);
+            ResultSet rs = pstmtGetID.executeQuery();
+
+            if (rs.next())
+            {
+                Long IDactor = rs.getLong(1);
+                String Nom = rs.getString(2);
+                String Prenom = rs.getString(3);
+                String Email = rs.getString(4);
+                String Password = rs.getString(5);
+
+                Actor actor = new MainActor(IDactor,Nom,Prenom,Email,Password);
+
+                actorList.add(actor);
+            }
+
+        }
+
+        return actorList;
+
+    }
+
+    public static List<Actor> getSuppActorSerie(List<Long> IDactors) throws SQLException, IOException
+    {
+        List<Actor> actorList = new ArrayList<>();
+
+        String sql = "SELECT * FROM SUPPORTINGACTOR WHERE ID_ACT = ?";
+
+        PreparedStatement pstmtGetID = conn.prepareStatement(sql);
+
+        for(Long lo : IDactors)
+        {
+            pstmtGetID.setLong(1, lo);
+            ResultSet rs = pstmtGetID.executeQuery();
+
+            if (rs.next())
+            {
+                Long IDactor = rs.getLong(1);
+                String Nom = rs.getString(2);
+                String Prenom = rs.getString(3);
+                String Email = rs.getString(4);
+                String Password = rs.getString(5);
+
+                Actor actor = new Supportingactor(IDactor,Nom,Prenom,Email,Password);
+
+                actorList.add(actor);
+            }
+
+        }
+
+        return actorList;
+
+    }
+
 
 
 
