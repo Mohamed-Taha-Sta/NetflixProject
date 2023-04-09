@@ -80,7 +80,7 @@ public class EpisodeDAO2 {
 
     }
 
-    public List<Episode> FindEpisodeID(Long ID) throws SQLException, IOException {
+    public static List<Episode> FindEpisodeID(Long ID) throws SQLException, IOException {
 
         List<Episode> episodeList = new ArrayList<>();
 
@@ -179,7 +179,7 @@ public class EpisodeDAO2 {
         return episodeList;
     }
 
-    public List<Episode> FindEpisodeName(String EpisodeName) throws SQLException, IOException {
+    public static List<Episode> FindEpisodeName(String EpisodeName) throws SQLException, IOException {
 
         List<Episode> episodeList = new ArrayList<>();
 
@@ -407,7 +407,7 @@ public class EpisodeDAO2 {
         return score;
     }
 
-    public static long getViewNbr(Episode ep){
+    public static long getViewNbrEpisode(Episode ep){
 
         PreparedStatement pstmt = null;
 

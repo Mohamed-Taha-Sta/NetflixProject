@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
+<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
    <children>
       <ScrollPane id="scroll-pane" fitToWidth="true" layoutX="283.0" layoutY="61.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
         <content>
