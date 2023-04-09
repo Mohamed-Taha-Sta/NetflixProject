@@ -50,7 +50,7 @@ public class SeasonDAO {
         return true;
     }
 
-    public List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {
+    public static List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {
 
         Season season = null;
 
@@ -110,7 +110,7 @@ public class SeasonDAO {
 
     }
 
-    public List<Season> FindSeasonID(long ID) throws SQLException, IOException {
+    public static List<Season> FindSeasonID(long ID) throws SQLException, IOException {
 
         Season season = null;
 

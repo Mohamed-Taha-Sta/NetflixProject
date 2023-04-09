@@ -45,7 +45,7 @@ public class EpisodeController {
 
 //        System.out.println(episodeDAO.AddEpisode(episode));
 //        System.out.println(episodeDAO.AddEpisode(episode2));
-        List<Episode> episodeList = episodeDAO.FindEpisodeID(90L);
+//        List<Episode> episodeList = episodeDAO.FindEpisodeID(90L);
 //        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
 
 //        System.out.println(EpisodeDAO2.getViewNbr(episodeList.get(0)));

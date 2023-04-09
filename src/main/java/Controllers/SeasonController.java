@@ -23,7 +23,7 @@ public class SeasonController {
 
 //        System.out.println(seasonDAO.ajout_Season(season));
 
-        List<Season> seasonList = seasonDAO.FindSeasonID(21L);
+//        List<Season> seasonList = seasonDAO.FindSeasonID(21L);
 
 //        System.out.println(seasonDAO.FindSeasonName("SeasonKindaNormal"));
 //        System.out.println(seasonDAO.getScoreSeason(seasonList.get(0)));
@@ -39,4 +39,9 @@ public class SeasonController {
     public static long StreamSumViewNumber(Season season) throws SQLException, IOException {return SeasonService.StreamSumViewNumber(season);}
 
     public static List<Episode> FindEpisodeSeasonID(Season season) throws SQLException, IOException {return EpisodeController.FindEpisodeSeasonID(season.getID());}
+
+    public static long getVotesSeason(Season season) throws SQLException, IOException {return SeasonService.getVotesSeason(season);}
+
+
+
 }
