@@ -263,3 +263,18 @@
     -fx-background-color: #fff;
 }
 
+.hbox{
+    -fx-background-color: linear-gradient(#100552, #0b0077);
+
+}
+.label{
+    -fx-text-fill: #ffffff;
+}
+
+.slider{
+    -fx-background-color: #566ed3;
+
+}
+.slider .filled {
+    -fx-selection-color: green;
+}

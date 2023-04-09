@@ -64,6 +64,14 @@
             <artifactId>javafx-swing</artifactId>
             <version>19.0.2.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.jdbc/ojdbc10 -->
+        <dependency>
+            <groupId>com.oracle.jdbc</groupId>
+            <artifactId>ojdbc10</artifactId>
+            <version>19.3.0.0</version>
+        </dependency>
+
+
 
 
     </dependencies>
