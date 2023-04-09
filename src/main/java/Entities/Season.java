@@ -30,6 +30,17 @@ public class Season {
         Thumbnail = thumbnail;
         this.episodeList = episodeList;
     }
+    public Season(long ID,String name, File synopsis, long SERIE_ID, int number,
+                  LocalDate debutDate, File thumbnail, List<Episode> episodeList) {
+        this.name=name;
+        this.ID = ID;
+        Synopsis = synopsis;
+        this.SERIE_ID = SERIE_ID;
+        Number = number;
+        DebutDate = debutDate;
+        Thumbnail = thumbnail;
+        this.episodeList = episodeList;
+    }
 
     public Season(String name, File synopsis, long SERIE_ID, int number, LocalDate debutDate, File thumbnail) {
 

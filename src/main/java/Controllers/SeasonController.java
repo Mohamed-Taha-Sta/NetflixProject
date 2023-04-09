@@ -2,11 +2,13 @@ package Controllers;
 
 import DAO.SeasonDAO;
 import Entities.Season;
+import Services.SeasonService;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class SeasonController {
 
@@ -20,9 +22,17 @@ public class SeasonController {
 
 //        System.out.println(seasonDAO.ajout_Season(season));
 
-        System.out.println(seasonDAO.FindSeasonName("SeasonKindaNormal"));
+        List<Season> seasonList = seasonDAO.FindSeasonID(21L);
+
+//        System.out.println(seasonDAO.FindSeasonName("SeasonKindaNormal"));
+        System.out.println(seasonDAO.getScoreSeason(seasonList.get(0)));
     }
 
+
+    public static long StreamAverageScore(List<Long> listScore)
+    {
+        return SeasonService.StreamAverageScore(listScore);
+    }
 
 
 }

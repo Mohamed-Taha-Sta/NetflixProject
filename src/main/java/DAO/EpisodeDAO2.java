@@ -27,18 +27,18 @@ public class EpisodeDAO2 {
     public EpisodeDAO2() throws SQLException {
     }
 
-    public static boolean ajout_episode(Episode episode) throws SQLException, FileNotFoundException {
+    public static boolean AddEpisode(Episode episode) throws SQLException, FileNotFoundException {
         String sql;
         InputStream inputStreamSynopsis = null;
 
         if (episode.getResume() instanceof Text) {
-            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, texte,IMAGE,VIDEO) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, texte,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         } else {
             inputStreamSynopsis = new FileInputStream(((Synopsis) episode.getResume()).getTinyVideo());
 
-            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, SYNOPSIS,IMAGE,VIDEO) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date, SYNOPSIS,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
 
 //        InputStream inputStream = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
@@ -61,6 +61,9 @@ public class EpisodeDAO2 {
             }
             pstmt.setBlob(7, inputStream); // replace inputStream with the actual image data
             pstmt.setBlob(8, inputStreamVideo); // replace "https://example.com/video.mp4" with the actual video URL value
+            pstmt.setLong(9, 0); // replace "https://example.com/video.mp4" with the actual video URL value
+            pstmt.setLong(10, 0); // replace "https://example.com/video.mp4" with the actual video URL value
+            pstmt.setLong(11, 0); // replace "https://example.com/video.mp4" with the actual video URL value
             int affectedRows = pstmt.executeUpdate();
 
         } catch (SQLException se) {
