@@ -4,8 +4,10 @@ import DAO.SerieDAO;
 import Entities.Actor;
 import Entities.MainActor;
 import Entities.Serie;
+import Services.SerieService;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -34,11 +36,23 @@ public class SerieController {
         Serie serie = new Serie("SerieNumDra9adeh","Ahmed", LocalDate.of(2009,3,12),
                 "Chel7a","Germany",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
 
-        SerieDAO.AddSerie(serie);
+//        SerieDAO.AddSerie(serie);
 
 //        System.out.println(SerieDAO.GetSerieByName("Hajet9dom"));
 
     }
+
+
+
+    public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
+        return SerieService.AddSerie(Serie);
+    }
+
+    public static List<Serie> GetSerieByName(String SerieName) throws SQLException, IOException {
+        return SerieService.GetSerieByName(SerieName);
+    }
+
+
 
 
 }
