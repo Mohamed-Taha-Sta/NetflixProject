@@ -1,5 +1,8 @@
 package DAO;
 
+import Entities.Episode;
+import Entities.Film;
+import Entities.Serie;
 import Entities.User;
 import Utils.ConxDB;
 import Utils.DataHolder;
@@ -190,5 +193,45 @@ public class UserDAO {
             System.out.println(e.getMessage());
         }
     }
+    public static boolean votepositivefilm(Film film){
+       return FilmDAO.UpdatePositiveScoreFilm(film);
+    }
+    public static boolean votenegativefilm(Film film){
+        return FilmDAO.UpdatenegativeScoreFilm(film);
+    }
+    public static boolean regarderfilm(Film film){
+        return FilmDAO.UpdatevuenbrFilm(film);
+    }
+    public static boolean votepositiveepisode(Episode ep){
+        try{
+        return EpisodeDAO2.UpdatePositiveScoreEpisode(ep);}
+        catch (SQLException E){
+            System.out.println("error dans la connection du base");
+            return false;
+        }
+    }
+    public static boolean votenegativeepisode(Episode ep){
+        try{
+            return EpisodeDAO2.UpdateNegativeScoreEpisode(ep);
+
+        }
+        catch (SQLException E){
+            System.out.println("error dans la connection du base");
+            return false;
+        }
+    }
+    public static boolean regarederepisode(Episode ep){
+        try{
+            return EpisodeDAO2.UpdateViewNbrEpisode(ep);}
+        catch (SQLException E){
+            System.out.println("error dans la connection du base");
+            return false;
+        }
+    }
+
+
+
+
+
 
 }

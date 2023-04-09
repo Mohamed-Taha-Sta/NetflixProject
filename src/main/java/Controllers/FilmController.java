@@ -61,7 +61,8 @@ public class FilmController {
         //System.out.println(        FilmDAO.recherche_filmnom("caff"));
        // AdminDAO.createadmin(new Admin("fares","makki","faresmakki21@gmail.com","fares123"));
         //System.out.println(FilmDAO.getnbrvue(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
-
+       // FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film));
+      //  System.out.println(FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
 
     }
 }
