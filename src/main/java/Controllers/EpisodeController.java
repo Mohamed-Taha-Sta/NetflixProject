@@ -16,6 +16,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
+
+import static DAO.EpisodeDAO2.UpdateViewNbrEpisode;
 
 public class EpisodeController {
 
@@ -39,15 +42,19 @@ public class EpisodeController {
                 LocalDate.of(2023,12,15),resume2,1500,50,150,file,imageFile);
 
 
-        System.out.println(episodeDAO.ajout_episode(episode));
+//        System.out.println(episodeDAO.ajout_episode(episode));
 //        System.out.println(episodeDAO.ajout_episode(episode2));
-//        System.out.println(episodeDAO.FindEpisodeID(54L));
+        List<Episode> episodeList = episodeDAO.FindEpisodeID(50L);
 //        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
 
+//        System.out.println(EpisodeDAO2.getViewNbr(episodeList.get(0)));
 
+//        episodeDAO.UpdateViewNbrEpisode(episodeList.get(0));
+//        episodeDAO.UpdateVoteEpisode(episodeList.get(0));
 
+//        episodeDAO.UpdateVoteEpisode(episodeList.get(0));episodeDAO.UpdateScoreEpisode(episodeList.get(0));
 
-
+        episodeDAO.UpdatePositiveScoreEpisode(episodeList.get(0));
 
     }
 

@@ -351,6 +351,254 @@ public class EpisodeDAO2 {
         return episodeList;
     }
 
+    public static long getVote(Episode ep){
+
+        PreparedStatement pstmt = null;
+
+        long nbrVotes=-1;
+
+        ResultSet rs = null;
+
+        try {
+            String sql="SELECT VOTES FROM EPISODES WHERE ID=?";
+
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setLong(1, ep.getID());
+
+            rs=pstmt.executeQuery();
+
+            if (rs.next())
+                nbrVotes = rs.getLong(1);
+
+        }catch (Exception e){
+            System.out.println("Episode "+ep.getID()+" vote retrieval failed");
+            return -1;
+        }
+        return nbrVotes;
+    }
+
+
+    public static long getScore(Episode ep){
+
+        PreparedStatement pstmt = null;
+
+        long score=-1;
+
+        ResultSet rs = null;
+
+        try {
+            String sql="SELECT SCORE FROM EPISODES WHERE ID = ?";
+
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setLong(1,ep.getID());
+
+            rs=pstmt.executeQuery();
+            if (rs.next())
+                score = rs.getLong(1);
+        }catch (Exception e){
+            System.out.println("Episode "+ep.getID()+" score retrieval failed");
+            return -1;
+        }
+        return score;
+    }
+
+    public static long getViewNbr(Episode ep){
+
+        PreparedStatement pstmt = null;
+
+        long nbr_view = -1;
+
+        ResultSet rs = null;
+
+        try {
+            String sql="select VIEW_NBR from EPISODES where ID = ?";
+
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setLong(1,ep.getID());
+
+            rs=pstmt.executeQuery();
+
+            if (rs.next())
+                nbr_view = rs.getLong(1);
+        }catch (Exception e){
+            System.out.println("Episode "+ep.getID()+" view number retrieval failed");
+            return -1;
+        }
+        return nbr_view;
+    }
+
+
+    public static boolean UpdateViewNbrEpisode(Episode ep) throws SQLException {
+        String sql = "update EPISODES set VIEW_NBR = VIEW_NBR + 1 where ID = ?";
+
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1,ep.getID());
+
+        try {
+            int affectedRows = pstmt.executeUpdate();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static boolean UpdateVoteEpisode(Episode ep) throws SQLException {
+        String sql = "update EPISODES set VOTES = VOTES + 1 where ID = ?";
+
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1,ep.getID());
+
+        try {
+            int affectedRows = pstmt.executeUpdate();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean UpdateNegativeScoreEpisode(Episode ep) throws SQLException {
+
+        try {
+            UpdateVoteEpisode(ep);
+        }catch (Exception e)
+        {
+            System.out.println("Error updating Negative Score");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static long getScoreEpisode(Episode ep) throws SQLException {
+
+        long score = -1;
+
+        String sql = "SELECT SCORE from EPISODES WHERE ID = ?";
+
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1,ep.getID());
+
+        ResultSet rs = null;
+
+        try {
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                score = rs.getLong("SCORE");
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return -1;
+        }
+        return score;
+    }
+
+    public static long getVotesEpisode(Episode ep) throws SQLException {
+
+        long votes = -1;
+
+        String sql = "SELECT VOTES from EPISODES WHERE ID = ?";
+
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1,ep.getID());
+
+        ResultSet rs = null;
+
+        try {
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                votes = rs.getLong("VOTES");
+            }
+        }catch (Exception e)
+        {
+            return -1;
+        }
+        return votes;
+    }
+
+
+    public static boolean UpdatePositiveScoreEpisode(Episode ep) throws SQLException {
+
+        long score = getScoreEpisode(ep);
+        long votes = getVotesEpisode(ep);
+
+
+        if (score == -1)
+        {
+            System.out.println("Error retrieving Score in UpdatePositiveScoreEpisode Function ");
+            return false;
+        }
+        if (votes == -1)
+        {
+            System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
+            return false;
+        }
+
+//        long posVotes = (long) Math.ceil(((score/100)*votes));
+        long posVotes = (long) Math.ceil(((float)score/100.0)*votes);
+        System.out.println("PosVotes Before Increase "+ posVotes);
+        votes++;
+        posVotes++;
+        System.out.println("PosVotes After Increase "+ posVotes);
+
+
+//        long Newscore = (long) Math.ceil(((float)(posVotes+1)/(votes+1))*100);
+        long Newscore = (long) (((float)posVotes*100.0)/votes);
+
+        UpdateVoteEpisode(ep);
+
+//        System.out.println("New score is "+Newscore);
+
+        String sql = "update EPISODES set SCORE = ? where ID = ?";
+
+        PreparedStatement pstmt = null;
+
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1,Newscore);
+        pstmt.setLong(2,ep.getID());
+
+        ResultSet rs = null;
+
+        try {
+            rs = pstmt.executeQuery();
+
+        }catch (Exception e)
+        {
+            System.out.println("Error Setting Score in UpdatePositiveScoreEpisode Function ");
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+
+
+
 
 
 
