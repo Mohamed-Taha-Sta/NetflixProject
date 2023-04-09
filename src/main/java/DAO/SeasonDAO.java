@@ -50,7 +50,7 @@ public class SeasonDAO {
         return true;
     }
 
-    public List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {
+    public static List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {
 
         Season season = null;
 
@@ -110,7 +110,7 @@ public class SeasonDAO {
 
     }
 
-    public List<Season> FindSeasonID(long ID) throws SQLException, IOException {
+    public static List<Season> FindSeasonID(long ID) throws SQLException, IOException {
 
         Season season = null;
 
@@ -227,25 +227,36 @@ public class SeasonDAO {
 
     }
 
+//
+//    Was Moved to SeasonService and further optimised
+//
+//    public static long getScoreSeason(Season season) throws SQLException, IOException {
+//
+//        List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(season.getID());
+//
+//        List<Long> listScore = new ArrayList<>();
+//
+//        for(Episode episode : episodeList)
+//        {
+//            long score = EpisodeDAO2.getScoreEpisode(episode);
+//            listScore.add(score);
+//        }
+//
+//        return SeasonController.StreamAverageScore(listScore);
+//
+//    }
 
-    public static long getScoreSeason(Season season) throws SQLException, IOException {
 
-        List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(season.getID());
-
-        List<Long> listScore = new ArrayList<>();
-
-        for(Episode episode : episodeList)
-        {
-            long score = EpisodeDAO2.getScoreEpisode(episode);
-            listScore.add(score);
-        }
-
-        return SeasonController.StreamAverageScore(listScore);
-
-    }
-
-
-
+//
+//    Was Moved to SeasonService and further optimised
+//
+//    public static long getViewNbrSeason(Season season) throws SQLException, IOException {
+//
+//        List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(season.getID());
+//
+//        return SeasonController.StreamSumViewNumber(episodeList);
+//    }
+//
 
 
 

@@ -5,6 +5,7 @@ import Entities.Episode;
 import Entities.Resume;
 import Entities.Synopsis;
 import Entities.Text;
+import Services.EpisodeService;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -42,9 +43,9 @@ public class EpisodeController {
                 LocalDate.of(2015,12,12),resume2,1500,50,150,file,imageFile);
 
 
-        System.out.println(episodeDAO.AddEpisode(episode));
-        System.out.println(episodeDAO.AddEpisode(episode2));
-//        List<Episode> episodeList = episodeDAO.FindEpisodeID(50L);
+//        System.out.println(episodeDAO.AddEpisode(episode));
+//        System.out.println(episodeDAO.AddEpisode(episode2));
+//        List<Episode> episodeList = episodeDAO.FindEpisodeID(90L);
 //        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));
 
 //        System.out.println(EpisodeDAO2.getViewNbr(episodeList.get(0)));
@@ -56,6 +57,51 @@ public class EpisodeController {
 
 //        episodeDAO.UpdatePositiveScoreEpisode(episodeList.get(0));
 
+    }
+
+
+    public static List<Episode> FindEpisodeSeasonID(long id) throws SQLException, IOException {
+        return EpisodeService.FindEpisodeSeasonID(id);
+    }
+
+    public static long getVotesEpisode(Episode ep) throws SQLException {
+        return EpisodeService.getVotesEpisode(ep);
+    }
+
+    public static long getScoreEpisode(Episode ep) throws SQLException {
+        return EpisodeService.getScoreEpisode(ep);
+    }
+
+    public static long getViewNbrEpisode(Episode ep){
+        return EpisodeService.getViewNbrEpisode(ep);
+    }
+
+    public static boolean UpdatePositiveScoreEpisode(Episode ep) throws SQLException {
+        return EpisodeService.UpdatePositiveScoreEpisode(ep);
+    }
+
+    public static boolean UpdateNegativeScoreEpisode(Episode ep) throws SQLException {
+        return EpisodeService.UpdateNegativeScoreEpisode(ep);
+    }
+
+
+    public static boolean UpdateViewNbrEpisode(Episode ep) throws SQLException {
+        return EpisodeService.UpdateViewNbrEpisode(ep);
+    }
+
+
+    public static List<Episode> FindEpisodeName(String EpisodeName) throws SQLException, IOException {
+        return EpisodeService.FindEpisodeName(EpisodeName);
+    }
+
+
+    public static List<Episode> FindEpisodeID(long id) throws SQLException, IOException {
+        return EpisodeService.FindEpisodeID(id);
+    }
+
+
+    public static boolean AddEpisode(Episode episode) throws SQLException, IOException {
+        return EpisodeService.AddEpisode(episode);
     }
 
 
