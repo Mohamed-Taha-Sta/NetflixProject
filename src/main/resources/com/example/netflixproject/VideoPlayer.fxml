@@ -21,7 +21,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
-            <Button fx:id="ButtonPPR" mnemonicParsing="false" onAction="#handleButtonAction" text="Button">
+            <Button fx:id="ButtonPPR" mnemonicParsing="false" text="Button">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>

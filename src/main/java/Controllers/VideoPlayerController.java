@@ -46,31 +46,15 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivVolume;
     private ImageView ivMute;
     private ImageView ivFullScreen;
-    @FXML
-    public void handleButtonAction() throws Exception{
-        FileChooser fc= new FileChooser();
-        File file= fc.showOpenDialog(null);
-        String filePath = file.toURI().toString();
 
-        if(filePath!= null) {
-            System.out.println("FilePath is- "+filePath);
-            Media media= new Media(filePath);
-            mpVideo= new MediaPlayer(media);
-
-            // move initialization of mvVideo after creating the MediaPlayer
-            mvVideo= new MediaView(mpVideo);
-            mvVideo.setFitWidth(600);
-            mvVideo.setFitHeight(600);
-            mvVideo.setPreserveRatio(false);
-            mvVideo.setSmooth(true);
-
-            mpVideo.setAutoPlay(true);
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        File file = new File("src/main/java/Test/VideoTest.mp4");
+        mediaVideo = new Media(file.toURI().toString());
+        mpVideo = new MediaPlayer(mediaVideo);
+        mvVideo.setMediaPlayer(mpVideo);
+        mpVideo.setAutoPlay(true);
     }
 }
