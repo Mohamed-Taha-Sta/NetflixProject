@@ -1,6 +1,7 @@
 package Controllers;
 
 import DAO.SeasonDAO;
+import Entities.Episode;
 import Entities.Season;
 import Services.SeasonService;
 
@@ -25,14 +26,17 @@ public class SeasonController {
         List<Season> seasonList = seasonDAO.FindSeasonID(21L);
 
 //        System.out.println(seasonDAO.FindSeasonName("SeasonKindaNormal"));
-        System.out.println(seasonDAO.getScoreSeason(seasonList.get(0)));
+//        System.out.println(seasonDAO.getScoreSeason(seasonList.get(0)));
+//        System.out.println(seasonDAO.getViewNbrSeason(seasonList.get(0)));
+//        List<Episode> episodeList = FindEpisodeSeasonID(seasonList.get(0));
+        System.out.println();
+
     }
 
 
-    public static long StreamAverageScore(List<Long> listScore)
-    {
-        return SeasonService.StreamAverageScore(listScore);
-    }
+    public static long StreamAverageScore(Season season) throws SQLException, IOException {return SeasonService.StreamAverageScore(season);}
 
+    public static long StreamSumViewNumber(Season season) throws SQLException, IOException {return SeasonService.StreamSumViewNumber(season);}
 
+    public static List<Episode> FindEpisodeSeasonID(Season season) throws SQLException, IOException {return EpisodeController.FindEpisodeSeasonID(season.getID());}
 }

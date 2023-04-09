@@ -23,7 +23,7 @@ public class Episode {
 
     @Override
     public String toString() {
-        return "Episode{" +
+        return "\nEpisode{" +
                 "ID=" + ID +
                 ", SeasonParentID=" + SeasonParentID +
                 ", Name='" + Name + '\'' +
