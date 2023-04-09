@@ -68,7 +68,7 @@ public class AdminDAO {
         }
     }
    public static Long consult_score_episodepourcentage(Episode ep) {try{
-      return ( (EpisodeDAO2.getScoreEpisode(ep)*100)/EpisodeDAO2.getVotesEpisode(ep));
+      return EpisodeDAO2.getScoreEpisode(ep);
    }
    catch (Exception e){
        System.out.println("error dans la connection du base de donner");

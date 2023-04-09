@@ -86,15 +86,11 @@ public class FilmDAO {
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
                     ActorDAO.ajout_acteur(act.get(i));
-
-
                 }else{
                     sql3 = "INSERT INTO acteursec_film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
-
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
                     ActorDAO.ajout_acteur(act.get(i));
-
                 }
 
 
