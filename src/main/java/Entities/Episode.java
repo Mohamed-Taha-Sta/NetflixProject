@@ -76,16 +76,16 @@ public class Episode {
         media = file;
     }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, long vueNbr, long score, long votes, File file,File Image) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, File file,File Image) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.resume = resume;
-        VueNbr = vueNbr;
-        Score = score;
-        Votes = votes;
+        VueNbr = 0;
+        Score = 0;
+        Votes = 0;
         media = file;
         image = Image;
     }

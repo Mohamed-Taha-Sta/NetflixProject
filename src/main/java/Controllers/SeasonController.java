@@ -4,6 +4,7 @@ import DAO.SeasonDAO;
 import Entities.Episode;
 import Entities.Season;
 import Services.SeasonService;
+import Services.SerieService;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class SeasonController {
 //        System.out.println(seasonDAO.getScoreSeason(seasonList.get(0)));
 //        System.out.println(seasonDAO.getViewNbrSeason(seasonList.get(0)));
 //        List<Episode> episodeList = FindEpisodeSeasonID(seasonList.get(0));
-        System.out.println();
+
 
     }
 
@@ -41,6 +42,22 @@ public class SeasonController {
     public static List<Episode> FindEpisodeSeasonID(Season season) throws SQLException, IOException {return EpisodeController.FindEpisodeSeasonID(season.getID());}
 
     public static long getVotesSeason(Season season) throws SQLException, IOException {return SeasonService.getVotesSeason(season);}
+
+    public static List<Season> FindSeasonSerieID(Long SerieID) throws SQLException, IOException {return SeasonService.FindSeasonSerieID(SerieID);}
+
+    public static List<Season> FindSeasonID(Long SerieID) throws SQLException, IOException {return SeasonService.FindSeasonID(SerieID);}
+
+    public static List<Season> FindSeasonName(String SerieName) throws SQLException, IOException {return SeasonService.FindSeasonName(SerieName);}
+
+    public static boolean AddSeason(Season season) throws SQLException, IOException {return SeasonService.AddSeason(season);}
+
+
+
+
+
+
+
+
 
 
 

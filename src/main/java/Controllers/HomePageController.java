@@ -66,9 +66,9 @@ public class HomePageController implements Initializable {
         File imageFile = new File("src/main/resources/Images/battlefield-2042-kaleidoscope-map-pc-games-xbox-series-x-3440x1440-6956.jpg");
         Resume resume2 = new Synopsis(file);
         Episode episode = new Episode(1, "EpisodeFamilyGuy", 5, LocalDate.of(2012, 10, 12),
-                LocalDate.of(2012, 10, 10), resume, 1500, 50, 150, file, imageFile);
+                LocalDate.of(2012, 10, 10), resume, file, imageFile);
         Episode episode2 = new Episode(2, "FaresSEpisode", 2, LocalDate.of(2023, 12, 14),
-                LocalDate.of(2023, 12, 15), resume2, 1500, 50, 150, file, imageFile);
+                LocalDate.of(2023, 12, 15), resume2, file, imageFile);
         episodes.add(episode);
         episodes.add(episode2);
         for (int i = 1; i < 8; i++) {

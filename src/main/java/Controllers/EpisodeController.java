@@ -37,10 +37,10 @@ public class EpisodeController {
 
 
         Episode episode = new Episode(21,"EpisodeInteresting",4, LocalDate.of(2014,12,9),
-                LocalDate.of(2011,11,2),resume,1500,50,150,file,imageFile);
+                LocalDate.of(2011,11,2),resume,file,imageFile);
 
         Episode episode2 = new Episode(21,"TahaEpsisode",2, LocalDate.of(1990,3,14),
-                LocalDate.of(2015,12,12),resume2,1500,50,150,file,imageFile);
+                LocalDate.of(2015,12,12),resume2,file,imageFile);
 
 
 //        System.out.println(episodeDAO.AddEpisode(episode));

@@ -31,7 +31,8 @@ public class FilmDAO {
         try {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
-            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film)" +
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getRealisateur() + "'";
             pstmt = conn.prepareStatement(sql);
 
@@ -42,7 +43,6 @@ public class FilmDAO {
             inputStreamSynopsisimg = new FileInputStream(film.getImg());
             inputStreamSynopsisfilm=new FileInputStream(film.getFilm());
             inputStreamSynopsissynops=new FileInputStream(film.getSynopsis());
-
 
             pstmt.setString(1,film.getNom());
             pstmt.setString(2,film.getRealisateur());
@@ -58,25 +58,18 @@ public class FilmDAO {
             pstmt.setBlob(12,inputStreamSynopsisfilm);
             pstmt.setBlob(13,inputStreamSynopsissynops);
 
-
-
-
             pstmt.executeUpdate();
 
-
             pstmt = conn.prepareStatement(sql1);
-            System.out.println(sql1);
-
 
             rs = pstmt.executeQuery();
             rs.next();
 
             int idfilm=rs.getInt(1);
 
-            ArrayList<Actor> act=film.getActeur();
+            List<Actor> act=film.getActeur();
 
             for(int i=0;i<act.size();i++){
-
                // sql3 = "INSERT INTO Acteurprinc_Film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
               //  sql3 = "INSERT INTO acteursec_film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
 
@@ -85,15 +78,13 @@ public class FilmDAO {
                     sql3 = "INSERT INTO Acteurprinc_Film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
-                    ActorDAO.ajout_acteur(act.get(i));
+//                    ActorDAO.ajout_acteur(act.get(i));
                 }else{
                     sql3 = "INSERT INTO acteursec_film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
-                    ActorDAO.ajout_acteur(act.get(i));
+//                    ActorDAO.ajout_acteur(act.get(i));
                 }
-
-
 
             }
 
@@ -164,7 +155,6 @@ public class FilmDAO {
             String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.id_film="+filmid;
             pstmt = conn.prepareStatement(sql);
 
-
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Long id=rs.getLong(1);
@@ -183,7 +173,7 @@ public class FilmDAO {
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
                 //Converting Blob Image to Jpeg File
-                File fileImg = new File("src/main/java/Test/ImgEp"+id+".jpeg");
+                File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
                 byte[] bufferImg = new byte[1024];
                 int length;
@@ -192,7 +182,7 @@ public class FilmDAO {
                 }
 
                 //Handeling the Video, from inputStream
-                Path outputFilePath = Paths.get("src/main/java/Test/VideoEp"+id+".mp4");
+                Path outputFilePath = Paths.get("src/main/java/Test/VideoSynopsis"+id+".mp4");
                 try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
@@ -203,20 +193,20 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
                 //Handeling the Video, from inputStream
-                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoEp"+id+".mp4");
+                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoFilm"+id+".mp4");
                 try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
                     byte[] bufferved = new byte[4096];
                     int bytesReadved;
-                    while ((bytesReadved = synop.read(bufferved)) != -1) {
+                    while ((bytesReadved = vedio.read(bufferved)) != -1) {
                         outputStream1.write(bufferved, 0, bytesReadved);
                     }
                 } catch (IOException e) {
                     System.out.println("Error Handelling the video");
                 }
 
-                File filesynop = new File("src/main/java/Test/VideoEp"+ id +".mp4");
-                File fileImage = new File("src/main/java/Test/ImgEp"+id+".jpeg");
-                File filmvedio=new File("src/main/java/Test/VideoEp"+ id +".mp4");
+                File filesynop = new File("src/main/java/Test/SynopsisFilm"+ id +".mp4");
+                File fileImage = new File("src/main/java/Test/ImgFilm"+ id +".jpeg");
+                File filmvedio=new File("src/main/java/Test/VideoFilm"+ id +".mp4");
 
 
                 ArrayList<String> genrelist = new ArrayList<>();
@@ -237,7 +227,6 @@ public class FilmDAO {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
         return list;
     }
@@ -273,7 +262,7 @@ public class FilmDAO {
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
                 //Converting Blob Image to Jpeg File
-                File fileImg = new File("src/main/java/Test/ImgEp"+id+".jpeg");
+                File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
                 byte[] bufferImg = new byte[1024];
                 int length;
@@ -282,7 +271,7 @@ public class FilmDAO {
                 }
 
                 //Handeling the Video, from inputStream
-                Path outputFilePath = Paths.get("src/main/java/Test/VideoEp"+id+".mp4");
+                Path outputFilePath = Paths.get("src/main/java/Test/SynopsisFilm"+id+".mp4");
                 try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
@@ -293,20 +282,20 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
                 //Handeling the Video, from inputStream
-                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoEp"+id+".mp4");
+                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoFilm"+id+".mp4");
                 try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
                     byte[] bufferved = new byte[4096];
                     int bytesReadved;
-                    while ((bytesReadved = synop.read(bufferved)) != -1) {
+                    while ((bytesReadved = vedio.read(bufferved)) != -1) {
                         outputStream1.write(bufferved, 0, bytesReadved);
                     }
                 } catch (IOException e) {
                     System.out.println("Error Handelling the video");
                 }
 
-                File filesynop = new File("src/main/java/Test/VideoEp"+ id +".mp4");
-                File fileImage = new File("src/main/java/Test/ImgEp"+id+".jpeg");
-                File filmvedio=new File("src/main/java/Test/VideoEp"+ id +".mp4");
+                File filesynop = new File("src/main/java/Test/SynopsisFilm"+ id +".mp4");
+                File fileImage = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
+                File filmvedio=new File("src/main/java/Test/VideoFilm"+ id +".mp4");
 
 
                 ArrayList<String> genrelist = new ArrayList<>();
@@ -382,23 +371,6 @@ public class FilmDAO {
         return list1;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static Long getvote(Film film){
         PreparedStatement pstmt = null;
