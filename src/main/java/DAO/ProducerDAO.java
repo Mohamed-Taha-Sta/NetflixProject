@@ -37,7 +37,7 @@ public class ProducerDAO {
 
     }
     public static void ajoutFilm(Film film){
-        FilmDAO.ajout_film(film);
+        FilmDAO.Add(film);
     }
     public static void modifnom(Long id,String nom){
         /**/

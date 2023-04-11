@@ -19,7 +19,7 @@ public class FilmDAO {
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public static boolean ajout_film(Film film) {
+    public static boolean Add(Film film) {
         boolean etat = true;
         PreparedStatement pstmt = null;
         //java.sql.Time sqlTime = java.sql.Time.valueOf(film.getDuree());
@@ -31,8 +31,8 @@ public class FilmDAO {
         try {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
-            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film)" +
-                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,resume)" +
+                    " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getRealisateur() + "'";
             pstmt = conn.prepareStatement(sql);
 
@@ -55,8 +55,9 @@ public class FilmDAO {
             pstmt.setLong(9,film.getVueNbr());
             pstmt.setLong(10,film.getScore());
             pstmt.setLong(11,film.getVotes());
-            pstmt.setBlob(12,inputStreamSynopsisfilm);
-            pstmt.setBlob(13,inputStreamSynopsissynops);
+            pstmt.setBlob(12,inputStreamSynopsissynops);
+            pstmt.setBlob(13,inputStreamSynopsisfilm);
+            pstmt.setString(14,film.getResume());
 
             pstmt.executeUpdate();
 
@@ -146,13 +147,13 @@ public class FilmDAO {
 
 
     }*/
-    public static List<Film> recherche_film(Long filmid) {
+    public static List<Film> FindByID(Long filmid) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Film>list=new ArrayList<>();
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.id_film="+filmid;
+            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,resume from Film where Film.id_film="+filmid;
             pstmt = conn.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
@@ -172,6 +173,7 @@ public class FilmDAO {
                 InputStream image=img.getBinaryStream();
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
+                String resume=rs.getString(15);
                 //Converting Blob Image to Jpeg File
                 File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
@@ -216,7 +218,7 @@ public class FilmDAO {
                 }
 
 
-                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio);
+                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,resume);
                 list.add(filmm);
             }
 
@@ -231,14 +233,14 @@ public class FilmDAO {
         return list;
     }
 
-    public static ArrayList<Film> recherche_filmnom(String filmnom) {
+    public static ArrayList<Film> FindByName(String filmnom) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         ArrayList<Film>list=new ArrayList<>();
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             //String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom like %"+filmnom+"%";
-            String sql="SELECT id_film, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film " +
+            String sql="SELECT id_film, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,resume " +
                     "FROM Film " +
                     "WHERE Film.nom LIKE '%" + filmnom + "%'";
             pstmt = conn.prepareStatement(sql);
@@ -261,6 +263,8 @@ public class FilmDAO {
                 InputStream image=img.getBinaryStream();
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
+                String resume=rs.getString(15);
+
                 //Converting Blob Image to Jpeg File
                 File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
@@ -305,7 +309,7 @@ public class FilmDAO {
                 }
 
 
-                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio);
+                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,resume);
                 list.add(filmm);
             }
 
@@ -321,7 +325,7 @@ public class FilmDAO {
         return list;
     }
 
-    public static ArrayList<Film> recherche_filmact(Actor act) {
+    public static ArrayList<Film> FindByActor(Actor act) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         ArrayList<Film> list=new ArrayList<>();
@@ -340,7 +344,7 @@ public class FilmDAO {
 
                 while (rs.next()) {
 
-                    list= (ArrayList<Film>) recherche_film(rs.getLong(1));
+                    list= (ArrayList<Film>) FindByID(rs.getLong(1));
                 for (int i = 0; i < list.size(); i++) {
                     list1.add(list.get(i));
                 }
@@ -356,7 +360,7 @@ public class FilmDAO {
 
                 while (rs.next()) {
 
-                list= (ArrayList<Film>) recherche_film(rs.getLong(1));
+                list= (ArrayList<Film>) FindByID(rs.getLong(1));
                 for (int i = 0; i < list.size(); i++) {
                     list1.add(list.get(i));
                 }
