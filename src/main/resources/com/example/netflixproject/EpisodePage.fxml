@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="SerieXXXX" layoutX="43.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serie XXXX" wrappingWidth="397.13671875">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <Text fx:id="SeasonXXEpisodeYY" layoutX="43.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season XX, Episode YY" wrappingWidth="397.13671875">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <VBox layoutX="484.0" layoutY="125.0" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Text fx:id="Title" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre" wrappingWidth="121.13671875">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Text>
+            <Text fx:id="Descirption" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." wrappingWidth="255.13671875" />
+         </children>
+      </VBox>
+      <VBox layoutX="43.0" layoutY="137.0" prefHeight="222.0" prefWidth="397.0">
+         <children>
+            <ImageView fx:id="Image" fitHeight="190.0" fitWidth="397.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox prefHeight="36.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="RatingLabel" prefHeight="30.0" prefWidth="116.0" text="Rating:         ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="RatingValue" strokeType="OUTSIDE" strokeWidth="0.0" text="#Rating#" wrappingWidth="114.13671875">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="170.0" prefHeight="36.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="ProducerLabel" prefHeight="30.0" prefWidth="114.0" text="Producteur:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="ProducerValue" strokeType="OUTSIDE" strokeWidth="0.0" text="#Producteur#" wrappingWidth="114.13671875">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="6.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="201.0" prefHeight="36.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="DateSortieLabel" prefHeight="30.0" prefWidth="114.0" text="Date Sortie:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="DateSortieValue" strokeType="OUTSIDE" strokeWidth="0.0" text="#DateSortie#" wrappingWidth="114.13671875">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <AnchorPane fx:id="DecoAnchor4" layoutX="510.0" layoutY="423.0" prefHeight="200.0" prefWidth="40.0" />
+      <AnchorPane fx:id="DecoAnchor3" layoutX="550.0" layoutY="409.0" prefHeight="200.0" prefWidth="40.0" />
+      <AnchorPane fx:id="DecoAnchor2" layoutX="590.0" layoutY="395.0" prefHeight="200.0" prefWidth="40.0" />
+      <AnchorPane fx:id="DecoAnchor1" layoutX="630.0" layoutY="382.0" prefHeight="200.0" prefWidth="40.0" />
+      <Button fx:id="WatchNowButton" layoutX="484.0" layoutY="332.0" mnemonicParsing="false" text="Watch Now" />
+   </children>
+</AnchorPane>
