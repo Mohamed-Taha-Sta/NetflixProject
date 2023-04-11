@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.media.MediaView?>
 
-<VBox fx:id="VboxParent" alignment="BOTTOM_CENTER" style="-fx-background-color: #000;" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VideoPlayerController">
+<VBox fx:id="VboxParent" alignment="BOTTOM_CENTER" style="-fx-background-color: #000;" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.VideoPlayerController">
    <children>
       <MediaView fx:id="mvVideo" />
       <HBox id="hbox" alignment="CENTER" stylesheets="@../../../Style.css" VBox.vgrow="NEVER">

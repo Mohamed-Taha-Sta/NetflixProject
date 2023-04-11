@@ -36,14 +36,14 @@ public class EpisodeController {
         Resume resume2 = new Synopsis(file);
 
 
-        Episode episode = new Episode(21,"EpisodeInteresting",4, LocalDate.of(2014,12,9),
+        Episode episode = new Episode(1,"episode1",4, LocalDate.of(2014,12,9),
                 LocalDate.of(2011,11,2),resume,file,imageFile);
 
-        Episode episode2 = new Episode(21,"TahaEpsisode",2, LocalDate.of(1990,3,14),
+        Episode episode2 = new Episode(1,"TahaEpsisode",2, LocalDate.of(1990,3,14),
                 LocalDate.of(2015,12,12),resume2,file,imageFile);
 
 
-//        System.out.println(episodeDAO.AddEpisode(episode));
+        System.out.println(episodeDAO.AddEpisode(episode));
 //        System.out.println(episodeDAO.AddEpisode(episode2));
 //        List<Episode> episodeList = episodeDAO.FindEpisodeID(90L);
 //        System.out.println(episodeDAO.FindEpisodeName("FaresSEpisode"));

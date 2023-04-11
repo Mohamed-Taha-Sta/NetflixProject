@@ -19,10 +19,10 @@ public class SeasonController {
         File file = new File("src/main/java/Test/VideoTest.mp4");
         File imageFile = new File("src/main/java/Test/LionTest.jpeg");
 
-        Season season = new Season("SeasonKindaNormal",file,3,6,
+        Season season = new Season("Season1",file,3,6,
                 LocalDate.of(2022,12,15),imageFile);
 
-//        System.out.println(seasonDAO.ajout_Season(season));
+//        System.out.println(seasonDAO.AddSeason(season));
 
 //        List<Season> seasonList = seasonDAO.FindSeasonID(21L);
 

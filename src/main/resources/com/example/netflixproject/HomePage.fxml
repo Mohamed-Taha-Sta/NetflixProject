@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HomePageController">
+<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.HomePageController">
    <children>
       <ScrollPane id="scroll-pane" fitToWidth="true" layoutX="283.0" layoutY="61.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
         <content>
@@ -33,7 +33,7 @@
                      <children>
                         <AnchorPane fx:id="ImageAnchor" style="-fx-background-color: #09338c;" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                            <children>
-
+                        
                                <ImageView fx:id="TopWatched" fitHeight="350.0" fitWidth="1750.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
@@ -72,8 +72,11 @@
                         <Image url="@../../../Images/Logo.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+                  <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
                      <children>
+                        <Button fx:id="homeButton" layoutX="20.0" layoutY="227.0" mnemonicParsing="false" text="Home" />
+                        <Button fx:id="seriesButoon" mnemonicParsing="false" text="Series" />
+                        <Button fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" text="Movies" />
                         <Button fx:id="ProfileBtn" mnemonicParsing="false" onAction="#OnProfileClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-radius: 100; -fx-border-color: #fff; -fx-border-radius: 100; -fx-background-color: transparent;" text="User" textFill="WHITE">
                            <font>
                               <Font name="Lucida Bright" size="12.0" />
@@ -81,6 +84,9 @@
                            <effect>
                               <Bloom />
                            </effect>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
                         </Button>
                      </children>
                      <VBox.margin>

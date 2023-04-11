@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChoicesController">
+<AnchorPane id="Anchor" maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ChoicesController">
    <children>
       <Line endY="329.6999816894531" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <GridPane alignment="TOP_CENTER" layoutX="-55.0" layoutY="-115.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

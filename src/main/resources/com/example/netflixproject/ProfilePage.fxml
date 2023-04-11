@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,13 +12,81 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfilePageController">
+<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ProfilePageController">
    <children>
-      <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="49.0" prefHeight="400.0" prefWidth="178.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox fx:id="ProfileBox" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <VBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="Your First Name: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <TextField fx:id="prenameField" prefHeight="23.0" prefWidth="176.0" promptText="New first name" />
+                        <Button fx:id="PrenameBtn" mnemonicParsing="false" text="Change" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="290.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="Your Last Name: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <TextField fx:id="namefield" prefHeight="23.0" prefWidth="176.0" promptText="New last name" />
+                        <Button fx:id="NameBtn" mnemonicParsing="false" text="Change" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="323.0" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <Label text="Your Mail: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="20.0">
+                     <children>
+                        <TextField fx:id="mailfield" prefHeight="23.0" prefWidth="176.0" promptText="New mail" />
+                        <Button fx:id="MailBtn" mnemonicParsing="false" text="Change" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+      <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="49.0" prefHeight="400.0" prefWidth="180.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfile" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfileImage" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Images/profilepicture.png" />
                      </image>
@@ -33,7 +103,7 @@
                               <Image url="@../../../Images/miniProfile.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" alignment="CENTER" mnemonicParsing="false" stylesheets="@../../../Style.css" text="Profile" textFill="WHITE" />
+                        <Button id="button" fx:id="ProfileBtn" alignment="CENTER" mnemonicParsing="false" stylesheets="@../../../Style.css" text="Profile" textFill="WHITE" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -49,7 +119,7 @@
                               <Image url="@../../../Images/Notification.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" alignment="CENTER" mnemonicParsing="false" stylesheets="@../../../Style.css" text="Notiication" textFill="WHITE" />
+                        <Button id="button" fx:id="NotfificationBtn" alignment="CENTER" mnemonicParsing="false" stylesheets="@../../../Style.css" text="Notification" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />

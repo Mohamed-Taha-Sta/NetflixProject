@@ -29,16 +29,17 @@ public class SerieController {
 
         listSuppActors.add(1L);
 
-        listGenre.add("Action");
+//        listGenre.add("Action");
         listGenre.add("Comedie");
         listGenre.add("Drama");
+//        listGenre.add("Torki");
 
-        Serie serie = new Serie("SerieNumDra9adeh","Ahmed", LocalDate.of(2009,3,12),
-                "Chel7a","Germany",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
+        Serie serie = new Serie("Serie5","Ahmed", LocalDate.of(2009,3,12),
+                "German","Germany",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
 
 //        SerieDAO.AddSerie(serie);
 
-//        System.out.println(SerieDAO.GetSerieByName("Hajet9dom"));
+//        System.out.println(SerieDAO.GetSerieByName("Serie1"));
 
     }
 

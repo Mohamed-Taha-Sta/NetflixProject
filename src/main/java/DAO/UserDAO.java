@@ -52,7 +52,6 @@ public class UserDAO {
         ResultSet rs;
 
 
-
         try {
             sql = "SELECT * FROM Utilisateurs WHERE MAIL=? AND password =?";
             pstmt = conn.prepareStatement(sql);
@@ -86,7 +85,7 @@ public class UserDAO {
                 }
 
                 User user = new User(userId, rs.getString("Last_Name"), rs.getString("First_Name"), mail, pass, birthday, actorList, genreList, subscription, imageFile);
-                System.out.println("inUserDao image:" +imageFile);
+                System.out.println("inUserDao image:" + imageFile);
                 DataHolder.setUser(user);
                 return true;
             } else {
@@ -134,6 +133,56 @@ public class UserDAO {
             return true;
         } catch (Exception e) {
             System.out.println(e.toString());
+            return false;
+        }
+    }
+
+    public static boolean changeName(String newName) {
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            sql = "Update Utilisateurs set LAST_NAME=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, newName);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public static boolean changePrename(String newPreName) {
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            sql = "Update Utilisateurs set FIRST_NAME=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, newPreName);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public static boolean changeMail(String newMail){
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            sql = "Update Utilisateurs set MAIL=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, newMail);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -193,45 +242,46 @@ public class UserDAO {
             System.out.println(e.getMessage());
         }
     }
-    public static boolean votepositivefilm(Film film){
-       return FilmDAO.UpdatePositiveScoreFilm(film);
+
+    public static boolean votepositivefilm(Film film) {
+        return FilmDAO.UpdatePositiveScoreFilm(film);
     }
-    public static boolean votenegativefilm(Film film){
+
+    public static boolean votenegativefilm(Film film) {
         return FilmDAO.UpdatenegativeScoreFilm(film);
     }
-    public static boolean regarderfilm(Film film){
+
+    public static boolean regarderfilm(Film film) {
         return FilmDAO.UpdatevuenbrFilm(film);
     }
-    public static boolean votepositiveepisode(Episode ep){
-        try{
-        return EpisodeDAO2.UpdatePositiveScoreEpisode(ep);}
-        catch (SQLException E){
+
+    public static boolean votepositiveepisode(Episode ep) {
+        try {
+            return EpisodeDAO2.UpdatePositiveScoreEpisode(ep);
+        } catch (SQLException E) {
             System.out.println("error dans la connection du base");
             return false;
         }
     }
-    public static boolean votenegativeepisode(Episode ep){
-        try{
+
+    public static boolean votenegativeepisode(Episode ep) {
+        try {
             return EpisodeDAO2.UpdateNegativeScoreEpisode(ep);
 
-        }
-        catch (SQLException E){
-            System.out.println("error dans la connection du base");
-            return false;
-        }
-    }
-    public static boolean regarederepisode(Episode ep){
-        try{
-            return EpisodeDAO2.UpdateViewNbrEpisode(ep);}
-        catch (SQLException E){
+        } catch (SQLException E) {
             System.out.println("error dans la connection du base");
             return false;
         }
     }
 
-
-
-
+    public static boolean regarederepisode(Episode ep) {
+        try {
+            return EpisodeDAO2.UpdateViewNbrEpisode(ep);
+        } catch (SQLException E) {
+            System.out.println("error dans la connection du base");
+            return false;
+        }
+    }
 
 
 }

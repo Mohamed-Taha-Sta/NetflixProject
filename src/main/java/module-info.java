@@ -15,4 +15,6 @@ module com.example.netflixproject {
     opens Entities to javafx.fxml;
     exports Utils;
     opens Utils to javafx.fxml;
+    exports Controllers.FXMLControllers;
+    opens Controllers.FXMLControllers to javafx.fxml;
 }
