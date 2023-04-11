@@ -18,8 +18,8 @@ public class HelloApplication extends Application implements Initializable {
     public void start(Stage stage) throws Exception {
         scene = new Scene(LoadFxml("EpisodePage"),1280,720);
         stage.setResizable(resize);
-        stage.setMinHeight(1280);
-        stage.setMinWidth(720);
+        stage.setMinWidth(1280);
+        stage.setMinHeight(720);
         stage.setScene(scene);
         stage.show();
 
