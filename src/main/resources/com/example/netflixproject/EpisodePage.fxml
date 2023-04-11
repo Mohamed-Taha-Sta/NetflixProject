@@ -11,14 +11,14 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EpisodePage">
    <children>
-      <Text fx:id="SerieXXXX" layoutX="43.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serie XXXX" wrappingWidth="397.13671875">
+      <Text fx:id="SerieXXXX" layoutX="43.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Serie XXXX" wrappingWidth="397.13671875">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Text fx:id="SeasonXXEpisodeYY" layoutX="43.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season XX, Episode YY" wrappingWidth="397.13671875">
+      <Text fx:id="SeasonXXEpisodeYY" layoutX="43.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Season XX, Episode YY" wrappingWidth="397.13671875">
          <font>
             <Font size="40.0" />
          </font>
@@ -48,7 +48,7 @@
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets top="6.0" />
+                        <Insets top="5.0" />
                      </HBox.margin>
                   </Text>
                </children>
@@ -65,7 +65,7 @@
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets top="6.0" />
+                        <Insets top="5.0" />
                      </HBox.margin>
                   </Text>
                </children>
@@ -82,7 +82,7 @@
                         <Font size="16.0" />
                      </font>
                      <HBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="6.0" />
                      </HBox.margin>
                   </Text>
                </children>
@@ -92,7 +92,8 @@
       <AnchorPane fx:id="DecoAnchor4" layoutX="510.0" layoutY="423.0" prefHeight="200.0" prefWidth="40.0" />
       <AnchorPane fx:id="DecoAnchor3" layoutX="550.0" layoutY="409.0" prefHeight="200.0" prefWidth="40.0" />
       <AnchorPane fx:id="DecoAnchor2" layoutX="590.0" layoutY="395.0" prefHeight="200.0" prefWidth="40.0" />
+      <Button fx:id="WatchNowButton1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="&lt;" />
       <AnchorPane fx:id="DecoAnchor1" layoutX="630.0" layoutY="382.0" prefHeight="200.0" prefWidth="40.0" />
-      <Button fx:id="WatchNowButton" layoutX="484.0" layoutY="332.0" mnemonicParsing="false" text="Watch Now" />
+      <Button fx:id="WatchNowButton" layoutX="484.0" layoutY="325.0" mnemonicParsing="false" text="Watch Now" />
    </children>
 </AnchorPane>

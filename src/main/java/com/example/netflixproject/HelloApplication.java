@@ -16,8 +16,10 @@ public class HelloApplication extends Application implements Initializable {
     public static boolean resize=true;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("VideoPlayer"),600,600);
+        scene = new Scene(LoadFxml("EpisodePage"),600,600);
         stage.setResizable(resize);
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
         stage.setScene(scene);
         stage.show();
 
@@ -41,4 +43,7 @@ public class HelloApplication extends Application implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+
+
 }
