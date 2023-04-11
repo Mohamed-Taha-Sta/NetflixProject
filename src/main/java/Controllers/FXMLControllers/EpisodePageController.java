@@ -75,20 +75,19 @@ public class EpisodePageController implements Initializable {
 //        File fileExported = new File("file:src/main/java/Test/ImgEp"+episode2.getID()+".jpeg");
 //        Image ImageExported = new Image(fileExported.toURI().toString());
 
-        String ImagePath = "file:src/main/java/Test/ImgEp"+episode2.getID()+".jpeg";
+//        String ImagePath = "src/main/java/Test/ImgEp"+episode2.getID()+".jpeg";
 
-        Image imageInter = new Image(ImagePath);
+//        Image imageInter = new Image(ImagePath);
 
-        Thumbnail = new ImageView();
 
         System.out.println(episode2.getImage());
 
         try {
-            Thumbnail.setImage(imageInter);
+            Thumbnail.setImage(new Image(String.valueOf(episode2.getImage().toURL())));
         } catch (Exception e) {
             System.out.println("Error setting image: " + e.getMessage());
         }
-        System.out.println("Image dimensions: " + Thumbnail.getImage().getWidth() + "x" + Thumbnail.getImage().getHeight());
+//        System.out.println("Image dimensions: " + Thumbnail.getImage().getWidth() + "x" + Thumbnail.getImage().getHeight());
 
 //        try {
 //            Thumbnail = new ImageView(String.valueOf(episode2.getImage().toURL()));

@@ -16,10 +16,10 @@ public class HelloApplication extends Application implements Initializable {
     public static boolean resize=true;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("SeriesPage"),600,600);
+        scene = new Scene(LoadFxml("EpisodePage"),1280,720);
         stage.setResizable(resize);
-        stage.setMinHeight(600);
-        stage.setMinWidth(600);
+        stage.setMinHeight(1280);
+        stage.setMinWidth(720);
         stage.setScene(scene);
         stage.show();
 
