@@ -4,68 +4,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="Anchor" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.HomePageController">
+<AnchorPane id="Anchor" minHeight="720.0" minWidth="1280.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.HomePageController">
    <children>
-      <ScrollPane id="scroll-pane" fitToWidth="true" layoutX="283.0" layoutY="61.0" prefHeight="600.0" prefWidth="600.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
-        <content>
-          <AnchorPane id="scroll-pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="601.0" stylesheets="@../../../Style.css">
-               <children>
-                  <GridPane alignment="TOP_CENTER" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" scaleShape="false" vgap="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="1.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="100.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="347.0000030517578" minHeight="10.0" percentHeight="60.0" prefHeight="339.0000030517578" />
-                      <RowConstraints maxHeight="273.00004272460933" minHeight="10.0" percentHeight="20.0" prefHeight="143.79999694824215" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="232.99997558593753" minHeight="10.0" percentHeight="20.0" prefHeight="95.39998779296877" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <AnchorPane fx:id="ImageAnchor" style="-fx-background-color: #09338c;" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-                           <children>
-                        
-                               <ImageView fx:id="TopWatched" fitHeight="350.0" fitWidth="1750.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
-                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" prefWidth="568.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-                          <content>
-                            <AnchorPane id="MiniAnchor" layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../Style.css">
-                                 <children>
-                                    <HBox id="hbox" fx:id="ThumbnailViewer" layoutX="7.0" layoutY="14.0" prefHeight="100.0" prefWidth="646.0" spacing="10.0" stylesheets="@../../../Style.css" />
-                                    <Label layoutX="-3.0" layoutY="-4.0" text="You might like" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <font>
-                                          <Font name="Roboto" size="18.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding>
-                              </AnchorPane>
-                          </content>
-                        </ScrollPane>
-                     </children>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-        </content>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-      </ScrollPane>
-      <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="14.0" prefWidth="70.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-9.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox id="Vbox" alignment="TOP_CENTER" layoutX="45.0" layoutY="29.0" spacing="20.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
                <children>
                   <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,10 +28,15 @@
                   </ImageView>
                   <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button fx:id="homeButton" layoutX="20.0" layoutY="227.0" mnemonicParsing="false" text="Home" />
-                        <Button fx:id="seriesButoon" mnemonicParsing="false" text="Series" />
-                        <Button fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" text="Movies" />
-                        <Button fx:id="ProfileBtn" mnemonicParsing="false" onAction="#OnProfileClick" prefHeight="64.0" prefWidth="64.0" style="-fx-background-radius: 100; -fx-border-color: #fff; -fx-border-radius: 100; -fx-background-color: transparent;" text="User" textFill="WHITE">
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Button fx:id="homeButton" mnemonicParsing="false" style="-fx-background-color: tranparent;" />
+                              <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="seriesButoon" mnemonicParsing="false" />
+                        <Button fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" />
+                        <Button fx:id="ProfileBtn" mnemonicParsing="false" onAction="#OnProfileClick" prefHeight="54.0" prefWidth="50.0" style="-fx-background-radius: 100; -fx-border-color: #fff; -fx-border-radius: 100; -fx-background-color: transparent;" text="User" textFill="WHITE">
                            <font>
                               <Font name="Lucida Bright" size="12.0" />
                            </font>
@@ -95,7 +54,68 @@
                   </VBox>
                </children>
             </VBox>
+            <Line endX="-99.17283630371094" endY="761.594970703125" startX="-99.17298889160156" startY="79.86698913574219" stroke="#d62e4a" strokeMiterLimit="15.0" strokeWidth="2.0" />
+            <ScrollPane id="scroll-pane" fitToWidth="true" prefHeight="700.0" prefWidth="1175.0" stylesheets="@../../../Style.css">
+              <content>
+                  <VBox spacing="15.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
+                                 <children>
+                                    <Label fx:id="welcome" text="Welcome Back ya &quot;Flen&quot;!" wrapText="true">
+                                       <font>
+                                          <Font name="Calibri Bold Italic" size="48.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT">
+                                       <children>
+                                          <TextField prefHeight="30.0" prefWidth="238.0" promptText="Search" style="-fx-background-radius: 20; -fx-background-color: #212121;">
+                                             <font>
+                                                <Font name="Calibri" size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" />
+                           </padding>
+                        </VBox>
+                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="191.0" prefWidth="1174.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
+                          <content>
+                              <VBox prefHeight="143.0" prefWidth="674.0" spacing="10.0">
+                                 <children>
+                                    <Label text="Latest Series" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri" size="22.0" />
+                                       </font>
+                                    </Label>
+                                  <AnchorPane id="MiniAnchor" prefWidth="674.0" stylesheets="@../../../Style.css">
+                                       <children>
+                                          <HBox id="hbox" fx:id="ThumbnailViewer" alignment="CENTER_LEFT" layoutX="7.0" layoutY="14.0" prefHeight="102.0" prefWidth="646.0" spacing="20.0" stylesheets="@../../../Style.css" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </VBox>
+              </content>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </ScrollPane>
          </children>
-      </AnchorPane>
+      </HBox>
    </children>
 </AnchorPane>

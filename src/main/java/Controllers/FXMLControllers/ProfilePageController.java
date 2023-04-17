@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import DAO.UserDAO;
 import Utils.DataHolder;
+import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -30,6 +31,7 @@ public class ProfilePageController implements Initializable {
     public Button MailBtn;
     public Button ProfileBtn;
     public Button NotfificationBtn;
+    public Button returnBtn;
 
     @FXML
     public void OnProfileImage(javafx.scene.input.MouseEvent event) throws Exception {
@@ -59,10 +61,13 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-
+    public void OnReturn()throws Exception{
+        HelloApplication.SetRoot("HomePage");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        final int IV_Size = 25;
         try {
             UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
             File imageFile = DataHolder.getImage();
@@ -77,6 +82,11 @@ public class ProfilePageController implements Initializable {
         } catch (Exception e) {
             System.out.println("image not found");
         }
+        Image returnIm=new Image(new File("src/main/resources/Images/HomePage/BackArrow.png").toURI().toString());
+        ImageView returnView=new ImageView(returnIm);
+        returnView.setFitWidth(IV_Size);
+        returnView.setFitHeight(IV_Size);
+        returnBtn.setGraphic(returnView);
 
         ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
     }

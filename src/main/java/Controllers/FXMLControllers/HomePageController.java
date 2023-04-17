@@ -2,16 +2,22 @@ package Controllers.FXMLControllers;
 
 import Controllers.SerieController;
 import Entities.*;
+import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
 
 import java.awt.geom.Rectangle2D;
 import java.io.File;
@@ -28,11 +34,12 @@ public class HomePageController implements Initializable {
 
     public HBox ThumbnailViewer;
     public Button ProfileBtn;
-    public ImageView TopWatched;
+
     public AnchorPane ImageAnchor = new AnchorPane();
     public Button homeButton;
     public Button seriesButoon;
     public Button filmButton;
+    public Label welcome;
 
     private boolean homeSelected = true;
     private boolean SeriesSeleced = false;
@@ -61,12 +68,14 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String imagePath = "file:src/main/resources/Images/battlefield-2042-kaleidoscope-map-pc-games-xbox-series-x-3440x1440-6956.jpg";
-        TopWatched.setImage(new Image(imagePath));
-        TopWatched.setCursor(Cursor.cursor("hand"));
-
+        final int IV_Size = 40;
         List<Serie> serie = new ArrayList<>();
-
+        welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
+        Image homeBut=new Image(new File("src/main/resources/Images/HomePage/HomeButton.png").toURI().toString());
+        ImageView homeView=new ImageView(homeBut);
+        homeView.setFitHeight(IV_Size);
+        homeView.setFitWidth(IV_Size);
+        homeButton.setGraphic(homeView);
 
         try {
             serie = SerieController.GetSerieByName("The Witcher");
@@ -79,7 +88,6 @@ public class HomePageController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         for (Serie s : serie) {
             ImageView imageView = null;
             try {
@@ -87,6 +95,7 @@ public class HomePageController implements Initializable {
                 imageView.setCursor(Cursor.cursor("hand"));
                 imageView.setFitHeight(100);
                 imageView.setFitWidth(150);
+                imageView = ImageClipper(imageView);
                 imageView.setOnMouseClicked(this::handleImageClick);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
@@ -95,6 +104,17 @@ public class HomePageController implements Initializable {
         }
     }
 
+    public ImageView ImageClipper(ImageView imageView){
+        Rectangle imageClip=new Rectangle(imageView.getFitWidth(),imageView.getFitHeight());
+        imageClip.setArcHeight(20);
+        imageClip.setArcWidth(20);
+        imageClip.setStroke(Color.BLACK);
+        imageClip.setStrokeType(StrokeType.INSIDE);
+        imageClip.setFill(Color.WHITE);
+        imageView.setClip(imageClip);
+        return imageView;
+
+    }
 
 }
 

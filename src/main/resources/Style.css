@@ -27,6 +27,7 @@
     -fx-border-radius: 15px;
     -fx-border-width: 3px;
     -fx-border-color: #c72c41;
+    -fx-font-family: Calibri;
     -fx-font-size: 14px;
     -fx-background-radius: 15px;
 }
@@ -44,6 +45,9 @@
     -fx-background-color: #B3253D;
     -fx-border-radius: 10px;
     -fx-background-radius: 12px;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+
 }
 
 
@@ -182,19 +186,19 @@
 }
 
 #scroll-pane .scroll-bar {
-    -fx-background-color: #6f8cf6;
+    -fx-background-color: transparent;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
 }
 
 #scroll-pane .scroll-bar .thumb {
-    -fx-background-color: white;
+    -fx-background-color: #b3253d;
     -fx-background-radius: 10px;
 }
 
 #scroll-pane .scroll-bar .increment-button,
 #scroll-pane .scroll-bar .decrement-button {
-    -fx-background-color: #7a97ff;
+    -fx-background-color: #b3253d;
 }
 
 #scroll-pane .scroll-bar .increment-arrow,

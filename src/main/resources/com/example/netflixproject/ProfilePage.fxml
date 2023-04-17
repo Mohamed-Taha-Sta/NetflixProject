@@ -9,88 +9,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ProfilePageController">
+<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ProfilePageController">
    <children>
-      <VBox fx:id="ProfileBox" alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
-         </padding>
+      <HBox alignment="CENTER_LEFT" layoutX="180.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER_LEFT" spacing="10.0">
+            <VBox alignment="TOP_CENTER" prefHeight="720.0" prefWidth="188.0" spacing="30.0">
                <children>
-                  <HBox alignment="CENTER" spacing="20.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Label text="Your First Name: ">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" />
+                        <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#OnReturn" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfileImage" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Images/profilepicture.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <TextField fx:id="prenameField" prefHeight="23.0" prefWidth="176.0" promptText="New first name" />
-                        <Button fx:id="PrenameBtn" mnemonicParsing="false" text="Change" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="290.0" spacing="10.0">
-               <children>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <Label text="Your Last Name: ">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <TextField fx:id="namefield" prefHeight="23.0" prefWidth="176.0" promptText="New last name" />
-                        <Button fx:id="NameBtn" mnemonicParsing="false" text="Change" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="323.0" spacing="10.0">
-               <children>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <Label text="Your Mail: ">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Label" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" spacing="20.0">
-                     <children>
-                        <TextField fx:id="mailfield" prefHeight="23.0" prefWidth="176.0" promptText="New mail" />
-                        <Button fx:id="MailBtn" mnemonicParsing="false" text="Change" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-         </children>
-      </VBox>
-      <AnchorPane id="MiniAnchor" layoutX="14.0" layoutY="49.0" prefHeight="400.0" prefWidth="180.0" stylesheets="@../../../Style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox alignment="TOP_CENTER" layoutX="39.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfileImage" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../Images/profilepicture.png" />
-                     </image>
-                  </ImageView>
                   <Text fx:id="ProfileName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName">
                      <font>
                         <Font name="Lucida Bright" size="14.0" />
@@ -155,8 +97,80 @@
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </VBox>
+            <Line endX="-98.96443176269531" endY="141.69288635253906" startX="-97.92887878417969" startY="-539.2106323242188" stroke="#d62e4a" strokeWidth="2.0" />
+            <VBox fx:id="ProfileBox" alignment="CENTER" spacing="20.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Label text="Your First Name: ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <TextField fx:id="prenameField" prefHeight="23.0" prefWidth="176.0" promptText="New first name" />
+                              <Button fx:id="PrenameBtn" mnemonicParsing="false" text="Change" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="290.0" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Label text="Your Last Name: ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <TextField fx:id="namefield" prefHeight="23.0" prefWidth="176.0" promptText="New last name" />
+                              <Button fx:id="NameBtn" mnemonicParsing="false" text="Change" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="323.0" spacing="10.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <Label text="Your Mail: ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label text="Label" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="20.0">
+                           <children>
+                              <TextField fx:id="mailfield" prefHeight="23.0" prefWidth="176.0" promptText="New mail" />
+                              <Button fx:id="MailBtn" mnemonicParsing="false" text="Change" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
             </VBox>
          </children>
-      </AnchorPane>
+      </HBox>
    </children>
 </AnchorPane>
