@@ -1,15 +1,19 @@
 package Controllers.FXMLControllers;
 
 import DAO.UserDAO;
-import Entities.User;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class LoginPageController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginPageController implements Initializable {
 
     public AnchorPane loginpage;
     public Text AlertText;
@@ -33,7 +37,6 @@ public class LoginPageController {
             AlertText.setOpacity(1);
         }
         else{
-            HelloApplication.resize=true;
             HelloApplication.SetRoot("HomePage");
         }
 
@@ -46,4 +49,8 @@ public class LoginPageController {
         HelloApplication.SetRoot("RegisterPage");
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

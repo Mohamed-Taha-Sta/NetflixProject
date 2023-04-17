@@ -13,13 +13,14 @@ import java.util.ResourceBundle;
 
 public class HelloApplication extends Application implements Initializable {
     private static Scene scene;
-    public static boolean resize=true;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("EpisodePage"),1280,720);
-        stage.setResizable(resize);
+        scene = new Scene(LoadFxml("ChoicesMenu"),1280,720);
+        stage.setResizable(false);
         stage.setMinWidth(1280);
         stage.setMinHeight(720);
+        stage.setMaxHeight(1280);
+        stage.setMaxWidth(720);
         stage.setScene(scene);
         stage.show();
 

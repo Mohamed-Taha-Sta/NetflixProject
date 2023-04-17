@@ -1,11 +1,15 @@
 package Controllers.FXMLControllers;
 
+import Controllers.UserController;
 import DAO.UserDAO;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -47,21 +51,25 @@ public class RegisterPage {
         HelloApplication.SetRoot("LoginPage");
     }
 
+    private void showErrorMessage(String message) {
+        Alerttext.setText(message);
+        Alerttext.setOpacity(1);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            Alerttext.setOpacity(0);
+        }));
+        timeline.play();
+    }
+
     @FXML
     protected void OnSignUp() throws Exception {
-        if( UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserBirthday.getValue() == null || UserPassword.getText().isEmpty()){
-            Alerttext.setText("Must fill all the fields");
-            Alerttext.setOpacity(1);
-        }
-        else if(!UserEmail.getText().endsWith("@gmail.com") || !UserEmail.getText().endsWith("@yahoo.com") ){
-            Alerttext.setText("This email address is not recognized.");
-            Alerttext.setOpacity(1);
-        }
-        else if(!UserDAO.check_Mail(UserEmail.getText())){
-            Alerttext.setText("Another user with same mail exists");
-            Alerttext.setOpacity(1);
-        }
-        else {
+        if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserBirthday.getValue() == null || UserPassword.getText().isEmpty()) {
+            showErrorMessage("Must fill all the fields!");
+        } else if (!UserController.isEmail(UserEmail.getText())) {
+            showErrorMessage("This email address is not recognized!");
+        } else if (!UserDAO.check_Mail(UserEmail.getText())) {
+            showErrorMessage("Another user with same mail exists");
+        } else {
             DataHolder.setName(UserName.getText());
             DataHolder.setPrename(UserPrename.getText());
             DataHolder.setEmail(UserEmail.getText());

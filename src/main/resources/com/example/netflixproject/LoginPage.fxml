@@ -5,53 +5,77 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="Anchor" fx:id="loginpage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.LoginPageController">
+
+<AnchorPane style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.LoginPageController">
    <children>
-      <VBox alignment="CENTER" layoutX="200.0" layoutY="29.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="30.0">
+      <VBox alignment="CENTER" fillWidth="false" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
          <children>
-            <Label alignment="CENTER" prefHeight="85.0" prefWidth="200.0" text="Login" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Lucida Bright" size="24.0" />
-               </font>
+            <VBox alignment="CENTER" prefHeight="360.0" prefWidth="400.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="400.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                     <children>
+                        <VBox alignment="TOP_RIGHT">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="283.0" text="We missed you!" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="205.0" text="We missed you!" textFill="WHITE" wrapText="true">
+                                 <font>
+                                    <Font name="Calibri Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <TextField id="TextFields" fx:id="mail" prefHeight="35.0" prefWidth="258.0" promptText="E-Mail" stylesheets="@../../../Style.css">
+                           <font>
+                              <Font name="Lucida Bright" size="14.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField id="TextFields" fx:id="Password" prefHeight="35.0" prefWidth="230.0" promptText="Password" stylesheets="@../../../Style.css">
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </PasswordField>
+                        <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="278.1429748535156">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="34.0" prefWidth="229.0" spacing="40.0">
+                           <children>
+                              <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" style="-fx-background-color: transparent;" text="Don't have an account? Join us!" textAlignment="CENTER" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font name="Calibri Italic" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button id="button" fx:id="login" mnemonicParsing="false" onAction="#onSignIn" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Log In" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
                <padding>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </padding>
-               <effect>
-                  <Glow level="1.0" />
-               </effect>
-            </Label>
-            <TextField id="TextFields" fx:id="mail" promptText="E-Mail" stylesheets="@../../../Style.css">
-               <font>
-                  <Font name="Lucida Bright" size="12.0" />
-               </font></TextField>
-            <PasswordField id="TextFields" fx:id="Password" promptText="Password" stylesheets="@../../../Style.css">
-               <font>
-                  <Font name="Lucida Bright" size="12.0" />
-               </font></PasswordField>
-            <Text fx:id="AlertText" fill="RED" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="198.14300537109375">
-               <font>
-                  <Font name="Lucida Bright" size="12.0" />
-               </font>
-            </Text>
-            <Button id="button" fx:id="login" mnemonicParsing="false" onAction="#onSignIn" stylesheets="@../../../Style.css" text="Log In" textAlignment="CENTER" textFill="WHITE">
-               <font>
-                  <Font name="Lucida Bright" size="14.0" />
-               </font>
-            </Button>
-            <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: transparent;" text="Not Registered yet? Click here" textAlignment="CENTER" textFill="WHITE" underline="true">
-               <font>
-                  <Font name="Lucida Bright" size="12.0" />
-               </font>
-               <effect>
-                  <Glow level="0.6" />
-               </effect>
-            </Button>
+            </VBox>
          </children>
       </VBox>
    </children>

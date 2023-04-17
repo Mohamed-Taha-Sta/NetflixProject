@@ -17,8 +17,8 @@ import java.util.List;
 public class SerieController {
 
     public static void main(String[] args) throws SQLException, IOException {
-        File file = new File("src/main/java/Test/VideoTest.mp4");
-        File imageFile = new File("src/main/java/Test/LionTest.jpeg");
+        File file = new File("src/main/java/Test/Synopsis.mp4");
+        File imageFile = new File("src/main/java/Test/breakingBad.jpg");
 
         List<Long> listMainActors = new ArrayList<>();
         List<Long> listSuppActors = new ArrayList<>();
@@ -34,10 +34,11 @@ public class SerieController {
         listGenre.add("Drama");
 //        listGenre.add("Torki");
 
-        Serie serie = new Serie("Serie5","Ahmed", LocalDate.of(2009,3,12),
-                "German","Germany",listGenre,imageFile,4L,file,listMainActors,listSuppActors);
+        Serie serie = new Serie("breaking bad","Vince Gilligan", LocalDate.of(2008,1,8),
+                "English","America",listGenre,imageFile,5L,file,listMainActors,listSuppActors);
 
-//        SerieDAO.AddSerie(serie);
+       SerieDAO.AddSerie(serie);
+
 
 //        System.out.println(SerieDAO.GetSerieByName("Serie1"));
 
