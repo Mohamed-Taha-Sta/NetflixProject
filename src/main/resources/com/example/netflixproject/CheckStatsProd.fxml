@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" layoutX="14.0" layoutY="14.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="564.0" prefWidth="1098.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+               <padding>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="637.0" prefWidth="1167.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="518.0" prefWidth="965.0">
+                           <children>
+                              <HBox prefHeight="71.0" prefWidth="992.0">
+                                 <children>
+                                    <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="3.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="304.0" text="Content Overview:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Calibri Bold" size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <TableView id="OverviewTable" prefHeight="430.0" prefWidth="992.0" stylesheets="@../../../Style.css">
+                                <columns>
+                                  <TableColumn prefWidth="423.0" text="Name" />
+                                  <TableColumn minWidth="1.0" prefWidth="208.0" text="Type" />
+                                    <TableColumn prefWidth="132.0" text="Views" />
+                                    <TableColumn prefWidth="228.0" text="Debut Date" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

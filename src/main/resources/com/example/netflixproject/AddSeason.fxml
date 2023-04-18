@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="355.0" prefWidth="386.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+               <padding>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="349.0" prefWidth="358.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                     <children>
+                        <VBox alignment="TOP_RIGHT">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="382.0" text="Adding Season" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <TextField id="TextFields" fx:id="Name" prefHeight="35.0" prefWidth="258.0" promptText="Name" stylesheets="@../../../Style.css">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField id="TextFields" fx:id="Thumbnail" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
+                           <font>
+                              <Font name="Lucida Bright" size="14.0" />
+                           </font>
+                        </TextField>
+                        <TextField id="TextFields" fx:id="Synopsis" prefHeight="35.0" prefWidth="258.0" promptText="Synopsis" stylesheets="@../../../Style.css">
+                           <font>
+                              <Font name="Lucida Bright" size="14.0" />
+                           </font>
+                        </TextField>
+                        <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="256.1429748535156">
+                           <font>
+                              <Font name="Calibri" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="33.0" prefWidth="58.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button id="button" fx:id="login" mnemonicParsing="false" prefHeight="33.0" prefWidth="59.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="165.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

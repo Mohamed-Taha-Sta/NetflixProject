@@ -51,6 +51,20 @@
 
 }
 
+#DescriptionBox  {
+    -fx-border-color: #661332;
+    -fx-border-width: 4px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 14px;
+    -fx-font-size: 14px;
+    -fx-background-insets: 10px;
+}
+
+#DescriptionBox .content {
+    -fx-background-color: #B3253D;
+    -fx-control-inner-background: #B3253D;
+}
+
 
 /* TABLE EDIT*/
 .table-view .table-cell {
@@ -216,7 +230,8 @@
 .date-picker{
     -fx-background-color: transparent;
     -fx-border-radius: 10px;
-    -fx-border-color: #801336;
+    /*-fx-border-color: #801336;*/ /* Changed this One to make it fit in*/
+    -fx-border-color: #661332FF;
     -fx-border-width: 3px;
 
 }
