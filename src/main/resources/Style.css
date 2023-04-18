@@ -60,6 +60,7 @@
     -fx-background-radius: 14px;
     -fx-font-size: 14px;
     -fx-background-insets: 10px;
+    -fx-text-fill: white;
 }
 
 #DescriptionBox .content {
@@ -222,6 +223,7 @@
 #scroll-pane .scroll-bar .decrement-arrow {
     -fx-background-color: white;
 }
+
 
 
 .image-view {

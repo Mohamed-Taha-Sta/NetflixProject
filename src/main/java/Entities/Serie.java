@@ -83,6 +83,9 @@ public class Serie extends Content{
         this.actorList = actorList;
     }
 
+    public Serie() {
+    }
+
     @Override
     public String toString() {
         return "Serie{" +
