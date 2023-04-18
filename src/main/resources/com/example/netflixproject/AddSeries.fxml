@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
+<?import org.controlsfx.control.CheckComboBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
    <children>
@@ -17,9 +17,9 @@
          <children>
             <VBox alignment="CENTER" prefHeight="477.0" prefWidth="462.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="469.0" prefWidth="456.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER" prefHeight="469.0" prefWidth="456.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
                      <children>
-                        <VBox alignment="TOP_RIGHT">
+                        <VBox alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="382.0" text="Adding Series" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
@@ -64,6 +64,7 @@
                               <Font name="Lucida Bright" size="14.0" />
                            </font>
                         </TextField>
+                        <CheckComboBox fx:id="GenreSelector" />
                         <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="278.1429748535156">
                            <font>
                               <Font name="Calibri" size="18.0" />

@@ -6,6 +6,7 @@ module com.example.netflixproject {
     requires org.apache.commons.io;
     requires java.desktop;
     requires javafx.swing;
+    requires org.controlsfx.controls;
 
     opens com.example.netflixproject to javafx.fxml;
     exports com.example.netflixproject;

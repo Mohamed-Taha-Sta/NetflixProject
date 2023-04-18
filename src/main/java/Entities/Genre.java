@@ -4,11 +4,11 @@ import javafx.scene.control.CheckBox;
 
 public class Genre {
     protected String nom;
-   protected CheckBox select;
+    protected CheckBox select;
 
     public Genre(String nom) {
         this.nom = nom;
-        this.select=new CheckBox();
+        this.select = new CheckBox();
     }
 
     public String getNom() {
@@ -25,8 +25,6 @@ public class Genre {
 
     @Override
     public String toString() {
-        return "Genre{" +
-                "nom='" + nom + '\'' +
-                '}';
+        return nom;
     }
 }
