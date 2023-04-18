@@ -14,9 +14,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.SearchableComboBox?>
 
 <AnchorPane id="Anchor" minHeight="720.0" minWidth="1280.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.HomePageController">
    <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Design/Background.png" />
+         </image>
+      </ImageView>
       <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-9.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
@@ -70,11 +76,12 @@
                                     </Label>
                                     <HBox alignment="CENTER_LEFT">
                                        <children>
-                                          <TextField prefHeight="30.0" prefWidth="238.0" promptText="Search" style="-fx-background-radius: 20; -fx-background-color: #212121;">
+                                          <TextField disable="true" prefHeight="30.0" prefWidth="238.0" promptText="Search" style="-fx-background-radius: 20; -fx-background-color: #212121;">
                                              <font>
                                                 <Font name="Calibri" size="14.0" />
                                              </font>
                                           </TextField>
+                                          <SearchableComboBox stylesheets="@../../../Style.css" />
                                        </children>
                                     </HBox>
                                  </children>

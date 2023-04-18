@@ -70,7 +70,10 @@ public class HomePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 40;
         List<Serie> serie = new ArrayList<>();
-        welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
+        if(DataHolder.getUser()!=null){
+            welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
+        }
+
         Image homeBut=new Image(new File("src/main/resources/Images/HomePage/HomeButton.png").toURI().toString());
         ImageView homeView=new ImageView(homeBut);
         homeView.setFitHeight(IV_Size);

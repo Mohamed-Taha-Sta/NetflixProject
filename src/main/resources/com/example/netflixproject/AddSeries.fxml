@@ -59,12 +59,7 @@
                               <Font name="Lucida Bright" size="14.0" />
                            </font>
                         </TextField>
-                        <TextField id="TextFields" fx:id="Genres" layoutX="60.0" layoutY="323.0" prefHeight="35.0" prefWidth="258.0" promptText="Genres" stylesheets="@../../../Style.css">
-                           <font>
-                              <Font name="Lucida Bright" size="14.0" />
-                           </font>
-                        </TextField>
-                        <CheckComboBox fx:id="GenreSelector" />
+                        <CheckComboBox fx:id="enreSelector" />
                         <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="278.1429748535156">
                            <font>
                               <Font name="Calibri" size="18.0" />

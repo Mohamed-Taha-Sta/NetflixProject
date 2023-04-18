@@ -2,7 +2,9 @@
     -fx-font-family: Calibri;
 
 }
-
+.SearchableComboBox{
+    -fx-background-color: #000;
+}
 #button {
     -fx-background-color: #801336;
     -fx-border-radius: 15px;

@@ -32,6 +32,7 @@ public class LoginPageController implements Initializable {
             AlertText.setText("Must fill all fields");
             AlertText.setOpacity(1);
         }
+
         else if(!UserDAO.authenticate(mail.getText(),Password.getText())){
             AlertText.setText("Email or password invalid");
             AlertText.setOpacity(1);
