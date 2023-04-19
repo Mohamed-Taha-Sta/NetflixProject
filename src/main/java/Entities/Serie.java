@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Serie extends Content{
     private long SeasonNumber;
+    private long ID_PROD;
     private File synopsis;
     private List<Season> seasonList;
     private List<Actor> actorList;
@@ -20,10 +21,10 @@ public class Serie extends Content{
         this.actorList = actorList;
     }
 
-    public Serie(String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
+    public Serie(String nom,long ID_PROD, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
         super(nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
-        SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
+        this.ID_PROD = ID_PROD;
         this.IDMainactorList = IDMainactorList;
         this.IDSuppactorList = IDSuppactorList;
     }
@@ -79,6 +80,15 @@ public class Serie extends Content{
     public void setActorList(List<Actor> actorList) {
         this.actorList = actorList;
     }
+
+    public long getID_PROD() {
+        return ID_PROD;
+    }
+
+    public void setID_PROD(long ID_PROD) {
+        this.ID_PROD = ID_PROD;
+    }
+
 
     public Serie() {
     }

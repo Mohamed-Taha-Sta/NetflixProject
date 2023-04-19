@@ -20,8 +20,8 @@ public class SerieDAO {
 
         long SerieID=-1;
 
-        String sql = "INSERT INTO SERIE (Name, DESCRIPTION, DEBUT_DATE, LANGUAGE, COUNTRY, Image, NUM_SEASONS, SYNOPSIS, ListeGenre) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SERIE (Name, DESCRIPTION, DEBUT_DATE, LANGUAGE, COUNTRY, Image, NUM_SEASONS, SYNOPSIS, ListeGenre,ID_PROD) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -37,6 +37,7 @@ public class SerieDAO {
             pstmt.setLong(7,Serie.getSeasonNumber());
             pstmt.setBlob(8,inputStreamSynopsis);
             pstmt.setString(9,String.join(",", Serie.getListegenre().stream().map(Object::toString).toArray(String[]::new)));
+            pstmt.setLong(10,Serie.getID_PROD());
             int affectedRows = pstmt.executeUpdate();
 //            ResultSet generatedKeys = pstmt.getGeneratedKeys();
 //            if (generatedKeys.next()) {
@@ -111,12 +112,12 @@ public class SerieDAO {
 
 
     public static long getSerieID(Serie Serie) throws SQLException {
-        String sql = "Select * from SERIE where NAME = ? and DIRECTOR = ? and LANGUAGE = ?";
+        String sql = "Select * from SERIE where NAME = ? and ID_PROD = ? and LANGUAGE = ?";
         long SerieID=-1;
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
         pstmt.setString(1,Serie.getNom());
-        pstmt.setString(2,Serie.getDescription());
+        pstmt.setLong(2,Serie.getID_PROD());
         pstmt.setString(3,Serie.getLangue());
 
         ResultSet rs = pstmt.executeQuery();
