@@ -1,5 +1,6 @@
 package Utils;
 
+import Entities.Actor;
 import Entities.Serie;
 
 import java.io.File;
@@ -13,6 +14,24 @@ public class DataHolderSeries {
     private static File Thumbnail;
     private static File Synopsis;
     private static List<String> GenreList;
+    private static List<Actor> MainActorsList;
+    private static List<Actor> SuppActorsList;
+
+    public static List<Actor> getMainActorsList() {
+        return MainActorsList;
+    }
+
+    public static void setMainActorsList(List<Actor> mainActorsList) {
+        MainActorsList = mainActorsList;
+    }
+
+    public static List<Actor> getSuppActorsList() {
+        return SuppActorsList;
+    }
+
+    public static void setSuppActorsList(List<Actor> suppActorsList) {
+        SuppActorsList = suppActorsList;
+    }
 
     public static String getSeriesName() {
         return SeriesName;
