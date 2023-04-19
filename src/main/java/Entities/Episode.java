@@ -14,7 +14,8 @@ public class Episode {
     private LocalDate DebutDate;
     private LocalDate PremiereDate;
     private File image;
-    private Resume resume;
+    private File Synopsis;
+    private String Description;
     private File media;
 
     private long VueNbr;
@@ -36,14 +37,14 @@ public class Episode {
                 '}';
     }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, File Synopsis, File media, long vueNbr, long score, long votes) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.image = image;
-        this.resume = resume;
+        this.Synopsis = Synopsis;
         this.media = media;
         VueNbr = vueNbr;
         Score = score;
@@ -76,13 +77,14 @@ public class Episode {
         media = file;
     }
 
-    public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Resume resume, File file,File Image) {
+    public Episode(long seasonParentID, String name, int number, String Description, LocalDate debutDate, LocalDate premiereDate, File Synopsis, File file, File Image) {
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
+        this.Description = Description;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
-        this.resume = resume;
+        this.Synopsis = Synopsis;
         VueNbr = 0;
         Score = 0;
         Votes = 0;
@@ -90,15 +92,16 @@ public class Episode {
         image = Image;
     }
 
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, String Description,String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, File Synopsis, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
+        this.Description = Description;
         SeasonParentID = seasonParentID;
         Name = name;
         Number = number;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.image = image;
-        this.resume = resume;
+        this.Synopsis = Synopsis;
         this.media = media;
         VueNbr = vueNbr;
         Score = score;
@@ -106,14 +109,14 @@ public class Episode {
     }
 
 
-    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, File image, Resume resume, File media, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, int number, LocalDate debutDate, LocalDate premiereDate, File image, File Synopsis, File media, long vueNbr, long score, long votes) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Number = number;
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.image = image;
-        this.resume = resume;
+        this.Synopsis = Synopsis;
         this.media = media;
         VueNbr = vueNbr;
         Score = score;
@@ -164,12 +167,12 @@ public class Episode {
         this.image = image;
     }
 
-    public Resume getResume() {
-        return resume;
+    public File getSynopsis() {
+        return Synopsis;
     }
 
-    public void setResume(Resume resume) {
-        this.resume = resume;
+    public void setSynopsis(File Synopsis) {
+        this.Synopsis = Synopsis;
     }
 
     public long getVueNbr() {
@@ -219,4 +222,13 @@ public class Episode {
     public void setName(String name) {
         Name = name;
     }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
 }

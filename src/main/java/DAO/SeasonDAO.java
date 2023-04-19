@@ -19,8 +19,8 @@ public class SeasonDAO {
 
     public static boolean AddSeason(Season season) throws SQLException, FileNotFoundException  {
 
-        String sql = "INSERT INTO Season (ID_SERIE, NUM, name, DEBUT_DATE,THUMBNAIL,SYNOPSIS) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Season (ID_SERIE, NUM, name, DEBUT_DATE,THUMBNAIL,SYNOPSIS,DESCRIPTION) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -34,6 +34,7 @@ public class SeasonDAO {
         pstmt.setDate(4,java.sql.Date.valueOf(season.getDebutDate()));
         pstmt.setBlob(5,inputStreamThumbnail);
         pstmt.setBlob(6,inputStreamSynopsis);
+        pstmt.setString(7,season.getDescription());
 
         int affectedRows = pstmt.executeUpdate();
 
@@ -69,6 +70,7 @@ public class SeasonDAO {
             long ID = rs.getLong("ID");
             long ID_SERIE = rs.getLong("ID_SERIE");
             String name = rs.getString("NAME");
+            String Description = rs.getString("DESCRIPTION");
             int num = rs.getInt("NUM");
             Date DebutDate = rs.getDate("DEBUT_DATE");
             Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
@@ -100,7 +102,7 @@ public class SeasonDAO {
 
             List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
-            season = new Season(ID,SeasonName,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
 
             SeasonList.add(season);
 
@@ -129,6 +131,7 @@ public class SeasonDAO {
 //            long ID = rs.getLong("ID");
             long ID_SERIE = rs.getLong("ID_SERIE");
             String SeasonName = rs.getString("NAME");
+            String Description = rs.getString("Description");
             int num = rs.getInt("NUM");
             Date DebutDate = rs.getDate("DEBUT_DATE");
             Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
@@ -160,7 +163,7 @@ public class SeasonDAO {
 
             List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
-            season = new Season(ID,SeasonName,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
 
             SeasonList.add(season);
         }

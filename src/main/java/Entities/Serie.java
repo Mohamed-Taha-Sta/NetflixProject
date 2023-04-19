@@ -13,10 +13,11 @@ public class Serie extends Content{
     private List<Long> IDMainactorList;
     private List<Long> IDSuppactorList;
 
-    public Serie(long id, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
+    public Serie(long id,long ID_PROD, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
         super(id, nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
         SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
+        this.ID_PROD = ID_PROD;
         this.seasonList = seasonList;
         this.actorList = actorList;
     }

@@ -40,3 +40,6 @@ build/
 .idea
 target
 /src/main/java/Test/
+*.jpeg
+*.mp4
+

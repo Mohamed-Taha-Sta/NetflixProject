@@ -67,10 +67,7 @@ public class EpisodePageController implements Initializable {
         SerieXXXX.setText("Serie "+seasonList.get(0).getSERIE_ID());
         SeasonXXEpisodeYY.setText("Season "+episode2.getSeasonParentID()+" Episode "+episode2.getNumber());
 
-        if(episode2.getResume() instanceof Entities.Text)
-            Descirption.setText(((Entities.Text) episode2.getResume()).getTexte());
-        else
-            Descirption.setVisible(false);
+        Descirption.setText(episode2.getDescription());
 
 //        File fileExported = new File("file:src/main/java/Test/ImgEp"+episode2.getID()+".jpeg");
 //        Image ImageExported = new Image(fileExported.toURI().toString());
