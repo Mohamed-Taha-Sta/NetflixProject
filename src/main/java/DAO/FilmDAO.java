@@ -27,18 +27,23 @@ public class FilmDAO {
         try {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
-            String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,resume)" +
+            String sql = "INSERT INTO Film (nom,description,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod)" +
                     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getDescription() + "'";
+            String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.id_prod ='" + film.getId_realisateur() + "'";
             pstmt = conn.prepareStatement(sql);
-
             InputStream inputStreamSynopsisimg = null;
             InputStream inputStreamSynopsissynops = null;
             InputStream inputStreamSynopsisfilm= null;
+            System.out.println(1);
 
             inputStreamSynopsisimg = new FileInputStream(film.getImg());
+            System.out.println(1);
+
             inputStreamSynopsisfilm=new FileInputStream(film.getFilm());
+            System.out.println(1);
+
             inputStreamSynopsissynops=new FileInputStream(film.getSynopsis());
+            System.out.println(1);
 
             pstmt.setString(1,film.getNom());
             pstmt.setString(2,film.getDescription());
@@ -53,9 +58,10 @@ public class FilmDAO {
             pstmt.setLong(11,film.getVotes());
             pstmt.setBlob(12,inputStreamSynopsissynops);
             pstmt.setBlob(13,inputStreamSynopsisfilm);
-            pstmt.setString(14,film.getResume());
-
+            pstmt.setLong(14,film.getId_realisateur());
+            System.out.println(1);
             pstmt.executeUpdate();
+            System.out.println(1);
 
             pstmt = conn.prepareStatement(sql1);
 
@@ -67,9 +73,6 @@ public class FilmDAO {
             List<Actor> act=film.getActeur();
 
             for(int i=0;i<act.size();i++){
-               // sql3 = "INSERT INTO Acteurprinc_Film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
-              //  sql3 = "INSERT INTO acteursec_film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
-
 
                 if(act.get(i) instanceof MainActor ){
                     sql3 = "INSERT INTO Acteurprinc_Film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
@@ -149,14 +152,14 @@ public class FilmDAO {
         List<Film>list=new ArrayList<>();
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,resume from Film where Film.id_film="+filmid;
+            String sql="select id_film,nom,description,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod from Film where Film.id_film="+filmid;
             pstmt = conn.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Long id=rs.getLong(1);
                 String nom=rs.getString(2);
-                String realisateur= rs.getString(3);
+                String description= rs.getString(3);
                 Date annerdesortie=rs.getDate(4);
                 String langue=rs.getString(5);
                 String paysorigine=rs.getString(6);
@@ -169,7 +172,7 @@ public class FilmDAO {
                 InputStream image=img.getBinaryStream();
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
-                String resume=rs.getString(15);
+                Long idrealisateur=rs.getLong(15);
                 //Converting Blob Image to Jpeg File
                 File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
@@ -214,7 +217,7 @@ public class FilmDAO {
                 }
 
 
-                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,resume);
+                Film filmm=new Film(nom,description,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
                 list.add(filmm);
             }
 
@@ -236,7 +239,7 @@ public class FilmDAO {
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             //String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom like %"+filmnom+"%";
-            String sql="SELECT id_film, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,resume " +
+            String sql="SELECT id_film, nom, description, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,id_prod " +
                     "FROM Film " +
                     "WHERE Film.nom LIKE '%" + filmnom + "%'";
             pstmt = conn.prepareStatement(sql);
@@ -246,7 +249,7 @@ public class FilmDAO {
             while (rs.next()) {
                 Long id=rs.getLong(1);
                 String nom=rs.getString(2);
-                String realisateur= rs.getString(3);
+                String decription= rs.getString(3);
                 Date annerdesortie=rs.getDate(4);
                 String langue=rs.getString(5);
                 String paysorigine=rs.getString(6);
@@ -259,7 +262,7 @@ public class FilmDAO {
                 InputStream image=img.getBinaryStream();
                 InputStream synop=rs.getBinaryStream(13);
                 InputStream vedio=rs.getBinaryStream(14);
-                String resume=rs.getString(15);
+                Long idrealisateur=rs.getLong(15);
 
                 //Converting Blob Image to Jpeg File
                 File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
@@ -305,7 +308,7 @@ public class FilmDAO {
                 }
 
 
-                Film filmm=new Film(nom,realisateur,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,resume);
+                Film filmm=new Film(nom,decription,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
                 list.add(filmm);
             }
 
@@ -320,6 +323,11 @@ public class FilmDAO {
 
         return list;
     }
+
+
+
+
+
 
     public static ArrayList<Film> FindByActor(Actor act) {
         PreparedStatement pstmt = null;
@@ -369,6 +377,29 @@ public class FilmDAO {
             System.out.println(ex.getMessage());
         }
         return list1;
+
+    }
+    public static boolean deleteFilm(Film film) {
+           PreparedStatement pstmt = null;
+
+
+           String sql;
+
+            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+            try{sql = "delete FROM Film WHERE id_film = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,film.getId());
+             pstmt.executeUpdate();
+            return true;
+
+            }catch (Exception e){
+                System.out.println("Film n'exite pas");
+                return false;
+            }
+
+
+
 
     }
 

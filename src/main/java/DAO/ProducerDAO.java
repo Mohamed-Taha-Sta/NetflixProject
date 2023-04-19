@@ -39,6 +39,9 @@ public class ProducerDAO {
     public static void ajoutFilm(Film film){
         FilmDAO.Add(film);
     }
+    public static void deleteFilm(Film film){
+        FilmDAO.deleteFilm(film);
+    }
     public static void modifnom(Long id,String nom){
         /**/
         PreparedStatement pstmt = null;

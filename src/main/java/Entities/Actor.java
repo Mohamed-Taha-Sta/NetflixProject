@@ -36,8 +36,8 @@ public class Actor {
        Prename = prename;
        Mail = mail;
        this.password = password;
-       this.select=new CheckBox();
-       this.select.setId("checkBox");
+/*       this.select=new CheckBox();
+       this.select.setId("checkBox");*/
    }
 
 

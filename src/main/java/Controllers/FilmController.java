@@ -37,13 +37,13 @@ public class FilmController {
 
         List<String> listeGenre = Arrays.asList("Action","Comedie","Drama");
 
-        File FileSynopsis = new File("src/main/java/Test/VideoTest.mp4");
-        File FileImage = new File("src/main/java/Test/LionTest.jpeg");
-        File FileVideo=new File("src/main/java/Test/VideoTest.mp4");
+        File FileSynopsis = new File("src/main/java/Test/VideoFilm19.mp4");
+        File FileImage = new File("src/main/java/Test/ImgEp10.jpeg");
+        File FileVideo=new File("src/main/java/Test/VideoFilm19.mp4");
 
         Actor actor1 = new MainActor(1,"Smith","John","jsmith@example.com","password1");
-        Actor actor2 = new MainActor(2,"Doe","Jane","jdoe@example.com","password2");
-        Actor actor3 = new Supportingactor(3,"Johnson","Robert","rjohnson@example.com","password3");
+        Actor actor2 = new MainActor(44,"Doe","Jane","jdoe@example.com","password2");
+        Actor actor3 = new Supportingactor(45,"Johnson","Robert","rjohnson@example.com","password3");
 
         ArrayList<Actor> ListeActeurs = new ArrayList<>();
 
@@ -93,9 +93,12 @@ list.add("drama");
         //System.out.println(        FilmDAO.recherche_filmnom("caff"));
        // AdminDAO.createadmin(new Admin("fares","makki","faresmakki21@gmail.com","fares123"));
         //System.out.println(FilmDAO.getnbrvue(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
-       // FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film));
+      // /FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film));
       //  System.out.println(FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
        // System.out.println(FilmDAO.FindByName(""));
        // System.out.println(FilmService.filterByGenre("fares"));
-    }
+        Long x= Long.valueOf(1);
+//FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
+FilmDAO.FindByName("d");
+        }
 }
