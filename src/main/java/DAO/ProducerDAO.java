@@ -19,7 +19,7 @@ public class ProducerDAO {
         Long compteur = prod.getId();
 
         try {
-             sql = "INSERT INTO Producer (nom,prenom,mail,password) VALUES (?,?,?,?)";
+             sql = "INSERT INTO Producer (NOM,PRENOM,EMAIL,PASSWORD) VALUES (?,?,?,?)";
 
 
 
