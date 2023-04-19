@@ -148,7 +148,7 @@ public class SerieDAO {
         while (rs.next()) {
 
             long ID = rs.getLong("ID_SERIE");
-            String Director = rs.getString("DIRECTOR");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
             String Language = rs.getString("LANGUAGE");
             String Country = rs.getString("COUNTRY");
@@ -190,7 +190,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,SerieName,Director,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+            serie = new Serie(ID,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
 
             serieList.add(serie);
         }

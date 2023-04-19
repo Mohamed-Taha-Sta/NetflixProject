@@ -39,10 +39,10 @@ public class SerieController {
                 "when an unknown printer took a galley of type and scrambled it to make a type specimen book.", LocalDate.of(2008,1,8),
                 "English","America",listGenre,imageFile,file,listMainActors,listSuppActors);
 
-        AddSerie(serie);
+//        AddSerie(serie);
 
 
-//        System.out.println(SerieDAO.GetSerieByName("Serie1"));
+        System.out.println(SerieDAO.GetSerieByName("Serie1"));
 
     }
 
