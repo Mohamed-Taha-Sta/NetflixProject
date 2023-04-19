@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Actor {
     private  long ID=9;
-    private int x;
+
     protected String Name;
     protected String Prename;
     protected String Mail;
