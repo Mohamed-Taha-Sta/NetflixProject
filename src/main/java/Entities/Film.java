@@ -1,17 +1,9 @@
 package Entities;
 
-import Utils.ConxDB;
-import javafx.scene.image.Image;
-
 import java.io.File;
-import java.sql.Connection;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Film extends Content{
 private String duree;
@@ -151,7 +143,7 @@ private ArrayList<Actor>acteur;
                 ", resume='" + resume + '\'' +
                 ", id=" + id +
                 ", nom='" + nom + '\'' +
-                ", realisateur='" + realisateur + '\'' +
+                ", realisateur='" + Description + '\'' +
                 ", annerdesortie=" + annerdesortie +
                 ", langue='" + langue + '\'' +
                 ", paysorigine='" + paysorigine + '\'' +

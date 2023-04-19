@@ -8,10 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +29,7 @@ public class FilmDAO {
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
             String sql = "INSERT INTO Film (nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,resume)" +
                     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getRealisateur() + "'";
+            String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.realisateur='" + film.getDescription() + "'";
             pstmt = conn.prepareStatement(sql);
 
             InputStream inputStreamSynopsisimg = null;
@@ -45,7 +41,7 @@ public class FilmDAO {
             inputStreamSynopsissynops=new FileInputStream(film.getSynopsis());
 
             pstmt.setString(1,film.getNom());
-            pstmt.setString(2,film.getRealisateur());
+            pstmt.setString(2,film.getDescription());
             pstmt.setDate(3,java.sql.Date.valueOf(film.getAnnerdesortie()));
             pstmt.setString(4,film.getLangue());
             pstmt.setString(5,film.getPaysorigine());
@@ -175,7 +171,7 @@ public class FilmDAO {
                 InputStream vedio=rs.getBinaryStream(14);
                 String resume=rs.getString(15);
                 //Converting Blob Image to Jpeg File
-                File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
+                File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
                 byte[] bufferImg = new byte[1024];
                 int length;
@@ -184,7 +180,7 @@ public class FilmDAO {
                 }
 
                 //Handeling the Video, from inputStream
-                Path outputFilePath = Paths.get("src/main/java/Test/VideoSynopsis"+id+".mp4");
+                Path outputFilePath = Paths.get("src/main/java/Temp/VideoSynopsis"+id+".mp4");
                 try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
@@ -195,7 +191,7 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
                 //Handeling the Video, from inputStream
-                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoFilm"+id+".mp4");
+                Path outputFilePath1 = Paths.get("src/main/java/Temp/VideoFilm"+id+".mp4");
                 try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
                     byte[] bufferved = new byte[4096];
                     int bytesReadved;
@@ -206,9 +202,9 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
 
-                File filesynop = new File("src/main/java/Test/SynopsisFilm"+ id +".mp4");
-                File fileImage = new File("src/main/java/Test/ImgFilm"+ id +".jpeg");
-                File filmvedio=new File("src/main/java/Test/VideoFilm"+ id +".mp4");
+                File filesynop = new File("src/main/java/Temp/SynopsisFilm"+ id +".mp4");
+                File fileImage = new File("src/main/java/Temp/ImgFilm"+ id +".jpeg");
+                File filmvedio=new File("src/main/java/Temp/VideoFilm"+ id +".mp4");
 
 
                 ArrayList<String> genrelist = new ArrayList<>();
@@ -266,7 +262,7 @@ public class FilmDAO {
                 String resume=rs.getString(15);
 
                 //Converting Blob Image to Jpeg File
-                File fileImg = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
+                File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
                 OutputStream outS = new FileOutputStream(fileImg);
                 byte[] bufferImg = new byte[1024];
                 int length;
@@ -275,7 +271,7 @@ public class FilmDAO {
                 }
 
                 //Handeling the Video, from inputStream
-                Path outputFilePath = Paths.get("src/main/java/Test/SynopsisFilm"+id+".mp4");
+                Path outputFilePath = Paths.get("src/main/java/Temp/SynopsisFilm"+id+".mp4");
                 try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
                     byte[] buffer = new byte[4096];
                     int bytesRead;
@@ -286,7 +282,7 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
                 //Handeling the Video, from inputStream
-                Path outputFilePath1 = Paths.get("src/main/java/Test/VideoFilm"+id+".mp4");
+                Path outputFilePath1 = Paths.get("src/main/java/Temp/VideoFilm"+id+".mp4");
                 try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
                     byte[] bufferved = new byte[4096];
                     int bytesReadved;
@@ -297,9 +293,9 @@ public class FilmDAO {
                     System.out.println("Error Handelling the video");
                 }
 
-                File filesynop = new File("src/main/java/Test/SynopsisFilm"+ id +".mp4");
-                File fileImage = new File("src/main/java/Test/ImgFilm"+id+".jpeg");
-                File filmvedio=new File("src/main/java/Test/VideoFilm"+ id +".mp4");
+                File filesynop = new File("src/main/java/Temp/SynopsisFilm"+ id +".mp4");
+                File fileImage = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
+                File filmvedio=new File("src/main/java/Temp/VideoFilm"+ id +".mp4");
 
 
                 ArrayList<String> genrelist = new ArrayList<>();

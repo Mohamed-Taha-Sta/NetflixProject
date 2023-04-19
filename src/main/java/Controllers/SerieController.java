@@ -18,7 +18,7 @@ public class SerieController {
 
     public static void main(String[] args) throws SQLException, IOException {
         File file = new File("src/main/java/Test/Synopsis.mp4");
-        File imageFile = new File("src/main/java/Test/breakingBad.jpg");
+        File imageFile = new File("src/main/java/Test/SeriePlaceHolder.jpg");
 
         List<Long> listMainActors = new ArrayList<>();
         List<Long> listSuppActors = new ArrayList<>();
@@ -34,10 +34,12 @@ public class SerieController {
         listGenre.add("Drama");
 //        listGenre.add("Torki");
 
-        Serie serie = new Serie("breaking bad","Vince Gilligan", LocalDate.of(2008,1,8),
+        Serie serie = new Serie("Serie1","Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
+                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
+                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.", LocalDate.of(2008,1,8),
                 "English","America",listGenre,imageFile,5L,file,listMainActors,listSuppActors);
 
-       SerieDAO.AddSerie(serie);
+        AddSerie(serie);
 
 
 //        System.out.println(SerieDAO.GetSerieByName("Serie1"));

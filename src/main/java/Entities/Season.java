@@ -12,6 +12,7 @@ public class Season {
 
     private long ID;
     private String name;
+    private String Description;
     private File Synopsis;
     private long SERIE_ID;
     private int Number;
@@ -123,6 +124,15 @@ public class Season {
     public void setSERIE_ID(long SERIE_ID) {
         this.SERIE_ID = SERIE_ID;
     }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
 
     @Override
     public String toString() {

@@ -76,7 +76,7 @@ public class SeasonDAO {
             InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
-            File fileThumb = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
             OutputStream outS = new FileOutputStream(fileThumb);
             byte[] bufferImg = new byte[1024];
             int length;
@@ -85,7 +85,7 @@ public class SeasonDAO {
             }
 
             //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisSeason"+ID+".mp4");
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -95,8 +95,8 @@ public class SeasonDAO {
             } catch (IOException e) {
                 System.out.println("Error Handelling the Synopsis");
             }
-            File fileSynopsis = new File("src/main/java/Test/SynopsisSeason"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
             List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
@@ -136,7 +136,7 @@ public class SeasonDAO {
             InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
-            File fileThumb = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
             OutputStream outS = new FileOutputStream(fileThumb);
             byte[] bufferImg = new byte[1024];
             int length;
@@ -145,7 +145,7 @@ public class SeasonDAO {
             }
 
             //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisSeason"+ID+".mp4");
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -155,8 +155,8 @@ public class SeasonDAO {
             } catch (IOException e) {
                 System.out.println("Error Handelling the Synopsis");
             }
-            File fileSynopsis = new File("src/main/java/Test/SynopsisSeason"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
             List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
@@ -194,7 +194,7 @@ public class SeasonDAO {
             InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
-            File fileThumb = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
             OutputStream outS = new FileOutputStream(fileThumb);
             byte[] bufferImg = new byte[1024];
             int length;
@@ -203,7 +203,7 @@ public class SeasonDAO {
             }
 
             //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Test/SynopsisSeason"+ID+".mp4");
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
                 byte[] buffer = new byte[4096];
                 int bytesRead;
@@ -213,8 +213,8 @@ public class SeasonDAO {
             } catch (IOException e) {
                 System.out.println("Error Handelling the Synopsis");
             }
-            File fileSynopsis = new File("src/main/java/Test/SynopsisSeason"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Test/ImgSeason"+ID+".jpeg");
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
             List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 

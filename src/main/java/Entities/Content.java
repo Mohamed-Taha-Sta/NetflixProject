@@ -1,7 +1,5 @@
 package Entities;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.Objects;
 public class Content {
     long id;
    protected String nom;
-    protected String realisateur;
+    protected String Description;
     protected LocalDate annerdesortie;
     protected String langue;
     protected String paysorigine;
@@ -21,10 +19,10 @@ public class Content {
     public Content() {
     }
 
-    public Content(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
+    public Content(long id, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
         this.id = id;
         this.nom = nom;
-        this.realisateur = realisateur;
+        this.Description = Description;
         this.annerdesortie = annerdesortie;
         this.langue = langue;
         this.paysorigine = paysorigine;
@@ -32,9 +30,9 @@ public class Content {
         this.img = img;
     }
 
-    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
+    public Content(String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
         this.nom = nom;
-        this.realisateur = realisateur;
+        this.Description = Description;
         this.annerdesortie = annerdesortie;
         this.langue = langue;
         this.paysorigine = paysorigine;
@@ -42,9 +40,9 @@ public class Content {
         this.img = img;
     }
 
-    public Content(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre) {
+    public Content(String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre) {
         this.nom = nom;
-        this.realisateur = realisateur;
+        this.Description = Description;
         this.annerdesortie = annerdesortie;
         this.langue = langue;
         this.paysorigine = paysorigine;
@@ -80,12 +78,12 @@ public class Content {
         this.nom = nom;
     }
 
-    public String getRealisateur() {
-        return realisateur;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setRealisateur(String realisateur) {
-        this.realisateur = realisateur;
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
     public LocalDate getAnnerdesortie() {

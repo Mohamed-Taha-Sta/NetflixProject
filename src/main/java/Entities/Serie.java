@@ -1,10 +1,7 @@
 package Entities;
 
-import javafx.scene.image.Image;
-
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Serie extends Content{
@@ -15,16 +12,16 @@ public class Serie extends Content{
     private List<Long> IDMainactorList;
     private List<Long> IDSuppactorList;
 
-    public Serie(long id, String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
-        super(id, nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+    public Serie(long id, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
+        super(id, nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
         SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
         this.seasonList = seasonList;
         this.actorList = actorList;
     }
 
-    public Serie(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
-        super(nom, realisateur, annerdesortie, langue, paysorigine, listegenre, img);
+    public Serie(String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
+        super(nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
         SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
         this.IDMainactorList = IDMainactorList;
@@ -92,7 +89,7 @@ public class Serie extends Content{
                 "actorList=" + actorList + "\n" +
                 ", id=" + id + "\n" +
                 ", nom='" + nom + '\'' + "\n" +
-                ", realisateur='" + realisateur + '\'' + "\n" +
+                ", realisateur='" + Description + '\'' + "\n" +
                 ", annerdesortie=" + annerdesortie + "\n" +
                 ", langue='" + langue + '\'' + "\n" +
                 ", paysorigine='" + paysorigine + '\'' + "\n" +
