@@ -55,6 +55,12 @@ public class AddSeriesController implements Initializable {
         } else if (GenreSelector.getCheckModel().isEmpty()) {
             AlertText.setText("Series must have at least 1 genre");
             AlertText.setOpacity(1);
+        } else if (Thumbnail.getText().isEmpty()) {
+            AlertText.setText("Series must have a thumbnail");
+            AlertText.setOpacity(1);
+        } else if (Synopsis.getText().isEmpty()) {
+            AlertText.setText("Series must have a synopsis");
+            AlertText.setOpacity(1);
         } else{
             DataHolderSeries.setSeriesName(Name.getText());
             DataHolderSeries.setCountryOfOrigin(CountrySelector.getValue());
@@ -82,6 +88,7 @@ public class AddSeriesController implements Initializable {
             int height = (int) image.getHeight();
             if (width <= 1920 && height <= 1080) {
                 DataHolderSeries.setThumbnail(selectedFile);
+                Thumbnail.setText(selectedFile.toURI().toString());
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -108,6 +115,7 @@ public class AddSeriesController implements Initializable {
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
                 DataHolderSeries.setSynopsis(selectedFile);
+                Synopsis.setText(selectedFile.toURI().toString());
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message

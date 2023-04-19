@@ -1,6 +1,7 @@
 package Controllers.FXMLControllers;
 
 import Controllers.SerieController;
+import DAO.UserDAO;
 import Entities.*;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
@@ -33,13 +34,15 @@ import java.util.ResourceBundle;
 public class HomePageController implements Initializable {
 
     public HBox ThumbnailViewer;
-    public Button ProfileBtn;
+ 
 
     public AnchorPane ImageAnchor = new AnchorPane();
     public Button homeButton;
     public Button seriesButoon;
     public Button filmButton;
     public Label welcome;
+    public Button NotificationButton;
+    public ImageView ProfileBtn;
 
     private boolean homeSelected = true;
     private boolean SeriesSeleced = false;
@@ -79,6 +82,27 @@ public class HomePageController implements Initializable {
         homeView.setFitHeight(IV_Size);
         homeView.setFitWidth(IV_Size);
         homeButton.setGraphic(homeView);
+        Image notiBut=new Image(new File("src/main/resources/Images/HomePage/Notification.png").toURI().toString());
+        ImageView notiView=new ImageView(notiBut);
+        notiView.setFitHeight(IV_Size);
+        notiView.setFitWidth(IV_Size);
+        NotificationButton.setGraphic(notiView);
+        try {
+            UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
+            File imageFile = DataHolder.getImage();
+            System.out.println("image file: "+imageFile);
+            if (imageFile != null) {
+                Image profileImage = new Image(imageFile.toURI().toString());
+                System.out.println("Profile image in profilepage: "+profileImage);
+
+                ProfileBtn.setImage(profileImage);
+                ProfileBtn = ImageClipper(ProfileBtn);
+            } else {
+                System.out.println("No image found for user.");
+            }
+        } catch (Exception e) {
+            System.out.println("image not found");
+        }
 
         try {
             serie = SerieController.GetSerieByName("The Witcher");

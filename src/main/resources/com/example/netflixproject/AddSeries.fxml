@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,22 +15,27 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
    <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Design/Background.png" />
+         </image>
+      </ImageView>
       <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
          <children>
-            <VBox alignment="CENTER" prefHeight="477.0" prefWidth="462.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+            <VBox alignment="CENTER" style="-fx-background-color: #801336; -fx-background-radius: 20;">
                <children>
-                  <VBox alignment="CENTER" prefHeight="469.0" prefWidth="456.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER" maxWidth="350.0" prefHeight="583.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
                      <children>
-                        <VBox alignment="CENTER">
+                        <VBox alignment="TOP_CENTER">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="382.0" text="Adding Series" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label alignment="TOP_CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="318.0" text="Adding Series" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                            </children>
@@ -40,7 +48,7 @@
                               <Insets top="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <ComboBox id="ComboBox" fx:id="CountrySelector" prefHeight="35.0" prefWidth="365.0" promptText="CountryOfOrigin" stylesheets="@../../../Style.css" />
+                        <ComboBox id="ComboBox" fx:id="CountrySelector" prefHeight="35.0" prefWidth="478.0" promptText="CountryOfOrigin" stylesheets="@../../../Style.css" />
                         <ComboBox id="ComboBox" fx:id="LanguageSelector" layoutX="64.0" layoutY="158.0" prefHeight="35.0" prefWidth="380.0" promptText="Language" stylesheets="@../../../Style.css" />
                         <TextField id="TextFields" fx:id="Thumbnail" editable="false" onAction="#ThumbnailSelect" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
                            <font>
@@ -52,7 +60,10 @@
                               <Font name="Lucida Bright" size="14.0" />
                            </font>
                         </TextField>
-                        <CheckComboBox id="CheckComboBox" fx:id="GenreSelector" prefHeight="22.0" prefWidth="363.0" stylesheets="@../../../Style.css" />
+                        <CheckComboBox id="myCheckComboBox" fx:id="GenreSelector" pickOnBounds="false" prefHeight="30.0" prefWidth="310.0" snapToPixel="false" stylesheets="@../../../Style.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></CheckComboBox>
                         <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="317.1429748535156">
                            <font>
                               <Font name="Calibri" size="18.0" />
@@ -61,7 +72,7 @@
                               <Insets />
                            </VBox.margin>
                         </Text>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox>
                            <children>
                               <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
                                  <font>
@@ -83,7 +94,7 @@
                         <Insets />
                      </VBox.margin>
                      <padding>
-                        <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                        <Insets left="50.0" right="50.0" />
                      </padding>
                   </VBox>
                </children>

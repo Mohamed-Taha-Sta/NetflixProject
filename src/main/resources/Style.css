@@ -2,9 +2,11 @@
     -fx-font-family: Calibri;
 
 }
-.SearchableComboBox{
+
+.SearchableComboBox {
     -fx-background-color: #000;
 }
+
 #button {
     -fx-background-color: #801336;
     -fx-border-radius: 15px;
@@ -36,7 +38,6 @@
 }
 
 
-
 #Anchor {
     -fx-background-color: #2D142C;
 
@@ -50,7 +51,9 @@
     -fx-background-radius: 12px;
     -fx-text-fill: White;
     -fx-font-size: 14px;
+    -fx-prompt-text-fill: white;
 }
+
 #ComboBox {
     -fx-border-color: #661332;
     -fx-border-width: 4px;
@@ -63,11 +66,65 @@
 }
 
 #ComboBox .text-field {
-    -fx-prompt-text-fill: rgba(255, 0, 0, 0.5) ;
+    -fx-prompt-text-fill: rgba(255, 0, 0, 0.5);
+    -fx-text-fill: white;
 }
+
 #ComboBox .text-field:focused {
-    -fx-prompt-text-fill: transparent ;
+    -fx-prompt-text-fill: transparent;
 }
+
+#ComboBox .list-view {
+    -fx-background-color:  #510A32;
+    -fx-background-radius: 10px;
+
+
+}
+
+#ComboBox .list-cell {
+    -fx-background-color: #B3253D;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0px 0px 1px 1px ;
+    -fx-border-color: #661332;
+
+}
+#ComboBox .list-cell:hover{
+    -fx-background-color: #661332;
+}
+
+#ComboBox .arrow-button >.arrow{
+    -fx-background-color: white;
+}
+
+#ComboBox  .scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+#ComboBox  .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+
+#ComboBox  .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+#ComboBox .scroll-bar > .increment-button:hover,
+#ComboBox  .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+#ComboBox .scroll-bar > .increment-button > .arrow,
+#ComboBox  .scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+
+#ComboBox .scroll-bar > .increment-button:hover > .arrow,
+#ComboBox .scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
+
 
 .check-box {
     -fx-background-color: #B3253D;
@@ -77,6 +134,7 @@
 
 .check-box .box {
     -fx-background-color: #B3253D;
+    -fx-text-fill: white;
 }
 
 .check-box .box:hover {
@@ -96,56 +154,75 @@
 }
 
 /*CHECK COMBOBOX HERE */
-#CheckComboBox{
+
+#myCheckComboBox .list-cell {
+    -fx-background-color: #B3253D;
+    -fx-background-radius: 8px 0px 0px 8px;
+    -fx-text-fill: #ffffff;
     -fx-border-color: #661332;
-    -fx-border-width: 4px;
-    -fx-background: #B3253D;
-    -fx-background-color: #B3253D;
-    fx-control-inner-background:#B3253D;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 12px;
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-body-color: #B3253D;
-    -fx-selection-bar: #661332;
-    /*-fx-accent: #13ff00;*/
-    /*-fx-faint-focus-color: #18ff00;*/
-    /*-fx-focus-color: #17ff00;*/
+    -fx-border-width: 4px 0px 4px 4px ;
+    -fx-border-radius: 8px 0px 0px 8px;
+    -fx-control-inner-background: #620505;
+    -fx-background-insets:-3px -1px -1px -1px;
+    -fx-control-background: #620505;
+    -fx-border-insets: -4px;
 }
 
-/*#CheckComboBox .check-box {*/
-/*    -fx-background-color: transparent;*/
-/*}*/
 
-#CheckComboBox .box {
+
+#myCheckComboBox .arrow-button, .check-combo-box  {
+    -fx-background-color: #B3253D;
+    -fx-border-color: #661332;
+    -fx-background-radius:0;
+    -fx-background-insets:-1px -1px -1px -3px;
+    -fx-border-insets: -4px;
+}
+
+#myCheckComboBox .arrow-button {
+    -fx-border-width: 4px 4px 4px 0px;
+    -fx-border-radius: 0px 10px 10px 0px;
+}
+#myCheckComboBox .arrow-button > .arrow {
+    -fx-background-color: white;
+    -fx-border-insets: -4px;
+}
+
+
+#myCheckComboBox .list-view {
+    -fx-background-color: transparent;
+
+}
+
+#myCheckComboBox .scroll-bar:vertical {
     -fx-background-color: #B3253D;
 }
 
-/*#CheckComboBox .check-box:selected .box {*/
-/*    -fx-background-color: #661332;*/
-/*    -fx-border-color: #661332;*/
-/*}*/
+#myCheckComboBox .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
 
-/*#CheckComboBox .check-box:hover .box {*/
-/*    -fx-background-color: #E67E22;*/
-/*}*/
+#myCheckComboBox .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
 
-/*#CheckComboBox .check-box:selected:hover .box {*/
-/*    -fx-background-color: #E67E22;*/
-/*}*/
+#myCheckComboBox .scroll-bar > .increment-button:hover,
+#myCheckComboBox .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
 
-/*#CheckComboBox .arrow {*/
-/*    -fx-background-color: #B3253D;*/
-/*}*/
+#myCheckComboBox .scroll-bar > .increment-button > .arrow,
+#myCheckComboBox .scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
 
-/*#CheckComboBox .arrow:hover {*/
-/*    -fx-background-color: #E67E22;*/
-/*}*/
+#myCheckComboBox .scroll-bar > .increment-button:hover > .arrow,
+#myCheckComboBox .scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
 
 
-
-
-#DescriptionBox  {
+#DescriptionBox {
     -fx-border-color: #661332;
     -fx-border-width: 4px;
     -fx-border-radius: 10px;
@@ -176,16 +253,20 @@
 .table-row-cell:empty {
     -fx-background-color: transparent;
 }
-.table-view .column-header{
+
+.table-view .column-header {
     -fx-background-color: transparent;
 }
+
 .table-view .column-header-background {
     -fx-background-color: transparent;
     -fx-background-radius: 0 10 10 0;
 }
-#Table{
+
+#Table {
     -fx-background-radius: 0 10 10 0;
 }
+
 .table-view .column-header-background .filler {
     -fx-background-color: #4b0202;
 }
@@ -257,6 +338,7 @@
     -fx-background-color: #fc0000;
     -fx-text-fill: white;
 }
+
 .check-box {
     -fx-background-color: #7c1d40;
     -fx-border-radius: 15px;
@@ -317,13 +399,13 @@
 }
 
 
-
 .image-view {
     -fx-background-radius: 15px;
     -fx-border-radius: 15px;
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
 }
-.date-picker{
+
+.date-picker {
     -fx-background-color: transparent;
     -fx-border-radius: 10px;
     /*-fx-border-color: #801336;*/ /* Changed this One to make it fit in*/
@@ -331,12 +413,14 @@
     -fx-border-width: 3px;
 
 }
+
 .date-picker .arrow-button {
     -fx-background-color: #b3253d;
     -fx-border-color: #661332;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
 }
+
 .date-picker > .text-field {
     -fx-background-radius: 7px 0 0 7px;
     -fx-background-color: #B3253D;
@@ -346,13 +430,16 @@
 .date-picker .arrow-button:hover {
     -fx-background-color: #ee4540;
 }
+
 .date-picker .arrow-button .arrow {
     -fx-background-color: #ffffff;
 }
+
 .date-picker .cell {
     -fx-background-color: white;
     -fx-background-radius: 10px;
 }
+
 .date-picker .cell:hover {
     -fx-background-color: #ee4540;
     -fx-text-fill: #ffffff;
@@ -362,16 +449,19 @@
     -fx-background-color: #b3253d;
     -fx-text-fill: #ffffff;
 }
+
 .date-picker .selected {
     -fx-background-color: #650b3d;
 
     -fx-text-fill: #ffffff;
 }
+
 .date-picker .selected:focused {
     -fx-background-color: #b3253d;
     -fx-text-fill: #ffffff;
 }
-.date-picker-popup  {
+
+.date-picker-popup {
     -fx-border-color: transparent;
     -fx-background-radius: 10px 10px 5px 5px;
     -fx-background-color: #812b3c;
@@ -379,33 +469,38 @@
 
 .date-picker-popup .month-year-pane {
     -fx-background-color: #801336;
-    -fx-background-radius: 10px ;
+    -fx-background-radius: 10px;
 }
+
 .date-picker-popup .month-year-pane .label {
     -fx-text-fill: #fff;
 
 }
+
 .date-picker-popup .week-number-cell {
     -fx-text-fill: #2510d2;
-    -fx-background-color:#2510d2 ;
+    -fx-background-color: #2510d2;
 }
+
 .date-picker-popup .spinner .button .left-arrow,
 .date-picker-popup .spinner .button .right-arrow {
     -fx-background-color: #fc0000;
 }
 
-.hbox{
+.hbox {
     -fx-background-color: linear-gradient(#100552, #0b0077);
 
 }
-.label{
+
+.label {
     -fx-text-fill: #ffffff;
 }
 
-.slider{
+.slider {
     -fx-background-color: #566ed3;
 
 }
+
 .slider .filled {
     -fx-selection-color: green;
 }
