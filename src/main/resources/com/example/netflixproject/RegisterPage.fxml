@@ -35,7 +35,7 @@
                               <Insets bottom="40.0" />
                            </VBox.margin>
                         </Label>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox id="ComboBox" fx:id="identity" prefHeight="36.0" prefWidth="326.0" />
                         <TextField id="TextFields" fx:id="UserName" prefHeight="35.0" prefWidth="230.0" promptText="Last Name" stylesheets="@../../../Style.css">
                            <font>
                               <Font name="Calibri" size="14.0" />

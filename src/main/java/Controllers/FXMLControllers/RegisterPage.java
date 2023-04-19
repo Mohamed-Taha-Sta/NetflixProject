@@ -7,6 +7,7 @@ import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -18,17 +19,11 @@ import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
-public class RegisterPage {
+public class RegisterPage implements Initializable {
 
 
     public Text Alerttext;
-    String Name;
-    String prename;
-
-    String Email;
-    String Birthday;
-    String Password;
-
+    public ComboBox<String> identity;
 
     public DatePicker UserBirthday;
     public TextField UserPassword;
@@ -81,6 +76,20 @@ public class RegisterPage {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        identity.getItems().addAll("User", "Producer", "Actor");
+        identity.setValue("User");
+        identity.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (newValue.equals("User")) {
+                UserBirthday.setVisible(true);
+            } else {
+                UserBirthday.setVisible(false);
+            }
+        });
+
+    }
 }
 
 

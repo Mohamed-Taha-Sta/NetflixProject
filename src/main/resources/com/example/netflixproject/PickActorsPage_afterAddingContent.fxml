@@ -45,7 +45,7 @@
                               <Insets />
                            </VBox.margin>
                         </TextField>
-                        <TableView id="Table" fx:id="SupportingActorTable1" stylesheets="@../../../Style.css">
+                        <TableView id="Table" fx:id="SupportingActorTable1" prefWidth="621.0" stylesheets="@../../../Style.css">
                            <columns>
                               <TableColumn fx:id="SupportingActorColomn1" prefWidth="195.2000732421875" />
                               <TableColumn fx:id="MainActorColumn1" prefWidth="524.0000419616699" />
