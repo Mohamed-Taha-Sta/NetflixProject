@@ -8,9 +8,7 @@ public class DataHolderSeason {
     private static File Thumbnail;
     private static File Synopsis;
 
-    public static String getName() {
-        return Name;
-    }
+    public static String getName() {return Name;}
 
     public static void setName(String name) {
         Name = name;

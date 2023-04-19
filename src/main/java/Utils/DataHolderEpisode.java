@@ -1,6 +1,7 @@
 package Utils;
 
 import java.io.File;
+import java.time.LocalDate;
 
 public class DataHolderEpisode {
 
@@ -8,7 +9,7 @@ public class DataHolderEpisode {
     private static File Thumbnail;
     private static File Synopsis;
     private static File Video;
-    private static String PremiereDate;
+    private static LocalDate PremiereDate;
     private static String Description;
 
     public static String getName() {
@@ -43,11 +44,11 @@ public class DataHolderEpisode {
         Video = video;
     }
 
-    public static String getPremiereDate() {
+    public static LocalDate getPremiereDate() {
         return PremiereDate;
     }
 
-    public static void setPremiereDate(String premiereDate) {
+    public static void setPremiereDate(LocalDate premiereDate) {
         PremiereDate = premiereDate;
     }
 

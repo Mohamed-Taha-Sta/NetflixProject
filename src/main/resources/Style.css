@@ -50,8 +50,100 @@
     -fx-background-radius: 12px;
     -fx-text-fill: White;
     -fx-font-size: 14px;
-
 }
+#ComboBox {
+    -fx-border-color: #661332;
+    -fx-border-width: 4px;
+    -fx-background-color: #B3253D;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 12px;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+    -fx-background-insets: 0;
+}
+
+#ComboBox .text-field {
+    -fx-prompt-text-fill: rgba(255, 0, 0, 0.5) ;
+}
+#ComboBox .text-field:focused {
+    -fx-prompt-text-fill: transparent ;
+}
+
+.check-box {
+    -fx-background-color: #B3253D;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.check-box .box {
+    -fx-background-color: #B3253D;
+}
+
+.check-box .box:hover {
+    -fx-background-color: #661332;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #B3253D;
+}
+
+.check-box:selected .box:hover {
+    -fx-background-color: #B3253D;
+}
+
+.check-box:selected .box:pressed {
+    -fx-background-color: #B3253D;
+}
+
+/*CHECK COMBOBOX HERE */
+#CheckComboBox{
+    -fx-border-color: #661332;
+    -fx-border-width: 4px;
+    -fx-background: #B3253D;
+    -fx-background-color: #B3253D;
+    fx-control-inner-background:#B3253D;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-body-color: #B3253D;
+    -fx-selection-bar: #661332;
+    /*-fx-accent: #13ff00;*/
+    /*-fx-faint-focus-color: #18ff00;*/
+    /*-fx-focus-color: #17ff00;*/
+}
+
+/*#CheckComboBox .check-box {*/
+/*    -fx-background-color: transparent;*/
+/*}*/
+
+#CheckComboBox .box {
+    -fx-background-color: #B3253D;
+}
+
+/*#CheckComboBox .check-box:selected .box {*/
+/*    -fx-background-color: #661332;*/
+/*    -fx-border-color: #661332;*/
+/*}*/
+
+/*#CheckComboBox .check-box:hover .box {*/
+/*    -fx-background-color: #E67E22;*/
+/*}*/
+
+/*#CheckComboBox .check-box:selected:hover .box {*/
+/*    -fx-background-color: #E67E22;*/
+/*}*/
+
+/*#CheckComboBox .arrow {*/
+/*    -fx-background-color: #B3253D;*/
+/*}*/
+
+/*#CheckComboBox .arrow:hover {*/
+/*    -fx-background-color: #E67E22;*/
+/*}*/
+
+
+
 
 #DescriptionBox  {
     -fx-border-color: #661332;
