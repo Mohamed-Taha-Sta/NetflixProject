@@ -67,7 +67,7 @@ public class AddSeriesController implements Initializable {
             DataHolderSeries.setLanguage(LanguageSelector.getValue());
             DataHolderSeries.setGenreList(GenreSelector.getItems());
 //            SerieController.AddSerie();  /*TAHA PICK UP HERE, TAHA LZMEK TZID PAGE JDIDA FIHA ACTORS LKOOOL */
-            HelloApplication.SetRoot("AddSeason");
+            HelloApplication.SetRoot("PickActorsPage_afterAddingContent");
         }
 
 
