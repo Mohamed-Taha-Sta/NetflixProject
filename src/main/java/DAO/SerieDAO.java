@@ -199,6 +199,76 @@ public class SerieDAO {
         return serieList;
     }
 
+
+
+    public static List<Serie> GetSerieByID(long ID) throws SQLException, IOException {
+
+        Serie serie = null;
+
+        List<Serie> serieList = new ArrayList<>();
+
+        String sql = "SELECT * FROM SERIE WHERE ID_SERIE = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, ID);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            String SerieName = rs.getString("Name");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            String Language = rs.getString("LANGUAGE");
+            String Country = rs.getString("COUNTRY");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+
+            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+
+            serieList.add(serie);
+        }
+
+        return serieList;
+    }
+
     public static List<Long> getPrincActorIDSerie(long IDSerie) throws SQLException {
 
         List<Long> listIDActor = new ArrayList<>();
@@ -302,6 +372,254 @@ public class SerieDAO {
         return actorList;
 
     }
+
+
+
+    public static List<Serie> GetManySeries(long limit) throws SQLException, IOException {
+
+        Serie serie = null;
+
+        List<Serie> serieList = new ArrayList<>();
+
+        String sql = "SELECT * " +
+                "FROM (SELECT * FROM serie ORDER BY dbms_random.value)" +
+                "WHERE rownum <= ?;";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, limit);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            long ID = rs.getLong("ID_SERIE");
+            String SerieName = rs.getString("NAME");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            String Language = rs.getString("LANGUAGE");
+            String Country = rs.getString("COUNTRY");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+
+            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+
+            serieList.add(serie);
+        }
+
+        return serieList;
+    }
+
+
+
+
+
+
+    ///////////////////////////////////////////////////// Fonction Fares
+//
+//    public static List<Serie> FindByproducer(Producer prod) {
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//        List<Serie> list = new ArrayList<>();
+//        List<Serie> list1 = new ArrayList<>();
+//        long idprod = ProducerDAO.getprodId(prod.getNom(),prod.getPrenom());
+//
+//        String sql;
+//        try {
+//            sql = "SELECT ID_SERIE FROM SERIE WHERE id_prod = ?";
+//            pstmt = conn.prepareStatement(sql);
+//            pstmt.setLong(1,idprod);
+//            rs = pstmt.executeQuery();
+//
+//            while (rs.next()) {
+//
+//                list = GetSerieByID(rs.getLong(1));
+//                for (int i = 0; i < list.size(); i++) {
+//                    list1.add(list.get(i));
+//                }
+//            }
+//        }catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return list1;
+//    }
+//
+//    public static List<Serie> FindByActor(Actor act) {
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//        List<Serie> list = new ArrayList<>();
+//        List<Serie> list1 = new ArrayList<>();
+//        long idact=ActorDAO.getActId(act.getName(),act.getPrename());
+//
+//        String sql;
+//        try {
+//
+//            try{sql = "SELECT ID_SERIE FROM SERIEACTORSUPP WHERE id_act = ?";
+//                pstmt = conn.prepareStatement(sql);
+//                pstmt.setLong(1,idact);
+//                rs = pstmt.executeQuery();
+//
+//                while (rs.next()) {
+//
+//                    list = GetSerieByID(rs.getLong(1));
+//                    for (int i = 0; i < list.size(); i++) {
+//                        list1.add(list.get(i));
+//                    }
+//                }}catch (Exception e){
+//                System.out.println("Serie n'a pas d'acteurs secandaires");
+//            }
+//
+//            try{ sql = "SELECT ID_SERIE FROM SERIEACTORPRINC WHERE id_act = ?";
+//                pstmt = conn.prepareStatement(sql);
+//                pstmt.setLong(1,idact);
+//
+//                rs = pstmt.executeQuery();
+//
+//                while (rs.next()) {
+//
+//                    list = GetSerieByID(rs.getLong(1));
+//                    for (int i = 0; i < list.size(); i++) {
+//                        list1.add(list.get(i));
+//                    }
+//                }}catch (Exception e){
+//                System.out.println("Serie n'a pas d'acteurs principales");
+//            }
+//
+//        }catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//        return list1;
+//
+//    }
+
+
+
+    public static boolean DeleteSerie(Serie serie) {
+        PreparedStatement pstmt = null;
+        String sql;
+
+        try{
+            sql = "DELETE FROM SERIE WHERE ID_SERIE = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,serie.getId());
+            pstmt.executeUpdate();
+            DeleteCorrespMainActorSerie(serie);
+            DeleteCorrespSuppActorSerie(serie);
+            return true;
+
+        }catch (Exception e){
+            System.out.println("Serie n'exite pas");
+            return false;
+        }
+    }
+
+
+    public static boolean DeleteCorrespMainActorSerie(Serie serie) {
+        PreparedStatement pstmt = null;
+        String sql;
+        try{sql = "delete FROM SERIEACTORPRINC WHERE ID_SERIE = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,serie.getId());
+            pstmt.executeUpdate();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public static boolean DeleteCorrespSuppActorSerie(Serie Serie) {
+        PreparedStatement pstmt = null;
+        String sql;
+        try{sql = "delete FROM SERIEACTORSUPP WHERE ID_SERIE = ? ";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,Serie.getId());
+
+            pstmt.executeUpdate();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+//    public static boolean ModifVideoSerie(Serie serie,File NewVideo) {
+//        PreparedStatement pstmt;
+//        ResultSet rs;
+//        String sql;
+//
+//        try {;
+//            InputStream inputStreamSynopsisfilm=new FileInputStream(NewVideo);
+//
+//
+//            sql = "UPDATE SERIE SET synopsis = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + serie.getId();
+//            pstmt = conn.prepareStatement(sql);
+//            pstmt.executeQuery();
+//
+//            return true;
+//        } catch (SQLException e) {
+//            System.out.println("error dans la connection de la base");
+//            return false;
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//
+//    }
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
