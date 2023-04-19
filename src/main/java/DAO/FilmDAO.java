@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -323,12 +324,6 @@ public class FilmDAO {
 
         return list;
     }
-
-
-
-
-
-
     public static ArrayList<Film> FindByActor(Actor act) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -379,6 +374,46 @@ public class FilmDAO {
         return list1;
 
     }
+
+    public static ArrayList<Film> FindByproducer(Producer prod) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<Film> list=new ArrayList<>();
+        ArrayList<Film>list1=new ArrayList<>();
+        Long idprod=ProducerDAO.getprodId(prod.getNom(),prod.getPrenom());
+
+        String sql;
+        try {
+
+            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+            try{sql = "SELECT id_film FROM Film WHERE id_prod = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setLong(1,idprod);
+                rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+
+                    list= (ArrayList<Film>) FindByID(rs.getLong(1));
+                    for (int i = 0; i < list.size(); i++) {
+                        list1.add(list.get(i));
+                    }
+                }}catch (Exception e){
+                System.out.println("ce acteur a aucun acteur secandaire");
+            }
+
+
+
+
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list1;
+
+    }
+
+
+
     public static boolean deleteFilm(Film film) {
            PreparedStatement pstmt = null;
 
@@ -561,5 +596,317 @@ public class FilmDAO {
         return((socore*100)/votesTotal);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    public static boolean modifnom(Film film,String nom) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET nom = '" + nom + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modifdescription(Film film,String description) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET description = '" + description + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modiflangues(Film film,String langue) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET langue = '" + langue + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modifpaysoregine(Film film,String paysorgine) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET paysorigine = '" + paysorgine + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modifAnnerdesoritie(Film film, LocalDate date) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET annerdesortie = '" + java.sql.Date.valueOf(date) + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modiflistegenre(Film film,List<String> listegenre ) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+            String genreListString = String.join(",", listegenre.stream().map(Object::toString).toArray(String[]::new));
+
+            sql = "UPDATE film SET listegenre = '" + genreListString + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modifduree(Film film,String duree ) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE film SET duree = '" + duree + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        }
+
+
+    }
+    public static boolean modifimg(Film film,File img ) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+           InputStream inputStreamSynopsisimg = new FileInputStream(img);
+
+            sql = "UPDATE film SET img = '" + inputStreamSynopsisimg + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public static boolean modifsynop(Film film,File synop ) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+             InputStream inputStreamSynopsissynops=new FileInputStream(synop);
+
+            sql = "UPDATE film SET synopsis = '" + inputStreamSynopsissynops + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public static boolean modiffilmvedio(Film film,File vid ) {
+        PreparedStatement pstmt;
+        ResultSet rs;
+        String sql;
+
+        try {;
+            InputStream inputStreamSynopsisfilm=new FileInputStream(vid);
+
+
+            sql = "UPDATE film SET synopsis = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + film.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+    public static boolean deleteFilm_actsec(Film film,Actor act) {
+        PreparedStatement pstmt = null;
+
+
+        String sql;
+
+        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+
+        try{sql = "delete FROM acteursec_film WHERE id_film = ? and id_act=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,film.getId());
+            pstmt.setLong(2,act.getID());
+
+            pstmt.executeUpdate();
+            return true;
+
+        }catch (Exception e){
+            System.out.println("acteur n'exite pas");
+            return false;
+        }
+
+
+
+    }
+    public static boolean deleteFilm_actprinc(Film film,Actor act) {
+        PreparedStatement pstmt = null;
+
+
+        String sql;
+
+        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+        try{sql = "delete FROM acteurprinc_film WHERE id_film = ? and id_act=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,film.getId());
+            pstmt.setLong(2,act.getID());
+
+            pstmt.executeUpdate();
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
+
+
+
+
+    }
+    public static boolean ajoutFilm_actprinc(Film film,Actor act) {
+        PreparedStatement pstmt = null;
+
+
+        String sql;
+
+        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+        try {
+            sql = "INSERT INTO acteurprinc_film (id_act,id_film)" +
+                    " VALUES (?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, film.getId());
+            pstmt.setLong(2, act.getID());
+
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+
+    }
+    public static boolean ajoutFilm_actsec(Film film,Actor act) {
+        PreparedStatement pstmt = null;
+
+
+        String sql;
+
+        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
+        try {
+            sql = "INSERT INTO acteursec_film (id_act,id_film)" +
+                    " VALUES (?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, film.getId());
+            pstmt.setLong(2, act.getID());
+
+            pstmt.executeUpdate();
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+
+    }
+
+
 
 }

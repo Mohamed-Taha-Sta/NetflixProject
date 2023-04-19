@@ -99,6 +99,6 @@ list.add("drama");
        // System.out.println(FilmService.filterByGenre("fares"));
         Long x= Long.valueOf(1);
 //FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
-FilmDAO.FindByName("d");
-        }
+        System.out.println(FilmDAO.FindByName("d"));
+    }
 }

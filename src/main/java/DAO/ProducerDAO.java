@@ -1,13 +1,21 @@
 package DAO;
 
+import Entities.Actor;
 import Entities.Film;
 import Entities.MainActor;
 import Entities.Producer;
 import Utils.ConxDB;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 
 public class ProducerDAO {
     private static final Connection conn = ConxDB.getInstance();
@@ -94,6 +102,124 @@ public class ProducerDAO {
 
         }
     }
+
+
+    public static void modifnom(Film film,String nom) {
+    FilmDAO.modifnom(film,nom);
+
+    }
+    public static void modifdescription(Film film,String description) {
+
+        FilmDAO.modifdescription(film,description);
+
+
+    }
+    public static void modiflangues(Film film,String langue) {
+        FilmDAO.modiflangues(film,langue);
+
+
+
+    }
+    public static void modifpaysoregine(Film film,String paysoegine) {
+       FilmDAO.modifpaysoregine(film,paysoegine);
+
+    }
+    public static void modifAnnerdesoritie(Film film, LocalDate date) {
+        FilmDAO.modifAnnerdesoritie(film,date);
+
+
+
+    }
+    public static void modiflistegenre(Film film, List<String> listegenre ) {
+        FilmDAO.modiflistegenre(film,listegenre);
+
+
+    }
+    public static void modifduree(Film film,String duree ) {
+        FilmDAO.modifduree(film,duree);
+
+
+
+    }
+    public static void modifimg(Film film, File img ) {
+        FilmDAO.modifimg(film,img);
+
+
+
+    }
+    public static void modifsynop(Film film,File synop ) {
+        FilmDAO.modifsynop(film,synop);
+
+
+    }
+    public static void modiffilmvedio(Film film,File vid ) {
+        FilmDAO.modiffilmvedio(film,vid);
+
+
+
+    }
+    public static void deleteFilm_actsec(Film film, Actor act) {
+        FilmDAO.deleteFilm_actsec(film,act);
+
+
+
+
+    }
+    public static void deleteFilm_actprinc(Film film,Actor act) {
+        FilmDAO.deleteFilm_actprinc(film,act);
+
+
+
+
+
+    }
+    public static void ajoutFilm_actprinc(Film film,Actor act) {
+        FilmDAO.ajoutFilm_actprinc(film,act);
+
+
+    }
+    public static void ajoutFilm_actsec(Film film,Actor act) {
+        FilmDAO.ajoutFilm_actsec(film,act);
+
+
+
+    }
+
+
+    public static long getprodId(String nom, String prenom) {
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
+        try {
+            sql = "SELECT id_prod FROM producer WHERE nom LIKE ? OR prenome LIKE ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,  nom  );
+            pstmt.setString(2,  prenom  );
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getLong(1);
+            } else {
+                System.out.println("PRODUCER n'existe pas");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erreur lors de l'exécution de la requête SQL : " + ex.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException ex) {
+                System.out.println("Erreur lors de la fermeture du statement : " + ex.getMessage());
+            }
+        }
+        return -1;
+    }
+
+
+
+
+
+
+
+
 
 
 
