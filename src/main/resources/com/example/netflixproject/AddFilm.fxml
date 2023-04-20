@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -12,8 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddSeriesController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AddFilmController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" layoutX="14.0" layoutY="14.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
          <children>
@@ -46,27 +48,13 @@
                                                 <Insets top="5.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <TextField id="TextFields" fx:id="Language" prefHeight="35.0" prefWidth="258.0" promptText="Language" stylesheets="@../../../Style.css">
-                                             <font>
-                                                <Font name="Lucida Bright" size="14.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField id="TextFields" fx:id="Country" prefHeight="35.0" prefWidth="258.0" promptText="Country of Origin" stylesheets="@../../../Style.css">
-                                             <font>
-                                                <Font name="Lucida Bright" size="14.0" />
-                                             </font>
-                                          </TextField>
-                                          <TextField id="TextFields" fx:id="Duration" prefHeight="35.0" prefWidth="258.0" promptText="Duration" stylesheets="@../../../Style.css">
-                                             <font>
-                                                <Font name="Lucida Bright" size="14.0" />
-                                             </font>
-                                          </TextField>
-                                          <ComboBox fx:id="ComboBoxGenres" prefHeight="25.0" prefWidth="287.0" promptText="Genres" />
-                                          <TextField id="TextFields" fx:id="Genres0" prefHeight="35.0" prefWidth="258.0" promptText="Genres" stylesheets="@../../../Style.css">
-                                             <font>
-                                                <Font name="Lucida Bright" size="14.0" />
-                                             </font>
-                                          </TextField>
+                                          <ComboBox id="ComboBox" fx:id="LanguageSelector" prefHeight="36.0" prefWidth="292.0" promptText="Language" stylesheets="@../../../Style.css" />
+                                          <ComboBox id="ComboBox" fx:id="CountrySelector" prefHeight="35.0" prefWidth="478.0" promptText="CountryOfOrigin" stylesheets="@../../../Style.css" />
+                                          <CheckComboBox id="myCheckComboBox" fx:id="GenreSelector" pickOnBounds="false" prefHeight="22.0" prefWidth="282.0" snapToPixel="false" stylesheets="@../../../Style.css">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                          </CheckComboBox>
                                           <DatePicker fx:id="DebutDate" prefHeight="25.0" prefWidth="353.0" promptText="DebutDate" stylesheets="@../../../Style.css" />
                                        </children>
                                     </VBox>
@@ -116,12 +104,12 @@
                         </Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#onBack" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button id="button" fx:id="login" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="Add" mnemonicParsing="false" onAction="#onAdd" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
