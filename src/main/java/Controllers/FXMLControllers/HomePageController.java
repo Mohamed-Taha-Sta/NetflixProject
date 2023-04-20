@@ -69,6 +69,11 @@ public class HomePageController implements Initializable {
         HelloApplication.SetRoot("ProfilePage");
     }
 
+    @FXML
+    public void OnFilmClick()throws Exception{
+        HelloApplication.SetRoot("FilmPage");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 40;
@@ -77,16 +82,10 @@ public class HomePageController implements Initializable {
             welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
         }
 
-        Image homeBut=new Image(new File("src/main/resources/Images/HomePage/HomeButton.png").toURI().toString());
-        ImageView homeView=new ImageView(homeBut);
-        homeView.setFitHeight(IV_Size);
-        homeView.setFitWidth(IV_Size);
-        homeButton.setGraphic(homeView);
-        Image notiBut=new Image(new File("src/main/resources/Images/HomePage/Notification.png").toURI().toString());
-        ImageView notiView=new ImageView(notiBut);
-        notiView.setFitHeight(IV_Size);
-        notiView.setFitWidth(IV_Size);
-        NotificationButton.setGraphic(notiView);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",IV_Size);
+        IconSetter(NotificationButton,"src/main/resources/Images/HomePage/Notification.png",IV_Size);
+        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
+        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);
         try {
             UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
             File imageFile = DataHolder.getImage();
@@ -131,7 +130,7 @@ public class HomePageController implements Initializable {
         }
     }
 
-    public ImageView ImageClipper(ImageView imageView){
+    public static ImageView ImageClipper(ImageView imageView){
         Rectangle imageClip=new Rectangle(imageView.getFitWidth(),imageView.getFitHeight());
         imageClip.setArcHeight(20);
         imageClip.setArcWidth(20);
@@ -141,6 +140,14 @@ public class HomePageController implements Initializable {
         imageView.setClip(imageClip);
         return imageView;
 
+    }
+
+    public static void IconSetter(Button btn,  String path, int size){
+        Image img=new Image(new File(path).toURI().toString());
+        ImageView imgView=new ImageView(img);
+        imgView.setFitHeight(size);
+        imgView.setFitWidth(size);
+        btn.setGraphic(imgView);
     }
 
 }

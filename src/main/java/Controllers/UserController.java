@@ -46,7 +46,7 @@ public class UserController {
     }
 
     public static boolean authenticate(String mail, String pass) {
-        return UserController.authenticate(mail, pass);
+        return UserService.authenticate(mail, pass);
     }
 
 

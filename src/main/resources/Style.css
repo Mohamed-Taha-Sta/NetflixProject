@@ -6,6 +6,21 @@
 .SearchableComboBox {
     -fx-background-color: #000;
 }
+#MenuBtn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+#Title{
+    -fx-font-family: Calibri;
+    -fx-font-size: 48px;
+    -fx-font-weight: Bold;
+    -fx-font-style: italic;
+}
+
+#Category{
+    -fx-font-family: Calibri;
+    -fx-font-size: 22px;
+}
 
 #button {
     -fx-background-color: #801336;
@@ -65,6 +80,7 @@
     -fx-background-radius: 0px 12px 12px 0px;
     -fx-background-color: #212121;
 }
+
 
 #ComboBox {
     -fx-border-color: #661332;
