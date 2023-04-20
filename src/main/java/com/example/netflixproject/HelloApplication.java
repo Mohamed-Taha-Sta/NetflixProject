@@ -15,7 +15,7 @@ public class HelloApplication extends Application implements Initializable {
     private static Scene scene;
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(LoadFxml("RegisterPage"),1280,720);
+        scene = new Scene(LoadFxml("FilmPage"),1280,720);
         stage.setResizable(false);
         stage.setMinWidth(1280);
         stage.setMinHeight(720);

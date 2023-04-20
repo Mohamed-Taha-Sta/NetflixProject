@@ -1,24 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane minHeight="600.0" minWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.FilmPageController">
+<AnchorPane minHeight="720.0" minWidth="1280.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.FilmPageController">
    <children>
-      <HBox alignment="TOP_CENTER" layoutX="48.0" layoutY="62.0" spacing="10.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Design/Background.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="searchBar" HBox.hgrow="ALWAYS" />
-            <Button fx:id="searchButton" mnemonicParsing="false" text="Button" />
+            <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
+               <children>
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER">
+                           <children>
+                              <Button fx:id="homeButton" mnemonicParsing="false" style="-fx-background-color: tranparent;" />
+                           </children>
+                        </VBox>
+                        <Button fx:id="seriesButoon" mnemonicParsing="false" />
+                        <Button fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" />
+                        <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+            <Line endX="-99.17283630371094" endY="761.594970703125" startX="-99.17298889160156" startY="79.86698913574219" stroke="#d62e4a" strokeMiterLimit="15.0" strokeWidth="2.0" />
+            <ScrollPane id="scroll-pane" fitToWidth="true" prefHeight="700.0" prefWidth="1175.0" stylesheets="@../../../Style.css">
+               <content>
+                  <VBox alignment="CENTER" prefWidth="1174.0" spacing="15.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" maxHeight="200.0" prefHeight="200.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
+                                 <children>
+                                    <Label fx:id="welcome" text="Search for your Films!" wrapText="true">
+                                       <font>
+                                          <Font name="Calibri Bold Italic" size="48.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="1146.0">
+                                       <VBox.margin>
+                                          <Insets right="10.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <TextField prefHeight="35.0" prefWidth="202.0" />
+                                          <Button mnemonicParsing="false" prefHeight="35.0" text="Button" />
+                                          <CheckComboBox id="myCheckComboBox" fx:id="GenresSelector" prefHeight="26.0" prefWidth="152.0" title="Select Genres">
+                                             <HBox.margin>
+                                                <Insets left="50.0" />
+                                             </HBox.margin>
+                                          </CheckComboBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </ScrollPane>
          </children>
       </HBox>
-      <ScrollPane fx:id="ContentHolder" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
-         <content>
-            <VBox />
-         </content>
-      </ScrollPane>
    </children>
 </AnchorPane>

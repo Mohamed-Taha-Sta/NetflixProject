@@ -49,7 +49,7 @@
                               <Font name="Calibri" size="14.0" />
                            </font>
                         </TextField>
-                        <TextField id="TextFields" fx:id="UserEmail" prefHeight="35.0" prefWidth="230.0" promptText="E-MAIL" stylesheets="@../../../Style.css">
+                        <TextField id="TextFields" fx:id="UserEmail" prefHeight="35.0" prefWidth="230.0" promptText="E-Mail" stylesheets="@../../../Style.css">
                            <font>
                               <Font name="Calibri" size="14.0" />
                            </font>

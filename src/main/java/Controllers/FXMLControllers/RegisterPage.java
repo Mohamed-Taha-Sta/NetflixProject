@@ -33,15 +33,6 @@ public class RegisterPage implements Initializable {
 
 
     @FXML
-    private Button SignUp;
-
-    @FXML
-    private Button login;
-
-    ResourceBundle BN;
-    URL ul;
-
-    @FXML
     protected void OnSignIn() throws Exception {
         HelloApplication.SetRoot("LoginPage");
     }
@@ -58,17 +49,24 @@ public class RegisterPage implements Initializable {
 
     @FXML
     protected void OnSignUp() throws Exception {
-        if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserBirthday.getValue() == null || UserPassword.getText().isEmpty()) {
+        if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserPassword.getText().isEmpty()) {
             showErrorMessage("Must fill all the fields!");
+
         } else if (!UserController.isEmail(UserEmail.getText())) {
             showErrorMessage("This email address is not recognized!");
         } else if (!UserDAO.check_Mail(UserEmail.getText())) {
-            showErrorMessage("Another user with same mail exists");
-        } else {
+            showErrorMessage("Another user with same mail exists!");
+
+        }else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
+           showErrorMessage("Must fill all the fields!");
+        }
+        else {
             DataHolder.setName(UserName.getText());
             DataHolder.setPrename(UserPrename.getText());
             DataHolder.setEmail(UserEmail.getText());
-            DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
+            if (identity.getValue().equals("User")) {
+                DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
+            }
             DataHolder.setPassword(UserPassword.getText());
             HelloApplication.SetRoot("ChoicesMenu");
         }
@@ -81,12 +79,7 @@ public class RegisterPage implements Initializable {
         identity.getItems().addAll("User", "Producer", "Actor");
         identity.setValue("User");
         identity.valueProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (newValue.equals("User")) {
-                UserBirthday.setVisible(true);
-            } else {
-                UserBirthday.setVisible(false);
-            }
+            UserBirthday.setVisible(newValue.equals("User"));
         });
 
     }

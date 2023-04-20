@@ -11,5 +11,7 @@ public class FilmPageController {
     public ScrollPane ContentHolder;
 
 
+    public Button filterBtn;
+
 
 }

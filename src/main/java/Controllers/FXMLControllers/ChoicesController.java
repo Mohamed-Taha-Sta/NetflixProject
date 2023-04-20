@@ -74,15 +74,32 @@ public class ChoicesController implements Initializable {
     ObservableList<Genre> data2 = observableArrayList(
             new Genre("Action"),
             new Genre("Adventure"),
+            new Genre("Animation"),
+            new Genre("Biography"),
             new Genre("Comedy"),
+            new Genre("Crime"),
+            new Genre("Documentary"),
             new Genre("Drama"),
+            new Genre("Family"),
             new Genre("Fantasy"),
+            new Genre("Film-Noir"),
+            new Genre("Game-Show"),
+            new Genre("History"),
             new Genre("Horror"),
+            new Genre("Music"),
+            new Genre("Musical"),
             new Genre("Mystery"),
+            new Genre("News"),
+            new Genre("Reality-TV"),
             new Genre("Romance"),
-            new Genre("Science Fiction"),
-            new Genre("Thriller")
+            new Genre("Sci-Fi"),
+            new Genre("Sport"),
+            new Genre("Talk-Show"),
+            new Genre("Thriller"),
+            new Genre("War"),
+            new Genre("Western")
     );
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

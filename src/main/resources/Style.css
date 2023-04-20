@@ -54,6 +54,18 @@
     -fx-prompt-text-fill: white;
 }
 
+#SearchField{
+    -fx-background-radius: 12px 0px 0px 12px;
+    -fx-background-color: #212121;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: white;
+}
+#SearchBtn{
+    -fx-background-radius: 0px 12px 12px 0px;
+    -fx-background-color: #212121;
+}
+
 #ComboBox {
     -fx-border-color: #661332;
     -fx-border-width: 4px;
@@ -62,7 +74,7 @@
     -fx-background-radius: 12px;
     -fx-text-fill: White;
     -fx-font-size: 14px;
-    -fx-background-insets: 0;
+   -fx-background-insets: 0;
 }
 
 #ComboBox .text-field {
@@ -93,6 +105,10 @@
     -fx-background-color: #661332;
 }
 
+#ComboBox .arrow-button{
+    -fx-border-color: #661332;
+    -fx-border-width: 0px 0px 1px 0px ;
+}
 #ComboBox .arrow-button >.arrow{
     -fx-background-color: white;
 }
@@ -230,6 +246,7 @@
     -fx-font-size: 14px;
     -fx-background-insets: 10px;
     -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
 }
 
 #DescriptionBox .content {
@@ -333,6 +350,33 @@
     -fx-background-color: transparent;
 }
 
+.table-view .scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+.table-view .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+
+.table-view .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+.table-view .scroll-bar > .increment-button:hover,
+.table-view .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .scroll-bar > .increment-button > .arrow,
+#myCheckComboBox .scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+
+.table-view .scroll-bar > .increment-button:hover > .arrow,
+.table-view.scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
 
 .table-row-cell:selected {
     -fx-background-color: #fc0000;
@@ -408,7 +452,6 @@
 .date-picker {
     -fx-background-color: transparent;
     -fx-border-radius: 10px;
-    /*-fx-border-color: #801336;*/ /* Changed this One to make it fit in*/
     -fx-border-color: #661332FF;
     -fx-border-width: 3px;
 
@@ -417,8 +460,8 @@
 .date-picker .arrow-button {
     -fx-background-color: #b3253d;
     -fx-border-color: #661332;
-    -fx-border-radius: 0px 10px 10px 0px;
-    -fx-background-radius:  0px 8px 8px 0px;
+    -fx-border-width: 0px;
+    -fx-background-radius:  0px 7px 7px 0px;
 
 }
 
