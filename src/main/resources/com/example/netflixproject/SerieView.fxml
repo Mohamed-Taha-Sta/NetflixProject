@@ -36,7 +36,7 @@
                                         <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </VBox>
-                                <Button id="MenuBtn" fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false"  />
+                                <Button id="MenuBtn" fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" />
                             </children>
                             <VBox.margin>
                                 <Insets bottom="20.0" />
@@ -57,7 +57,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="126.0" prefWidth="1146.0" spacing="10.0">
                                  <children>
                                     <Button id="BackBtn" mnemonicParsing="false" stylesheets="@../../../Style.css" text="Button" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="Thumbnail" fitHeight="150.0" fitWidth="243.0" pickOnBounds="true" preserveRatio="true" />
                                     <VBox prefHeight="150.0" prefWidth="521.0" spacing="40.0">
                                        <children>
                                           <Label id="Title" fx:id="SerieName" text="Label" />
@@ -72,13 +72,13 @@
                                     <VBox alignment="TOP_CENTER" spacing="20.0">
                                        <children>
                                           <Label id="Category" text="Rating: " />
-                                          <HBox alignment="CENTER" prefWidth="298.0" spacing="30.0">
+                                          <HBox alignment="CENTER" prefWidth="298.0" spacing="30.0" VBox.vgrow="SOMETIMES">
                                              <children>
-                                                <Button mnemonicParsing="false" text="Button" />
-                                                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Button" />
+                                                <Button id="MenuBtn" fx:id="ThumbUp" mnemonicParsing="false" />
+                                                <Button id="MenuBtn" fx:id="ThumbDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" />
                                              </children>
                                           </HBox>
-                                          <Button id="SynopsisBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" text="Watch Synopsis" />
+                                          <Button id="SynopsisBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                        </children>
                                     </VBox>
                                  </children>

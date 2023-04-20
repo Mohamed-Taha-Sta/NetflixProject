@@ -22,20 +22,17 @@ import java.util.Date;
 import java.util.List;
 
 public class FilmController {
-    MediaPlayer mp;
-    public void time(){
+
+    public static void main(String[] args) {
+
         File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
 
         Media media=new Media(FileVideo.toURI().toString());
-        mp=new MediaPlayer(media);
-        System.out.println(mp.getTotalDuration());
+        MediaPlayer mp=new MediaPlayer(media);
+        System.out.println(media.getDuration().toSeconds());
         String duration = VideoPlayerController.getTime(media.getDuration());
 
         System.out.println(duration);
-    }
-    public static void main(String[] args) {
-
-
 
 
 
