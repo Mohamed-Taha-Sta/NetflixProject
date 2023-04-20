@@ -23,9 +23,8 @@ import java.util.List;
 public class FilmController {
     public static void main(String[] args) {
 
-        File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
-
-        Media media=new Media(FileVideo.toURI().toString());
+        File file=new File("src/main/java/Test/Synopsis.mp4");
+        Media media=new Media(file.toURI().toString());
         System.out.println(media.getDuration().toString());
         String duration = VideoPlayerController.getTime(media.getDuration());
 
