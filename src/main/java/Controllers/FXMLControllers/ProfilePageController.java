@@ -175,17 +175,19 @@ public class ProfilePageController implements Initializable {
             }
         }
         String userGenres =String.join(",", DataHolder.getUser().getGenreList().stream().map(Object::toString).toArray(String[]::new));
+        System.out.println("User:"+userGenres);
         String genreListString = String.join(",", selectedGenres.stream().map(Object::toString).toArray(String[]::new));
+        System.out.println("Selec"+genreListString);
         if(genreListString.equals(userGenres)){
             showErrorMessage(GenreAlertText,"You didnt change anything!");
         }
         else if(genreListString.isEmpty()){
-            showErrorMessage(ActorsAlertText,"At least one Genre should be selected!");
+            showErrorMessage(GenreAlertText,"At least one Genre should be selected!");
         }
         else{
             DataHolder.getUser().setGenreList(selectedGenres);
             System.out.println(UserController.Genres(genreListString));
-            showErrorMessage(ActorsAlertText,"Genrezs list Updated Successfully");
+            showErrorMessage(GenreAlertText,"Genres list Updated Successfully");
         }
 
     }
