@@ -1,11 +1,14 @@
 package Controllers;
 
+import Controllers.FXMLControllers.VideoPlayerController;
 import DAO.ActorDAO;
 import DAO.AdminDAO;
 import DAO.FilmDAO;
 import DAO.ProducerDAO;
 import Entities.*;
 import Services.FilmService;
+import Utils.DataHolderFilm;
+import javafx.scene.media.Media;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -19,6 +22,16 @@ import java.util.List;
 
 public class FilmController {
     public static void main(String[] args) {
+
+        File file=new File("src/main/java/Test/Synopsis.mp4");
+        Media media=new Media(file.toURI().toString());
+        System.out.println(media.getDuration().toString());
+        String duration = VideoPlayerController.getTime(media.getDuration());
+
+        System.out.println(duration);
+
+
+
      //   Long compteur=Actor.getID();
 
        // Actor.ID=Actor.ID+1;
@@ -33,23 +46,23 @@ public class FilmController {
 //        list.add("fares");
 //        list.add("zaza");
 //        list.add("jasser");
-        ArrayList<Actor>liste1=new ArrayList<>();
-
-        List<String> listeGenre = Arrays.asList("Action","Comedie","Drama");
-
-        File FileSynopsis = new File("src/main/java/Test/VideoFilm19.mp4");
-        File FileImage = new File("src/main/java/Test/ImgEp10.jpeg");
-        File FileVideo=new File("src/main/java/Test/VideoFilm19.mp4");
-
-        Actor actor1 = new MainActor(1,"Smith","John","jsmith@example.com","password1");
-        Actor actor2 = new MainActor(44,"Doe","Jane","jdoe@example.com","password2");
-        Actor actor3 = new Supportingactor(45,"Johnson","Robert","rjohnson@example.com","password3");
-
-        ArrayList<Actor> ListeActeurs = new ArrayList<>();
-
-        ListeActeurs.add(actor1);
-        ListeActeurs.add(actor2);
-        ListeActeurs.add(actor3);
+//        ArrayList<Actor>liste1=new ArrayList<>();
+//
+//        List<String> listeGenre = Arrays.asList("Action","Comedie","Drama");
+//
+//        File FileSynopsis = new File("src/main/java/Test/VideoFilm19.mp4");
+//        File FileImage = new File("src/main/java/Test/ImgEp10.jpeg");
+//        File FileVideo=new File("src/main/java/Test/VideoFilm19.mp4");
+//
+//        Actor actor1 = new MainActor(1,"Smith","John","jsmith@example.com","password1");
+//        Actor actor2 = new MainActor(44,"Doe","Jane","jdoe@example.com","password2");
+//        Actor actor3 = new Supportingactor(45,"Johnson","Robert","rjohnson@example.com","password3");
+//
+//        ArrayList<Actor> ListeActeurs = new ArrayList<>();
+//
+//        ListeActeurs.add(actor1);
+//        ListeActeurs.add(actor2);
+//        ListeActeurs.add(actor3);
 
        //*/ Film film1 = new Film("FilmJasser","FaresCamera",LocalDate.of(2023,2,2),"Francais","France",listeGenre,FileImage
        //         ,"2heures30minutes",ListeActeurs,FileSynopsis,FileVideo);*/
@@ -64,12 +77,12 @@ public class FilmController {
 
                // liste1.add(new MainActor("jasser","hamdi","taha@gmail.com","zzzz"));
 //        liste1.add(new MainActor("jasser","","taha@gmail.com","zzzz"));
-        liste1.add(new Actor(1,"fares","makki","faresmakki21@gmail.com","tahajasser"));
-        liste1.add(new Actor(41,"ahmed","makki","faresmakki21@gmail.com","tahajasser"));
-
-ArrayList<String> list=new ArrayList();
-list.add("drama");
-        list.add("fares");
+//        liste1.add(new Actor(1,"fares","makki","faresmakki21@gmail.com","tahajasser"));
+//        liste1.add(new Actor(41,"ahmed","makki","faresmakki21@gmail.com","tahajasser"));
+//
+//ArrayList<String> list=new ArrayList();
+//list.add("drama");
+//        list.add("fares");
 
            // public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film) {
 //            Date dat=null;
@@ -97,16 +110,33 @@ list.add("drama");
       //  System.out.println(FilmDAO.getscorepourcantage(new Film(16,"caffer","express",LocalDate.now(),"arabic","tunisie",list,imageFile, "lyoumsba7",liste1,11,11,11,synop,film)));
        // System.out.println(FilmDAO.FindByName(""));
        // System.out.println(FilmService.filterByGenre("fares"));
-        Long x= Long.valueOf(1);
-//FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
-      //  System.out.println(FilmDAO.FindByName("d"));
-        List<String> l =new ArrayList<>();
-        l.add("drama");
-        l.add("comedie");
-        l.add("horror");
-        l.add("scer");
-       // FilmDAO.modifimg(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),FileImage);
-           // public Film(long id, String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film,Long idrealisateur) {
-FilmDAO.deleteFilm_actsec(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),new Actor(42,"fares","makki","faresmakki21@gmail.com","tahajasser"));
-        }
+//        Long x= Long.valueOf(1);
+////FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
+//      //  System.out.println(FilmDAO.FindByName("d"));
+//        List<String> l =new ArrayList<>();
+//        l.add("drama");
+//        l.add("comedie");
+//        l.add("horror");
+//        l.add("scer");
+//       // FilmDAO.modifimg(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),FileImage);
+//           // public Film(long id, String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film,Long idrealisateur) {
+//FilmDAO.deleteFilm_actsec(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),new Actor(42,"fares","makki","faresmakki21@gmail.com","tahajasser"));
+            }
+
+    public static boolean Add(Film film){
+        return FilmService.Add(film);
+    }
+    public static List<Film> FindByID(Long filmid){
+        return FilmService.FindByID(filmid);
+    }
+    public static ArrayList<Film> FindByName(String filmnom){
+        return FilmService.FindByName(filmnom);
+    }
+    public static ArrayList<Film> FindByActor(Actor act){
+        return FilmService.FindByActor(act);
+    }
+
+
+
+
 }
