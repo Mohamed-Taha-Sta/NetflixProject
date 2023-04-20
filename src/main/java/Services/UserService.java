@@ -31,6 +31,10 @@ public class UserService {
     public static boolean ChangingActors(String actors){
         return UserDAO.changeActors(actors);
     }
+
+    public static boolean ChangingGenres(String genres){
+        return UserDAO.changeGenres(genres);
+    }
     public static boolean authenticate(String mail, String pass) {
         return UserDAO.authenticate(mail, pass);
     }

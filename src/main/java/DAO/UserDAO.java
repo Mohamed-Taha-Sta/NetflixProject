@@ -229,6 +229,22 @@ public class UserDAO {
             return false;
         }
     }
+
+    public static boolean changeGenres(String genres){
+        PreparedStatement pstmt;
+        String sql;
+        try {
+            sql = "Update Utilisateurs set GENRELIST=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, genres);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     public static boolean changePass(String pass){
         PreparedStatement pstmt;
         String sql;

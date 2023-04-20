@@ -37,6 +37,12 @@ public class UserController {
         return UserService.ChangingBirthday(date);
     }
 
+    public static boolean Genres(String genres){
+        return UserService.ChangingGenres(genres);
+    }
+    public static boolean Actors(String actors){
+       return UserService.ChangingActors(actors);
+    }
     public static boolean Password(String pass){
         return UserService.ChangingPass(pass);
     }

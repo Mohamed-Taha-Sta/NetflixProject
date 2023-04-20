@@ -76,7 +76,7 @@ public class ChoicesController implements Initializable {
 
     }
     ObservableList<Actor> actors;
-    ObservableList<Genre> data2 = observableArrayList(
+     ObservableList<Genre> data2 = observableArrayList(
             new Genre("Action"),
             new Genre("Adventure"),
             new Genre("Animation"),

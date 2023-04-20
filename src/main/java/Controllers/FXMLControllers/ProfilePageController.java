@@ -1,14 +1,20 @@
 package Controllers.FXMLControllers;
 
+import Controllers.ActorController;
 import Controllers.UserController;
 import DAO.UserDAO;
+import Entities.Actor;
+import Entities.Genre;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -21,7 +27,10 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfilePageController implements Initializable {
 
@@ -50,14 +59,22 @@ public class ProfilePageController implements Initializable {
     public DatePicker Birthdaypicker;
     public Button BirthdayBtn;
     public Label AlertText;
-    public TableView GenreTable;
-    public TableColumn GenreColumn;
-    public TableColumn SelectedGenre;
+    public TableView<Actor> ActorTable=new TableView<>();
+    public TableColumn<Actor,String> ActorNameColumn;
+    public TableColumn<Actor,String> ActorPrenameColumn;
+    public TableColumn<Actor, CheckBox> SelectedActor;
+    public Button UpdateActors;
+    public Button UpdateGenres;
+
+
+    public TableView<Genre> GenreTable;
+    public TableColumn<Genre,String> GenreColumn;
+    public TableColumn<Genre,String> SelectedGenre;
 
 
     //Notification Menu Anchor
     public AnchorPane NotificationMenu;
-    public ListView NotificationPane;
+    public ListView<String> NotificationPane;
 
 
     //Password Menu
@@ -67,9 +84,111 @@ public class ProfilePageController implements Initializable {
     public TextField PassConf;
     public Button confirmBtn;
     public Label passAlert;
+    public Label GenreAlertText;
+    public Label ActorsAlertText;
 
 
+    ObservableList<Actor> actors;
+    ObservableList<Genre> genres = observableArrayList(
+            new Genre("Action"),
+            new Genre("Adventure"),
+            new Genre("Animation"),
+            new Genre("Biography"),
+            new Genre("Comedy"),
+            new Genre("Crime"),
+            new Genre("Documentary"),
+            new Genre("Drama"),
+            new Genre("Family"),
+            new Genre("Fantasy"),
+            new Genre("Film-Noir"),
+            new Genre("Game-Show"),
+            new Genre("History"),
+            new Genre("Horror"),
+            new Genre("Music"),
+            new Genre("Musical"),
+            new Genre("Mystery"),
+            new Genre("News"),
+            new Genre("Reality-TV"),
+            new Genre("Romance"),
+            new Genre("Sci-Fi"),
+            new Genre("Sport"),
+            new Genre("Talk-Show"),
+            new Genre("Thriller"),
+            new Genre("War"),
+            new Genre("Western")
+    );
 
+    public void LoadSelectedActors(){
+        actors= FXCollections.observableList(ActorController.GetAllActors(""));
+        ArrayList<Long> userActors=DataHolder.getUser().getActorsList();
+        for(Long actorId : userActors){
+            for(Actor actor : actors){
+                if(actor.getID() == actorId){
+                    actor.getSelect().setSelected(true);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void LoadSelectedGenres(){
+        ArrayList<String > userGenre= DataHolder.getUser().getGenreList();
+        for(String genre:userGenre){
+            for(Genre genreName:genres){
+                if(genre.equals(genreName.getNom())){
+                    genreName.getSelect().setSelected(true);
+                    break;
+                }
+            }
+        }
+    }
+
+
+    public void OnUpdateActors()throws Exception{
+        ArrayList<Long> selectedActors = new ArrayList<>();
+        for (Actor actor : actors ) {
+            if (actor.getSelect().isSelected()) {
+                selectedActors.add(actor.getID());
+            }
+        }
+        String actorListString = String.join(",", selectedActors.stream().map(Object::toString).toArray(String[]::new));
+        String userActors= String.join(",", DataHolder.getUser().getActorsList().stream().map(Object::toString).toArray(String[]::new));
+        if(actorListString.equals(userActors)){
+            showErrorMessage(ActorsAlertText,"You didnt change anything!");
+        }
+        else if(actorListString.isEmpty()){
+            showErrorMessage(ActorsAlertText,"At least one Actor should be selected!");
+        }
+        else {
+            DataHolder.getUser().setActorsList(selectedActors);
+            System.out.println(UserController.Actors(actorListString));
+            showErrorMessage(ActorsAlertText,"Actors list Updated Successfully");
+        }
+
+    }
+
+    public void OnUpdateGenres()throws  Exception{
+        ArrayList<String> selectedGenres = new ArrayList<>();
+        for (Genre genre: genres){
+            if(genre.getSelect().isSelected()){
+                selectedGenres.add(genre.getNom());
+            }
+        }
+        String userGenres =String.join(",", DataHolder.getUser().getGenreList().stream().map(Object::toString).toArray(String[]::new));
+        String genreListString = String.join(",", selectedGenres.stream().map(Object::toString).toArray(String[]::new));
+        if(genreListString.equals(userGenres)){
+            showErrorMessage(GenreAlertText,"You didnt change anything!");
+        }
+        else if(genreListString.isEmpty()){
+            showErrorMessage(ActorsAlertText,"At least one Genre should be selected!");
+        }
+        else{
+            DataHolder.getUser().setGenreList(selectedGenres);
+            System.out.println(UserController.Genres(genreListString));
+            showErrorMessage(ActorsAlertText,"Genrezs list Updated Successfully");
+        }
+
+    }
     @FXML
     public void OnProfileImage(javafx.scene.input.MouseEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
@@ -103,6 +222,7 @@ public class ProfilePageController implements Initializable {
     }
 
     public void OnloadProfile() throws Exception {
+
         System.out.println(DataHolder.getUser().getBirthday());
         ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
         NameLabel.setText(DataHolder.getUser().getName());
@@ -114,8 +234,22 @@ public class ProfilePageController implements Initializable {
 
             System.out.println(e);
         }
+        TableSetter();
 
 
+    }
+
+
+    public void TableSetter() {
+        LoadSelectedGenres();
+        LoadSelectedActors();
+        ActorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ActorPrenameColumn.setCellValueFactory(new PropertyValueFactory<>("Prename"));
+        SelectedActor.setCellValueFactory(new PropertyValueFactory<>("select"));
+        GenreColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        SelectedGenre.setCellValueFactory(new PropertyValueFactory<>("select"));
+        ActorTable.setItems(actors);
+        GenreTable.setItems(genres);
     }
 
     public void OnProfilebtn() throws Exception {
@@ -230,6 +364,7 @@ public class ProfilePageController implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        TableSetter();
 
     }
 

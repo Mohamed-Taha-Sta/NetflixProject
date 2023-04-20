@@ -228,6 +228,7 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </TableView>
+                                          <Label fx:id="ActorsAlertText" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
@@ -254,14 +255,15 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </TableView>
+                                          <Label fx:id="GenreAlertText" />
                                        </children>
                                     </VBox>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" spacing="230.0">
                                  <children>
-                                    <Button id="button" mnemonicParsing="false" text="Update Actors" />
-                                    <Button id="button" mnemonicParsing="false" text="Update Genres" />
+                                    <Button id="button" fx:id="UpdateActors" mnemonicParsing="false" onAction="#OnUpdateActors" text="Update Actors" />
+                                    <Button id="button" fx:id="UpdateGenres" mnemonicParsing="false" text="Update Genres" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="20.0" />

@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
+import javax.print.attribute.standard.Media;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
@@ -142,6 +143,8 @@ public class AddEpisodeController implements Initializable {
         FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter("MP4 videos", "*.mp4");
         fileChooser.getExtensionFilters().add(videoFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
+        Media med= new Media(selectedFile.toURI().toString());
+
         if (selectedFile != null) {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
