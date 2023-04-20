@@ -329,7 +329,7 @@ public class VideoPlayerController implements Initializable {
         }, mpVideo.currentTimeProperty()));
     }
 
-    private String getTime(Duration currentTime) {
+    private static String getTime(Duration currentTime) {
         int hours = (int) currentTime.toHours();
         int minutes = (int) currentTime.toMinutes();
         int seconds = (int) currentTime.toSeconds();

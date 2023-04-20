@@ -13,10 +13,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
-import javax.print.attribute.standard.Media;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
@@ -135,6 +135,7 @@ public class AddEpisodeController implements Initializable {
         }
     }
 
+    Media media;
     @FXML
     public void VideoSelect(javafx.scene.input.MouseEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
@@ -143,8 +144,8 @@ public class AddEpisodeController implements Initializable {
         FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter("MP4 videos", "*.mp4");
         fileChooser.getExtensionFilters().add(videoFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
-        Media med= new Media(selectedFile.toURI().toString());
-
+        media=new Media(selectedFile.toURI().toString());
+        media.getDuration();
         if (selectedFile != null) {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
