@@ -33,8 +33,17 @@ public class FilmPageController implements Initializable  {
         HelloApplication.SetRoot("HomePage");
     }
 
+    public void OnSeriesClick()throws Exception{
+        HelloApplication.SetRoot("SeriesPage");
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
+
+
+    }
+
+    public static void PageSetter(CheckComboBox<String> genresSelector, Button searchButton, Button homeButton, Button seriesButoon, Button filmButton) {
         ObservableList<String> genreNames = FXCollections.observableArrayList(
                 "Action",
                 "Adventure",
@@ -63,12 +72,10 @@ public class FilmPageController implements Initializable  {
                 "War",
                 "Western"
         );
-        GenresSelector.getItems().addAll(genreNames);
-        HomePageController.IconSetter(SearchButton,"src/main/resources/Images/HomePage/search.png",20);
+        genresSelector.getItems().addAll(genreNames);
+        HomePageController.IconSetter(searchButton,"src/main/resources/Images/HomePage/search.png",20);
         HomePageController.IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",30);
         HomePageController.IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
         HomePageController.IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);
-
-
     }
 }

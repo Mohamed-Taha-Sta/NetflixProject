@@ -74,6 +74,9 @@ public class HomePageController implements Initializable {
         HelloApplication.SetRoot("FilmPage");
     }
 
+    public void OnSeriesClick()throws Exception{
+        HelloApplication.SetRoot("SeriesPage");
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 40;
@@ -82,7 +85,7 @@ public class HomePageController implements Initializable {
             welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
         }
 
-        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",IV_Size);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",30);
         IconSetter(NotificationButton,"src/main/resources/Images/HomePage/Notification.png",IV_Size);
         IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
         IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);

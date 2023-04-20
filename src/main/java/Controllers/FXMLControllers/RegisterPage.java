@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -57,10 +58,9 @@ public class RegisterPage implements Initializable {
         } else if (!UserDAO.check_Mail(UserEmail.getText())) {
             showErrorMessage("Another user with same mail exists!");
 
-        }else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
-           showErrorMessage("Must fill all the fields!");
-        }
-        else {
+        } else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
+            showErrorMessage("Must fill all the fields!");
+        } else {
             DataHolder.setName(UserName.getText());
             DataHolder.setPrename(UserPrename.getText());
             DataHolder.setEmail(UserEmail.getText());
@@ -82,7 +82,68 @@ public class RegisterPage implements Initializable {
             UserBirthday.setVisible(newValue.equals("User"));
         });
 
+        identity.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        UserBirthday.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        UserPassword.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        UserEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        UserPrename.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        UserName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    OnSignUp();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
+
 }
+
 
 

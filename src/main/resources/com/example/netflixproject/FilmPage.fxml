@@ -28,13 +28,13 @@
                <children>
                   <ImageView cache="true" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../Images/Design/LogoGif1.gif" />
+                        <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
                      </image>
                   </ImageView>
                   <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnHomeClick" />
-                        <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" />
+                        <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
                         <VBox alignment="CENTER">
                            <children>
                               <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" />

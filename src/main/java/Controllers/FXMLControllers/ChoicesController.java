@@ -1,11 +1,13 @@
 package Controllers.FXMLControllers;
 
+import Controllers.ActorController;
 import DAO.UserDAO;
 import Entities.Actor;
 import Entities.Genre;
 import Entities.User;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +27,8 @@ import static javafx.collections.FXCollections.observableArrayList;
 
 public class ChoicesController implements Initializable {
 
+    public TableColumn<Actor, String> ActorNameColumn;
+    public TableColumn<Actor, String> ActorPrenameColumn;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate date;
 
@@ -32,7 +36,7 @@ public class ChoicesController implements Initializable {
     public TableView<Actor> ActorTable = new TableView<>();
     public TableView<Genre> GenreTable=new TableView<>();
     @FXML
-    public TableColumn<Actor, String> ActorColumn = new TableColumn<>();
+    //   public TableColumn<Actor, String> ActorColumn = new TableColumn<>();
     public TableColumn<Actor, CheckBox> SelectedActor = new TableColumn<>();
     public TableColumn<Genre,String> GenreColumn=new TableColumn<>();
     public TableColumn<Genre,CheckBox> SelectedGenre=new TableColumn<>();
@@ -46,7 +50,7 @@ public class ChoicesController implements Initializable {
     protected void OnDone() throws Exception{
         ArrayList<Long> selectedActors = new ArrayList<>();
         ArrayList<String> selectedGenres = new ArrayList<>();
-        for (Actor actor : data) {
+        for (Actor actor : actors ) {
             if (actor.getSelect().isSelected()) {
                 selectedActors.add(actor.getID());
             }
@@ -69,8 +73,7 @@ public class ChoicesController implements Initializable {
         }
 
     }
-
-    ObservableList<Actor> data = observableArrayList(new Actor(11, "Tom hanks", "", "dd", "sssa"), new Actor(12, "Jr", "", "dd", "sssa"), new Actor(13, "Emm", "", "dd", "sssa"));
+    ObservableList<Actor> actors;
     ObservableList<Genre> data2 = observableArrayList(
             new Genre("Action"),
             new Genre("Adventure"),
@@ -104,11 +107,14 @@ public class ChoicesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ActorColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        actors= FXCollections.observableList(ActorController.GetAllActors());
+
+        ActorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ActorPrenameColumn.setCellValueFactory(new PropertyValueFactory<>("Prename"));
         SelectedActor.setCellValueFactory(new PropertyValueFactory<>("select"));
         GenreColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         SelectedGenre.setCellValueFactory(new PropertyValueFactory<>("select"));
-        ActorTable.setItems(data);
+        ActorTable.setItems(actors);
         GenreTable.setItems(data2);
 
     }

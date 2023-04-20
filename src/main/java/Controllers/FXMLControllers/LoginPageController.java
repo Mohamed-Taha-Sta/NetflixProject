@@ -7,13 +7,17 @@ import DAO.ProducerDAO;
 import DAO.UserDAO;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,8 +38,7 @@ public class LoginPageController implements Initializable {
     @FXML
     protected  void onSignIn() throws Exception{
         if(mail.getText().isEmpty()||Password.getText().isEmpty()){
-            AlertText.setText("Must fill all fields");
-            AlertText.setOpacity(1);
+            showErrorMessage("Must fill all fields");
         } else if (UserController.authenticate(mail.getText(),Password.getText())){
             DataHolder.setUserType("User");
             HelloApplication.SetRoot("HomePage");
@@ -60,8 +63,36 @@ public class LoginPageController implements Initializable {
         HelloApplication.SetRoot("RegisterPage");
     }
 
+    private void showErrorMessage(String message) {
+        AlertText.setText(message);
+        AlertText.setOpacity(1);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            AlertText.setOpacity(0);
+        }));
+        timeline.play();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    onSignIn();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
+        Password.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    onSignIn();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 }

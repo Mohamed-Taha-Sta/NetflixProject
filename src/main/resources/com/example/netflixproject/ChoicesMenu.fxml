@@ -43,7 +43,8 @@
                         </TextField>
                         <TableView id="Table" fx:id="ActorTable" stylesheets="@../../../Style.css">
                           <columns>
-                            <TableColumn fx:id="ActorColumn" prefWidth="524.0000419616699" />
+                            <TableColumn fx:id="ActorNameColumn" prefWidth="524.0000419616699" />
+                              <TableColumn fx:id="ActorPrenameColumn" prefWidth="75.0" />
                             <TableColumn fx:id="SelectedActor" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
                           </columns>
                            <columnResizePolicy>

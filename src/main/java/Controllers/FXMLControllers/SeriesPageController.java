@@ -2,15 +2,21 @@ package Controllers.FXMLControllers;
 
 import Controllers.SerieController;
 import Entities.Serie;
+import com.example.netflixproject.HelloApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.CheckComboBox;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,15 +30,34 @@ public class SeriesPageController implements Initializable {
     public Button searchButton;
 
     public List<Serie> series=new ArrayList<>();
+    public Button homeButton;
+    public Button seriesButoon;
+    public Button filmButton;
+    public Label welcome;
+    public Button SearchButton;
+    public CheckComboBox<String> GenresSelector;
 
+    @FXML
     public void onSearch() throws Exception {
         series = SerieController.GetSerieByName(searchBar.getText());
         ContentHolder.getChildren().clear();
         initialize(null,null);
     }
 
+    @FXML
+    public void OnFilmClick()throws Exception{
+        HelloApplication.SetRoot("FilmPage");
+    }
+    public void OnHomeClick()throws Exception{
+        HelloApplication.SetRoot("HomePage");
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FilmPageController.PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
+
         if (series.isEmpty()) {
             System.out.println("Series is empty");
         } else {
