@@ -26,8 +26,6 @@ public class ProducerDAO {
         try {
              sql = "INSERT INTO Producer (NOM,PRENOM,EMAIL,PASSWORD) VALUES (?,?,?,?)";
 
-
-
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, prod.getNom());
             pstmt.setString(2, prod.getPrenom());
