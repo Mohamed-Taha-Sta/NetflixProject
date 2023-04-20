@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -22,13 +23,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static javafx.collections.FXCollections.checkedObservableList;
+
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ChoicesController implements Initializable {
 
     public TableColumn<Actor, String> ActorNameColumn;
     public TableColumn<Actor, String> ActorPrenameColumn;
+    public TextField ActorSearch;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate date;
 
@@ -107,7 +109,7 @@ public class ChoicesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        actors= FXCollections.observableList(ActorController.GetAllActors());
+        actors= FXCollections.observableList(ActorController.GetAllActors(ActorSearch.getText()));
 
         ActorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ActorPrenameColumn.setCellValueFactory(new PropertyValueFactory<>("Prename"));

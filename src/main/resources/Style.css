@@ -6,6 +6,13 @@
 .SearchableComboBox {
     -fx-background-color: #000;
 }
+.label{
+    -fx-font-family: Calibri;
+    -fx-font-size: 16px;
+    -fx-font-weight: Bold;
+    -fx-font-style: italic;
+}
+
 #MenuBtn {
     -fx-background-color: transparent;
     -fx-cursor: hand;

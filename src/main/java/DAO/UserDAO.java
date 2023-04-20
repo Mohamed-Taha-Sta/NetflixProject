@@ -153,7 +153,8 @@ public class UserDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newName);
             pstmt.setInt(2, (int) DataHolder.getUser().getID());
-            return true;
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -170,7 +171,8 @@ public class UserDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newPreName);
             pstmt.setInt(2, (int) DataHolder.getUser().getID());
-            return true;
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -187,13 +189,61 @@ public class UserDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newMail);
             pstmt.setInt(2, (int) DataHolder.getUser().getID());
-            return true;
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
         }
     }
 
+    public static boolean changeBirthday(LocalDate date){
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            sql = "Update Utilisateurs set BIRTHDAY=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean changeActors(String actors){
+        PreparedStatement pstmt;
+        String sql;
+        try {
+            sql = "Update Utilisateurs set ACTORLIST=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, actors);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    public static boolean changePass(String pass){
+        PreparedStatement pstmt;
+        String sql;
+        try {
+            sql = "Update Utilisateurs set PASSWORD=? where id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, pass);
+            pstmt.setInt(2, (int) DataHolder.getUser().getID());
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     public static void adding_Image(File imageFile) {
         PreparedStatement pstmt = null;
         String sql;

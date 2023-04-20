@@ -9,8 +9,8 @@ import java.util.List;
 
 public class ActorController {
 
-    public static List<Actor> GetAllActors(){
-        return ActorService.GetAll();
+    public static List<Actor> GetAllActors(String something){
+        return ActorService.GetAll(something);
     }
     public static boolean authenticate(String mail, String pass) {
         return ActorService.authenticate(mail, pass);

@@ -3,6 +3,8 @@ package Services;
 import DAO.UserDAO;
 import Entities.User;
 
+import java.time.LocalDate;
+
 
 public class UserService {
 
@@ -18,6 +20,17 @@ public class UserService {
         return  UserDAO.changeMail(mail);
     }
 
+    public static boolean ChangingBirthday(LocalDate date){
+        return UserDAO.changeBirthday(date);
+    }
+
+    public static boolean ChangingPass(String pass){
+        return UserDAO.changePass(pass);
+    }
+
+    public static boolean ChangingActors(String actors){
+        return UserDAO.changeActors(actors);
+    }
     public static boolean authenticate(String mail, String pass) {
         return UserDAO.authenticate(mail, pass);
     }

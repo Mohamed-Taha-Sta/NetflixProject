@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ActorService {
 
-    public static List<Actor> GetAll(){
-        return ActorDAO.recherche_actjasser();
+    public static List<Actor> GetAll(String something){
+        return ActorDAO.recherche_actjasser(something);
     }
     public static boolean authenticate(String mail, String pass) {
         return ActorDAO.authenticate(mail, pass);

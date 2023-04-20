@@ -36,7 +36,7 @@
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <TextField id="TextFields" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css">
+                        <TextField id="TextFields" fx:id="ActorSearch" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

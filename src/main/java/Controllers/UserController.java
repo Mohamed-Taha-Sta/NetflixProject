@@ -33,7 +33,13 @@ public class UserController {
         return input.matches(emailRegex);
     }
 
+    public static boolean Birthday(LocalDate date){
+        return UserService.ChangingBirthday(date);
+    }
 
+    public static boolean Password(String pass){
+        return UserService.ChangingPass(pass);
+    }
     public static boolean FirstName(String first){
         return UserService.ChangingFirstName(first);
     }

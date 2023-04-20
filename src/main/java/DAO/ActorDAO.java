@@ -126,7 +126,7 @@ public class ActorDAO {
         }
         return -1;
     }
-    public static List<Actor> recherche_actjasser() {
+    public static List<Actor> recherche_actjasser(String something) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Actor> list = new ArrayList<>();
@@ -134,20 +134,30 @@ public class ActorDAO {
         Actor act = null;
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql = "select id_act,nom,prenome,Mail,password from Actor";
+            if(something.isEmpty()){
+                String sql = "select id_act,nom,prenome,Mail,password from Actor";
 
-            pstmt = conn.prepareStatement(sql);
+                pstmt = conn.prepareStatement(sql);
 
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                act = new Actor(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-
-
-                list.add(act);
-
-
-
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    act = new Actor(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    list.add(act);
+                }
             }
+            else{
+                String sql = "select id_act,nom,prenome,Mail,password from Actor where Nom like ? or Prenome like ?";
+
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,"%"+something+"%");
+                pstmt.setString(2,"%"+something+"%");
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    act = new Actor(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    list.add(act);
+                }
+            }
+
 
 
         } catch (SQLException ex) {
