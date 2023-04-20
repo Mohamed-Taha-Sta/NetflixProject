@@ -113,8 +113,10 @@ public class UserDAO {
                 maxID = rs.getInt(1);
             }
             int newID = maxID + 1;
-
-            sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription) VALUES (?,?,?,?,?,?,?,?,?)";
+            if (user.getImage()== null)
+                sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription) VALUES (?,?,?,?,?,?,?,?,?)";
+            else
+                sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription,IMAGE) VALUES (?,?,?,?,?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, newID);
             pstmt.setString(2, user.getName());
@@ -127,6 +129,11 @@ public class UserDAO {
             pstmt.setString(7, user.getPassword());
             pstmt.setString(8, user.getMail());
             pstmt.setDate(9, java.sql.Date.valueOf(today));
+            if (user.getImage()!=null)
+            {
+                InputStream inputStream = new FileInputStream(user.getImage());
+                pstmt.setBlob(10,inputStream);
+            }
             pstmt.executeUpdate();
             authenticate(user.getMail(), user.getPassword());
             System.out.println("exucuted correctly");

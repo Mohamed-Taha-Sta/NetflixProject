@@ -1,6 +1,7 @@
 package Services;
 
 import DAO.UserDAO;
+import Entities.User;
 
 
 public class UserService {
@@ -15,5 +16,13 @@ public class UserService {
 
     public static boolean ChangingMail(String mail){
         return  UserDAO.changeMail(mail);
+    }
+
+    public static boolean authenticate(String mail, String pass) {
+        return UserDAO.authenticate(mail, pass);
+    }
+
+    public static boolean ajout_User(User user) {
+        return UserDAO.ajout_User(user);
     }
 }

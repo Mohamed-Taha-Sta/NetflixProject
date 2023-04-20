@@ -2,14 +2,11 @@ package DAO;
 
 import Entities.Actor;
 import Entities.Film;
-import Entities.MainActor;
 import Entities.Producer;
 import Utils.ConxDB;
+import Utils.DataHolder;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -211,6 +208,40 @@ public class ProducerDAO {
             }
         }
         return -1;
+    }
+
+
+
+
+    public static boolean authenticate(String mail, String pass) {
+        PreparedStatement pstmt;
+        String sql;
+        ResultSet rs;
+
+        try {
+            sql = "SELECT * FROM Producer WHERE MAIL=? AND PASSWORD =?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, mail);
+            pstmt.setString(2, pass);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                long Prod_ID = rs.getInt("ID_PROD");
+                String Nom = rs.getString("NOM");
+                String Prenom = rs.getString("PRENOM");
+
+                Producer producer = new Producer(Prod_ID,Nom,Prenom,mail,pass);
+
+                DataHolder.setProducer(producer);
+                return true;
+            } else {
+                System.out.println("Producer not found");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error authenticating user Producer: " + e.toString());
+            return false;
+        }
     }
 
 

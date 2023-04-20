@@ -1,6 +1,11 @@
 package Controllers.FXMLControllers;
 
+import Controllers.ActorController;
+import Controllers.ProducerController;
+import Controllers.UserController;
+import DAO.ProducerDAO;
 import DAO.UserDAO;
+import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,14 +36,19 @@ public class LoginPageController implements Initializable {
         if(mail.getText().isEmpty()||Password.getText().isEmpty()){
             AlertText.setText("Must fill all fields");
             AlertText.setOpacity(1);
-        }
+        } else if (UserController.authenticate(mail.getText(),Password.getText())){
+            DataHolder.setUserType("User");
+            HelloApplication.SetRoot("HomePage");
+        } else if (ActorController.authenticate(mail.getText(),Password.getText())) {
+            DataHolder.setUserType("Actor");
+//            HelloApplication.SetRoot("ActorDashboard");
+        } else if (ProducerController.authenticate(mail.getText(),Password.getText())) {
+            DataHolder.setUserType("Producer");
+//            HelloApplication.SetRoot("ProducerDashBoard");
 
-        else if(!UserDAO.authenticate(mail.getText(),Password.getText())){
+        } else {
             AlertText.setText("Email or password invalid");
             AlertText.setOpacity(1);
-        }
-        else{
-            HelloApplication.SetRoot("HomePage");
         }
 
 

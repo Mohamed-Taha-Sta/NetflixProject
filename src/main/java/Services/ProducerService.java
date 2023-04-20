@@ -9,5 +9,8 @@ public class ProducerService {
         ProducerDAO.createprod(prod);
     }
 
+    public static boolean authenticate(String mail, String pass) {
+        return ProducerDAO.authenticate(mail,pass);
+    }
 
 }

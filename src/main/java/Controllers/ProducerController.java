@@ -16,4 +16,8 @@ public class ProducerController {
         ProducerService.createprod(prod);
     }
 
+    public static boolean authenticate(String mail, String pass) {
+        return ProducerService.authenticate(mail, pass);
+    }
+
 }

@@ -1,6 +1,9 @@
 package Controllers.FXMLControllers;
 
+import Controllers.SerieController;
 import Entities.Actor;
+import Entities.Serie;
+import Utils.DataHolder;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.ObservableList;
@@ -47,17 +50,17 @@ public class AddActorsController implements Initializable {
 
     @FXML
     protected void OnNext() throws Exception {
-        List<Actor> selectedMainActors = new ArrayList<>();
-        List<Actor> selectedSupportingActors = new ArrayList<>();
+        List<Long> selectedMainActors = new ArrayList<>();
+        List<Long> selectedSupportingActors = new ArrayList<>();
 
         for (Actor actor : CHANGEMainActorsList) {
             if (actor.getSelect().isSelected()) {
-                selectedMainActors.add(actor);
+                selectedMainActors.add(actor.getID());
             }
         }
         for (Actor actor : CHANGESuppActorsList) {
             if (actor.getSelect().isSelected()) {
-                selectedSupportingActors.add(actor);
+                selectedSupportingActors.add(actor.getID());
             }
         }
 
@@ -68,19 +71,16 @@ public class AddActorsController implements Initializable {
         {
             DataHolderSeries.setMainActorsList(selectedMainActors);
             DataHolderSeries.setSuppActorsList(selectedSupportingActors);
+            //PickUp constructor Here
+            SerieController.AddSerie(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
+                    DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
+                    DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
+                    DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
 
-            HelloApplication.SetRoot("AddSeries");
+            HelloApplication.SetRoot("AddSeason");
         }
 
     }
-
-
-
-
-
-
-
-
 
 
     @Override

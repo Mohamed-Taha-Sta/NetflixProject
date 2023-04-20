@@ -1,11 +1,14 @@
 package Utils;
 
+import Entities.Actor;
+import Entities.Producer;
 import Entities.User;
 import javafx.scene.image.Image;
 
 import java.io.File;
 
 public  class DataHolder {
+    private static String UserType;
     private static String Name;
     private static String prename;
     private static String Email;
@@ -14,8 +17,25 @@ public  class DataHolder {
 
     private static File image;
     private static User user;
-
+    private static Actor actor;
+    private static Producer producer;
     private static int EpidodeId;
+
+    public static Producer getProducer() {
+        return producer;
+    }
+
+    public static void setProducer(Producer producer) {
+        DataHolder.producer = producer;
+    }
+
+    public static Actor getActor() {
+        return actor;
+    }
+
+    public static void setActor(Actor actor) {
+        DataHolder.actor = actor;
+    }
 
     public static int getEpidodeId() {
         return EpidodeId;
@@ -79,5 +99,13 @@ public  class DataHolder {
 
     public static void setImage(File image) {
         DataHolder.image = image;
+    }
+
+    public static String getUserType() {
+        return UserType;
+    }
+
+    public static void setUserType(String userType) {
+        UserType = userType;
     }
 }

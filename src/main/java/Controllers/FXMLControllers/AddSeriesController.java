@@ -10,9 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -21,6 +19,7 @@ import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
@@ -30,7 +29,9 @@ public class AddSeriesController implements Initializable {
     public TextField Name;
     public Text AlertText;
     public TextField Thumbnail;
+    public TextArea DescriptionBox;
     public TextField Synopsis;
+    public DatePicker DebutDate;
 
     public CheckComboBox<String> GenreSelector;
     public ComboBox<String> CountrySelector;
@@ -61,10 +62,18 @@ public class AddSeriesController implements Initializable {
         } else if (Synopsis.getText().isEmpty()) {
             AlertText.setText("Series must have a synopsis");
             AlertText.setOpacity(1);
-        } else{
+        } else if (DescriptionBox.getText().isEmpty()) {
+            AlertText.setText("Series must have a description");
+            AlertText.setOpacity(1);
+        } else if (DebutDate.getValue() == null) {
+            AlertText.setText("Series must have a Debut Date");
+            AlertText.setOpacity(1);
+        } else {
             DataHolderSeries.setSeriesName(Name.getText());
             DataHolderSeries.setCountryOfOrigin(CountrySelector.getValue());
             DataHolderSeries.setLanguage(LanguageSelector.getValue());
+            DataHolderSeries.setDebutDate(DebutDate.getValue());
+            DataHolderSeries.setDescription(DescriptionBox.getText());
             DataHolderSeries.setGenreList(GenreSelector.getItems());
 //            SerieController.AddSerie();  /*TAHA PICK UP HERE, TAHA LZMEK TZID PAGE JDIDA FIHA ACTORS LKOOOL */
             HelloApplication.SetRoot("PickActorsPage_afterAddingContent");

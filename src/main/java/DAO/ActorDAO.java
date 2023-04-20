@@ -2,12 +2,11 @@ package DAO;
 
 import Entities.*;
 import Utils.ConxDB;
+import Utils.DataHolder;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.File;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,5 +255,42 @@ public class ActorDAO {
 
         }
     }
+
+
+
+
+    public static boolean authenticate(String mail, String pass) {
+        PreparedStatement pstmt;
+        String sql;
+        ResultSet rs;
+
+        try {
+            sql = "SELECT * FROM Actor WHERE MAIL=? AND PASSWORD =?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, mail);
+            pstmt.setString(2, pass);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                long ActId = rs.getInt("ID_ACT");
+                String Nom = rs.getString("NOM");
+                String Prenom = rs.getString("PRENOME");
+
+                Actor actor = new Actor(ActId,Nom,Prenom,mail,pass);
+
+                DataHolder.setActor(actor);
+                return true;
+            } else {
+                System.out.println("Actor not found");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Error authenticating user Actor: " + e.toString());
+            return false;
+        }
+    }
+
+
+
 
 }

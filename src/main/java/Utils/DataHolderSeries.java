@@ -4,32 +4,43 @@ import Entities.Actor;
 import Entities.Serie;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
 
 public class DataHolderSeries {
 
     private static String SeriesName;
     private static String Language;
+    private static String Description;
+    private static LocalDate DebutDate;
     private static String CountryOfOrigin;
     private static File Thumbnail;
     private static File Synopsis;
     private static List<String> GenreList;
-    private static List<Actor> MainActorsList;
-    private static List<Actor> SuppActorsList;
+    private static List<Long> MainActorsList;
+    private static List<Long> SuppActorsList;
 
-    public static List<Actor> getMainActorsList() {
+    public static LocalDate getDebutDate() {
+        return DebutDate;
+    }
+
+    public static void setDebutDate(LocalDate debutDate) {
+        DebutDate = debutDate;
+    }
+
+    public static List<Long> getMainActorsList() {
         return MainActorsList;
     }
 
-    public static void setMainActorsList(List<Actor> mainActorsList) {
+    public static void setMainActorsList(List<Long> mainActorsList) {
         MainActorsList = mainActorsList;
     }
 
-    public static List<Actor> getSuppActorsList() {
+    public static List<Long> getSuppActorsList() {
         return SuppActorsList;
     }
 
-    public static void setSuppActorsList(List<Actor> suppActorsList) {
+    public static void setSuppActorsList(List<Long> suppActorsList) {
         SuppActorsList = suppActorsList;
     }
 
@@ -79,5 +90,13 @@ public class DataHolderSeries {
 
     public static void setGenreList(List<String> genreList) {
         GenreList = genreList;
+    }
+
+    public static String getDescription() {
+        return Description;
+    }
+
+    public static void setDescription(String description) {
+        Description = description;
     }
 }
