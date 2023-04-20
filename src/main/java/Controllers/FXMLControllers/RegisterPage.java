@@ -1,5 +1,7 @@
 package Controllers.FXMLControllers;
 
+import Controllers.ActorController;
+import Controllers.ProducerController;
 import Controllers.UserController;
 import DAO.UserDAO;
 import Utils.DataHolder;
@@ -55,8 +57,12 @@ public class RegisterPage implements Initializable {
 
         } else if (!UserController.isEmail(UserEmail.getText())) {
             showErrorMessage("This email address is not recognized!");
-        } else if (!UserDAO.check_Mail(UserEmail.getText())) {
+        } else if (!UserController.check_Mail(UserEmail.getText())) {
             showErrorMessage("Another user with same mail exists!");
+        } else if (!ProducerController.check_Mail(UserEmail.getText())) {
+            showErrorMessage("Another producer with same mail exists!");
+        } else if (!ActorController.check_Mail(UserEmail.getText())) {
+            showErrorMessage("Another actor with same mail exists!");
 
         } else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
             showErrorMessage("Must fill all the fields!");

@@ -44,9 +44,11 @@ public class LoginPageController implements Initializable {
             HelloApplication.SetRoot("HomePage");
         } else if (ActorController.authenticate(mail.getText(),Password.getText())) {
             DataHolder.setUserType("Actor");
+            System.out.println("Logged as Actor");
 //            HelloApplication.SetRoot("ActorDashboard");
         } else if (ProducerController.authenticate(mail.getText(),Password.getText())) {
             DataHolder.setUserType("Producer");
+            System.out.println("Logged as Producer");
 //            HelloApplication.SetRoot("ProducerDashBoard");
 
         } else {

@@ -14,4 +14,9 @@ public class ActorService {
         return ActorDAO.authenticate(mail, pass);
     }
 
+    public static boolean check_Mail(String mail) {
+        return ActorDAO.check_Mail(mail);
+    }
+
+
 }

@@ -217,7 +217,7 @@ public class ProducerDAO {
         ResultSet rs;
 
         try {
-            sql = "SELECT * FROM Producer WHERE MAIL=? AND PASSWORD =?";
+            sql = "SELECT * FROM Producer WHERE EMAIL=? AND PASSWORD =?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, mail);
             pstmt.setString(2, pass);

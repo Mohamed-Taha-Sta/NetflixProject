@@ -25,4 +25,9 @@ public class UserService {
     public static boolean ajout_User(User user) {
         return UserDAO.ajout_User(user);
     }
+
+    public static boolean check_Mail(String mail) {
+        return UserDAO.check_Mail(mail);
+    }
+
 }

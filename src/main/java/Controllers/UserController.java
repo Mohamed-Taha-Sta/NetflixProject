@@ -49,9 +49,13 @@ public class UserController {
         return UserService.authenticate(mail, pass);
     }
 
-
     public static boolean ajout_User(User user) {
         return UserService.ajout_User(user);
+    }
+
+
+    public static boolean check_Mail(String mail) {
+        return UserService.check_Mail(mail);
     }
 
 }
