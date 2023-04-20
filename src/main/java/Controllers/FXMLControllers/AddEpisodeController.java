@@ -76,7 +76,8 @@ public class AddEpisodeController implements Initializable {
 
             DataHolderEpisode.setIDEpisode(IdEpisode);
 
-            HelloApplication.SetRoot("HomePage");
+            //CHANGE ME
+//            HelloApplication.SetRoot("HomePage");
         }
     }
 
@@ -135,7 +136,7 @@ public class AddEpisodeController implements Initializable {
         }
     }
 
-
+    Media media;
     @FXML
     public void VideoSelect(javafx.scene.input.MouseEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
@@ -144,7 +145,8 @@ public class AddEpisodeController implements Initializable {
         FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter("MP4 videos", "*.mp4");
         fileChooser.getExtensionFilters().add(videoFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
-
+        media=new Media(selectedFile.toURI().toString());
+        media.getDuration();
         if (selectedFile != null) {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);

@@ -28,7 +28,7 @@ public class FilmDAO {
         try {
            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
-            String sql = "INSERT INTO Film (nom,description,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod)" +
+            String sql = "INSERT INTO Film (nom,description,annee_sortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod)" +
                     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             String sql1 = "SELECT id_film FROM Film WHERE Film.nom='" + film.getNom() + "' AND Film.id_prod ='" + film.getId_realisateur() + "'";
             pstmt = conn.prepareStatement(sql);

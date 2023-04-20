@@ -1,10 +1,11 @@
 package Controllers.FXMLControllers;
 
 import Controllers.ActorController;
+import Controllers.FilmController;
 import Controllers.SerieController;
-import Entities.Actor;
-import Entities.Serie;
+import Entities.*;
 import Utils.DataHolder;
+import Utils.DataHolderFilm;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
@@ -22,9 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static javafx.collections.FXCollections.observableArrayList;
-
-public class AddActorsController implements Initializable {
+public class AddActorsFilmController implements Initializable {
 
     public Text AlertText;
     public TableView<Actor> MainActorTable = new TableView<>();
@@ -46,22 +45,22 @@ public class AddActorsController implements Initializable {
 
     @FXML
     protected void OnBack() throws Exception {
-        HelloApplication.SetRoot("AddSeries");
+        HelloApplication.SetRoot("AddFilm");
     }
 
     @FXML
     protected void OnNext() throws Exception {
-        List<Long> selectedMainActors = new ArrayList<>();
-        List<Long> selectedSupportingActors = new ArrayList<>();
+        List<Actor> selectedMainActors = new ArrayList<>();
+        List<Actor> selectedSupportingActors = new ArrayList<>();
 
         for (Actor actor : MainActorsList) {
             if (actor.getSelect().isSelected()) {
-                selectedMainActors.add(actor.getID());
+                selectedMainActors.add(new MainActor(actor.getID(), actor.getName(), actor.getPrename(), actor.getMail(), actor.getPassword()));
             }
         }
         for (Actor actor : SuppActorsList) {
             if (actor.getSelect().isSelected()) {
-                selectedSupportingActors.add(actor.getID());
+                selectedSupportingActors.add(new Supportingactor(actor.getID(), actor.getName(), actor.getPrename(), actor.getMail(), actor.getPassword()));
             }
         }
 
@@ -69,17 +68,20 @@ public class AddActorsController implements Initializable {
         {
             AlertText.setText("Must select at least 1 main Actor");
         }else {
-            DataHolderSeries.setMainActorsList(selectedMainActors);
-            DataHolderSeries.setSuppActorsList(selectedSupportingActors);
+            DataHolderFilm.setMainActorsList(selectedMainActors);
+            DataHolderFilm.setSuppActorsList(selectedSupportingActors);
+            ArrayList<Actor> auxList = new ArrayList<>();
+            auxList.addAll(selectedMainActors);
+            auxList.addAll(selectedSupportingActors);
+            DataHolderFilm.setAllTheActors(auxList);
             //PickUp constructor Here
-            long idSeries = SerieController.AddSerie(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
-                    DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
-                    DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
-                    DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
+            FilmController.Add(new Film(DataHolderFilm.getName(),DataHolderFilm.getDescription(),
+                    DataHolderFilm.getDebutDate(),DataHolderFilm.getLanguage(),DataHolderFilm.getCountryOfOrigin(),
+                    DataHolderFilm.getGenreList(),DataHolderFilm.getThumbnail(),DataHolderFilm.getDuration(),
+                    DataHolderFilm.getSynopsis(),DataHolderFilm.getVideo(), DataHolder.getProducer().getId(),DataHolderFilm.getAllTheActors()));
 
-            DataHolderSeries.setIDSerie(idSeries);
-
-            HelloApplication.SetRoot("AddSeason");
+            //CHANGE ME
+//            HelloApplication.SetRoot("PRODUCER_DASHBOARD");
         }
 
     }

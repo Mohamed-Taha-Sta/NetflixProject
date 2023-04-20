@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Film extends Content{
-private String duree;
-private ArrayList<Actor>acteur;
+    private String duree;
+    private ArrayList<Actor>acteur;
 
 //private ArrayList<String>genre;
     private long VueNbr;
@@ -71,12 +71,29 @@ private ArrayList<Actor>acteur;
     }*/
 
 
-    public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, long vueNbr, long score, long votes, File synopsis, File film,Long idrealisateur) {
+    public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine,
+                List<String> listegenre, File img, String duree, long vueNbr, long score, long votes,
+                File synopsis, File film,Long idrealisateur) {
         super(nom, desc, annerdesortie, langue, paysorigine, listegenre, img);
         this.duree = duree;
         VueNbr = vueNbr;
         Score = score;
         Votes = votes;
+        this.synopsis = synopsis;
+        this.film = film;
+        this.id_realisateur=idrealisateur;
+    }
+
+    //Constructor mta3 Taha
+    public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine,
+                List<String> listegenre, File img, String duree,
+                File synopsis, File film,Long idrealisateur,ArrayList<Actor> actorArrayList) {
+        super(nom, desc, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        VueNbr = 0;
+        Score = 0;
+        Votes = 0;
+        this.acteur = actorArrayList;
         this.synopsis = synopsis;
         this.film = film;
         this.id_realisateur=idrealisateur;
