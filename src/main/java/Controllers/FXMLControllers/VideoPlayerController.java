@@ -67,7 +67,7 @@ public class VideoPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 25;
         //setting up player
-        File file = new File("src/main/java/Test/VideoTest.mp4");
+        File file = new File("src/main/java/Test/Video.mp4");
         mediaVideo = new Media(file.toURI().toString());
         mpVideo = new MediaPlayer(mediaVideo);
         mvVideo.setMediaPlayer(mpVideo);

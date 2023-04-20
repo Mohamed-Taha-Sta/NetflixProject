@@ -9,6 +9,7 @@ import Entities.*;
 import Services.FilmService;
 import Utils.DataHolderFilm;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -21,14 +22,20 @@ import java.util.Date;
 import java.util.List;
 
 public class FilmController {
-    public static void main(String[] args) {
+    MediaPlayer mp;
+    public void time(){
+        File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
 
-        File file=new File("src/main/java/Test/Synopsis.mp4");
-        Media media=new Media(file.toURI().toString());
-        System.out.println(media.getDuration().toString());
+        Media media=new Media(FileVideo.toURI().toString());
+        mp=new MediaPlayer(media);
+        System.out.println(mp.getTotalDuration());
         String duration = VideoPlayerController.getTime(media.getDuration());
 
         System.out.println(duration);
+    }
+    public static void main(String[] args) {
+
+
 
 
 

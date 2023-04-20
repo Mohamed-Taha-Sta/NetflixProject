@@ -48,6 +48,29 @@
     -fx-font-size: 14px;
     -fx-background-radius: 15px;
 }
+#SynopsisBtn{
+    -fx-background-color: #D62E4A;
+    -fx-background-radius: 30px;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+    -fx-font-weight: Bold;
+}
+
+#SynopsisBtn:hover{
+    -fx-background-color: #b70e0e;
+    -fx-background-radius: 30px;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+    -fx-font-weight: Bold;
+}
+
+#SynopsisBtn:pressed{
+    -fx-background-color: #64131f;
+    -fx-background-radius: 30px;
+    -fx-text-fill: White;
+    -fx-font-size: 14px;
+    -fx-font-weight: Bold;
+}
 
 #button:pressed {
     -fx-background-color: #ee4540;
