@@ -5,11 +5,14 @@ import java.time.LocalDate;
 
 public class DataHolderEpisode {
 
+    private static long IDEpisode;
     private static String Name;
     private static File Thumbnail;
     private static File Synopsis;
     private static File Video;
     private static LocalDate PremiereDate;
+
+    private static LocalDate DebutDate;
     private static String Description;
 
     public static String getName() {
@@ -59,4 +62,22 @@ public class DataHolderEpisode {
     public static void setDescription(String description) {
         Description = description;
     }
+
+
+    public static LocalDate getDebutDate() {
+        return DebutDate;
+    }
+
+    public static void setDebutDate(LocalDate debutDate) {
+        DebutDate = debutDate;
+    }
+
+    public static long getIDEpisode() {
+        return IDEpisode;
+    }
+
+    public static void setIDEpisode(long IDEpisode) {
+        DataHolderEpisode.IDEpisode = IDEpisode;
+    }
+
 }

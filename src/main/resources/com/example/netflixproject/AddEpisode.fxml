@@ -56,6 +56,7 @@
                                              </font>
                                           </TextField>
                                           <DatePicker fx:id="PremiereDate" prefHeight="25.0" prefWidth="353.0" promptText="PremiereDate" stylesheets="@../../../Style.css" />
+                                          <DatePicker fx:id="DebutDate" layoutX="10.0" layoutY="180.0" prefHeight="25.0" prefWidth="353.0" promptText="DebutDate" stylesheets="@../../../Style.css" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="TOP_RIGHT" prefHeight="201.0" prefWidth="289.0" spacing="20.0">
@@ -71,7 +72,7 @@
                                           <TextArea id="DescriptionBox" fx:id="DescriptionBox" prefHeight="200.0" prefWidth="200.0" promptText="Description" stylesheets="@../../../Style.css" />
                                        </children>
                                        <HBox.margin>
-                                          <Insets left="20.0" />
+                                          <Insets left="20.0" top="1.0" />
                                        </HBox.margin>
                                     </VBox>
                                  </children>
@@ -88,12 +89,12 @@
                         </Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#OnBack" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button id="button" fx:id="login" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="login" mnemonicParsing="false" onAction="#onAdd" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>

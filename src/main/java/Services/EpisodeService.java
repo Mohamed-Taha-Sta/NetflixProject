@@ -12,7 +12,7 @@ public class EpisodeService {
 
 
 
-    public static boolean AddEpisode(Episode episode) throws SQLException, IOException {
+    public static long AddEpisode(Episode episode) throws SQLException, IOException {
         return EpisodeDAO2.AddEpisode(episode);
     }
 

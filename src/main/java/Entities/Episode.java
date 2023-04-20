@@ -77,10 +77,9 @@ public class Episode {
         media = file;
     }
 
-    public Episode(long seasonParentID, String name, int number, String Description, LocalDate debutDate, LocalDate premiereDate, File Synopsis, File file, File Image) {
+    public Episode(long seasonParentID, String name, String Description, LocalDate debutDate, LocalDate premiereDate, File Synopsis, File file, File Image) {
         SeasonParentID = seasonParentID;
         Name = name;
-        Number = number;
         this.Description = Description;
         DebutDate = debutDate;
         PremiereDate = premiereDate;

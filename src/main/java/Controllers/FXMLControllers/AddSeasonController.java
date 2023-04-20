@@ -119,7 +119,7 @@ public class AddSeasonController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Image Size");
-                alert.setContentText("Please select an image with dimensions of 1920*1080 pixels.");
+                alert.setContentText("Please select a valid Synopsis.");
                 alert.showAndWait();
             }
         }

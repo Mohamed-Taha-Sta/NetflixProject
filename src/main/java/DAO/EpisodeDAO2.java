@@ -21,8 +21,10 @@ public class EpisodeDAO2 {
     public EpisodeDAO2() throws SQLException {
     }
 
-    public static boolean AddEpisode(Episode episode) throws SQLException, FileNotFoundException {
-        String sql=null;
+    public static long AddEpisode(Episode episode) throws SQLException, FileNotFoundException {
+        String sql = null;
+        long id = -1;
+
         if (episode.getDescription() != null && episode.getSynopsis() != null) {
             sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR,Description,Synopsis) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -42,7 +44,7 @@ public class EpisodeDAO2 {
             inputStreamSynopsis = new FileInputStream(episode.getSynopsis());
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"ID"});
 
             // Set the values for the parameters
             pstmt.setLong(1, episode.getSeasonParentID());
@@ -64,17 +66,24 @@ public class EpisodeDAO2 {
                 pstmt.setBlob(11, inputStreamSynopsis);
             int affectedRows = pstmt.executeUpdate();
 
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getLong(1);
+            }
+
+
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-            return false;
+            return -1;
         } catch (Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-            return false;
+            return -1;
         }  // end finally try
 
-        return true;
+        return id;
 
     }
 

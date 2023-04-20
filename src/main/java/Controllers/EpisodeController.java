@@ -38,11 +38,11 @@ public class EpisodeController {
         File imageFile = new File("src/main/java/Test/EpisodePlaceHolder.jpg");
 
 
-        Episode episode = new Episode(46,"episode3",4,Description, LocalDate.of(2014,12,9),
-                LocalDate.of(2011,11,2),fileSynopsis,fileVideo,imageFile);
-
-        Episode episode2 = new Episode(46,"Episode2",2,Description, LocalDate.of(1990,3,14),
-                LocalDate.of(2015,12,12),fileSynopsis,fileVideo,imageFile);
+//        Episode episode = new Episode(46,"episode3",4,Description, LocalDate.of(2014,12,9),
+//                LocalDate.of(2011,11,2),fileSynopsis,fileVideo,imageFile);
+//
+//        Episode episode2 = new Episode(46,"Episode2",2,Description, LocalDate.of(1990,3,14),
+//                LocalDate.of(2015,12,12),fileSynopsis,fileVideo,imageFile);
 
 
 //        System.out.println(episodeDAO.AddEpisode(episode));
@@ -102,7 +102,7 @@ public class EpisodeController {
     }
 
 
-    public static boolean AddEpisode(Episode episode) throws SQLException, IOException {
+    public static long AddEpisode(Episode episode) throws SQLException, IOException {
         return EpisodeService.AddEpisode(episode);
     }
 
