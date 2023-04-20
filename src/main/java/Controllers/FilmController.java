@@ -99,6 +99,14 @@ list.add("drama");
        // System.out.println(FilmService.filterByGenre("fares"));
         Long x= Long.valueOf(1);
 //FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
-        System.out.println(FilmDAO.FindByName("d"));
-    }
+      //  System.out.println(FilmDAO.FindByName("d"));
+        List<String> l =new ArrayList<>();
+        l.add("drama");
+        l.add("comedie");
+        l.add("horror");
+        l.add("scer");
+       // FilmDAO.modifimg(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),FileImage);
+           // public Film(long id, String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film,Long idrealisateur) {
+FilmDAO.deleteFilm_actsec(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),new Actor(42,"fares","makki","faresmakki21@gmail.com","tahajasser"));
+        }
 }

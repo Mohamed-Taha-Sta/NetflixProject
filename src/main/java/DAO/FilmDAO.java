@@ -35,16 +35,12 @@ public class FilmDAO {
             InputStream inputStreamSynopsisimg = null;
             InputStream inputStreamSynopsissynops = null;
             InputStream inputStreamSynopsisfilm= null;
-            System.out.println(1);
 
             inputStreamSynopsisimg = new FileInputStream(film.getImg());
-            System.out.println(1);
 
             inputStreamSynopsisfilm=new FileInputStream(film.getFilm());
-            System.out.println(1);
 
             inputStreamSynopsissynops=new FileInputStream(film.getSynopsis());
-            System.out.println(1);
 
             pstmt.setString(1,film.getNom());
             pstmt.setString(2,film.getDescription());
@@ -742,7 +738,7 @@ public class FilmDAO {
 
 
     }
-    public static boolean modifimg(Film film,File img ) {
+    /*public static boolean modifimg(Film film,File img ) {
         PreparedStatement pstmt;
         ResultSet rs;
         String sql;
@@ -763,8 +759,8 @@ public class FilmDAO {
         }
 
 
-    }
-    public static boolean modifsynop(Film film,File synop ) {
+    }*/
+    /*public static boolean modifsynop(Film film,File synop ) {
         PreparedStatement pstmt;
         ResultSet rs;
         String sql;
@@ -785,18 +781,20 @@ public class FilmDAO {
         }
 
 
-    }
-    public static boolean modiffilmvedio(Film film,File vid ) {
+    }*/
+    /*public static boolean modiffilmvedio(Film film,File vid ) {
         PreparedStatement pstmt;
         ResultSet rs;
         String sql;
 
         try {;
+
             InputStream inputStreamSynopsisfilm=new FileInputStream(vid);
 
 
-            sql = "UPDATE film SET synopsis = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + film.getId();
+            sql = "UPDATE film SET film = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
+
             pstmt.executeQuery();
 
             return true;
@@ -808,6 +806,84 @@ public class FilmDAO {
         }
 
 
+    }*/
+    public static boolean modifimg(Film film, File img) {
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] imgBytes = Files.readAllBytes(img.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE film SET img = ? WHERE id_film = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, imgBytes);
+            pstmt.setLong(2, film.getId());
+
+            pstmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+    public static boolean modiffilmvedio(Film film, File vid) {
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] vidBytes = Files.readAllBytes(vid.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE film SET film = ? WHERE id_film = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, vidBytes);
+            pstmt.setLong(2, film.getId());
+
+            pstmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+    public static boolean modifsynop(Film film, File synop) {
+        PreparedStatement pstmt;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] vidBytes = Files.readAllBytes(synop.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE film SET synopsis = ? WHERE id_film = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, vidBytes);
+            pstmt.setLong(2, film.getId());
+
+            pstmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
     }
     public static boolean deleteFilm_actsec(Film film,Actor act) {
         PreparedStatement pstmt = null;
@@ -870,8 +946,9 @@ public class FilmDAO {
             sql = "INSERT INTO acteurprinc_film (id_act,id_film)" +
                     " VALUES (?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, film.getId());
-            pstmt.setLong(2, act.getID());
+            pstmt.setLong(1, act.getID());
+
+            pstmt.setLong(2, film.getId());
 
             pstmt.executeUpdate();
             return true;
@@ -894,8 +971,9 @@ public class FilmDAO {
             sql = "INSERT INTO acteursec_film (id_act,id_film)" +
                     " VALUES (?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, film.getId());
-            pstmt.setLong(2, act.getID());
+            pstmt.setLong(1, act.getID());
+            pstmt.setLong(2, film.getId());
+
 
             pstmt.executeUpdate();
             return true;
