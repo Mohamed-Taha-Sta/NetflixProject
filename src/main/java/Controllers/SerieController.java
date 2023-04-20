@@ -24,25 +24,25 @@ public class SerieController {
         List<Long> listSuppActors = new ArrayList<>();
         List<String> listGenre = new ArrayList<>();
 
-        listMainActors.add(1L);
-        listMainActors.add(2L);
+        listMainActors.add(21L);
+        listMainActors.add(10L);
 
-        listSuppActors.add(1L);
+        listSuppActors.add(4L);
 
 //        listGenre.add("Action");
         listGenre.add("Comedie");
         listGenre.add("Drama");
 //        listGenre.add("Torki");
 
-        Serie serie = new Serie("Serie1",1,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
+        Serie serie = new Serie("Serie3",1,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.", LocalDate.of(2008,1,8),
+                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.", LocalDate.of(2014,2,9),
                 "English","America",listGenre,imageFile,file,listMainActors,listSuppActors);
 
-//        AddSerie(serie);
+        System.out.println(AddSerie(serie));
 
 
-        System.out.println(SerieDAO.GetSerieByName("Serie1"));
+//        System.out.println(SerieDAO.GetSerieByName("Serie1"));
 
     }
 

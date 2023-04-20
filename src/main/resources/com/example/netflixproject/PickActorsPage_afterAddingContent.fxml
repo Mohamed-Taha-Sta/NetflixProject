@@ -45,11 +45,11 @@
                               <Insets />
                            </VBox.margin>
                         </TextField>
-                        <TableView id="Table" fx:id="SupportingActorTable1" stylesheets="@../../../Style.css">
+                        <TableView id="Table" fx:id="MainActorTable" stylesheets="@../../../Style.css">
                            <columns>
-                              <TableColumn fx:id="SupportingActorColomn1" prefWidth="195.2000732421875" />
-                              <TableColumn fx:id="MainActorColumn1" prefWidth="524.0000419616699" />
-                              <TableColumn fx:id="SelectedSupportingActor1" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+                              <TableColumn fx:id="MainActorColumnName" prefWidth="195.2000732421875" />
+                              <TableColumn fx:id="MainActorColumnLastName" prefWidth="524.0000419616699" />
+                              <TableColumn fx:id="SelectedMainActor" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -71,8 +71,8 @@
                         </TextField>
                         <TableView id="Table" fx:id="SupportingActorTable" stylesheets="@../../../Style.css">
                            <columns>
-                              <TableColumn fx:id="SupportingActorColomn" minWidth="-1.0" prefWidth="195.2000732421875" />
-                              <TableColumn fx:id="MainActorColumn" prefWidth="524.0000419616699" />
+                              <TableColumn fx:id="SupportingActorColomnName" minWidth="-1.0" prefWidth="195.2000732421875" />
+                              <TableColumn fx:id="SupportingActorColomnLastName" prefWidth="524.0000419616699" />
                               <TableColumn fx:id="SelectedSupportingActor" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
                            </columns>
                            <columnResizePolicy>

@@ -17,38 +17,45 @@ public class SeasonDAO {
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public static boolean AddSeason(Season season) throws SQLException, FileNotFoundException  {
+    public static long AddSeason(Season season) throws SQLException, FileNotFoundException  {
 
-        String sql = "INSERT INTO Season (ID_SERIE, NUM, name, DEBUT_DATE,THUMBNAIL,SYNOPSIS,DESCRIPTION) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        long id=-1;
 
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        String sql = "INSERT INTO Season (ID_SERIE, name, DEBUT_DATE,THUMBNAIL,SYNOPSIS,DESCRIPTION) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"ID"});
 
         InputStream inputStreamThumbnail = new FileInputStream(season.getThumbnail());
         InputStream inputStreamSynopsis = new FileInputStream(season.getSynopsis());
 
         try {
         pstmt.setLong(1,season.getSERIE_ID());
-        pstmt.setInt(2,season.getNumber());
-        pstmt.setString(3,season.getName());
-        pstmt.setDate(4,java.sql.Date.valueOf(season.getDebutDate()));
-        pstmt.setBlob(5,inputStreamThumbnail);
-        pstmt.setBlob(6,inputStreamSynopsis);
-        pstmt.setString(7,season.getDescription());
+        pstmt.setString(2,season.getName());
+        pstmt.setDate(3,java.sql.Date.valueOf(season.getDebutDate()));
+        pstmt.setBlob(4,inputStreamThumbnail);
+        pstmt.setBlob(5,inputStreamSynopsis);
+        pstmt.setString(6,season.getDescription());
 
         int affectedRows = pstmt.executeUpdate();
+
+
+        ResultSet generatedKeys = pstmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            id = generatedKeys.getLong(1);
+        }
 
 
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-            return false;
+            return -1;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-            return false;
+            return -1;
         }
-        return true;
+        return id;
     }
 
     public static List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {

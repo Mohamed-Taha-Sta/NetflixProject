@@ -1,15 +1,16 @@
 package Controllers.FXMLControllers;
 
+import Controllers.ActorController;
 import Controllers.SerieController;
 import Entities.Actor;
 import Entities.Serie;
 import Utils.DataHolder;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,8 +40,11 @@ public class AddActorsController implements Initializable {
     public TableColumn<Actor, CheckBox> SelectedSupportingActor = new TableColumn<>();
 
     //CHANGE ASAP
-    ObservableList<Actor> CHANGEMainActorsList = observableArrayList(new Actor(11, "Tom", "Hanks", "dd", "sssa"), new Actor(12, "Salah", "DooDOO", "dd", "sssa"), new Actor(13, "Emm", "", "dd", "sssa"));
-    ObservableList<Actor> CHANGESuppActorsList = observableArrayList(new Actor(11, "Jasser", "Hamdi", "dd", "sssa"), new Actor(12, "Salouh", "Mejri", "dd", "sssa"), new Actor(13, "Salem", "El Behi", "dd", "sssa"));
+//    ObservableList<Actor> CHANGEMainActorsList = observableArrayList(new Actor(1, "Tom", "Hanks", "dd", "sssa"), new Actor(2, "Salah", "DooDOO", "dd", "sssa"), new Actor(3, "Emm", "", "dd", "sssa"));
+//    ObservableList<Actor> CHANGESuppActorsList = observableArrayList(new Actor(23, "Jasser", "Hamdi", "dd", "sssa"), new Actor(22, "Salouh", "Mejri", "dd", "sssa"), new Actor(21, "Salem", "El Behi", "dd", "sssa"));
+
+    ObservableList<Actor> MainActorsList = FXCollections.observableList(ActorController.GetAllActors(""));
+    ObservableList<Actor> SuppActorsList = FXCollections.observableList(ActorController.GetAllActors(""));
 
 
     @FXML
@@ -53,12 +57,12 @@ public class AddActorsController implements Initializable {
         List<Long> selectedMainActors = new ArrayList<>();
         List<Long> selectedSupportingActors = new ArrayList<>();
 
-        for (Actor actor : CHANGEMainActorsList) {
+        for (Actor actor : MainActorsList) {
             if (actor.getSelect().isSelected()) {
                 selectedMainActors.add(actor.getID());
             }
         }
-        for (Actor actor : CHANGESuppActorsList) {
+        for (Actor actor : SuppActorsList) {
             if (actor.getSelect().isSelected()) {
                 selectedSupportingActors.add(actor.getID());
             }
@@ -67,15 +71,16 @@ public class AddActorsController implements Initializable {
         if (selectedMainActors.isEmpty())
         {
             AlertText.setText("Must select at least 1 main Actor");
-        }else
-        {
+        }else {
             DataHolderSeries.setMainActorsList(selectedMainActors);
             DataHolderSeries.setSuppActorsList(selectedSupportingActors);
             //PickUp constructor Here
-            SerieController.AddSerie(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
+            long idSeries = SerieController.AddSerie(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
                     DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
                     DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
                     DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
+
+            DataHolderSeries.setIDSerie(idSeries);
 
             HelloApplication.SetRoot("AddSeason");
         }
@@ -86,14 +91,14 @@ public class AddActorsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        MainActorColumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        MainActorColumnLastName.setCellValueFactory(new PropertyValueFactory<>("Prename"));
+        MainActorColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        MainActorColumnLastName.setCellValueFactory(new PropertyValueFactory<>("prename"));
         SelectedMainActor.setCellValueFactory(new PropertyValueFactory<>("select"));
-        SupportingActorColomnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        SupportingActorColomnLastName.setCellValueFactory(new PropertyValueFactory<>("Prename"));
+        SupportingActorColomnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        SupportingActorColomnLastName.setCellValueFactory(new PropertyValueFactory<>("prename"));
         SelectedSupportingActor.setCellValueFactory(new PropertyValueFactory<>("select"));
-        MainActorTable.setItems(CHANGEMainActorsList);
-        SupportingActorTable.setItems(CHANGESuppActorsList);
+        MainActorTable.setItems(MainActorsList);
+        SupportingActorTable.setItems(SuppActorsList);
 
     }
 }

@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -14,54 +16,68 @@
    <children>
       <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
          <children>
-            <VBox alignment="CENTER" prefHeight="355.0" prefWidth="386.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+            <VBox alignment="CENTER" prefHeight="352.0" prefWidth="608.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
                <padding>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </padding>
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="349.0" prefWidth="358.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER_LEFT" prefHeight="350.0" prefWidth="602.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
                      <children>
                         <VBox alignment="TOP_RIGHT">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="33.0" prefWidth="382.0" text="Adding Season" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="507.0" text="Adding Season" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets bottom="30.0" top="20.0" />
                                  </VBox.margin>
                               </Label>
+                              <HBox prefHeight="130.0" prefWidth="502.0" spacing="41.0">
+                                 <children>
+                                    <VBox prefHeight="145.0" prefWidth="230.0" spacing="20.0">
+                                       <children>
+                                          <TextField id="TextFields" fx:id="Name" prefHeight="35.0" prefWidth="258.0" promptText="Name" stylesheets="@../../../Style.css">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField id="TextFields" fx:id="Thumbnail" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
+                                             <font>
+                                                <Font name="Lucida Bright" size="14.0" />
+                                             </font>
+                                          </TextField>
+                                          <TextField id="TextFields" fx:id="Synopsis" prefHeight="35.0" prefWidth="258.0" promptText="Synopsis" stylesheets="@../../../Style.css">
+                                             <font>
+                                                <Font name="Lucida Bright" size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="145.0" prefWidth="230.0" spacing="20.0">
+                                       <children>
+                                          <DatePicker fx:id="DebutDate" prefHeight="33.0" prefWidth="230.0" promptText="DebutDate" stylesheets="@../../../Style.css" />
+                                          <TextArea id="DescriptionBox" fx:id="Description" prefHeight="145.0" prefWidth="230.0" promptText="Description" stylesheets="@../../../Style.css" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="1.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <TextField id="TextFields" fx:id="Name" prefHeight="35.0" prefWidth="258.0" promptText="Name" stylesheets="@../../../Style.css">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <TextField id="TextFields" fx:id="Thumbnail" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
-                           <font>
-                              <Font name="Lucida Bright" size="14.0" />
-                           </font>
-                        </TextField>
-                        <TextField id="TextFields" fx:id="Synopsis" prefHeight="35.0" prefWidth="258.0" promptText="Synopsis" stylesheets="@../../../Style.css">
-                           <font>
-                              <Font name="Lucida Bright" size="14.0" />
-                           </font>
-                        </TextField>
-                        <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="256.1429748535156">
+                        <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="501.1429748535156">
                            <font>
                               <Font name="Calibri" size="18.0" />
                            </font>
                            <VBox.margin>
-                              <Insets left="10.0" />
+                              <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </Text>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="33.0" prefWidth="58.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#OnBack" prefHeight="33.0" prefWidth="58.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
@@ -71,7 +87,7 @@
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="165.0" />
+                                    <Insets left="380.0" />
                                  </HBox.margin>
                               </Button>
                            </children>

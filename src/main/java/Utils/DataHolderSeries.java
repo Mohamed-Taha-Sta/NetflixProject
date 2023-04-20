@@ -9,6 +9,8 @@ import java.util.List;
 
 public class DataHolderSeries {
 
+
+    private static long IDSerie;
     private static String SeriesName;
     private static String Language;
     private static String Description;
@@ -99,4 +101,13 @@ public class DataHolderSeries {
     public static void setDescription(String description) {
         Description = description;
     }
+
+    public static long getIDSerie() {
+        return IDSerie;
+    }
+
+    public static void setIDSerie(long IDSerie) {
+        DataHolderSeries.IDSerie = IDSerie;
+    }
+
 }

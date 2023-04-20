@@ -53,7 +53,7 @@ public class SeasonController {
 
     public static List<Season> FindSeasonName(String SerieName) throws SQLException, IOException {return SeasonService.FindSeasonName(SerieName);}
 
-    public static boolean AddSeason(Season season) throws SQLException, IOException {return SeasonService.AddSeason(season);}
+    public static long AddSeason(Season season) throws SQLException, IOException {return SeasonService.AddSeason(season);}
 
 
 

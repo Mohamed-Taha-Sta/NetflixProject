@@ -66,7 +66,7 @@ public class SeasonService {
         return SeasonDAO.FindSeasonName(SerieName);
     }
 
-    public static boolean AddSeason(Season season) throws SQLException, IOException {
+    public static long AddSeason(Season season) throws SQLException, IOException {
         return SeasonDAO.AddSeason(season);
     }
 

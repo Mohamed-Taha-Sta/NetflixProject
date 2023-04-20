@@ -1,10 +1,16 @@
 package Utils;
 
+import javafx.scene.control.DatePicker;
+
 import java.io.File;
+import java.time.LocalDate;
 
 public class DataHolderSeason {
 
+    private static long IDSeason;
     private static String Name;
+    private static String Description;
+    private static LocalDate DebutDate;
     private static File Thumbnail;
     private static File Synopsis;
 
@@ -29,4 +35,29 @@ public class DataHolderSeason {
     public static void setSynopsis(File synopsis) {
         Synopsis = synopsis;
     }
+
+    public static String getDescription() {
+        return Description;
+    }
+
+    public static void setDescription(String description) {
+        Description = description;
+    }
+
+    public static LocalDate getDebutDate() {
+        return DebutDate;
+    }
+
+    public static void setDebutDate(LocalDate debutDate) {
+        DebutDate = debutDate;
+    }
+
+    public static long getIDSeason() {
+        return IDSeason;
+    }
+
+    public static void setIDSeason(long IDSeason) {
+        DataHolderSeason.IDSeason = IDSeason;
+    }
+
 }

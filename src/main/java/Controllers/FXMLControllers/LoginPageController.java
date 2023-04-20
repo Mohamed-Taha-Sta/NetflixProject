@@ -49,7 +49,7 @@ public class LoginPageController implements Initializable {
         } else if (ProducerController.authenticate(mail.getText(),Password.getText())) {
             DataHolder.setUserType("Producer");
             System.out.println("Logged as Producer");
-//            HelloApplication.SetRoot("ProducerDashBoard");
+            HelloApplication.SetRoot("AddSeries");
 
         } else {
             AlertText.setText("Email or password invalid");

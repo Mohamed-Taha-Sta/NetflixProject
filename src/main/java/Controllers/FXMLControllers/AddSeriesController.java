@@ -65,7 +65,10 @@ public class AddSeriesController implements Initializable {
         } else if (DescriptionBox.getText().isEmpty()) {
             AlertText.setText("Series must have a description");
             AlertText.setOpacity(1);
-        } else if (DebutDate.getValue() == null) {
+        } else if (GenreSelector.getCheckModel().getCheckedItems() == null) {
+            AlertText.setText("Series must have at least a genre");
+            AlertText.setOpacity(1);
+        }  else if (DebutDate.getValue() == null) {
             AlertText.setText("Series must have a Debut Date");
             AlertText.setOpacity(1);
         } else {
@@ -74,8 +77,7 @@ public class AddSeriesController implements Initializable {
             DataHolderSeries.setLanguage(LanguageSelector.getValue());
             DataHolderSeries.setDebutDate(DebutDate.getValue());
             DataHolderSeries.setDescription(DescriptionBox.getText());
-            DataHolderSeries.setGenreList(GenreSelector.getItems());
-//            SerieController.AddSerie();  /*TAHA PICK UP HERE, TAHA LZMEK TZID PAGE JDIDA FIHA ACTORS LKOOOL */
+            DataHolderSeries.setGenreList(GenreSelector.getCheckModel().getCheckedItems());
             HelloApplication.SetRoot("PickActorsPage_afterAddingContent");
         }
 

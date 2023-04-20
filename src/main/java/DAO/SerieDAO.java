@@ -19,11 +19,13 @@ public class SerieDAO {
     public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
 
         long SerieID=-1;
+        long id=-1;
+
 
         String sql = "INSERT INTO SERIE (Name, DESCRIPTION, DEBUT_DATE, LANGUAGE, COUNTRY, Image, NUM_SEASONS, SYNOPSIS, ListeGenre,ID_PROD) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"ID_SERIE"});
 
         InputStream inputStreamThumbnail = new FileInputStream(Serie.getImg());
         InputStream inputStreamSynopsis = new FileInputStream(Serie.getSynopsis());
@@ -39,12 +41,13 @@ public class SerieDAO {
             pstmt.setString(9,String.join(",", Serie.getListegenre().stream().map(Object::toString).toArray(String[]::new)));
             pstmt.setLong(10,Serie.getID_PROD());
             int affectedRows = pstmt.executeUpdate();
-//            ResultSet generatedKeys = pstmt.getGeneratedKeys();
-//            if (generatedKeys.next()) {
-//                id = generatedKeys.getLong(1);
-//            }
 
-            SerieID = getSerieID(Serie);
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getLong(1);
+            }
+
 
 
         } catch(SQLException se) {
@@ -56,16 +59,16 @@ public class SerieDAO {
             e.printStackTrace();
             return -1;
         }
-        InsertMainActSerie(SerieID,Serie.getIDMainactorList());
-        InsertSuppActSerie(SerieID,Serie.getIDSuppactorList());
-        return SerieID;
+        InsertMainActSerie(id,Serie.getIDMainactorList());
+        InsertSuppActSerie(id,Serie.getIDSuppactorList());
+        return id;
     }
 
     public static boolean InsertMainActSerie(long idSerie,List<Long> listMainAct) throws SQLException {
 
         String sql = "INSERT INTO SERIEACTORPRINC (ID_SERIE,ID_ACT) VALUES (?,?)";
 
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         try {
         for (Long lo : listMainAct)
             {
@@ -89,7 +92,7 @@ public class SerieDAO {
 
         String sql = "INSERT INTO SERIEACTORSUPP (ID_SERIE,ID_ACT) VALUES (?,?)";
 
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         try {
         for (Long lo : listSuppAct)
             {

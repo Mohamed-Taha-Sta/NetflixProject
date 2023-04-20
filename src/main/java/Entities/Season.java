@@ -62,6 +62,15 @@ public class Season {
         Thumbnail = thumbnail;
     }
 
+    public Season(long SERIE_ID,String Description,String Name , LocalDate debutDate, File thumbnail,File Synopsis) {
+        this.SERIE_ID = SERIE_ID;
+        this.Description = Description;
+        this.name = Name;
+        DebutDate = debutDate;
+        Thumbnail = thumbnail;
+        this.Synopsis = Synopsis;
+    }
+
     public Season(File synopsis, long SERIE_ID, int number, LocalDate debutDate, File thumbnail, List<Episode> episodeList) {
         Synopsis = synopsis;
         this.SERIE_ID = SERIE_ID;
