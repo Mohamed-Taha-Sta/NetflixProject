@@ -26,18 +26,18 @@
       </ImageView>
       <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
          <children>
-            <VBox alignment="CENTER" prefHeight="540.0" prefWidth="706.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+            <VBox alignment="CENTER" prefHeight="495.0" prefWidth="706.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
                <children>
-                  <VBox alignment="CENTER" maxWidth="775.0" prefHeight="583.0" prefWidth="775.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER" maxWidth="775.0" prefHeight="488.0" prefWidth="700.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
                      <children>
-                        <VBox alignment="TOP_CENTER">
+                        <VBox alignment="TOP_CENTER" prefHeight="109.0" prefWidth="600.0">
                            <children>
                               <Label alignment="TOP_CENTER" contentDisplay="RIGHT" prefHeight="58.0" prefWidth="318.0" text="Adding Series" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri Bold" size="24.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="40.0" top="50.0" />
+                                    <Insets bottom="60.0" top="50.0" />
                                  </VBox.margin>
                               </Label>
                            </children>
@@ -55,8 +55,8 @@
                                        </VBox.margin>
                                     </TextField>
                                     <ComboBox id="ComboBox" fx:id="CountrySelector" prefHeight="35.0" prefWidth="478.0" promptText="CountryOfOrigin" stylesheets="@../../../Style.css" />
-                                    <ComboBox id="ComboBox" fx:id="LanguageSelector" prefHeight="35.0" prefWidth="380.0" promptText="Language" stylesheets="@../../../Style.css" />
-                                    <CheckComboBox id="myCheckComboBox" fx:id="GenreSelector" pickOnBounds="false" prefHeight="22.0" prefWidth="294.0" snapToPixel="false" stylesheets="@../../../Style.css">
+                                    <ComboBox id="ComboBox" fx:id="LanguageSelector" prefHeight="20.0" prefWidth="275.0" promptText="Language" stylesheets="@../../../Style.css" />
+                                    <CheckComboBox id="myCheckComboBox" fx:id="GenreSelector" pickOnBounds="false" prefHeight="22.0" prefWidth="268.0" snapToPixel="false" stylesheets="@../../../Style.css">
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -95,7 +95,7 @@
                               <Font name="Calibri" size="18.0" />
                            </font>
                            <VBox.margin>
-                              <Insets />
+                              <Insets top="20.0" />
                            </VBox.margin>
                         </Text>
                         <HBox>
@@ -115,7 +115,7 @@
                               </Button>
                            </children>
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets bottom="20.0" top="20.0" />
                            </VBox.margin>
                         </HBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" />

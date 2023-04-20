@@ -292,5 +292,30 @@ public class ActorDAO {
 
 
 
+    public static boolean check_Mail(String mail) {
+        PreparedStatement pstmt;
+        String sql;
+        ResultSet rs;
+        try {
+            sql = "SELECT * FROM Actor where MAIL=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, mail);
+            rs = pstmt.executeQuery();
+            if (!rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
+
+    }
+
+
+
+
+
 
 }

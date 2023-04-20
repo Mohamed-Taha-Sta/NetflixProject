@@ -245,6 +245,29 @@ public class ProducerDAO {
     }
 
 
+    public static boolean check_Mail(String mail) {
+        PreparedStatement pstmt;
+        String sql;
+        ResultSet rs;
+        try {
+            sql = "SELECT * FROM Producer where EMAIL=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, mail);
+            rs = pstmt.executeQuery();
+            if (!rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
+        }
+
+    }
+
+
+
 
 
 
