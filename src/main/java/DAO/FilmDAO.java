@@ -376,7 +376,6 @@ public class FilmDAO {
         ResultSet rs = null;
         ArrayList<Film> list=new ArrayList<>();
         ArrayList<Film>list1=new ArrayList<>();
-        Long idprod=ProducerDAO.getprodId(prod.getNom(),prod.getPrenom());
 
         String sql;
         try {
@@ -385,7 +384,7 @@ public class FilmDAO {
             //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
             try{sql = "SELECT id_film FROM Film WHERE id_prod = ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setLong(1,idprod);
+                pstmt.setLong(1,prod.getId());
                 rs = pstmt.executeQuery();
 
                 while (rs.next()) {
