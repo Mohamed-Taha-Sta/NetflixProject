@@ -1,6 +1,7 @@
 package Controllers.FXMLControllers;
 
 import Utils.DataHolderSeries;
+import com.example.netflixproject.HelloApplication;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +24,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.IconSetter;
+
 public class VideoPlayerController implements Initializable {
     public MediaView mvVideo;
     @FXML
@@ -40,6 +43,7 @@ public class VideoPlayerController implements Initializable {
     public Label LabelFullScreen;
     public VBox VboxParent;
     public HBox ControlsMenu;
+    public Button ReturnBtn;
 
     private boolean atEndOfVideo = false;
     private boolean isPlaying = false;
@@ -62,12 +66,15 @@ public class VideoPlayerController implements Initializable {
         pageName=page;
     }
 
+    public void OnReturn()throws Exception{
+        HelloApplication.SetRoot(pageName);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 25;
         //setting up player
-
+        IconSetter(ReturnBtn,"src/main/resources/Images/HomePage/BackArrow.png",IV_Size);
         File file = new File(path);
         mediaVideo = new Media(file.toURI().toString());
         mpVideo = new MediaPlayer(mediaVideo);
