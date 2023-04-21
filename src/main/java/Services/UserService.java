@@ -39,7 +39,7 @@ public class UserService {
         return UserDAO.authenticate(mail, pass);
     }
 
-    public static boolean ajout_User(User user) {
+    public static int ajout_User(User user) {
         return UserDAO.ajout_User(user);
     }
 

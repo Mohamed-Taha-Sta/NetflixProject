@@ -17,27 +17,35 @@ import java.util.List;
 public class ProducerDAO {
     private static final Connection conn = ConxDB.getInstance();
 
-    public static  void createprod(Producer prod){
+    public static  long createprod(Producer prod){
         boolean etat = true;
         PreparedStatement pstmt = null;
         String sql;
+        long id = -1;
         Long compteur = prod.getId();
 
         try {
              sql = "INSERT INTO Producer (NOM,PRENOM,EMAIL,PASSWORD) VALUES (?,?,?,?)";
 
-            pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql, new String[]{"ID_PROD"});
             pstmt.setString(1, prod.getNom());
             pstmt.setString(2, prod.getPrenom());
             pstmt.setString(3, prod.getEmail());
             pstmt.setString(4, prod.getpassword());
             pstmt.executeUpdate();
 
+
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                id = generatedKeys.getLong(1);
+            }
+
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            etat = false;
+            return id;
         }
-
+        return id;
     }
     public static void ajoutFilm(Film film){
         FilmDAO.Add(film);

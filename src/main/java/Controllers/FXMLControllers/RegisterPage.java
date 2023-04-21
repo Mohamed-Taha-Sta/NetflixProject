@@ -3,7 +3,10 @@ package Controllers.FXMLControllers;
 import Controllers.ActorController;
 import Controllers.ProducerController;
 import Controllers.UserController;
+import DAO.ProducerDAO;
 import DAO.UserDAO;
+import Entities.Producer;
+import Entities.User;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
@@ -75,10 +78,15 @@ public class RegisterPage implements Initializable {
             }
             DataHolder.setPassword(UserPassword.getText());
             if(identity.getValue().equals("Producer")){
-                HelloApplication.SetRoot("AddSeries");
+                long ID_PROD = ProducerController.createprod(new Producer(DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword()));
+                DataHolder.setProducer(new Producer(ID_PROD,DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword()));
+                HelloApplication.SetRoot("ProducerLandingPage");
             }
-            else {
+            else if (identity.getValue().equals("User")){
                 HelloApplication.SetRoot("ChoicesMenu");
+            }
+            else if(identity.getValue().equals("Admin")){
+                System.out.println("FINISH THE ADMIN");
             }
 
         }

@@ -1,6 +1,5 @@
 package Controllers;
 
-import DAO.UserDAO;
 import Entities.Producer;
 import Services.ProducerService;
 
@@ -13,8 +12,9 @@ public class ProducerController {
         createprod(producer);
     }
 
-    public static  void createprod(Producer prod) {
-        ProducerService.createprod(prod);
+    public static long createprod(Producer prod) {
+        return ProducerService.createprod(prod);
+
     }
 
     public static boolean authenticate(String mail, String pass) {

@@ -1,13 +1,13 @@
 package Services;
 
 import DAO.ProducerDAO;
-import DAO.UserDAO;
 import Entities.Producer;
 
 public class ProducerService {
 
-    public static  void createprod(Producer prod) {
-        ProducerDAO.createprod(prod);
+    public static long createprod(Producer prod) {
+        return ProducerDAO.createprod(prod);
+
     }
 
     public static boolean authenticate(String mail, String pass) {

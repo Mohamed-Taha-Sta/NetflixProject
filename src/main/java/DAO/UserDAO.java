@@ -98,10 +98,11 @@ public class UserDAO {
         }
     }
 
-    public static boolean ajout_User(User user) {
+    public static int ajout_User(User user) {
         PreparedStatement pstmt;
         String sql;
         ResultSet rs;
+        int newID = -1;
         LocalDate today = LocalDate.now();
 
         try {
@@ -112,7 +113,7 @@ public class UserDAO {
             if (rs.next()) {
                 maxID = rs.getInt(1);
             }
-            int newID = maxID + 1;
+            newID = maxID + 1;
             if (user.getImage()== null)
                 sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription) VALUES (?,?,?,?,?,?,?,?,?)";
             else
@@ -137,10 +138,10 @@ public class UserDAO {
             pstmt.executeUpdate();
             authenticate(user.getMail(), user.getPassword());
             System.out.println("exucuted correctly");
-            return true;
+            return newID;
         } catch (Exception e) {
             System.out.println(e.toString());
-            return false;
+            return newID;
         }
     }
 

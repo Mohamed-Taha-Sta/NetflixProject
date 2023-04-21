@@ -63,7 +63,7 @@ public class ChoicesController implements Initializable {
         }
         date=LocalDate.parse(DataHolder.getBirthday(),formatter);
         User user = new User(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword(), date, selectedActors, selectedGenres);
-        if(UserDAO.ajout_User(user)){
+        if(UserDAO.ajout_User(user)!=-1){
             HelloApplication.SetRoot("HomePage");
         }
         else{
