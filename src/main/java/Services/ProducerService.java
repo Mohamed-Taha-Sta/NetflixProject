@@ -19,6 +19,25 @@ public class ProducerService {
         return ProducerDAO.check_Mail(mail);
     }
 
+    public static void modifnom(Long id,String nom) {
+        ProducerDAO.modifnom(id,nom);
+    }
+
+    public static void modifpassword(Long id,String pass) {
+        ProducerDAO.modifpassword(id,pass);
+    }
+
+    public static void modifmail(Long id,String pass) {
+        ProducerDAO.modifmail(id,pass);
+    }
+
+    public static void modifprenom(Long id,String pass) {
+        ProducerDAO.modifprenom(id,pass);
+    }
+
+    public static Producer getProdByID(long ID_PROD) {
+        return ProducerDAO.getProdByID(ID_PROD);
+    }
 
 
-}
+    }

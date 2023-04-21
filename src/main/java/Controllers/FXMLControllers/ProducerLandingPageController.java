@@ -1,7 +1,9 @@
 package Controllers.FXMLControllers;
 
 import Controllers.FilmController;
+import Controllers.ProducerController;
 import Controllers.SerieController;
+import Controllers.UserController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
@@ -38,6 +40,8 @@ public class ProducerLandingPageController implements Initializable {
     public TextField prenameField;
     public Button PrenameBtn;
     public TextField namefield;
+    public AnchorPane ProfileMenu;
+
     public Button NameBtn;
     public TextField mailfield;
     public Button MailBtn;
@@ -73,6 +77,20 @@ public class ProducerLandingPageController implements Initializable {
         HelloApplication.SetRoot("AddFilm");
     }
 
+
+
+    public void OnProfilebtn()  {
+        ProfileMenu.setVisible(true);
+        PassMenu.setVisible(false);
+    }
+
+
+    public void OnPassbtn()  {
+        ProfileMenu.setVisible(false);
+        PassMenu.setVisible(true);
+    }
+
+
     public void OnClickMovie() throws Exception {
 
         Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
@@ -85,8 +103,6 @@ public class ProducerLandingPageController implements Initializable {
             DataHolderFilm.setSelectedFilm(selectedMovie);
             HelloApplication.SetRoot("ProducerFilmView");
         }
-
-//        HelloApplication.SetRoot("");
     }
 
 
@@ -103,7 +119,69 @@ public class ProducerLandingPageController implements Initializable {
             HelloApplication.SetRoot("ProducerSeriesView");
         }
 
-//        HelloApplication.SetRoot("");
+    }
+
+
+    public void OnLogOutBtn() throws Exception {
+        HelloApplication.SetRoot("LoginPage");
+        DataHolder.setUser(null);
+    }
+
+    public void OnPrenameBtn() {
+        if (prenameField.getText().isEmpty()) {
+            showErrorMessage(AlertText,"Your FirstName field is empty");
+        } else {
+            ProducerController.modifprenom(DataHolder.getProducer().getId(),prenameField.getText());
+            DataHolder.getProducer().setPrenom(prenameField.getText());
+            PrenameLable.setText(prenameField.getText());
+            ProfileName.setText(DataHolder.getProducer().getNom() + " " + DataHolder.getProducer().getPrenom());
+        }
+    }
+
+
+    public void OnMailBtn()  {
+        if (mailfield.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Your Mail field is empty");
+        } else {
+            ProducerController.modifmail(DataHolder.getProducer().getId(),mailfield.getText());
+            DataHolder.getProducer().setEmail(mailfield.getText());
+            MailLabel.setText(mailfield.getText());
+        }
+    }
+
+
+    public void OnNameBtn()  {
+        if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
+            showErrorMessage( AlertText,"Your LastName field is empty");
+        } else {
+            ProducerController.modifnom(DataHolder.getProducer().getId(),namefield.getText());
+            DataHolder.getProducer().setNom(namefield.getText());
+            NameLabel.setText(namefield.getText());
+            ProfileName.setText(DataHolder.getProducer().getNom() + " " + DataHolder.getProducer().getPrenom());
+        }
+    }
+
+    public void OnConfirm()  {
+        if (OldPass.getText().isEmpty()) {
+            showErrorMessage(passAlert, "Old Password Required!");
+        } else if (newPass.getText().isEmpty()) {
+            showErrorMessage(passAlert, "Your new Password is empty!");
+        } else if (PassConf.getText().isEmpty()) {
+            showErrorMessage(passAlert, "Please Confirm your Password!");
+        } else if (!newPass.getText().equals(PassConf.getText())) {
+            showErrorMessage(passAlert, "Your confirm password is wrong!");
+
+        } else if (newPass.getText().equals(OldPass.getText())) {
+            showErrorMessage(passAlert, "New Password already in use!");
+        } else if (!OldPass.getText().equals(DataHolder.getProducer().getpassword())) {
+            showErrorMessage(passAlert,"Wrong Password!");
+        } else {
+            ProducerController.modifpassword(DataHolder.getProducer().getId(),newPass.getText());
+            showErrorMessage(passAlert,"Your password was changed Successfully!");
+            PassConf.setText("");
+            OldPass.setText("");
+            newPass.setText("");
+        }
     }
 
 
@@ -142,29 +220,7 @@ public class ProducerLandingPageController implements Initializable {
         SeriesTable.setItems(Series);
 
 
-//        MoviesTable.setRowFactory(tv -> {
-//            TableRow<Film> row = new TableRow<>();
-//            Film rowData;
-//            row.setOnMouseClicked(event -> {
-//                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-//                    Film rowDataLambda = row.getItem();
-//                }
-//            });
-//            return row;
-//        });
 
-
-//
-//        SeriesTable.setRowFactory(tv -> {
-//            TableRow<Serie> row = new TableRow<>();
-//            Film rowData;
-//            row.setOnMouseClicked(event -> {
-//                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-//                    Serie rowDataLambda = row.getItem();
-//                }
-//            });
-//            return row;
-//        });
 
     }
 

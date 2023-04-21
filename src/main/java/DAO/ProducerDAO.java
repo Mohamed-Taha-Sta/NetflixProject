@@ -217,6 +217,47 @@ public class ProducerDAO {
     }
 
 
+    public static Producer getProdByID(long ID_PROD) {
+        PreparedStatement pstmt = null;
+        String sql;
+        Producer producer = null;
+        String mail;
+        String password;
+        String Name;
+        String LName;
+        ResultSet rs;
+        try {
+            sql = "SELECT * FROM producer WHERE ID_PROD = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, ID_PROD);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                ID_PROD = rs.getLong(1);
+                Name = rs.getString(2);
+                LName = rs.getString(3);
+                mail = rs.getString(4);
+                password = rs.getString(5);
+
+                producer = new Producer(ID_PROD,Name,LName,mail,password);
+
+                return producer;
+
+            } else {
+                System.out.println("PRODUCER n'existe pas");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erreur lors de l'exécution de la requête SQL : " + ex.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException ex) {
+                System.out.println("Erreur lors de la fermeture du statement : " + ex.getMessage());
+            }
+        }
+        return null;
+    }
+
+
 
 
     public static boolean authenticate(String mail, String pass) {

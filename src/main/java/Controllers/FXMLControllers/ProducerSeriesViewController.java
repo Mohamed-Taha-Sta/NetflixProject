@@ -32,8 +32,6 @@ public class ProducerSeriesViewController implements Initializable {
     public Label genreLabel;
     public TextArea Description;
     public ImageView Thumbnail;
-    public Button ThumbUp;
-    public Button ThumbDown;
     public Button BackBtn;
     public Button SynopsisBtn;
 
