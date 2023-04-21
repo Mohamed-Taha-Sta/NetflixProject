@@ -18,18 +18,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.IconSetter;
+import static Utils.RepeatableFunction.ImageClipper;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProfilePageController implements Initializable {
@@ -144,7 +143,7 @@ public class ProfilePageController implements Initializable {
     }
 
 
-    public void OnUpdateActors()throws Exception{
+    public void OnUpdateActors(){
         ArrayList<Long> selectedActors = new ArrayList<>();
         for (Actor actor : actors ) {
             if (actor.getSelect().isSelected()) {
@@ -167,7 +166,7 @@ public class ProfilePageController implements Initializable {
 
     }
 
-    public void OnUpdateGenres()throws  Exception{
+    public void OnUpdateGenres(){
         ArrayList<String> selectedGenres = new ArrayList<>();
         for (Genre genre: genres){
             if(genre.getSelect().isSelected()){
@@ -192,7 +191,7 @@ public class ProfilePageController implements Initializable {
 
     }
     @FXML
-    public void OnProfileImage(javafx.scene.input.MouseEvent event) throws Exception {
+    public void OnProfileImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Profile Image");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -223,7 +222,7 @@ public class ProfilePageController implements Initializable {
         HelloApplication.SetRoot("HomePage");
     }
 
-    public void OnloadProfile() throws Exception {
+    public void OnloadProfile() {
 
         System.out.println(DataHolder.getUser().getBirthday());
         ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
@@ -234,7 +233,7 @@ public class ProfilePageController implements Initializable {
             Birthdaypicker.setValue(DataHolder.getUser().getBirthday());
         } catch (Exception e) {
 
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
         TableSetter();
 
@@ -254,19 +253,19 @@ public class ProfilePageController implements Initializable {
         GenreTable.setItems(genres);
     }
 
-    public void OnProfilebtn() throws Exception {
+    public void OnProfilebtn()  {
         ProfileMenu.setVisible(true);
         NotificationMenu.setVisible(false);
         PassMenu.setVisible(false);
     }
 
-    public void OnNotibtn() throws Exception {
+    public void OnNotibtn()  {
         ProfileMenu.setVisible(false);
         NotificationMenu.setVisible(true);
         PassMenu.setVisible(false);
     }
 
-    public void OnPassbtn() throws Exception {
+    public void OnPassbtn()  {
         ProfileMenu.setVisible(false);
         NotificationMenu.setVisible(false);
         PassMenu.setVisible(true);
@@ -277,7 +276,7 @@ public class ProfilePageController implements Initializable {
         DataHolder.setUser(null);
     }
 
-    public void OnPrenameBtn() throws Exception {
+    public void OnPrenameBtn() {
         if (prenameField.getText().isEmpty()) {
             showErrorMessage(AlertText,"Your FirstName field is empty");
         } else {
@@ -288,7 +287,7 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnMailBtn() throws Exception {
+    public void OnMailBtn()  {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
         } else {
@@ -298,7 +297,7 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnNameBtn() throws Exception {
+    public void OnNameBtn()  {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
             showErrorMessage( AlertText,"Your LastName field is empty");
         } else {
@@ -309,7 +308,7 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnBirthdayBtn() throws Exception {
+    public void OnBirthdayBtn(){
         if (Birthdaypicker.getValue().equals(DataHolder.getUser().getBirthday())) {
             showErrorMessage(AlertText, "You didnt change your birthday");
         } else {
@@ -319,7 +318,7 @@ public class ProfilePageController implements Initializable {
     }
 
 
-    public void OnConfirm() throws Exception {
+    public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
         } else if (newPass.getText().isEmpty()) {
@@ -344,7 +343,6 @@ public class ProfilePageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        final int IV_Size = 25;
         try {
             UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
             File imageFile = DataHolder.getImage();
@@ -353,14 +351,14 @@ public class ProfilePageController implements Initializable {
                 Image profileImage = new Image(imageFile.toURI().toString());
                 System.out.println("Profile image in profilepage: " + profileImage);
                 Profile_Image.setImage(profileImage);
-                Profile_Image = HomePageController.ImageClipper(Profile_Image);
+                ImageClipper(Profile_Image);
             } else {
                 System.out.println("No image found for user.");
             }
         } catch (Exception e) {
             System.out.println("image not found");
         }
-        HomePageController.IconSetter(returnBtn, "src/main/resources/Images/HomePage/BackArrow.png", 25);
+        IconSetter(returnBtn, "src/main/resources/Images/HomePage/BackArrow.png", 25);
         try {
             OnloadProfile();
         } catch (Exception e) {

@@ -3,7 +3,6 @@ package Utils;
 import Entities.Actor;
 import Entities.Producer;
 import Entities.User;
-import javafx.scene.image.Image;
 
 import java.io.File;
 

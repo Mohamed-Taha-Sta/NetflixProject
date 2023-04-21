@@ -16,6 +16,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.IconSetter;
+
 public class FilmPageController implements Initializable  {
 
     public TextField searchBar;
@@ -73,9 +75,9 @@ public class FilmPageController implements Initializable  {
                 "Western"
         );
         genresSelector.getItems().addAll(genreNames);
-        HomePageController.IconSetter(searchButton,"src/main/resources/Images/HomePage/search.png",20);
-        HomePageController.IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",30);
-        HomePageController.IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
-        HomePageController.IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);
+        IconSetter(searchButton,"src/main/resources/Images/HomePage/search.png",20);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",30);
+        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
+        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);
     }
 }

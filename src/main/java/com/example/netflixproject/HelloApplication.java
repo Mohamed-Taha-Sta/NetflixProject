@@ -19,8 +19,6 @@ public class HelloApplication extends Application implements Initializable {
         stage.setResizable(false);
         stage.setMinWidth(1280);
         stage.setMinHeight(720);
-        stage.setMaxHeight(1280);
-        stage.setMaxWidth(720);
         stage.setScene(scene);
         stage.show();
 

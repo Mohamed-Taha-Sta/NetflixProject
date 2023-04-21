@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../Images/Design/Background.png" />
+            </image>
+        </ImageView>
+        <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-9.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
+                    <children>
+                        <ImageView cache="true" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" />
+                        <VBox alignment="CENTER">
+                           <children>
+                                      <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" />
+                                        <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </VBox>
+                                <Button id="MenuBtn" fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" />
+                            </children>
+                            <VBox.margin>
+                                <Insets bottom="20.0" />
+                            </VBox.margin>
+                        </VBox>
+                    </children>
+                </VBox>
+                <Line endX="-99.17283630371094" endY="761.594970703125" startX="-99.17298889160156" startY="79.86698913574219" stroke="#d62e4a" strokeMiterLimit="15.0" strokeWidth="2.0" />
+                  <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                      <children>
+                          <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
+                              <children>
+                                  <VBox alignment="CENTER_LEFT" maxHeight="200.0" prefHeight="200.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefWidth="1116.0" spacing="10.0">
+                                 <children>
+                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" stylesheets="@../../../Style.css" />
+                                    <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </HBox.margin></ImageView>
+                                    <VBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="521.0" spacing="25.0">
+                                       <children>
+                                          <Label id="Title" fx:id="SerieName" text="Title" />
+                                          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                                             <children>
+                                                <Label id="Category" text="Produced by:" />
+                                                <Label id="Category" fx:id="DirectLabel" text="Label" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" spacing="20.0">
+                                       <children>
+                                          <Label id="Category" text="Rating: " />
+                                          <HBox alignment="CENTER" prefWidth="298.0" spacing="30.0" VBox.vgrow="SOMETIMES">
+                                             <children>
+                                                <Button id="MenuBtn" fx:id="ThumbUp" mnemonicParsing="false" />
+                                                <Button id="MenuBtn" fx:id="ThumbDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" />
+                                             </children>
+                                          </HBox>
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                                  </VBox>
+                              </children>
+                              <padding>
+                                  <Insets bottom="8.0" left="8.0" />
+                              </padding>
+                          </VBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" style="-fx-background-radius: 40px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <Label id="Title" fx:id="SeasonName2" text="Title" />
+                              <TextArea prefHeight="250.0" prefWidth="524.0" wrapText="true" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="518.0" spacing="10.0">
+                                 <children>
+                                    <Label id="Category" text="Premiere Date:" />
+                                    <Label id="Category" fx:id="dateLabel" text="Label" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="40.0" layoutY="346.0" prefHeight="46.0" prefWidth="518.0" spacing="10.0">
+                                 <children>
+                                    <Label id="Category" text="Genre:" />
+                                    <Label id="Category" fx:id="genreLabel" text="Label" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Line endX="-97.51477813720703" endY="206.3651580810547" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0" />
+                        <VBox alignment="CENTER" maxHeight="440.0" maxWidth="550.0" prefHeight="200.0" prefWidth="100.0" spacing="40.0" HBox.hgrow="SOMETIMES">
+                           <HBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </HBox.margin>
+                           <children>
+                              <ImageView fitHeight="270.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </ImageView>
+                              <Button id="SynopsisBtn" mnemonicParsing="false" text="Watch Now" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </HBox>
+                      </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="15.0" />
+               </padding>
+                  </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

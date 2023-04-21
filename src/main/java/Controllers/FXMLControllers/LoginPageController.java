@@ -3,8 +3,6 @@ package Controllers.FXMLControllers;
 import Controllers.ActorController;
 import Controllers.ProducerController;
 import Controllers.UserController;
-import DAO.ProducerDAO;
-import DAO.UserDAO;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
@@ -14,8 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -24,13 +20,8 @@ import java.util.ResourceBundle;
 
 public class LoginPageController implements Initializable {
 
-    public AnchorPane loginpage;
     public Text AlertText;
     public TextField mail;
-    @FXML
-    private Button login;
-    @FXML
-    private Button signup;
 
 
     @FXML

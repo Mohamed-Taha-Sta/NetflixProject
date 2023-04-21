@@ -1,14 +1,11 @@
 package Controllers;
 
-import DAO.UserDAO;
 import Entities.User;
 import Services.UserService;
 
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class UserController {
 

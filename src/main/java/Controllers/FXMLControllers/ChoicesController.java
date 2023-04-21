@@ -34,7 +34,6 @@ public class ChoicesController implements Initializable {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate date;
 
-    private User user;
     public TableView<Actor> ActorTable = new TableView<>();
     public TableView<Genre> GenreTable=new TableView<>();
     @FXML
@@ -63,10 +62,7 @@ public class ChoicesController implements Initializable {
             }
         }
         date=LocalDate.parse(DataHolder.getBirthday(),formatter);
-        user=new User(DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword(),date,selectedActors,selectedGenres);
-        System.out.println("Selected Actors: "+selectedActors);
-        System.out.println("Selected Genres: "+selectedGenres);
-        System.out.println(user);
+        User user = new User(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword(), date, selectedActors, selectedGenres);
         if(UserDAO.ajout_User(user)){
             HelloApplication.SetRoot("HomePage");
         }

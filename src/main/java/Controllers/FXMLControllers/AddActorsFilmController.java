@@ -2,11 +2,12 @@ package Controllers.FXMLControllers;
 
 import Controllers.ActorController;
 import Controllers.FilmController;
-import Controllers.SerieController;
-import Entities.*;
+import Entities.Actor;
+import Entities.Film;
+import Entities.MainActor;
+import Entities.Supportingactor;
 import Utils.DataHolder;
 import Utils.DataHolderFilm;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

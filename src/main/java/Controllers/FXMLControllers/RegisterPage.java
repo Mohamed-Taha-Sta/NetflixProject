@@ -74,7 +74,13 @@ public class RegisterPage implements Initializable {
                 DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
             }
             DataHolder.setPassword(UserPassword.getText());
-            HelloApplication.SetRoot("ChoicesMenu");
+            if(identity.getValue().equals("Producer")){
+                HelloApplication.SetRoot("AddSeries");
+            }
+            else {
+                HelloApplication.SetRoot("ChoicesMenu");
+            }
+
         }
 
     }

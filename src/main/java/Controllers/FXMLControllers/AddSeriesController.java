@@ -84,33 +84,85 @@ public class AddSeriesController implements Initializable {
 
     }
 
-    @FXML
-    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose Thumbnail");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
-        fileChooser.getExtensionFilters().add(imageFilter);
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            Image image = new Image(selectedFile.toURI().toString());
+//    @FXML
+//    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Choose Thumbnail");
+//        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+//        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
+//        fileChooser.getExtensionFilters().add(imageFilter);
+//        File selectedFile = fileChooser.showOpenDialog(null);
+//        //Taha i added the ability of checking the aspect ration
+//        double targetAspectRatio = 16.0 / 9.0;
+//        if (selectedFile != null) {
+//            Image image = new Image(selectedFile.toURI().toString());
+//
+////            int width = (int) image.getWidth();
+////            int height = (int) image.getHeight();
+//            double width = image.getWidth();
+//            double height = image.getHeight();
+//            double aspectRatio = width / height;
+//            if(aspectRatio==targetAspectRatio){
+//                DataHolderSeries.setThumbnail(selectedFile);
+//                Thumbnail.setText(selectedFile.toURI().toString());
+//
+//            }
+//            else{
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Error");
+//                alert.setHeaderText("Invalid Image Aspect Ratio");
+//                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+//                alert.showAndWait();
+//            }
+//            if (width <= 1920 && height <= 1080) {
+//                DataHolderSeries.setThumbnail(selectedFile);
+//                Thumbnail.setText(selectedFile.toURI().toString());
+//
+//            } else {
+//                // If the selected image does not have the required dimensions, display an error message
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("Error");
+//                alert.setHeaderText("Invalid Image Size");
+//                alert.setContentText("Please select an image with dimensions of 1920*1080 pixels.");
+//                alert.showAndWait();
+//            }
+//        }
+//    }
+    //Tiny changes
+ public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Choose Thumbnail");
+    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
+    fileChooser.getExtensionFilters().add(imageFilter);
+    File selectedFile = fileChooser.showOpenDialog(null);
 
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
-            if (width <= 1920 && height <= 1080) {
-                DataHolderSeries.setThumbnail(selectedFile);
-                Thumbnail.setText(selectedFile.toURI().toString());
+    if (selectedFile != null) {
+        Image image = new Image(selectedFile.toURI().toString());
+        double targetAspectRatio = 16.0 / 9.0;
+        double width = image.getWidth();
+        double height = image.getHeight();
+        double aspectRatio = width / height;
 
-            } else {
-                // If the selected image does not have the required dimensions, display an error message
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid Image Size");
-                alert.setContentText("Please select an image with dimensions of 1920*1080 pixels.");
-                alert.showAndWait();
-            }
+        if (aspectRatio != targetAspectRatio) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid Image Aspect Ratio");
+            alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+            alert.showAndWait();
+        } else if (width > 1920 || height > 1080) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Invalid Image Size");
+            alert.setContentText("Please select an image with dimensions of 1920*1080 pixels or less.");
+            alert.showAndWait();
+        } else {
+            DataHolderSeries.setThumbnail(selectedFile);
+            Thumbnail.setText(selectedFile.toURI().toString());
         }
     }
+}
+
 
 
     @FXML
