@@ -53,9 +53,13 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivFullScreen;
     private ImageView ivExit;
 
+    static  String pageName;
     static String path;
     public static void SetPath(String PATH){
         path=PATH;
+    }
+    public static void setPageName(String page){
+        pageName=page;
     }
 
 

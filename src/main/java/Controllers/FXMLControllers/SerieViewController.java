@@ -51,6 +51,7 @@ public class SerieViewController implements Initializable {
 
     public void OnSynopsisClick()throws Exception{
         VideoPlayerController.SetPath(DataHolderSeries.getSelectedSeries().getSynopsis().getPath());
+        VideoPlayerController.setPageName("SerieView");
         HelloApplication.SetRoot("VideoPlayer");
     }
 
