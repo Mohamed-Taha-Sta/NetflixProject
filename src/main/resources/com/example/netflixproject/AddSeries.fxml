@@ -100,7 +100,7 @@
                         </Text>
                         <HBox>
                            <children>
-                              <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="login1" mnemonicParsing="false" onAction="#onBack" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>

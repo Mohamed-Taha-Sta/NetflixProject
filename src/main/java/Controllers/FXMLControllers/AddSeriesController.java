@@ -37,6 +37,10 @@ public class AddSeriesController implements Initializable {
     public ComboBox<String> CountrySelector;
     public ComboBox<String> LanguageSelector;
 
+    @FXML
+    protected void onBack() throws Exception {
+        HelloApplication.SetRoot("ProducerLandingPage");
+    }
 
     @FXML
     protected  void onAdd() throws Exception{

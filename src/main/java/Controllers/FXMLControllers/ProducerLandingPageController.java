@@ -5,11 +5,9 @@ import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
+import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -18,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -52,10 +49,8 @@ public class ProducerLandingPageController implements Initializable {
 
     public TableView<Film> MoviesTable = new TableView<>();
     public TableColumn<Film,String> MovieName;
-    public TableColumn<Film,Long> MovieScore;
     public TableView<Serie> SeriesTable = new TableView<>();
     public TableColumn<Film,String> SeriesName;
-    public TableColumn<Film,String> SeriesDescription;
 
 
     //Password Menu
@@ -65,8 +60,23 @@ public class ProducerLandingPageController implements Initializable {
     public TextField PassConf;
     public Button confirmBtn;
     public Label passAlert;
-    public Label GenreAlertText;
-    public Label ActorsAlertText;
+    public Label SeriesAlertText;
+    public Label MovieAlertText;
+
+    public void OnAddSeries() throws Exception {
+        HelloApplication.SetRoot("AddSeries");
+    }
+
+    public void OnAddMovie() throws Exception {
+        HelloApplication.SetRoot("AddFilm");
+    }
+
+    public void OnClickMovie()
+    {
+//        HelloApplication.SetRoot("");
+    }
+
+
 
     public ProducerLandingPageController() throws SQLException, IOException {
     }
@@ -95,13 +105,36 @@ public class ProducerLandingPageController implements Initializable {
         }
 
         MovieName.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        MovieScore.setCellValueFactory(new PropertyValueFactory<>("Score"));
 
-//        SeriesName.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        SeriesDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
         MoviesTable.setItems(Films);
         SeriesTable.setItems(Series);
+
+
+        MoviesTable.setRowFactory(tv -> {
+            TableRow<Film> row = new TableRow<>();
+            Film rowData;
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Film rowDataLambda = row.getItem();
+                }
+            });
+            return row;
+        });
+
+//
+//        SeriesTable.setRowFactory(tv -> {
+//            TableRow<Serie> row = new TableRow<>();
+//            Film rowData;
+//            row.setOnMouseClicked(event -> {
+//                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+//                    Serie rowDataLambda = row.getItem();
+//                }
+//            });
+//            return row;
+//        });
+
     }
 
 

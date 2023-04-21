@@ -43,7 +43,7 @@ public class AddFilmController implements Initializable {
 
     @FXML
     protected void onBack() throws Exception {
-//        HelloApplication.SetRoot("");
+        HelloApplication.SetRoot("ProducerLandingPage");
     }
 
     @FXML
