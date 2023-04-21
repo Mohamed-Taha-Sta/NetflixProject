@@ -43,7 +43,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefWidth="1116.0" spacing="10.0">
                                  <children>
-                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" onAction="#onBack" stylesheets="@../../../Style.css" />
+                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" stylesheets="@../../../Style.css" />
                                     <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
@@ -84,7 +84,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
                            <children>
-                              <Label id="Title" fx:id="SerieName2" text="Title" />
+                              <Label id="Title" fx:id="SerieName2" text="Description:" />
                               <TextArea fx:id="Description" prefHeight="250.0" prefWidth="524.0" wrapText="true" />
                               <HBox alignment="CENTER_LEFT" prefHeight="46.0" prefWidth="518.0" spacing="10.0">
                                  <children>

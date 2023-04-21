@@ -38,7 +38,7 @@ public class ProducerSeriesViewController implements Initializable {
     public Button SynopsisBtn;
 
     public void onBack() throws Exception {
-        HelloApplication.SetRoot("ProducerLandingPageController");
+        HelloApplication.SetRoot("ProducerLandingPage");
     }
 
     @Override
@@ -51,8 +51,8 @@ public class ProducerSeriesViewController implements Initializable {
         Thumbnail.setFitWidth(240);
         Thumbnail.setFitHeight(135);
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
-        dateLabel.setText(DataHolderSeries.getDebutDate().toString());
-        genreLabel.setText(DataHolderSeries.getGenreList().toString());
+        dateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
+        genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());
         try {
             RatingLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries())));
         } catch (SQLException e) {
@@ -60,12 +60,7 @@ public class ProducerSeriesViewController implements Initializable {
         } catch (IOException e) {
             System.out.println("IO Error getting the Rating");
         }
-        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",40);
-        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
-        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",40);
         ImageClipper(Thumbnail);
-        IconSetter(ThumbUp,"src/main/resources/Images/Design/ThumbUp.png",40);
-        IconSetter(ThumbDown,"src/main/resources/Images/Design/ThumbDown.png",40);
         IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
 
 

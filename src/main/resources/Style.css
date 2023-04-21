@@ -303,19 +303,28 @@
 /* transparent TEXT-AREA*/
 .text-area {
     -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
 }
 
 .text-area .scroll-pane {
     -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
 }
 
 .text-area .scroll-pane .viewport{
     -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
 }
 
 
 .text-area .scroll-pane .content{
     -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+
 }
 
 
