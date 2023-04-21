@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 import org.controlsfx.control.SearchableComboBox;
@@ -47,17 +47,35 @@ public class HomePageController implements Initializable {
     public ImageView ProfileBtn;
 
 
+
+    List<Serie> serie ;
     @FXML
 
-    public void handleImageClick(javafx.scene.input.MouseEvent event) {
-        try {
-            ImageView clickedImage = (ImageView) event.getSource();
-            HelloApplication.SetRoot("VideoPlayer");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void handleImageClick(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        Serie selectedSerie = null;
+        for (Serie s : serie) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
+                selectedSerie = s;
+                break;
+            }
+        }
+        if (selectedSerie != null) {
+            try {
+                DataHolderSeries.setSelectedSeries(selectedSerie);
+                HelloApplication.SetRoot("SerieView");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
+
+
+
+
+
+
+
 
 
     @FXML
@@ -158,7 +176,7 @@ public class HomePageController implements Initializable {
 
         SetUserImage();
         final int IV_Size = 40;
-        List<Serie> serie = new ArrayList<>();
+
         List<Film> films = new ArrayList<>();
         if (DataHolder.getUser() != null) {
             welcome.setText("Welcome Back " + DataHolder.getUser().getPrename() + "!");
@@ -174,6 +192,7 @@ public class HomePageController implements Initializable {
             throw new RuntimeException(e);
         }
         searchBarInit(serie, films);
+
 
 
         for (Serie s : serie) {

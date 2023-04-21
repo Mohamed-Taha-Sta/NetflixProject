@@ -12,6 +12,7 @@
     -fx-font-size: 16px;
     -fx-font-weight: Bold;
     -fx-font-style: italic;
+    -fx-text-fill: white;
 }
 
 #MenuBtn {

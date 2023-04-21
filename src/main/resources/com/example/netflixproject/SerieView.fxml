@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -115,11 +116,14 @@
                            </padding>
                         </VBox>
                         <Line endX="-97.51477813720703" endY="206.3651580810547" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0" />
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="SOMETIMES">
+                        <ScrollPane id="scroll-pane" hbarPolicy="NEVER" prefHeight="438.0" prefWidth="509.0" stylesheets="@../../../Style.css">
+                           <content>
+                              <VBox fx:id="SeasonView" alignment="CENTER" prefHeight="431.0" prefWidth="511.0" style="-fx-background-color: transparent;" />
+                           </content>
                            <HBox.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
-                        </VBox>
+                        </ScrollPane>
                      </children>
                      <VBox.margin>
                         <Insets bottom="10.0" />
