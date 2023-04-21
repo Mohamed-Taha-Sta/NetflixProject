@@ -3,6 +3,7 @@ package Controllers;
 import DAO.SerieDAO;
 import Entities.Actor;
 import Entities.MainActor;
+import Entities.Producer;
 import Entities.Serie;
 import Services.SerieService;
 
@@ -57,6 +58,26 @@ public class SerieController {
     }
 
 
+    public static List<Serie> GetManySeries(long limit) throws SQLException, IOException {
+        return SerieService.GetManySeries(limit);
+    }
 
 
-}
+    public static List<Serie> GetAllSeries() throws SQLException, IOException {
+        return SerieService.GetAllSeries();
+    }
+
+
+    public static List<Serie> GetSeriesByProducer(Producer producer) throws SQLException, IOException {
+        return SerieService.GetSeriesByProducer(producer);
+    }
+
+    public static long StreamAverageScore(Serie serie) throws SQLException, IOException {
+        return SerieService.StreamAverageScore(serie);
+    }
+
+
+
+
+
+    }

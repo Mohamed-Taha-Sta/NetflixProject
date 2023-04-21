@@ -3,6 +3,7 @@ package Services;
 import DAO.FilmDAO;
 import Entities.Actor;
 import Entities.Film;
+import Entities.Producer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,12 @@ public class FilmService {
     }
     public static ArrayList<Film> FindByActor(Actor act){
         return FilmDAO.FindByActor(act);
+    }
+    public static ArrayList<Film> GetAllFilms(){
+        return FilmDAO.GetAllFilms();
+    }
+    public static ArrayList<Film> FindByproducer(Producer prod){
+        return FilmDAO.FindByproducer(prod);
     }
     public static List<Film> filterByGenre( String genreFilter) {
         List<Film> films=FilmDAO.FindByName("");

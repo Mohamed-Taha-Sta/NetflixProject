@@ -452,6 +452,148 @@ public class SerieDAO {
 
 
 
+    public static List<Serie> GetAllSeries() throws SQLException, IOException {
+
+        Serie serie = null;
+
+        List<Serie> serieList = new ArrayList<>();
+
+        String sql = "SELECT * FROM serie";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            long ID = rs.getLong("ID_SERIE");
+            String SerieName = rs.getString("NAME");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            String Language = rs.getString("LANGUAGE");
+            String Country = rs.getString("COUNTRY");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+
+            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+
+            serieList.add(serie);
+        }
+
+        return serieList;
+    }
+
+
+
+
+    public static List<Serie> GetSeriesByProducer(Producer producer) throws SQLException, IOException {
+
+        Serie serie = null;
+
+        List<Serie> serieList = new ArrayList<>();
+
+        String sql = "SELECT * FROM serie where ID_PROD = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, producer.getId());
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            long ID = rs.getLong("ID_SERIE");
+            String SerieName = rs.getString("NAME");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            String Language = rs.getString("LANGUAGE");
+            String Country = rs.getString("COUNTRY");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+
+            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+
+            serieList.add(serie);
+        }
+
+        return serieList;
+    }
+
+
+
+
 
 
     ///////////////////////////////////////////////////// Fonction Fares

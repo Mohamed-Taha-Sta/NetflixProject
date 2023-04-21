@@ -139,6 +139,13 @@ public class FilmController {
     public static ArrayList<Film> FindByActor(Actor act){
         return FilmService.FindByActor(act);
     }
+    public static ArrayList<Film> GetAllFilms(){
+        return FilmService.GetAllFilms();
+    }
+
+    public static ArrayList<Film> FindByproducer(Producer prod){
+        return FilmService.FindByproducer(prod);
+    }
 
 
 

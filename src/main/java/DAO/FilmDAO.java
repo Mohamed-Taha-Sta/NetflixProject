@@ -149,7 +149,7 @@ public class FilmDAO {
         List<Film>list=new ArrayList<>();
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film,nom,description,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod from Film where Film.id_film="+filmid;
+            String sql="select id_film,nom,description,ANNEE_SORTIE,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod from Film where Film.id_film="+filmid;
             pstmt = conn.prepareStatement(sql);
 
             rs = pstmt.executeQuery();
@@ -236,7 +236,7 @@ public class FilmDAO {
         try {
             // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             //String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom like %"+filmnom+"%";
-            String sql="SELECT id_film, nom, description, annerdesortie, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,id_prod " +
+            String sql="SELECT id_film, nom, description, ANNEE_SORTIE, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,id_prod " +
                     "FROM Film " +
                     "WHERE Film.nom LIKE '%" + filmnom + "%'";
             pstmt = conn.prepareStatement(sql);
@@ -399,6 +399,37 @@ public class FilmDAO {
 
 
 
+
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list1;
+
+    }
+
+    public static ArrayList<Film> GetAllFilms() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<Film> list=new ArrayList<>();
+        ArrayList<Film>list1=new ArrayList<>();
+
+        String sql;
+        try {
+
+            try{sql = "SELECT * FROM Film";
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+
+                    list= (ArrayList<Film>) FindByID(rs.getLong(1));
+                    for (int i = 0; i < list.size(); i++) {
+                        list1.add(list.get(i));
+                    }
+                }
+            }catch (Exception e){
+                System.out.println("Error getting all Actors");
+            }
 
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -686,7 +717,7 @@ public class FilmDAO {
 
         try {;
 
-            sql = "UPDATE film SET annerdesortie = '" + java.sql.Date.valueOf(date) + "' WHERE id_film = " + film.getId();
+            sql = "UPDATE film SET ANNEE_SORTIE = '" + java.sql.Date.valueOf(date) + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
 
