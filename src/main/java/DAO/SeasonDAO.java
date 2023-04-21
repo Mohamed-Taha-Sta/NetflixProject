@@ -76,7 +76,6 @@ public class SeasonDAO {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
             long ID_SERIE = rs.getLong("ID_SERIE");
-            String name = rs.getString("NAME");
             String Description = rs.getString("DESCRIPTION");
             int num = rs.getInt("NUM");
             Date DebutDate = rs.getDate("DEBUT_DATE");
@@ -107,9 +106,9 @@ public class SeasonDAO {
             File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
-            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
+//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
-            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail);
 
             SeasonList.add(season);
 
@@ -168,9 +167,9 @@ public class SeasonDAO {
             File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
-            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
+//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
-            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+            season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail);
 
             SeasonList.add(season);
         }
@@ -226,9 +225,9 @@ public class SeasonDAO {
             File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
-            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
+//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
-            season = new Season(ID,fileSynopsis,SerieID,num,DebutDate.toLocalDate(),fileThumbnail,episodeList);
+            season = new Season(ID,name,fileSynopsis,SerieID,num,DebutDate.toLocalDate(),fileThumbnail);
 
             SeasonList.add(season);
         }
