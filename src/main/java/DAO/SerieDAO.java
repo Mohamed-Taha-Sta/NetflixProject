@@ -54,20 +54,20 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return -1;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return -1;
         }
         InsertMainActSerie(id,Serie.getIDMainactorList());
         InsertSuppActSerie(id,Serie.getIDSuppactorList());
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return id;
     }
 
@@ -87,18 +87,18 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return true;
     }
     public static boolean InsertSuppActSerie(long idSerie,List<Long> listSuppAct) throws SQLException {
@@ -117,18 +117,18 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return true;
     }
 
@@ -148,8 +148,8 @@ public class SerieDAO {
             SerieID = rs.getLong("ID_SERIE");
         else
             System.out.println("Error getting SerieID");
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return SerieID;
     }
 
@@ -218,8 +218,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return serieList;
     }
 
@@ -289,8 +289,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return serieList;
     }
 
@@ -311,8 +311,8 @@ public class SerieDAO {
             listIDActor.add(IDActeurPrinc);
         }
         System.out.println("Got Main Actors = "+listIDActor);
-        pstmtGetID.close();
-        conn.close();
+//        pstmtGetID.close();
+//        conn.close();
         return listIDActor;
     }
 
@@ -333,8 +333,8 @@ public class SerieDAO {
             listIDActor.add(IDActeurSupp);
         }
         System.out.println("Got Support Actors = "+listIDActor);
-        pstmtGetID.close();
-        conn.close();
+//        pstmtGetID.close();
+//        conn.close();
         return listIDActor;
     }
 
@@ -364,8 +364,8 @@ public class SerieDAO {
             }
 
         }
-        pstmtGetID.close();
-        conn.close();
+//        pstmtGetID.close();
+//        conn.close();
         return actorList;
 
     }
@@ -396,8 +396,8 @@ public class SerieDAO {
             }
 
         }
-        pstmtGetID.close();
-        conn.close();
+//        pstmtGetID.close();
+//        conn.close();
         return actorList;
 
     }
@@ -471,8 +471,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return serieList;
     }
 
@@ -542,9 +542,9 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-
-        pstmt.close();
-        conn.close();
+//
+//        pstmt.close();
+//        conn.close();
         return serieList;
 
     }
@@ -617,8 +617,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        pstmt.close();
-        conn.close();
+//        pstmt.close();
+//        conn.close();
         return serieList;
     }
 
@@ -721,8 +721,8 @@ public class SerieDAO {
 
         }catch (Exception e){
             System.out.println("Serie n'exite pas");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -737,8 +737,8 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -753,8 +753,8 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -780,8 +780,8 @@ public class SerieDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
@@ -800,14 +800,14 @@ public class SerieDAO {
             pstmt.setBlob(1,inputStreamSynopsisSerie);
             pstmt.setLong(2,serie.getId());
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -827,14 +827,14 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Name = '" + nom + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
 
@@ -851,14 +851,14 @@ public class SerieDAO {
             sql = "UPDATE Serie SET description = '" + description + "' WHERE ID_SERIE = " + serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -873,13 +873,13 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Language = '" + langue + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -894,14 +894,14 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Country = '" + paysorgine + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -920,8 +920,8 @@ public class SerieDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -937,13 +937,13 @@ public class SerieDAO {
             sql = "UPDATE Serie SET listegenre = '" + genreListString + "' WHERE ID_SERIE = " + serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -960,14 +960,14 @@ public class SerieDAO {
             pstmt.setLong(2, act.getID());
 
             pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
 
         } catch (Exception e) {
             System.out.println("acteur n'exite pas");
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
 
@@ -985,13 +985,13 @@ public class SerieDAO {
             pstmt.setLong(2, act.getID());
 
             pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
 
         } catch (Exception e) {
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
     }
@@ -1014,8 +1014,8 @@ public class SerieDAO {
             return true;
 
         } catch (Exception e) {
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
 
@@ -1040,8 +1040,8 @@ public class SerieDAO {
             return true;
 
         } catch (Exception e) {
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return false;
         }
 
@@ -1096,9 +1096,9 @@ public class SerieDAO {
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
-        rs.close();
-        stmt.close();
-        conn.close();
+//        rs.close();
+//        stmt.close();
+//        conn.close();
         return serieList;
     }
 

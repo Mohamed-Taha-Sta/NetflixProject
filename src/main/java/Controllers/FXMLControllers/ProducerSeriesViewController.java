@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.SerieController;
 import Utils.DataHolder;
+import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.Initializable;
@@ -37,6 +38,11 @@ public class ProducerSeriesViewController implements Initializable {
 
     public void onBack() throws Exception {
         HelloApplication.SetRoot("ProducerLandingPage");
+    }
+
+    public void onAddSeason() throws Exception {
+        DataHolderSeries.setIDSerie(DataHolderSeries.getSelectedSeries().getId());
+        HelloApplication.SetRoot("AddSeason");
     }
 
     @Override
