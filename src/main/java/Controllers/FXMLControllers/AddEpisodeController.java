@@ -76,8 +76,7 @@ public class AddEpisodeController implements Initializable {
 
             DataHolderEpisode.setIDEpisode(IdEpisode);
 
-            //CHANGE ME
-//            HelloApplication.SetRoot("HomePage");
+            HelloApplication.SetRoot("ProducerLandingPage");
         }
     }
 
