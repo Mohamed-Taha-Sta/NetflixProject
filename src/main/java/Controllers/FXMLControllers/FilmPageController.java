@@ -76,8 +76,8 @@ public class FilmPageController implements Initializable  {
         );
         genresSelector.getItems().addAll(genreNames);
         IconSetter(searchButton,"src/main/resources/Images/HomePage/search.png",20);
-        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",30);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",40);
         IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
-        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",45);
+        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",40);
     }
 }

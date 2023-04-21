@@ -6,6 +6,8 @@ import Entities.Content;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
+import Utils.DataHolderFilm;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.util.StringConverter;
 import org.controlsfx.control.SearchableComboBox;
@@ -26,7 +29,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.IconSetter;
@@ -35,7 +37,7 @@ import static Utils.RepeatableFunction.ImageClipper;
 public class HomePageController implements Initializable {
 
     public HBox ThumbnailViewer;
- 
+
 
     public Button homeButton;
     public Button seriesButoon;
@@ -45,18 +47,11 @@ public class HomePageController implements Initializable {
     public ImageView ProfileBtn;
 
 
-
-
-
-
-
-
     @FXML
 
     public void handleImageClick(javafx.scene.input.MouseEvent event) {
         try {
             ImageView clickedImage = (ImageView) event.getSource();
-            System.out.println("Clicked image: " + clickedImage.getImage().getUrl());
             HelloApplication.SetRoot("VideoPlayer");
 
         } catch (Exception e) {
@@ -71,21 +66,21 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void OnFilmClick()throws Exception{
+    public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
     }
 
-    public void OnSeriesClick()throws Exception{
+    public void OnSeriesClick() throws Exception {
         HelloApplication.SetRoot("SeriesPage");
     }
 
-    public void SetUserImage(){
+    public void SetUserImage() {
         UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
         File imageFile = DataHolder.getImage();
-        System.out.println("image file: "+imageFile);
+        System.out.println("image file: " + imageFile);
         if (imageFile != null) {
             Image profileImage = new Image(imageFile.toURI().toString());
-            System.out.println("Profile image in profilepage: "+profileImage);
+            System.out.println("Profile image in profilepage: " + profileImage);
 
             ProfileBtn.setImage(profileImage);
             ImageClipper(ProfileBtn);
@@ -93,28 +88,39 @@ public class HomePageController implements Initializable {
             System.out.println("No image found for user.");
         }
     }
+
     public SearchableComboBox<Content> searchBar;
 
-    public void searchBarInit(List<Serie> series, List<Film> films){
-        List<Content> items=new ArrayList<>();
-        items.addAll( series);
-        items.addAll( films);
+    public void navigateToPage(Content selectedItem) throws Exception {
+        if (selectedItem instanceof Serie selectedSerie) {
+            DataHolderSeries.setSelectedSeries(selectedSerie);
+            HelloApplication.SetRoot("SerieView");
+        } else if (selectedItem instanceof Film selectedFilm) {
+            DataHolderFilm.setSelectedFilm(selectedFilm);
+            HelloApplication.SetRoot("FilmView");
+        }
+    }
+
+    public void searchBarInit(List<Serie> series, List<Film> films) {
+        List<Content> items = new ArrayList<>();
+        items.addAll(series);
+        items.addAll(films);
         searchBar.setConverter(new StringConverter<>() {
             @Override
             public String toString(Content item) {
                 if (item == null) {
                     return "";
                 } else if (item instanceof Serie) {
-                    return ((Serie) item).getNom();
+                    return item.getNom();
                 } else if (item instanceof Film) {
-                    return ((Film) item).getNom();
+                    return item.getNom();
                 } else {
                     return item.toString();
                 }
             }
+
             @Override
             public Content fromString(String string) {
-                // We don't need this method for our implementation, so we return null
                 return null;
             }
         });
@@ -126,14 +132,25 @@ public class HomePageController implements Initializable {
                     setText(null);
                 } else {
                     if (item instanceof Serie) {
-                        setText(((Serie) item).getNom());
+                        setText(item.getNom());
                     } else if (item instanceof Film) {
-                        setText(((Film) item).getNom());
+                        setText(item.getNom());
                     }
                 }
             }
         });
         searchBar.setItems(FXCollections.observableArrayList(items));
+        searchBar.setOnAction(event -> {
+            Content selectedItem = searchBar.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                try {
+                    navigateToPage(selectedItem);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -141,26 +158,26 @@ public class HomePageController implements Initializable {
 
         SetUserImage();
         final int IV_Size = 40;
-        List<Serie> serie=new ArrayList<>();
-        List<Film> films=new ArrayList<>();
-        if(DataHolder.getUser()!=null){
-            welcome.setText("Welcome Back "+ DataHolder.getUser().getPrename()+"!");
+        List<Serie> serie = new ArrayList<>();
+        List<Film> films = new ArrayList<>();
+        if (DataHolder.getUser() != null) {
+            welcome.setText("Welcome Back " + DataHolder.getUser().getPrename() + "!");
         }
-        IconSetter(NotificationButton,"src/main/resources/Images/HomePage/Notification.png",IV_Size);
-        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",IV_Size);
-        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",IV_Size);
-        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",IV_Size);
+        IconSetter(NotificationButton, "src/main/resources/Images/HomePage/Notification.png", IV_Size);
+        IconSetter(homeButton, "src/main/resources/Images/HomePage/HomeButton.png", IV_Size);
+        IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", IV_Size);
+        IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", IV_Size);
 
         try {
-            serie=SerieController.GetAllSeries();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            serie = SerieController.GetAllSeries();
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-        searchBarInit(serie,films);
+        searchBarInit(serie, films);
+
+
         for (Serie s : serie) {
-            ImageView imageView ;
+            ImageView imageView;
             imageView = new ImageView(String.valueOf(s.getImg().toURI()));
             imageView.setCursor(Cursor.cursor("hand"));
             imageView.setFitHeight(100);
@@ -170,8 +187,5 @@ public class HomePageController implements Initializable {
             ThumbnailViewer.getChildren().add(imageView);
         }
     }
-
-
-
 }
 

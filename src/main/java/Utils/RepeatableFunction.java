@@ -10,6 +10,12 @@ import javafx.scene.shape.StrokeType;
 import java.io.File;
 
 public class RepeatableFunction {
+    public static void ImageSetter(ImageView Imageview, String path,int width, int height){
+        Image image = new Image(path);
+        Imageview.setImage(image);
+        Imageview.setFitWidth(width);
+        Imageview.setFitHeight(height);
+    }
 
     public static ImageView ImageClipper(ImageView imageView){
         Rectangle imageClip=new Rectangle(imageView.getFitWidth(),imageView.getFitHeight());

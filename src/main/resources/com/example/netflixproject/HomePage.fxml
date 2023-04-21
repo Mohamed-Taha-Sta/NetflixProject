@@ -30,7 +30,7 @@
                         <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="TOP_CENTER" spacing="10.0">
+                  <VBox alignment="TOP_CENTER" spacing="20.0">
                      <children>
                         <VBox alignment="CENTER" spacing="10.0">
                            <children>
@@ -42,7 +42,7 @@
                         <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" onAction="#OnFilmClick" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" />
+                        <Insets top="170.0" />
                      </VBox.margin>
                   </VBox>
                </children>

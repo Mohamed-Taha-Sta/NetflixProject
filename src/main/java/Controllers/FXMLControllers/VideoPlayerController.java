@@ -1,5 +1,6 @@
 package Controllers.FXMLControllers;
 
+import Utils.DataHolderSeries;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,11 +53,18 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivFullScreen;
     private ImageView ivExit;
 
+    static String path;
+    public static void SetPath(String PATH){
+        path=PATH;
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 25;
         //setting up player
-        File file = new File("src/main/java/Test/Video.mp4");
+
+        File file = new File(path);
         mediaVideo = new Media(file.toURI().toString());
         mpVideo = new MediaPlayer(mediaVideo);
         mvVideo.setMediaPlayer(mpVideo);
