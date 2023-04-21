@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,14 +54,20 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
+            pstmt.close();
+            conn.close();
             return -1;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
+            pstmt.close();
+            conn.close();
             return -1;
         }
         InsertMainActSerie(id,Serie.getIDMainactorList());
         InsertSuppActSerie(id,Serie.getIDSuppactorList());
+        pstmt.close();
+        conn.close();
         return id;
     }
 
@@ -80,12 +87,18 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
+            pstmt.close();
+            conn.close();
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
+            pstmt.close();
+            conn.close();
             return false;
         }
+        pstmt.close();
+        conn.close();
         return true;
     }
     public static boolean InsertSuppActSerie(long idSerie,List<Long> listSuppAct) throws SQLException {
@@ -104,12 +117,18 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
+            pstmt.close();
+            conn.close();
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
+            pstmt.close();
+            conn.close();
             return false;
         }
+        pstmt.close();
+        conn.close();
         return true;
     }
 
@@ -129,7 +148,8 @@ public class SerieDAO {
             SerieID = rs.getLong("ID_SERIE");
         else
             System.out.println("Error getting SerieID");
-
+        pstmt.close();
+        conn.close();
         return SerieID;
     }
 
@@ -198,7 +218,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-
+        pstmt.close();
+        conn.close();
         return serieList;
     }
 
@@ -268,7 +289,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-
+        pstmt.close();
+        conn.close();
         return serieList;
     }
 
@@ -289,6 +311,8 @@ public class SerieDAO {
             listIDActor.add(IDActeurPrinc);
         }
         System.out.println("Got Main Actors = "+listIDActor);
+        pstmtGetID.close();
+        conn.close();
         return listIDActor;
     }
 
@@ -309,6 +333,8 @@ public class SerieDAO {
             listIDActor.add(IDActeurSupp);
         }
         System.out.println("Got Support Actors = "+listIDActor);
+        pstmtGetID.close();
+        conn.close();
         return listIDActor;
     }
 
@@ -338,7 +364,8 @@ public class SerieDAO {
             }
 
         }
-
+        pstmtGetID.close();
+        conn.close();
         return actorList;
 
     }
@@ -369,7 +396,8 @@ public class SerieDAO {
             }
 
         }
-
+        pstmtGetID.close();
+        conn.close();
         return actorList;
 
     }
@@ -443,7 +471,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-
+        pstmt.close();
+        conn.close();
         return serieList;
     }
 
@@ -514,7 +543,10 @@ public class SerieDAO {
             serieList.add(serie);
         }
 
+        pstmt.close();
+        conn.close();
         return serieList;
+
     }
 
 
@@ -585,7 +617,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-
+        pstmt.close();
+        conn.close();
         return serieList;
     }
 
@@ -673,7 +706,7 @@ public class SerieDAO {
 
 
 
-    public static boolean DeleteSerie(Serie serie) {
+    public static boolean DeleteSerie(Serie serie) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
 
@@ -688,12 +721,14 @@ public class SerieDAO {
 
         }catch (Exception e){
             System.out.println("Serie n'exite pas");
+            pstmt.close();
+            conn.close();
             return false;
         }
     }
 
 
-    public static boolean DeleteCorrespMainActorSerie(Serie serie) {
+    public static boolean DeleteCorrespMainActorSerie(Serie serie) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
         try{sql = "delete FROM SERIEACTORPRINC WHERE ID_SERIE = ?";
@@ -702,11 +737,13 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
+            pstmt.close();
+            conn.close();
             return false;
         }
     }
 
-    public static boolean DeleteCorrespSuppActorSerie(Serie Serie) {
+    public static boolean DeleteCorrespSuppActorSerie(Serie Serie) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
         try{sql = "delete FROM SERIEACTORSUPP WHERE ID_SERIE = ? ";
@@ -716,55 +753,354 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
+            pstmt.close();
+            conn.close();
             return false;
         }
     }
 
-//    public static boolean ModifVideoSerie(Serie serie,File NewVideo) {
-//        PreparedStatement pstmt;
-//        ResultSet rs;
-//        String sql;
-//
-//        try {;
-//            InputStream inputStreamSynopsisfilm=new FileInputStream(NewVideo);
-//
-//
-//            sql = "UPDATE SERIE SET synopsis = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + serie.getId();
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.executeQuery();
-//
-//            return true;
-//        } catch (SQLException e) {
-//            System.out.println("error dans la connection de la base");
-//            return false;
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//
-//    }
-//
-//
+    public static boolean modifimg(Serie serie, File img) throws SQLException {
+        PreparedStatement pstmt = null;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] imgBytes = Files.readAllBytes(img.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE Serie SET img = ? WHERE ID_SERIE = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, imgBytes);
+            pstmt.setLong(2, serie.getId());
+
+            pstmt.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+            pstmt.close();
+            conn.close();
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+
+    public static boolean ModifSynopsisSerie(Serie serie,File NewSynopsis) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            InputStream inputStreamSynopsisSerie = new FileInputStream(NewSynopsis);
+            sql = "UPDATE SERIE SET SYNOPSIS = ? WHERE ID_SERIE = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBlob(1,inputStreamSynopsisSerie);
+            pstmt.setLong(2,serie.getId());
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            pstmt.close();
+            conn.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
+
+    }
 
 
+    public static boolean modifnom(Serie Serie,String nom) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE Serie SET Name = '" + nom + "' WHERE ID_SERIE = " + Serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
 
 
+    }
+    public static boolean modifdescription(Serie serie,String description) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            ;
+
+            sql = "UPDATE Serie SET description = '" + description + "' WHERE ID_SERIE = " + serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean modiflangues(Serie Serie,String langue) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE Serie SET Language = '" + langue + "' WHERE ID_SERIE = " + Serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean modifpaysoregine(Serie Serie,String paysorgine) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE Serie SET Country = '" + paysorgine + "' WHERE ID_SERIE = " + Serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean modifAnnerdesoritie(Serie serie, LocalDate date) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {;
+
+            sql = "UPDATE Serie SET DEBUT_DATE = '" + java.sql.Date.valueOf(date) + "' WHERE ID_SERIE = " + serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean modiflistegenre(Serie serie,List<String> listegenre ) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {;
+            String genreListString = String.join(",", listegenre.stream().map(Object::toString).toArray(String[]::new));
+
+            sql = "UPDATE Serie SET listegenre = '" + genreListString + "' WHERE ID_SERIE = " + serie.getId();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean deleteSerie_actsec(Serie serie,Actor act) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        String sql;
+
+        try {
+            sql = "delete FROM SERIEACTORSUPP WHERE ID_SERIE = ? and id_act=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, serie.getId());
+            pstmt.setLong(2, act.getID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+
+        } catch (Exception e) {
+            System.out.println("acteur n'exite pas");
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+
+    }
+
+    public static boolean deleteSerie_actprinc(Serie serie,Actor act) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        String sql;
+
+        try {
+            sql = "delete FROM SERIEACTORPRINC WHERE ID_SERIE = ? and id_act=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, serie.getId());
+            pstmt.setLong(2, act.getID());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+
+        } catch (Exception e) {
+            pstmt.close();
+            conn.close();
+            return false;
+        }
+    }
+
+    public static boolean ajoutSerie_actprinc(Serie serie,Actor act) throws SQLException {
+        PreparedStatement pstmt = null;
+        String sql;
+
+        try {
+            sql = "INSERT INTO SERIEACTORPRINC (id_act,ID_SERIE)" +
+                    " VALUES (?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, act.getID());
+
+            pstmt.setLong(2, serie.getId());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+
+        } catch (Exception e) {
+            pstmt.close();
+            conn.close();
+            return false;
+        }
 
 
+    }
+    public static boolean ajoutSerie_actsec(Serie serie,Actor act) throws SQLException {
+        PreparedStatement pstmt = null;
+
+        String sql;
+
+        try {
+            sql = "INSERT INTO SERIEACTORSUPP (id_act,ID_SERIE)" +
+                    " VALUES (?,?)";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, act.getID());
+            pstmt.setLong(2, serie.getId());
 
 
+            pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return true;
+
+        } catch (Exception e) {
+            pstmt.close();
+            conn.close();
+            return false;
+        }
 
 
+    }
 
+    public static List<Serie> searchSeries(List<String> searchTerms) throws SQLException, IOException {
+        // Establish a connection to the Oracle database
+        // Build the SQL query using the LIKE operator to search for rows in the "series" table
+        // where the "title" column contains any of the search terms in the list
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT * FROM SERIE WHERE ");
+        List<Serie> serieList = new ArrayList<>();
+        for (int i = 0; i < searchTerms.size(); i++) {
+            if (i > 0) {
+                sqlBuilder.append(" AND ");
+            }
+            sqlBuilder.append("LISTEGENRE LIKE ?");
+        }
+        String sql = sqlBuilder.toString();
 
+        // Create a PreparedStatement object with the dynamic SQL query
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < searchTerms.size(); i++) {
+            stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
+        }
 
+        // Execute the PreparedStatement and retrieve the results
+        ResultSet rs = stmt.executeQuery();
 
+        // Process the results as needed
+        while (rs.next()) {
+            long ID = rs.getLong("ID_SERIE");
+            String Nom = rs.getString("NAME");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
 
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
 
+            Serie serie = new Serie(ID,Nom,fileThumb);
 
+            serieList.add(serie);
 
+            // Do something with the retrieved data
+        }
 
-
+        // Close the ResultSet, PreparedStatement, and database connection
+        rs.close();
+        stmt.close();
+        conn.close();
+        return serieList;
+    }
 
 
 }

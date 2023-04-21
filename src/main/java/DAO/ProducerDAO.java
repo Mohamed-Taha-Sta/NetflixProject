@@ -82,7 +82,7 @@ public class ProducerDAO {
     public static void modifmail(Long id,String mail){
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE producer SET mail = '"+mail+"' WHERE id_prod = "+id;
+        String sql = "UPDATE producer SET email = '"+mail+"' WHERE id_prod = "+id;
         try {
 
 

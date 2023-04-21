@@ -226,6 +226,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                              <Label fx:id="Advice" text="In Order to Modify The Attributes of Content, Please Do Click on Said Content." />
                               <HBox alignment="CENTER" spacing="230.0">
                                  <children>
                                     <Button id="button" fx:id="AddMovie" mnemonicParsing="false" onAction="#OnAddMovie" text="Add a Movie" />

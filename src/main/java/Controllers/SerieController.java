@@ -13,34 +13,46 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SerieController {
 
     public static void main(String[] args) throws SQLException, IOException {
-        File file = new File("src/main/java/Test/Synopsis.mp4");
-        File imageFile = new File("src/main/java/Test/SeriePlaceHolder.jpg");
+//        File file = new File("src/main/java/Test/Synopsis.mp4");
 
-        List<Long> listMainActors = new ArrayList<>();
-        List<Long> listSuppActors = new ArrayList<>();
-        List<String> listGenre = new ArrayList<>();
+//        List<String> listGenre = Arrays.asList("Biography","Documentary");
+//        List<Serie> serieList = SerieDAO.searchSeries(listGenre);
+//
+//        System.out.println(serieList);
 
-        listMainActors.add(21L);
-        listMainActors.add(10L);
 
-        listSuppActors.add(4L);
 
-//        listGenre.add("Action");
-        listGenre.add("Comedie");
-        listGenre.add("Drama");
+//        File imageFile = new File("src/main/java/Test/SeriePlaceHolder.jpg");
+//
+//        List<Long> listMainActors = new ArrayList<>();
+//        List<Long> listSuppActors = new ArrayList<>();
+//        List<String> listGenre = new ArrayList<>();
+
+//        listMainActors.add(21L);
+//        listMainActors.add(10L);
+//
+//        listSuppActors.add(4L);
+//
+////        listGenre.add("Action");
+//        listGenre.add("Comedie");
+//        listGenre.add("Drama");
 //        listGenre.add("Torki");
 
-        Serie serie = new Serie("Serie3",1,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.", LocalDate.of(2014,2,9),
-                "English","America",listGenre,imageFile,file,listMainActors,listSuppActors);
+//        Serie serie = new Serie(65);
 
-        System.out.println(AddSerie(serie));
+
+
+//        ModifSynopsisSerie(serie,file);
+
+//        GetSerieByName("yezfezfez");
+
+//        System.out.println(AddSerie(serie));
 
 
 //        System.out.println(SerieDAO.GetSerieByName("Serie1"));
@@ -77,7 +89,74 @@ public class SerieController {
     }
 
 
-
-
-
+    public static boolean DeleteSerie(Serie serie) throws SQLException, IOException {
+        return SerieService.DeleteSerie(serie);
     }
+
+
+    public static boolean modifimg(Serie serie, File img) throws SQLException, IOException {
+        return SerieService.modifimg(serie,img);
+    }
+
+    public static boolean ModifSynopsisSerie(Serie serie,File NewSynopsis) throws SQLException {
+        return SerieService.ModifSynopsisSerie(serie,NewSynopsis);
+    }
+
+    public static boolean modifnom(Serie Serie,String nom) throws SQLException {
+        return SerieService.modifnom(Serie,nom);
+    }
+
+    public static boolean modifdescription(Serie serie,String description) throws SQLException {
+        return SerieService.modifdescription(serie, description);
+    }
+
+    public static boolean modiflangues(Serie Serie,String langue) throws SQLException {
+        return SerieService.modiflangues(Serie, langue);
+    }
+
+    public static boolean modifpaysoregine(Serie Serie,String paysorgine) throws SQLException {
+        return SerieService.modifpaysoregine(Serie, paysorgine);
+    }
+
+    public static boolean modifAnnerdesoritie(Serie serie, LocalDate date) throws SQLException {
+        return SerieService.modifAnnerdesoritie(serie, date);
+    }
+
+    public static boolean modiflistegenre(Serie serie,List<String> listegenre ) throws SQLException {
+        return SerieService.modiflistegenre(serie, listegenre);
+    }
+
+    public static boolean deleteSerie_actsec(Serie serie, Actor act) throws SQLException {
+        return SerieService.deleteSerie_actsec(serie, act);
+    }
+
+    public static boolean deleteSerie_actprinc(Serie serie,Actor act) throws SQLException {
+        return SerieService.deleteSerie_actprinc(serie, act);
+    }
+
+    public static boolean ajoutSerie_actprinc(Serie serie,Actor act) throws SQLException {
+        return SerieService.ajoutSerie_actprinc(serie, act);
+    }
+
+    public static boolean ajoutSerie_actsec(Serie serie,Actor act) throws SQLException {
+        return SerieService.ajoutSerie_actsec(serie, act);
+    }
+
+
+    public static List<Serie> searchSeries(List<String> searchTerms) throws SQLException, IOException {
+        /** Keep in mind, this returns everything on null except ID, Name and Thumbnail*/
+        return SerieService.searchSeries(searchTerms);
+    }
+
+
+    public static List<Serie> GetSerieByID(long ID) throws SQLException, IOException {
+        return SerieService.GetSerieByID(ID);
+    }
+
+
+
+
+
+
+
+}

@@ -68,7 +68,8 @@
                                                 <Label id="Category" fx:id="RatingLabel" layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="52.0" text="Label" />
                                              </children>
                                           </HBox>
-                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Edit Synopsis" />
+                                          <Button id="SynopsisBtn" fx:id="AddSeason" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Add Season" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" layoutX="98.0" layoutY="61.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Edit Synopsis" />
                                        </children>
                                     </VBox>
                                  </children>

@@ -12,6 +12,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,16 +25,25 @@ import java.util.List;
 
 public class FilmController {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
+//        File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
+//
+//        Media media=new Media(FileVideo.toURI().toString());
+//        MediaPlayer mp=new MediaPlayer(media);
+//        System.out.println(media.getDuration().toSeconds());
+//        String duration = VideoPlayerController.getTime(media.getDuration());
+//
+//        System.out.println(duration);
 
-        Media media=new Media(FileVideo.toURI().toString());
-        MediaPlayer mp=new MediaPlayer(media);
-        System.out.println(media.getDuration().toSeconds());
-        String duration = VideoPlayerController.getTime(media.getDuration());
+//        FilmController.FindByID(10L);
 
-        System.out.println(duration);
+//        File img = new File("src/main/java/Test/FilmPlaceHolder.jpg");
+////
+////
+//        Film film1 = new Film(10L);
+//        FilmDAO.modifimg(film1,img);
+
 
 
 

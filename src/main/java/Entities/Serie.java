@@ -22,6 +22,18 @@ public class Serie extends Content{
         this.actorList = actorList;
     }
 
+    public Serie(long id, String nom, File img) {
+        super(id, nom,img);
+
+    }
+
+    public Serie(String nom) {
+        super(nom);
+    }
+    public Serie(long ID) {
+        super(ID);
+    }
+
     public Serie(String nom,long ID_PROD, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, File synopsis, List<Long> IDMainactorList,List<Long> IDSuppactorList) {
         super(nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
         this.synopsis = synopsis;

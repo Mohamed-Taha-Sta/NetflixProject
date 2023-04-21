@@ -61,7 +61,10 @@ public class Film extends Content{
         this.film = film;
         this.id_realisateur=idrealisateur;
     }
-
+    public Film (long id)
+    {
+        super(id);
+    }
    /* public ArrayList<String> getGenre() {
         return genre;
     }

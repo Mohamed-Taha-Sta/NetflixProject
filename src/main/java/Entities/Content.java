@@ -18,6 +18,19 @@ public class Content {
 
     public Content() {
     }
+    public Content(long id) {
+        this.id = id;
+    }
+    public Content(long id,String nom, File img) {
+        this.id = id;
+        this.nom = nom;
+        this.img = img;
+    }
+
+
+    public Content(String nom) {
+        this.nom = nom;
+    }
 
     public Content(long id, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img) {
         this.id = id;
