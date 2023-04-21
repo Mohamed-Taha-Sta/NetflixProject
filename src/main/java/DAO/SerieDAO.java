@@ -1049,9 +1049,6 @@ public class SerieDAO {
     }
 
     public static List<Serie> searchSeries(List<String> searchTerms) throws SQLException, IOException {
-        // Establish a connection to the Oracle database
-        // Build the SQL query using the LIKE operator to search for rows in the "series" table
-        // where the "title" column contains any of the search terms in the list
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("SELECT * FROM SERIE WHERE ");
         List<Serie> serieList = new ArrayList<>();
@@ -1063,16 +1060,13 @@ public class SerieDAO {
         }
         String sql = sqlBuilder.toString();
 
-        // Create a PreparedStatement object with the dynamic SQL query
         PreparedStatement stmt = conn.prepareStatement(sql);
         for (int i = 0; i < searchTerms.size(); i++) {
             stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
         }
 
-        // Execute the PreparedStatement and retrieve the results
         ResultSet rs = stmt.executeQuery();
 
-        // Process the results as needed
         while (rs.next()) {
             long ID = rs.getLong("ID_SERIE");
             String Nom = rs.getString("NAME");
@@ -1092,7 +1086,6 @@ public class SerieDAO {
 
             serieList.add(serie);
 
-            // Do something with the retrieved data
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
@@ -1103,4 +1096,38 @@ public class SerieDAO {
     }
 
 
+    public static List<Serie> getMostRecentSeries(int numSeries) throws SQLException, IOException {
+        List<Serie> serieList = new ArrayList<>();
+        String sql = "SELECT * FROM Serie ORDER BY DEBUT_DATE DESC FETCH FIRST ? ROWS ONLY";
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, numSeries);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            long ID = rs.getLong("ID_SERIE");
+            String Nom = rs.getString("NAME");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            Serie serie = new Serie(ID,Nom,fileThumb);
+
+            serieList.add(serie);
+        // Close the ResultSet, PreparedStatement, and database connection
+//        rs.close();
+//        stmt.close();
+//        connection.close();
+            }
+        return serieList;
+    }
 }

@@ -148,10 +148,16 @@ public class SerieController {
         return SerieService.searchSeries(searchTerms);
     }
 
+    public static List<Serie> getMostRecentSeries(int numSeries) throws SQLException, IOException {
+        /** Keep in mind, this returns everything on null except ID, Name and Thumbnail*/
+        return SerieService.getMostRecentSeries(numSeries);
+    }
+
 
     public static List<Serie> GetSerieByID(long ID) throws SQLException, IOException {
         return SerieService.GetSerieByID(ID);
     }
+
 
 
 
