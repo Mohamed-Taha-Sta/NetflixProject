@@ -1,6 +1,7 @@
 package Utils;
 
 import Entities.Actor;
+import Entities.Film;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -22,6 +23,15 @@ public class DataHolderFilm {
     private static List<Actor> MainActorsList;
     private static List<Actor> SuppActorsList;
     private static ArrayList<Actor> AllTheActors;
+    private static Film selectedFilm;
+
+    public static Film getSelectedFilm() {
+        return selectedFilm;
+    }
+
+    public static void setSelectedFilm(Film selectedFilm) {
+        DataHolderFilm.selectedFilm = selectedFilm;
+    }
 
     public static ArrayList<Actor> getAllTheActors() {
         return AllTheActors;

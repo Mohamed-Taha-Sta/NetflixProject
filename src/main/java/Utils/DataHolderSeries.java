@@ -21,6 +21,15 @@ public class DataHolderSeries {
     private static List<String> GenreList;
     private static List<Long> MainActorsList;
     private static List<Long> SuppActorsList;
+    private static Serie selectedSeries;
+
+    public static Serie getSelectedSeries() {
+        return selectedSeries;
+    }
+
+    public static void setSelectedSeries(Serie selectedSeries) {
+        DataHolderSeries.selectedSeries = selectedSeries;
+    }
 
     public static LocalDate getDebutDate() {
         return DebutDate;

@@ -193,7 +193,7 @@
                                                 <Font size="28.0" />
                                              </font>
                                           </Label>
-                                          <TableView id="Table" fx:id="MoviesTable" stylesheets="@../../../Style.css">
+                                          <TableView id="Table" fx:id="MoviesTable" onMouseClicked="#OnClickMovie" stylesheets="@../../../Style.css">
                                              <columns>
                                                 <TableColumn fx:id="MovieName" prefWidth="524.0000419616699" />
                                              </columns>
@@ -214,7 +214,7 @@
                                                 <Font size="28.0" />
                                              </font>
                                           </Label>
-                                          <TableView id="Table" fx:id="SeriesTable" stylesheets="@../../../Style.css">
+                                          <TableView id="Table" fx:id="SeriesTable" onMouseClicked="#OnClickSeries" stylesheets="@../../../Style.css">
                                              <columns>
                                                 <TableColumn fx:id="SeriesName" prefWidth="524.0000419616699" />
                                              </columns>

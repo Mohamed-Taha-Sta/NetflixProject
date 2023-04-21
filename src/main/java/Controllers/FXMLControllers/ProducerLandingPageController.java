@@ -5,6 +5,8 @@ import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
+import Utils.DataHolderFilm;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -71,8 +73,36 @@ public class ProducerLandingPageController implements Initializable {
         HelloApplication.SetRoot("AddFilm");
     }
 
-    public void OnClickMovie()
-    {
+    public void OnClickMovie() throws Exception {
+
+        Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
+        if (selectedMovie == null)
+        {
+            MovieAlertText.setText("No movie was selected");
+        }
+        else
+        {
+            DataHolderFilm.setSelectedFilm(selectedMovie);
+            HelloApplication.SetRoot("ProducerFilmView");
+        }
+
+//        HelloApplication.SetRoot("");
+    }
+
+
+    public void OnClickSeries() throws Exception {
+
+        Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
+        if (selectedSeries == null)
+        {
+            SeriesAlertText.setText("No Series was selected");
+        }
+        else
+        {
+            DataHolderSeries.setSelectedSeries(selectedSeries);
+            HelloApplication.SetRoot("ProducerSeriesView");
+        }
+
 //        HelloApplication.SetRoot("");
     }
 
@@ -112,16 +142,17 @@ public class ProducerLandingPageController implements Initializable {
         SeriesTable.setItems(Series);
 
 
-        MoviesTable.setRowFactory(tv -> {
-            TableRow<Film> row = new TableRow<>();
-            Film rowData;
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Film rowDataLambda = row.getItem();
-                }
-            });
-            return row;
-        });
+//        MoviesTable.setRowFactory(tv -> {
+//            TableRow<Film> row = new TableRow<>();
+//            Film rowData;
+//            row.setOnMouseClicked(event -> {
+//                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+//                    Film rowDataLambda = row.getItem();
+//                }
+//            });
+//            return row;
+//        });
+
 
 //
 //        SeriesTable.setRowFactory(tv -> {
