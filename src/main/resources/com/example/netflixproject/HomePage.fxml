@@ -25,21 +25,21 @@
          <children>
             <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
                <children>
-                  <ImageView cache="true" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView cache="true" fitHeight="60.0" fitWidth="96.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
                      </image>
                   </ImageView>
-                  <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                  <VBox alignment="TOP_CENTER" spacing="10.0">
                      <children>
-                        <VBox alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="10.0">
                            <children>
                               <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" />
                               <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </VBox>
                         <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
-                        <Button id="MenuBtn" fx:id="filmButton" layoutX="20.0" layoutY="238.0" mnemonicParsing="false" onAction="#OnFilmClick" />
+                        <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" onAction="#OnFilmClick" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" />
@@ -65,7 +65,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" fillHeight="false">
                                              <children>
-                                                <SearchableComboBox minHeight="35.0" minWidth="220.0" stylesheets="@../../../Style.css">
+                                                <SearchableComboBox fx:id="searchBar" minHeight="35.0" minWidth="220.0" stylesheets="@../../../Style.css">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>

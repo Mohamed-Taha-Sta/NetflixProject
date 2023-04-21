@@ -312,8 +312,7 @@ public class SerieDAO {
         return listIDActor;
     }
 
-    public static List<Actor> getPrincActorSerie(List<Long> IDactors) throws SQLException, IOException
-    {
+    public static List<Actor> getPrincActorSerie(List<Long> IDactors) throws SQLException, IOException {
         List<Actor> actorList = new ArrayList<>();
 
         String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
@@ -344,8 +343,7 @@ public class SerieDAO {
 
     }
 
-    public static List<Actor> getSuppActorSerie(List<Long> IDactors) throws SQLException
-    {
+    public static List<Actor> getSuppActorSerie(List<Long> IDactors) throws SQLException {
         List<Actor> actorList = new ArrayList<>();
 
         String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
