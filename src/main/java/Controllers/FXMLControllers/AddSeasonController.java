@@ -32,7 +32,7 @@ public class AddSeasonController implements Initializable {
 
     @FXML
     protected void OnBack() throws Exception {
-        HelloApplication.SetRoot("PickActorsPage_afterAddingContent");
+        HelloApplication.SetRoot(DataHolderSeason.getPreviousPage());
     }
 
     @FXML

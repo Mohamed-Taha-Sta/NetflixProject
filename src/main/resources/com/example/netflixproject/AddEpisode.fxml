@@ -94,12 +94,20 @@
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button id="button" fx:id="login" mnemonicParsing="false" onAction="#onAdd" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
+                              <Button id="button" fx:id="Add" mnemonicParsing="false" onAction="#onAdd" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Add" textAlignment="CENTER" textFill="WHITE">
                                  <font>
                                     <Font name="Calibri Bold" size="14.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="455.0" />
+                                    <Insets left="360.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button id="button" fx:id="Done" layoutX="535.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnDone" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Done" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="25.0" />
                                  </HBox.margin>
                               </Button>
                            </children>

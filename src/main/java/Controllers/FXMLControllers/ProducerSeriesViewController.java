@@ -41,6 +41,7 @@ public class ProducerSeriesViewController implements Initializable {
     }
 
     public void onAddSeason() throws Exception {
+        DataHolderSeason.setPreviousPage("ProducerSeriesView");
         DataHolderSeries.setIDSerie(DataHolderSeries.getSelectedSeries().getId());
         HelloApplication.SetRoot("AddSeason");
     }

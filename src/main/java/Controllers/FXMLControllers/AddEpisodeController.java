@@ -6,16 +6,17 @@ import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
@@ -33,7 +34,9 @@ public class AddEpisodeController implements Initializable {
     public DatePicker DebutDate;
     public TextArea DescriptionBox;
 
-
+    public void OnDone() throws Exception {
+        HelloApplication.SetRoot("ProducerLandingPage");
+    }
 
     @FXML
     protected void OnBack() throws Exception {
@@ -76,10 +79,10 @@ public class AddEpisodeController implements Initializable {
 
             DataHolderEpisode.setIDEpisode(IdEpisode);
 
-            HelloApplication.SetRoot("ProducerLandingPage");
+            HelloApplication.SetRoot("AddEpisode");
+
         }
     }
-
 
     @FXML
     public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
@@ -135,7 +138,6 @@ public class AddEpisodeController implements Initializable {
         }
     }
 
-    Media media;
     @FXML
     public void VideoSelect(javafx.scene.input.MouseEvent event) throws Exception {
         FileChooser fileChooser = new FileChooser();
@@ -144,8 +146,9 @@ public class AddEpisodeController implements Initializable {
         FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter("MP4 videos", "*.mp4");
         fileChooser.getExtensionFilters().add(videoFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
-        media=new Media(selectedFile.toURI().toString());
-        media.getDuration();
+//        Media media;
+//        media=new Media(selectedFile.toURI().toString());
+//        media.getDuration();
         if (selectedFile != null) {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
@@ -163,6 +166,16 @@ public class AddEpisodeController implements Initializable {
             }
         }
     }
+    private void showMessage(Text text, String message) {
+        text.setText(message);
+        text.setOpacity(1);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            text.setOpacity(0);
+        }));
+        timeline.play();
+    }
+
 
 
     @Override
@@ -196,4 +209,6 @@ public class AddEpisodeController implements Initializable {
 
 
     }
+
+
 }

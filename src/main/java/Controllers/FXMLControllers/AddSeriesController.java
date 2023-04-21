@@ -1,5 +1,6 @@
 package Controllers.FXMLControllers;
 
+import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
@@ -70,6 +71,7 @@ public class AddSeriesController implements Initializable {
         } else {
             DataHolderSeries.setSeriesName(Name.getText());
             DataHolderSeries.setCountryOfOrigin(CountrySelector.getValue());
+            DataHolderSeason.setPreviousPage("AddSeries");
             DataHolderSeries.setLanguage(LanguageSelector.getValue());
             DataHolderSeries.setDebutDate(DebutDate.getValue());
             DataHolderSeries.setDescription(DescriptionBox.getText());

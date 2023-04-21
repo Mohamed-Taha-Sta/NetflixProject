@@ -10,6 +10,7 @@ public class DataHolderSeason {
     private static long IDSeason;
     private static String Name;
     private static String Description;
+    private static String PreviousPage;
     private static LocalDate DebutDate;
     private static File Thumbnail;
     private static File Synopsis;
@@ -59,5 +60,14 @@ public class DataHolderSeason {
     public static void setIDSeason(long IDSeason) {
         DataHolderSeason.IDSeason = IDSeason;
     }
+
+    public static String getPreviousPage() {
+        return PreviousPage;
+    }
+
+    public static void setPreviousPage(String previousPage) {
+        PreviousPage = previousPage;
+    }
+
 
 }
