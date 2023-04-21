@@ -1,9 +1,5 @@
 package Controllers.FXMLControllers;
 
-import Controllers.SerieController;
-import DAO.UserDAO;
-import Entities.Serie;
-import Entities.Synopsis;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
@@ -12,17 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ResourceBundle;
-
-import static javafx.collections.FXCollections.observableArrayList;
 
 public class AddSeriesController implements Initializable {
 

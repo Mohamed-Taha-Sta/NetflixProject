@@ -120,12 +120,12 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </HBox.margin>
                            <children>
-                              <ImageView fitHeight="270.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="EpisodeThumbnail" fitHeight="270.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Button id="SynopsisBtn" mnemonicParsing="false" text="Watch Now" />
+                              <Button id="SynopsisBtn" fx:id="WatchBtn" mnemonicParsing="false" prefHeight="46.0" prefWidth="88.0" text="Watch Now" />
                            </children>
                         </VBox>
                      </children>
