@@ -76,7 +76,7 @@
                                                 <Insets bottom="1.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <CheckComboBox id="myCheckComboBox" fx:id="GenresSelector" prefHeight="26.0" prefWidth="152.0" title="Select Genres">
+                                          <CheckComboBox id="myCheckComboBox" fx:id="FilmGenresSelector" prefHeight="26.0" prefWidth="152.0" title="Select Genres">
                                              <HBox.margin>
                                                 <Insets left="50.0" />
                                              </HBox.margin>

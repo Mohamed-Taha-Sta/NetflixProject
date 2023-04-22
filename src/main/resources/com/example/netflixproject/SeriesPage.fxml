@@ -84,7 +84,7 @@
                                           <Insets left="50.0" />
                                        </HBox.margin>
                                     </CheckComboBox>
-                                    <ComboBox id="ComboBox" fx:id="YearSelect" prefHeight="22.0" prefWidth="86.0" />
+                                    <ComboBox id="ComboBox" fx:id="YearSelect" prefHeight="36.0" prefWidth="145.0" />
                                  </children>
                               </HBox>
                            </children>

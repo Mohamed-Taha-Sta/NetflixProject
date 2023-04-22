@@ -60,7 +60,7 @@
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
                                        </HBox.margin></ImageView>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="156.0" prefWidth="630.0" spacing="25.0">
+                                    <VBox alignment="CENTER_LEFT" prefHeight="156.0" prefWidth="630.0" spacing="25.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Label id="Title" fx:id="SerieName" text="Title" />
                                           <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -71,19 +71,13 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0">
+                                    <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
-                                          <HBox alignment="CENTER_LEFT" spacing="20.0" VBox.vgrow="SOMETIMES">
+                                          <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="SOMETIMES">
                                              <children>
-                                                <Label id="Category" text="DebutDate:" />
-                                                <Label id="Category" fx:id="dateLabel" text="Label" />
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="174.0" spacing="10.0">
-                                             <children>
-                                                <Label id="Category" text="Genre:" />
-                                                <Label id="Category" fx:id="genreLabel" text="Label" wrapText="true" />
+                                                <Label id="Category" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />
+                                                <Label id="Category" fx:id="dateLabel" text="Label" wrapText="true" HBox.hgrow="NEVER" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -106,6 +100,12 @@
                            <children>
                               <Label id="Category" text="Description:" />
                               <TextArea fx:id="Description" editable="false" prefHeight="200.0" prefWidth="540.0" wrapText="true" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="545.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label id="Category" graphicTextGap="2.0" text="Genre:" wrapText="true" HBox.hgrow="NEVER" />
+                                    <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="473.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
                               <Label id="Category" layoutX="40.0" layoutY="40.0" text="Your Opinion: " />
                               <HBox spacing="10.0">
                                  <children>

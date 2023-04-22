@@ -27,7 +27,7 @@ public class FilmPageController implements Initializable  {
     public Button seriesButoon;
     public Button filmButton;
     public Button SearchButton;
-    public CheckComboBox<String> GenresSelector;
+    public CheckComboBox<String> FilmGenresSelector;
 
 
     @FXML
@@ -40,7 +40,7 @@ public class FilmPageController implements Initializable  {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
+        PageSetter(FilmGenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
 
 
     }

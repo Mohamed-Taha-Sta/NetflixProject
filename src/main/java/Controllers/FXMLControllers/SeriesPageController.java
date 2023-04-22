@@ -29,11 +29,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.ImageClipper;
-import static Utils.RepeatableFunction.ImageSetter;
+import static Utils.RepeatableFunction.*;
+import static Utils.RepeatableFunction.IconSetter;
 
 public class SeriesPageController implements Initializable {
-    public List<Serie> series;
+    public static List<Serie> series;
 
     public VBox SeriesViewer = new VBox();
     public TextField searchBar;
@@ -44,7 +44,7 @@ public class SeriesPageController implements Initializable {
     public Button filmButton;
     public Label welcome;
     public Button SearchButton;
-    public CheckComboBox<String> GenresSelector;
+    public  CheckComboBox<String> GenresSelector;
     public ComboBox<String> YearSelect;
 
 
@@ -94,7 +94,6 @@ public class SeriesPageController implements Initializable {
                 imgView.setCursor(Cursor.cursor("hand"));
                 imgView.setOnMouseClicked(this::handleImageClick);
                 shelf.getChildren().add(imgView);
-                System.out.println("SerieNbr: " + counter);
                 counter++;
                 if (counter == 6) {
                     SeriesViewer.getChildren().add(shelf);
@@ -117,14 +116,18 @@ public class SeriesPageController implements Initializable {
         }
         List<Serie> filteredList = new ArrayList<>();
         for (Serie serie : seriesList) {
+            int serieYear = serie.getAnnerdesortie().getYear();
+            int selectedYearInt = selectedYear == null || selectedYear.equals("All") ? -1 : Integer.parseInt(selectedYear);
             if ((searchText.isEmpty() || serie.getNom().toLowerCase().contains(searchText.toLowerCase())) &&
                     (selectedGenres.isEmpty() || new HashSet<>(serie.getListegenre()).containsAll(selectedGenres)) &&
-                    (selectedYear == null || selectedYear.equals("All") || serie.getAnnerdesortie().getYear() == Integer.parseInt(selectedYear))) {
+                    (selectedYearInt == -1 || serieYear == selectedYearInt)) {
                 filteredList.add(serie);
             }
         }
         return filteredList;
     }
+
+
 
 
     public void OnSearch(){
@@ -135,23 +138,28 @@ public class SeriesPageController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FilmPageController.PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
+        IconSetter(SearchButton,"src/main/resources/Images/HomePage/search.png",20);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",40);
+        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
+        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",40);
         try {
-            series = SerieController.GetAllSeries();
+            if ( series==null ||series.isEmpty() ){
+                series=new ArrayList<>();
+                series = SerieController.GetAllSeries();
+            }
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-        GenresSelector.getItems().addAll(genreNames);
-        yearList.add("All");
-        YearSelect.getItems().addAll(yearList);
-        YearSelect.setValue("All");
+
+            GenresSelector.getItems().addAll(genreNames);
+
+
+            yearList.add("All");
+            YearSelect.getItems().addAll(yearList);
+            YearSelect.setValue("All");
+
+
         OnSearch();
-
-
-
-
-
-
 
     }
 

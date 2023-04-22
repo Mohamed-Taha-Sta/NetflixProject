@@ -46,6 +46,9 @@
                      <font>
                         <Font name="Calibri Bold" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="50.0" />
+                     </VBox.margin>
                   </Text>
                   <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="200.0" spacing="10.0" stylesheets="@../../../Style.css">
                      <children>
@@ -54,7 +57,7 @@
                               <Image url="@../../../Images/miniProfile.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="ProfileBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnProfilebtn" stylesheets="@../../../Style.css" text="Profile" textFill="WHITE" />
+                        <Button id="button" fx:id="ProfileBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnProfilebtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Profile" textFill="WHITE" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -65,12 +68,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../Images/Notification.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="NotfificationBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnNotibtn" stylesheets="@../../../Style.css" text="Notification" textFill="WHITE" />
+                        <Button id="button" fx:id="NotfificationBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnNotibtn" prefHeight="34.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Notification" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -78,12 +81,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="231.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../Images/Password.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="PassBtn" mnemonicParsing="false" onAction="#OnPassbtn" stylesheets="@../../../Style.css" text="Password" textFill="WHITE" />
+                        <Button id="button" fx:id="PassBtn" mnemonicParsing="false" onAction="#OnPassbtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Password" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -91,12 +94,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true">
                            <image>
                               <Image url="@../../../Images/LogOut.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="LogoutBtn" mnemonicParsing="false" onAction="#OnLogOutBtn" stylesheets="@../../../Style.css" text="LogOut" textFill="WHITE" />
+                        <Button id="button" fx:id="LogoutBtn" mnemonicParsing="false" onAction="#OnLogOutBtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="LogOut" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
