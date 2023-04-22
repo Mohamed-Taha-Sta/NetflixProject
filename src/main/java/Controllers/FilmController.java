@@ -1,10 +1,7 @@
 package Controllers;
 
 import Controllers.FXMLControllers.VideoPlayerController;
-import DAO.ActorDAO;
-import DAO.AdminDAO;
-import DAO.FilmDAO;
-import DAO.ProducerDAO;
+import DAO.*;
 import Entities.*;
 import Services.FilmService;
 import Utils.DataHolderFilm;
@@ -35,6 +32,7 @@ public class FilmController {
 //        String duration = VideoPlayerController.getTime(media.getDuration());
 //
 //        System.out.println(duration);
+      /* File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
 
 //        FilmController.FindByID(10L);
 
@@ -44,6 +42,7 @@ public class FilmController {
 //        Film film1 = new Film(10L);
 //        FilmDAO.modifimg(film1,img);
 
+        System.out.println(duration);*/
 
 
 
@@ -68,17 +67,16 @@ public class FilmController {
 //        File FileSynopsis = new File("src/main/java/Test/VideoFilm19.mp4");
 //        File FileImage = new File("src/main/java/Test/ImgEp10.jpeg");
 //        File FileVideo=new File("src/main/java/Test/VideoFilm19.mp4");
-//
-//        Actor actor1 = new MainActor(1,"Smith","John","jsmith@example.com","password1");
-//        Actor actor2 = new MainActor(44,"Doe","Jane","jdoe@example.com","password2");
-//        Actor actor3 = new Supportingactor(45,"Johnson","Robert","rjohnson@example.com","password3");
-//
-//        ArrayList<Actor> ListeActeurs = new ArrayList<>();
-//
-//        ListeActeurs.add(actor1);
-//        ListeActeurs.add(actor2);
-//        ListeActeurs.add(actor3);
 
+/*        Actor actor1 = new MainActor(1,"Smith","John","jsmith@example.com","password1");
+        Actor actor2 = new MainActor(44,"Doe","Jane","jdoe@example.com","password2");
+        Actor actor3 = new Supportingactor(45,"Johnson","Robert","rjohnson@example.com","password3");
+
+        ArrayList<Actor> ListeActeurs = new ArrayList<>();
+        ListeActeurs.add(actor1);
+        ListeActeurs.add(actor2);
+        ListeActeurs.add(actor3);
+*/
        //*/ Film film1 = new Film("FilmJasser","FaresCamera",LocalDate.of(2023,2,2),"Francais","France",listeGenre,FileImage
        //         ,"2heures30minutes",ListeActeurs,FileSynopsis,FileVideo);*/
 
@@ -88,7 +86,7 @@ public class FilmController {
 //        FilmDAO.recherche_film(8L);
 
 
-
+        ProducerDAO.createprod(new Producer("fares","eeee","fffffff","eeeee"));
 
                // liste1.add(new MainActor("jasser","hamdi","taha@gmail.com","zzzz"));
 //        liste1.add(new MainActor("jasser","","taha@gmail.com","zzzz"));
@@ -128,15 +126,35 @@ public class FilmController {
 //        Long x= Long.valueOf(1);
 ////FilmDAO.Add(new Film("ddjd","eoeoo",LocalDate.now(),"arab","tunis",list,FileImage,"duree",liste1,FileSynopsis,FileVideo,x));
 //      //  System.out.println(FilmDAO.FindByName("d"));
-//        List<String> l =new ArrayList<>();
-//        l.add("drama");
-//        l.add("comedie");
-//        l.add("horror");
-//        l.add("scer");
+        ArrayList<String> lo =new ArrayList<>();
+        lo.add("drama");
+        lo.add("comedie");
+        lo.add("horror");
+        lo.add("scer");
+        ArrayList<Long>l=new ArrayList<>();
+        Long lf= Long.valueOf(10);
+        l.add(lf);
 //       // FilmDAO.modifimg(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),FileImage);
 //           // public Film(long id, String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, long vueNbr, long score, long votes, File synopsis, File film,Long idrealisateur) {
 //FilmDAO.deleteFilm_actsec(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),new Actor(42,"fares","makki","faresmakki21@gmail.com","tahajasser"));
-            }
+
+
+        UserDAO.ajout_User(new User("user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null));
+Long lff= Long.valueOf(1);
+          // new User()
+Avis_FilmDAO.add_avis(new Film(lf,"caffer","eee",LocalDate.now(),"arabic","tunisie",null,null, "lyoumsba7",null,lf,lf,lf,null,null,lf),new User(lff,"user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null),"bla bla");
+
+
+
+
+
+
+
+
+
+
+
+        }
 
     public static boolean Add(Film film){
         return FilmService.Add(film);
