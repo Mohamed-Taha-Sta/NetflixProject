@@ -10,7 +10,11 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static DAO.SerieDAO.getPrincActorSerie;
+import static DAO.SerieDAO.getSuppActorSerie;
 
 public class FilmDAO {
 
@@ -1014,6 +1018,195 @@ public class FilmDAO {
         }
 
 
+    }
+
+
+    public static List<Film> searchFilm(List<String> searchTerms) throws SQLException, IOException {
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT * FROM FILM WHERE ");
+        List<Film> list = new ArrayList<>();
+        for (int i = 0; i < searchTerms.size(); i++) {
+            if (i > 0) {
+                sqlBuilder.append(" AND ");
+            }
+            sqlBuilder.append("LISTEGENRE LIKE ?");
+        }
+        String sql = sqlBuilder.toString();
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < searchTerms.size(); i++) {
+            stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Long id=rs.getLong(1);
+            String nom=rs.getString(2);
+            String decription= rs.getString(3);
+            Date annerdesortie=rs.getDate(4);
+            String langue=rs.getString(5);
+            String paysorigine=rs.getString(6);
+            String listegenre= rs.getString(7);
+            Blob img=rs.getBlob(8);
+            String duree=rs.getString(9);
+            Long vunbr=rs.getLong(10);
+            Long score=rs.getLong(11);
+            Long vote=rs.getLong(12);
+            InputStream image=img.getBinaryStream();
+            InputStream synop=rs.getBinaryStream(13);
+            InputStream vedio=rs.getBinaryStream(14);
+            Long idrealisateur=rs.getLong(15);
+
+            //Converting Blob Image to Jpeg File
+            File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
+            OutputStream outS = new FileOutputStream(fileImg);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = image.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Handeling the Video, from inputStream
+            Path outputFilePath = Paths.get("src/main/java/Temp/SynopsisFilm"+id+".mp4");
+            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = synop.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the video");
+            }
+            //Handeling the Video, from inputStream
+            Path outputFilePath1 = Paths.get("src/main/java/Temp/VideoFilm"+id+".mp4");
+            try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
+                byte[] bufferved = new byte[4096];
+                int bytesReadved;
+                while ((bytesReadved = vedio.read(bufferved)) != -1) {
+                    outputStream1.write(bufferved, 0, bytesReadved);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the video");
+            }
+
+            File filesynop = new File("src/main/java/Temp/SynopsisFilm"+ id +".mp4");
+            File fileImage = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
+            File filmvedio=new File("src/main/java/Temp/VideoFilm"+ id +".mp4");
+
+
+            ArrayList<String> genrelist = new ArrayList<>();
+            String[] array = listegenre.split(",");
+            for (String s : array) {
+                genrelist.add(s);
+            }
+
+
+            Film filmm=new Film(nom,decription,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
+            list.add(filmm);
+
+        }
+
+        // Close the ResultSet, PreparedStatement, and database connection
+        rs.close();
+//        stmt.close();
+//        conn.close();
+        return list;
+    }
+
+
+
+    public static List<Film> searchFilmOR(List<String> searchTerms) throws SQLException, IOException {
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT * FROM FILM WHERE ");
+        List<Film> list = new ArrayList<>();
+        for (int i = 0; i < searchTerms.size(); i++) {
+            if (i > 0) {
+                sqlBuilder.append(" OR ");
+            }
+            sqlBuilder.append("LISTEGENRE LIKE ?");
+        }
+        String sql = sqlBuilder.toString();
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < searchTerms.size(); i++) {
+            stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Long id=rs.getLong(1);
+            String nom=rs.getString(2);
+            String decription= rs.getString(3);
+            Date annerdesortie=rs.getDate(4);
+            String langue=rs.getString(5);
+            String paysorigine=rs.getString(6);
+            String listegenre= rs.getString(7);
+            Blob img=rs.getBlob(8);
+            String duree=rs.getString(9);
+            Long vunbr=rs.getLong(10);
+            Long score=rs.getLong(11);
+            Long vote=rs.getLong(12);
+            InputStream image=img.getBinaryStream();
+            InputStream synop=rs.getBinaryStream(13);
+            InputStream vedio=rs.getBinaryStream(14);
+            Long idrealisateur=rs.getLong(15);
+
+            //Converting Blob Image to Jpeg File
+            File fileImg = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
+            OutputStream outS = new FileOutputStream(fileImg);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = image.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Handeling the Video, from inputStream
+            Path outputFilePath = Paths.get("src/main/java/Temp/SynopsisFilm"+id+".mp4");
+            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = synop.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the video");
+            }
+            //Handeling the Video, from inputStream
+            Path outputFilePath1 = Paths.get("src/main/java/Temp/VideoFilm"+id+".mp4");
+            try (OutputStream outputStream1 = Files.newOutputStream(outputFilePath1)) {
+                byte[] bufferved = new byte[4096];
+                int bytesReadved;
+                while ((bytesReadved = vedio.read(bufferved)) != -1) {
+                    outputStream1.write(bufferved, 0, bytesReadved);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the video");
+            }
+
+            File filesynop = new File("src/main/java/Temp/SynopsisFilm"+ id +".mp4");
+            File fileImage = new File("src/main/java/Temp/ImgFilm"+id+".jpeg");
+            File filmvedio=new File("src/main/java/Temp/VideoFilm"+ id +".mp4");
+
+
+            ArrayList<String> genrelist = new ArrayList<>();
+            String[] array = listegenre.split(",");
+            for (String s : array) {
+                genrelist.add(s);
+            }
+
+
+            Film filmm=new Film(nom,decription,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
+            list.add(filmm);
+
+        }
+
+        // Close the ResultSet, PreparedStatement, and database connection
+        rs.close();
+//        stmt.close();
+//        conn.close();
+        return list;
     }
 
 

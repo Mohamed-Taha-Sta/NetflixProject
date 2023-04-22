@@ -79,7 +79,8 @@ public class Avis_FilmDAO {
             return false;
         }
 
-    }    public static String affiche_avis(Film film, User user){
+    }
+    public static String affiche_avis(Film film, User user){
         PreparedStatement pstmt = null;
         String sql;
         ResultSet rs;

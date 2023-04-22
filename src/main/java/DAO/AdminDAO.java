@@ -36,6 +36,74 @@ public class AdminDAO {
 
     }
 
+
+    public static void modifnom(Long id,String nom){
+        /**/
+        PreparedStatement pstmt = null;
+        String sql = "UPDATE ADMIN SET nom = '"+nom+"' WHERE id_admin = "+id;
+        try {
+
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+    public static void modifprenom(Long id,String prenom){
+        /**/
+        PreparedStatement pstmt = null;
+        String sql = "UPDATE ADMIN SET prenom = '"+prenom+"' WHERE id_admin = "+id;
+        try {
+
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+
+    public static void modifmail(Long id,String mail){
+        /**/
+        PreparedStatement pstmt = null;
+        String sql = "UPDATE ADMIN SET mail = '"+mail+"' WHERE id_admin = "+id;
+        try {
+
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+    public static void modifpass(Long id,String pass){
+        /**/
+        PreparedStatement pstmt = null;
+        String sql = "UPDATE ADMIN SET password = '"+pass+"' WHERE id_admin = "+id;
+        try {
+
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+        }catch (Exception e){
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static Long consult_nbrvue_film(Film film) {
         return FilmDAO.getnbrvue(film);
     }

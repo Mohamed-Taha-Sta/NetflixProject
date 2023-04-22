@@ -1,7 +1,7 @@
 package DAO;
 
-import Entities.Film;
-import Entities.Serie;
+import Entities.Episode;
+import Entities.Season;
 import Entities.User;
 import Utils.ConxDB;
 
@@ -10,22 +10,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Avis_SerieDAO {
+public class Avis_SeasonDAO {
+
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public static boolean add_avis(Serie serie, User user, String avis){
+    public static boolean add_avis(Season s, User user, String avis){
         PreparedStatement pstmt = null;
         String sql;
 
 
         try {
-            sql = "INSERT INTO avis_serie (id_user,id_serie,avis) VALUES (?,?,?)";
+            sql = "INSERT INTO avis_saison (id_user,id_saison,avis) VALUES (?,?,?)";
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,user.getID() );
-            pstmt.setLong(2, serie.getId());
+            pstmt.setLong(2, s.getID());
 
             pstmt.setString(3, avis);
             pstmt.executeUpdate();
@@ -36,18 +37,19 @@ public class Avis_SerieDAO {
         }
 
     }
-    public static boolean modif_avis(Serie serie, User user, String avis){
+
+    public static boolean modif_avis(Season s, User user, String avis){
         PreparedStatement pstmt = null;
         String sql;
 
 
         try {
-            sql = "UPDATE avis_serie SET avis = ? WHERE id_user = ? AND id_serie = ?";
+            sql = "UPDATE avis_saison SET avis = ? WHERE id_user = ? AND id_saison = ?";
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(2,user.getID() );
-            pstmt.setLong(3, serie.getId());
+            pstmt.setLong(3, s.getID());
             pstmt.setString(1, avis);
             pstmt.executeUpdate();
             return true;
@@ -58,18 +60,18 @@ public class Avis_SerieDAO {
 
     }
 
-    public static boolean delete_avis(Serie serie, User user){
+    public static boolean delete_avis(Season s, User user){
         PreparedStatement pstmt = null;
         String sql;
 
 
         try {
-            sql = "DELETE FROM avis_film WHERE id_user = ? AND id_serie = ?";
+            sql = "DELETE FROM avis_saison WHERE id_user = ? AND id_saison = ?";
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,user.getID() );
-            pstmt.setLong(2, serie.getId());
+            pstmt.setLong(2, s.getID());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -78,28 +80,31 @@ public class Avis_SerieDAO {
         }
 
     }
-    public static String affiche_avis(Serie serie, User user){
+
+    public static String affiche_avis(Season s, User user){
         PreparedStatement pstmt = null;
         String sql;
         ResultSet rs;
 
         try {
-            sql = "SELECT avis FROM avis_film WHERE id_serie = ? and id_user=?";
-
+            sql = "SELECT avis FROM avis_saison WHERE id_serie = ? and id_saison=?";
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(2,user.getID() );
-            pstmt.setLong(1, serie.getId());
+            pstmt.setLong(1,s.getID());
             rs=pstmt.executeQuery();
             rs.next();
             return rs.getString(1);
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
-            String s="tu dois avoid un commentaire pour le supprimer";
-            return s;
+            String st="tu dois avoid un commentaire pour le supprimer";
+            return st;
         }
 
+
     }
+
+
 
 
 }

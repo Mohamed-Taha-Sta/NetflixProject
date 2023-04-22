@@ -266,9 +266,6 @@ public class ActorDAO {
         }
     }
 
-
-
-
     public static boolean authenticate(String mail, String pass) {
         PreparedStatement pstmt;
         String sql;
@@ -299,9 +296,6 @@ public class ActorDAO {
             return false;
         }
     }
-
-
-
     public static boolean check_Mail(String mail) {
         PreparedStatement pstmt;
         String sql;
