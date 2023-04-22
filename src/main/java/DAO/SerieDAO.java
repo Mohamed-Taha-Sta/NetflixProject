@@ -148,6 +148,7 @@ public class SerieDAO {
             SerieID = rs.getLong("ID_SERIE");
         else
             System.out.println("Error getting SerieID");
+        rs.close();
 //        pstmt.close();
 //        conn.close();
         return SerieID;
@@ -218,6 +219,7 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
+        rs.close();
 //        pstmt.close();
 //        conn.close();
         return serieList;
@@ -291,6 +293,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
+        rs.close();
         return serieList;
     }
 
@@ -313,6 +316,7 @@ public class SerieDAO {
         System.out.println("Got Main Actors = "+listIDActor);
 //        pstmtGetID.close();
 //        conn.close();
+        rs.close();
         return listIDActor;
     }
 
@@ -335,6 +339,7 @@ public class SerieDAO {
         System.out.println("Got Support Actors = "+listIDActor);
 //        pstmtGetID.close();
 //        conn.close();
+        rs.close();
         return listIDActor;
     }
 
@@ -362,7 +367,7 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-
+            rs.close();
         }
 //        pstmtGetID.close();
 //        conn.close();
@@ -394,6 +399,7 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
+            rs.close();
 
         }
 //        pstmtGetID.close();
@@ -473,6 +479,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
+        rs.close();
         return serieList;
     }
 
@@ -545,6 +552,7 @@ public class SerieDAO {
 //
 //        pstmt.close();
 //        conn.close();
+        rs.close();
         return serieList;
 
     }
@@ -619,6 +627,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
+        rs.close();
         return serieList;
     }
 
@@ -1013,8 +1022,8 @@ public class SerieDAO {
             pstmt.setLong(2, serie.getId());
 
             pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
 
         } catch (Exception e) {
@@ -1039,8 +1048,8 @@ public class SerieDAO {
 
 
             pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
+//            pstmt.close();
+//            conn.close();
             return true;
 
         } catch (Exception e) {
@@ -1104,7 +1113,7 @@ public class SerieDAO {
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
-//        rs.close();
+        rs.close();
 //        stmt.close();
 //        conn.close();
         return serieList;
@@ -1149,7 +1158,7 @@ public class SerieDAO {
 
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection
-//        rs.close();
+        rs.close();
 //        stmt.close();
 //        connection.close();
             }
