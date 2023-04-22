@@ -51,12 +51,19 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="225.0" prefWidth="1174.0" spacing="10.0">
                                  <children>
                                     <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" onAction="#onBack" stylesheets="@../../../Style.css" />
-                                    <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" onMouseClicked="#onEditSerieImg" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
                                        </HBox.margin>
                                     </ImageView>
-                                    <VBox alignment="CENTER_LEFT" prefHeight="180.0" prefWidth="592.0" spacing="25.0" />
+                                    <VBox prefHeight="180.0" prefWidth="592.0" spacing="25.0">
+                                       <children>
+                                          <Label fx:id="SeriesOverView" alignment="CENTER" contentDisplay="RIGHT" onMouseClicked="#SeriesOverviewBtn" prefHeight="185.0" prefWidth="592.0" style="-fx-font-size: 50;" text="Click for Series Overview" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                             <font>
+                                                <Font name="Calibri Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children></VBox>
                                     <VBox alignment="TOP_CENTER" prefHeight="129.0" prefWidth="200.0" spacing="20.0">
                                        <children>
                                           <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="200.0">
@@ -73,7 +80,7 @@
                                              </children>
                                           </HBox>
                                           <Button id="SynopsisBtn" fx:id="AddSeason" mnemonicParsing="false" onAction="#onAddSeason" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Add Season" />
-                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" layoutX="98.0" layoutY="61.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Edit Synopsis" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" layoutX="98.0" layoutY="61.0" mnemonicParsing="false" onAction="#onEdtSynosisBtn" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Edit Synopsis" />
                                        </children>
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
@@ -114,6 +121,7 @@
                                     <HBox alignment="TOP_CENTER" prefHeight="32.0" prefWidth="531.0" spacing="10.0">
                                        <children>
                                           <Label id="Category" text="DebutDate:" />
+                                          <Label id="Category" fx:id="DebutDateLabel" text="Label" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="531.0">

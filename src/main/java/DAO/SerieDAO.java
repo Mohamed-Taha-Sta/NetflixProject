@@ -768,7 +768,7 @@ public class SerieDAO {
             byte[] imgBytes = Files.readAllBytes(img.toPath());
 
             // On prépare la requête SQL avec un paramètre pour le tableau de bytes
-            sql = "UPDATE Serie SET img = ? WHERE ID_SERIE = ?";
+            sql = "UPDATE Serie SET IMAGE = ? WHERE ID_SERIE = ?";
             pstmt = conn.prepareStatement(sql);
 
             // On affecte le paramètre avec le tableau de bytes

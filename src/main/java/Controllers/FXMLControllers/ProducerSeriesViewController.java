@@ -2,9 +2,11 @@ package Controllers.FXMLControllers;
 
 import Controllers.SeasonController;
 import Controllers.SerieController;
+import DAO.UserDAO;
 import Entities.Genre;
 import Entities.Season;
 import Utils.DataHolder;
+
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -12,6 +14,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -19,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
 
@@ -49,6 +53,7 @@ public class ProducerSeriesViewController implements Initializable {
     public TextArea New_Description;
     public Label CountryOfOrigin;
     public Label Language;
+    public Label DebutDateLabel;
     private List<Season> seasonList;
     public Label RatingLabel;
     public Label DirectLabel;
@@ -142,9 +147,11 @@ public class ProducerSeriesViewController implements Initializable {
         }
     }
 
+    //JJJJEEEEEEEESSSSSSSEEEEEEEERRRRR LOOOOOOOOOK into it
 
     public void LoadSelectedGenres(){
         List<String> seriesGenre= DataHolderSeries.getSelectedSeries().getListegenre();
+        System.out.println("GENRES LIST"+seriesGenre);
         for(String genre:seriesGenre){
             for(Genre genreName:genres){
                 if(genre.equals(genreName.getNom())){
@@ -153,6 +160,10 @@ public class ProducerSeriesViewController implements Initializable {
                 }
             }
         }
+    }
+
+    public void SeriesOverviewBtn() throws Exception {
+        HelloApplication.SetRoot("CheckStatsProdSerie");
     }
 
 
@@ -165,6 +176,7 @@ public class ProducerSeriesViewController implements Initializable {
             System.out.println(DebutDatePicker.getValue());
             SerieController.modifAnnerdesoritie(DataHolderSeries.getSelectedSeries(),DebutDatePicker.getValue());
             DataHolderSeries.getSelectedSeries().setAnnerdesortie(DebutDatePicker.getValue());
+            DebutDateLabel.setText(DebutDatePicker.getValue().toString());
             showMessage(AlertText,"Attribute changed successfully");
 
         }
@@ -226,7 +238,65 @@ public class ProducerSeriesViewController implements Initializable {
         }
     }
 
+    public void onEditSerieImg() throws SQLException, IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose a Series Thumbnail");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
 
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toString());
+
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+            if (width <= 1920 && height <= 1080) {
+                Thumbnail.setImage(image);
+                SerieController.modifimg(DataHolderSeries.getSelectedSeries(),selectedFile);
+                showMessage(AlertText,"Thumbnail Changed successfully");
+
+
+            } else {
+                // If the selected image does not have the required dimensions, display an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Size");
+                alert.setContentText("Please select an image with dimensions of 1920x1080 pixels.");
+                alert.showAndWait();
+            }
+        }
+
+
+    }
+
+
+    public void onEdtSynosisBtn() throws SQLException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Synopsis");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter videoFilter = new FileChooser.ExtensionFilter("MP4 videos", "*.mp4");
+        fileChooser.getExtensionFilters().add(videoFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String fileName = selectedFile.getName();
+            String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+            if (extension.equals("mp4")) {
+                SerieController.ModifSynopsisSerie(DataHolderSeries.getSelectedSeries(),selectedFile);
+                showMessage(AlertText,"Synopsis Changed successfully");
+
+            } else {
+                // If the selected image does not have the required dimensions, display an error message
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Size");
+                alert.setContentText("Please select an image with dimensions of 1920x1080 pixels.");
+                alert.showAndWait();
+            }
+        }
+
+    }
 
 
 
@@ -327,6 +397,7 @@ public class ProducerSeriesViewController implements Initializable {
 
         GenreSelector.getItems().addAll(genreNames);
         GenreSelector.setTitle("Genres");
+        LoadSelectedGenres();
 
         CountrySelector.getItems().addAll(countries);
 
@@ -363,6 +434,7 @@ public class ProducerSeriesViewController implements Initializable {
         Thumbnail.setFitWidth(240);
         Thumbnail.setFitHeight(135);
         Old_Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
+        DebutDateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
         try {
             RatingLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+" %");
         } catch (SQLException e) {
@@ -386,7 +458,6 @@ public class ProducerSeriesViewController implements Initializable {
         }));
         timeline.play();
     }
-
 
 
 }

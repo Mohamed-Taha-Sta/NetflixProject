@@ -31,7 +31,7 @@
                            <children>
                               <HBox prefHeight="71.0" prefWidth="992.0">
                                  <children>
-                                    <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="37.0" prefWidth="39.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                                    <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#onBack" prefHeight="37.0" prefWidth="39.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
@@ -39,21 +39,86 @@
                                           <Insets top="3.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="304.0" text="Content Overview:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="266.0" text="Series Overview:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                        <font>
                                           <Font name="Calibri Bold" size="36.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </HBox>
-                              <TableView id="OverviewTable" prefHeight="430.0" prefWidth="992.0" stylesheets="@../../../Style.css">
-                                <columns>
-                                  <TableColumn prefWidth="151.0" text="Name" />
-                                  <TableColumn minWidth="1.0" prefWidth="480.0" text="Avis" />
-                                    <TableColumn prefWidth="132.0" text="Type" />
-                                    <TableColumn prefWidth="228.0" text="Debut Date" />
-                                </columns>
-                              </TableView>
+                              <HBox prefHeight="443.0" prefWidth="992.0">
+                                 <children>
+                                    <VBox prefHeight="443.0" prefWidth="701.0" spacing="15.0">
+                                       <children>
+                                          <HBox prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="82.0" text="Title:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="SeriesTitle" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="23.0" prefWidth="94.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="218.0" text="Overall Score:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="ScoreLabel" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="52.0" prefWidth="94.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="72.0" prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="203.0" text="Debut Date:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="DebutDateLabel" alignment="TOP_CENTER" contentDisplay="RIGHT" prefHeight="53.0" prefWidth="94.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <TableView id="OverviewTable" fx:id="TableViewAvis" prefHeight="443.0" prefWidth="659.0" stylesheets="@../../../Style.css">
+                                      <columns>
+                                        <TableColumn fx:id="Avis" minWidth="1.0" prefWidth="473.0" text="Avis" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>

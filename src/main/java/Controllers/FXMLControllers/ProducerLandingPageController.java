@@ -115,7 +115,7 @@ public class ProducerLandingPageController implements Initializable {
         }
         else
         {
-            DataHolderSeries.setSelectedSeries(selectedSeries);
+            DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(selectedSeries.getId()).get(0));
             HelloApplication.SetRoot("ProducerSeriesView");
         }
 
