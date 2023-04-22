@@ -223,7 +223,7 @@
                                     <Insets left="10.0" top="20.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextArea id="modifyDescp" fx:id="Old_Description" editable="false" prefHeight="97.0" prefWidth="310.0" stylesheets="@../../../Style.css" wrapText="true">
+                              <TextArea id="modifyDescp" fx:id="Old_Description" editable="false" prefHeight="97.0" prefWidth="310.0" promptText="No Description" stylesheets="@../../../Style.css" wrapText="true">
                                  <VBox.margin>
                                     <Insets left="10.0" right="5.0" />
                                  </VBox.margin>

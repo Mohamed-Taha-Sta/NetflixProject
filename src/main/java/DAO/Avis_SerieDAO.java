@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Avis_SerieDAO {
 
@@ -97,6 +99,30 @@ public class Avis_SerieDAO {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             String s="tu dois avoid un commentaire pour le supprimer";
             return s;
+        }
+
+    }
+    public static List<String> FindAvisAllSerie(Serie serie){
+        PreparedStatement pstmt = null;
+        String sql;
+        List<String> avisList = new ArrayList<>();
+        ResultSet rs;
+
+        try {
+            sql = "SELECT avis FROM avis_film WHERE id_serie = ? ";
+
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, serie.getId());
+            rs=pstmt.executeQuery();
+            while (rs.next())
+            {
+                avisList.add(rs.getString(1));
+            }
+            return avisList;
+        } catch (SQLException ex) {
+            System.out.println("tu dois avoid un commentaire pour le supprimer");
+            return avisList;
         }
 
     }

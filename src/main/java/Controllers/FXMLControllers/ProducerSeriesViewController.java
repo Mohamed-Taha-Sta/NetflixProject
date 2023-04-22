@@ -2,11 +2,8 @@ package Controllers.FXMLControllers;
 
 import Controllers.SeasonController;
 import Controllers.SerieController;
-import DAO.UserDAO;
 import Entities.Genre;
 import Entities.Season;
-import Utils.DataHolder;
-
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -14,7 +11,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,12 +21,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 

@@ -2,12 +2,9 @@ package Controllers.FXMLControllers;
 
 import Controllers.EpisodeController;
 import Controllers.SeasonController;
-import Controllers.SerieController;
 import Entities.Episode;
-import Entities.Season;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,7 +18,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -29,14 +25,12 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.ImageClipper;
-import static Utils.RepeatableFunction.ImageSetter;
+import static Utils.RepeatableFunction.*;
 
 public class ProducerSeasonViewController implements Initializable {
     public Label SeasonOverView;
     public Button AddEpisode;
     public Button SynopsisBtn;
-    public Button SeriesNameBtn;
     public Button DebutDateBtn;
     public DatePicker DebutDatePicker;
     public TextField SeasonName;
@@ -60,7 +54,7 @@ public class ProducerSeasonViewController implements Initializable {
     public void onEditSeasonImg(MouseEvent mouseEvent) throws SQLException {
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose a Series Thumbnail");
+        fileChooser.setTitle("Choose a Season Thumbnail");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
         fileChooser.getExtensionFilters().add(imageFilter);
@@ -157,7 +151,7 @@ public class ProducerSeasonViewController implements Initializable {
         }
     }
     public void OnDebutDateBtn(ActionEvent actionEvent) throws SQLException {
-        if (DebutDatePicker.getValue().equals(DataHolderSeries.getSelectedSeries().getAnnerdesortie())) {
+        if (DebutDatePicker.getValue().equals(DataHolderSeason.getSelectedSeason().getDebutDate())) {
             showMessage(AlertText, "You didnt change the Debut Date");
         } else if (DebutDatePicker.getValue()==null) {
             showMessage(AlertText, "Your new DebutDate is Empty");
@@ -172,7 +166,7 @@ public class ProducerSeasonViewController implements Initializable {
     public void ChangeDescriptionBtn(ActionEvent actionEvent) throws SQLException {
         if (New_Description.getText().isEmpty()) {
             showMessage(AlertText,"Season must have a description");
-        } else if (New_Description.getText().equals(DataHolderSeries.getDescription())) {
+        } else if (New_Description.getText().equals(DataHolderSeason.getSelectedSeason().getDescription())) {
             showMessage(AlertText,"You didn't change the Description");
         } else {
             SeasonController.modifdescription(DataHolderSeason.getSelectedSeason(),New_Description.getText() );
@@ -198,7 +192,7 @@ public class ProducerSeasonViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         EpisodeViewer.setSpacing(15);
-
+        IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
         try {
             episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
         } catch (SQLException e) {

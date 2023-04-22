@@ -107,6 +107,35 @@ public class EpisodeController {
     }
 
 
+    public static boolean modifImg(Episode episode, File img) throws SQLException {
+        return EpisodeService.modifImg(episode,img);
+    }
+
+    public static boolean modifSynopsis(Episode episode,File NewSynopsis) throws SQLException {
+        return EpisodeService.modifSynopsis(episode,NewSynopsis);
+    }
+
+    public static boolean modifVideo(Episode episode,File NewSynopsis) throws SQLException {
+        return EpisodeService.modifVideo(episode,NewSynopsis);
+    }
+
+    public static boolean modifNom(Episode episode, String nom) throws SQLException {
+        return EpisodeService.modifNom(episode,nom);
+    }
+
+    public static boolean modifDebutDate(Episode episode, LocalDate date) throws SQLException {
+        return EpisodeService.modifDebutDate(episode,date);
+    }
+
+    public static boolean modifPremiereDate(Episode episode, LocalDate date) throws SQLException {
+        return EpisodeService.modifPremiereDate(episode,date);
+    }
+
+    public static boolean modifDescription(Episode episode,String description) throws SQLException {
+        return EpisodeService.modifDescription(episode,description);
+    }
+
+
 
 
 

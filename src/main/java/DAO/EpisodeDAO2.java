@@ -1,9 +1,6 @@
 package DAO;
 
-import Entities.Episode;
-import Entities.Resume;
-import Entities.Synopsis;
-import Entities.Text;
+import Entities.*;
 import Utils.ConxDB;
 
 import java.io.*;
@@ -11,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -596,6 +594,189 @@ public class EpisodeDAO2 {
     }
 
 
+    public static boolean modifImg(Episode episode, File img) throws SQLException {
+        PreparedStatement pstmt = null;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] imgBytes = Files.readAllBytes(img.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE EPISODES SET IMAGE = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, imgBytes);
+            pstmt.setLong(2, episode.getID());
+
+            pstmt.executeUpdate();
+            //     pstmt.close();
+            //     conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+
+    public static boolean modifSynopsis(Episode episode,File NewSynopsis) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            InputStream inputStreamSynopsisEpisode = new FileInputStream(NewSynopsis);
+            sql = "UPDATE EPISODES SET SYNOPSIS = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBlob(1, inputStreamSynopsisEpisode);
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error dans la connection de la base"+e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
+    }
+
+
+    public static boolean modifVideo(Episode episode,File NewVideo) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            InputStream inputStreamSynopsisEpisode = new FileInputStream(NewVideo);
+            sql = "UPDATE EPISODES SET VIDEO = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBlob(1, inputStreamSynopsisEpisode);
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base"+e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
+    }
+
+
+    public static boolean modifNom(Episode episode, String nom) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+            sql = "UPDATE EPISODES SET Name = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,nom);
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base"+e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+    public static boolean modifDebutDate(Episode episode, LocalDate date) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+            sql = "UPDATE EPISODES SET DEBUT_DATE = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base"+e.getMessage());
+
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+
+    public static boolean modifPremiereDate(Episode episode, LocalDate date) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+            sql = "UPDATE EPISODES SET PREMIERE_DATE = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base"+e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+    public static boolean modifDescription(Episode episode,String description) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            sql = "UPDATE EPISODES SET description = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,description);
+            pstmt.setLong(2,episode.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base"+e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
 
 
 
