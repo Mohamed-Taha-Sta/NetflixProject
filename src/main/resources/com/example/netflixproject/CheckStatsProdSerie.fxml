@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -48,7 +47,7 @@
                               </HBox>
                               <HBox prefHeight="443.0" prefWidth="992.0">
                                  <children>
-                                    <VBox prefHeight="443.0" prefWidth="701.0" spacing="15.0">
+                                    <VBox prefHeight="443.0" prefWidth="517.0" spacing="15.0">
                                        <children>
                                           <HBox prefHeight="47.0" prefWidth="517.0">
                                              <children>
@@ -97,7 +96,7 @@
                                                       <Font name="Calibri Bold" size="36.0" />
                                                    </font>
                                                 </Label>
-                                                <Label fx:id="DebutDateLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="44.0" prefWidth="237.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                <Label fx:id="DebutDateLabel" alignment="TOP_CENTER" contentDisplay="RIGHT" prefHeight="53.0" prefWidth="94.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                                                    <font>
                                                       <Font name="Calibri Bold" size="36.0" />
                                                    </font>
@@ -112,11 +111,7 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <TableView id="OverviewTable" fx:id="TableViewAvis" prefHeight="443.0" prefWidth="659.0" stylesheets="@../../../Style.css">
-                                      <columns>
-                                        <TableColumn fx:id="Avis" minWidth="1.0" prefWidth="473.0" text="Avis" />
-                                      </columns>
-                                    </TableView>
+                                    <ListView fx:id="opinionList" prefHeight="443.0" prefWidth="475.0" stylesheets="@../../../Style.css" />
                                  </children>
                               </HBox>
                            </children>

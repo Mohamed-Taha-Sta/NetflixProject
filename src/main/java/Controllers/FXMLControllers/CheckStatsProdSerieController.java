@@ -1,19 +1,20 @@
 package Controllers.FXMLControllers;
 
+import Controllers.Avis_serieController;
 import Controllers.SerieController;
 
 import Entities.Film;
+import Utils.DataHolder;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-
+import javafx.scene.control.ListView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CheckStatsProdSerieController implements Initializable {
@@ -23,8 +24,8 @@ public class CheckStatsProdSerieController implements Initializable {
     public Label ScoreLabel;
     public Label DebutDateLabel;
 
-    public TableView<String> TableViewAvis = new TableView<>();
-    public TableColumn<String,String> Avis;
+    @FXML
+    private ListView<String> opinionList;
 
 
     public void onBack() throws Exception {
@@ -45,6 +46,9 @@ public class CheckStatsProdSerieController implements Initializable {
             throw new RuntimeException(e);
         }
         DebutDateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
+
+        List<String> opnions = Avis_serieController.FindAvisAllSerie(DataHolderSeries.getSelectedSeries());
+        opinionList.getItems().addAll(opnions);
 
     }
 

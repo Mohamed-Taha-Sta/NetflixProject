@@ -22,7 +22,7 @@ public class Avis_SerieDAO {
 
 
         try {
-            sql = "INSERT INTO avis_serie (id_user,id_serie,avis) VALUES (?,?,?)";
+            sql = "INSERT INTO AVIS_SERIE (id_user,id_serie,avis) VALUES (?,?,?)";
 
 
             pstmt = conn.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class Avis_SerieDAO {
 
 
         try {
-            sql = "UPDATE avis_serie SET avis = ? WHERE id_user = ? AND id_serie = ?";
+            sql = "UPDATE AVIS_SERIE SET avis = ? WHERE id_user = ? AND id_serie = ?";
 
 
             pstmt = conn.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class Avis_SerieDAO {
 
 
         try {
-            sql = "DELETE FROM avis_film WHERE id_user = ? AND id_serie = ?";
+            sql = "DELETE FROM AVIS_SERIE WHERE id_user = ? AND id_serie = ?";
 
 
             pstmt = conn.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class Avis_SerieDAO {
         ResultSet rs;
 
         try {
-            sql = "SELECT avis FROM avis_film WHERE id_serie = ? and id_user=?";
+            sql = "SELECT avis FROM AVIS_SERIE WHERE id_serie = ? and id_user=?";
 
 
             pstmt = conn.prepareStatement(sql);
