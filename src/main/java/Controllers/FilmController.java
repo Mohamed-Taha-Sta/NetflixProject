@@ -11,6 +11,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,7 +23,7 @@ import java.util.List;
 
 public class FilmController {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
 
 //        File FileVideo=new File("src/main/java/Test/Synopsis.mp4");
 //
@@ -128,9 +129,6 @@ public class FilmController {
 //      //  System.out.println(FilmDAO.FindByName("d"));
         ArrayList<String> lo =new ArrayList<>();
         lo.add("drama");
-        lo.add("comedie");
-        lo.add("horror");
-        lo.add("scer");
         ArrayList<Long>l=new ArrayList<>();
         Long lf= Long.valueOf(10);
         l.add(lf);
@@ -140,10 +138,10 @@ public class FilmController {
 
 
 //        UserDAO.ajout_User(new User("user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null));
-        Long lff= Long.valueOf(1);
+     //   Long lff= Long.valueOf(1);
           // new User()
-        Avis_FilmDAO.add_avis(new Film(lf,"caffer","eee",LocalDate.now(),"arabic","tunisie",null,null, "lyoumsba7",null,lf,lf,lf,null,null,lf),new User(2,"user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null),"bla bla");
-
+       // Avis_FilmDAO.add_avis(new Film(lf,"caffer","eee",LocalDate.now(),"arabic","tunisie",null,null, "lyoumsba7",null,lf,lf,lf,null,null,lf),new User(2,"user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null),"bla bla");
+        //System.out.println(       FilmDAO.searchFilm(lo)
 
 
 
