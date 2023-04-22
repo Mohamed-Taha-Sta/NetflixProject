@@ -493,6 +493,39 @@
     -fx-background-color: white;
 }
 
+#modifyDescp{
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: white;
+}
+
+#modifyDescp .scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+#modifyDescp .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+
+#modifyDescp .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+#modifyDescp .scroll-bar > .increment-button:hover,
+#modifyDescp .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+#modifyDescp .scroll-bar > .increment-button > .arrow,
+#myCheckComboBox .scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+
+#modifyDescp .scroll-bar > .increment-button:hover > .arrow,
+#modifyDescp.scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
+
 #hbow {
     -fx-border-radius: 10px;
     -fx-background-color: transparent;

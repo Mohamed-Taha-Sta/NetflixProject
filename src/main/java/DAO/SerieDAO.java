@@ -171,18 +171,18 @@ public class SerieDAO {
         while (rs.next()) {
 
             long ID = rs.getLong("ID_SERIE");
-            long ID_PROD = rs.getLong("ID_PROD");
-            String DESCRIPTION = rs.getString("DESCRIPTION");
+//            long ID_PROD = rs.getLong("ID_PROD");
+//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-            String Language = rs.getString("LANGUAGE");
-            String Country = rs.getString("COUNTRY");
+//            String Language = rs.getString("LANGUAGE");
+//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-            int numsSeasons= rs.getInt("NUM_SEASONS");
+//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -194,27 +194,27 @@ public class SerieDAO {
             }
 
             //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-
-            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+//
+//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
 
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -424,18 +424,18 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-            long ID_PROD = rs.getLong("ID_PROD");
-            String DESCRIPTION = rs.getString("DESCRIPTION");
+//            long ID_PROD = rs.getLong("ID_PROD");
+//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-            String Language = rs.getString("LANGUAGE");
-            String Country = rs.getString("COUNTRY");
+//            String Language = rs.getString("LANGUAGE");
+//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-            int numsSeasons= rs.getInt("NUM_SEASONS");
+//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -446,28 +446,28 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-
-            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+//            //Converting Blob Synopsis to video File .mp4
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+//
+//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
 
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -495,18 +495,18 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-            long ID_PROD = rs.getLong("ID_PROD");
-            String DESCRIPTION = rs.getString("DESCRIPTION");
+//            long ID_PROD = rs.getLong("ID_PROD");
+//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-            String Language = rs.getString("LANGUAGE");
-            String Country = rs.getString("COUNTRY");
+//            String Language = rs.getString("LANGUAGE");
+//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-            int numsSeasons= rs.getInt("NUM_SEASONS");
+//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -516,29 +516,29 @@ public class SerieDAO {
             while ((length = SerieThumbnail.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
-            //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-
-            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
-
+//
+//            //Converting Blob Synopsis to video File .mp4
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+//
+//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+//
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -570,18 +570,18 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-            long ID_PROD = rs.getLong("ID_PROD");
-            String DESCRIPTION = rs.getString("DESCRIPTION");
+//            long ID_PROD = rs.getLong("ID_PROD");
+//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-            String Language = rs.getString("LANGUAGE");
-            String Country = rs.getString("COUNTRY");
+//            String Language = rs.getString("LANGUAGE");
+//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-            int numsSeasons= rs.getInt("NUM_SEASONS");
+//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -592,28 +592,28 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            //Converting Blob Synopsis to video File .mp4
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-
-            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+//            //Converting Blob Synopsis to video File .mp4
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+//
+//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
 
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,ActorList);
+            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -822,7 +822,7 @@ public class SerieDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE Serie SET Name = '" + nom + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
@@ -846,10 +846,12 @@ public class SerieDAO {
         String sql;
 
         try {
-            ;
 
-            sql = "UPDATE Serie SET description = '" + description + "' WHERE ID_SERIE = " + serie.getId();
+
+            sql = "UPDATE Serie SET description = ? WHERE ID_SERIE = ?";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,description);
+            pstmt.setLong(2,serie.getId());
             pstmt.executeQuery();
 //            pstmt.close();
 //            conn.close();
@@ -868,7 +870,7 @@ public class SerieDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE Serie SET Language = '" + langue + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
@@ -889,7 +891,7 @@ public class SerieDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE Serie SET Country = '" + paysorgine + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
@@ -911,10 +913,12 @@ public class SerieDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
-            sql = "UPDATE Serie SET DEBUT_DATE = '" + java.sql.Date.valueOf(date) + "' WHERE ID_SERIE = " + serie.getId();
+            sql = "UPDATE Serie SET DEBUT_DATE = ? WHERE ID_SERIE = ?";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setLong(2,serie.getId());
             pstmt.executeQuery();
 
             return true;
@@ -931,7 +935,7 @@ public class SerieDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
             String genreListString = String.join(",", listegenre.stream().map(Object::toString).toArray(String[]::new));
 
             sql = "UPDATE Serie SET listegenre = '" + genreListString + "' WHERE ID_SERIE = " + serie.getId();
@@ -1069,8 +1073,12 @@ public class SerieDAO {
 
         while (rs.next()) {
             long ID = rs.getLong("ID_SERIE");
-            String Nom = rs.getString("NAME");
+            String SerieName = rs.getString("NAME");
             Blob Thumbnail = rs.getBlob("IMAGE");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            Date DebutDate = rs.getDate("DEBUT_DATE");
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
 
             //Converting Blob Image to Jpeg File
@@ -1082,7 +1090,13 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            Serie serie = new Serie(ID,Nom,fileThumb);
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            Serie serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+
 
             serieList.add(serie);
 
@@ -1107,8 +1121,12 @@ public class SerieDAO {
 
         while (rs.next()) {
             long ID = rs.getLong("ID_SERIE");
-            String Nom = rs.getString("NAME");
+            String SerieName = rs.getString("NAME");
             Blob Thumbnail = rs.getBlob("IMAGE");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            Date DebutDate = rs.getDate("DEBUT_DATE");
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
 
             //Converting Blob Image to Jpeg File
@@ -1120,7 +1138,12 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            Serie serie = new Serie(ID,Nom,fileThumb);
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            Serie serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection

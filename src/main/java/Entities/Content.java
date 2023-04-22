@@ -27,6 +27,14 @@ public class Content {
         this.img = img;
     }
 
+    public Content(long id,String nom, File img, List<String> listegenre, LocalDate annerdesortie) {
+        this.id = id;
+        this.nom = nom;
+        this.img = img;
+        this.listegenre = listegenre;
+        this.annerdesortie = annerdesortie;
+    }
+
 
     public Content(String nom) {
         this.nom = nom;

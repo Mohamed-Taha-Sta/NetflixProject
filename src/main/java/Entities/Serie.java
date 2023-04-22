@@ -24,8 +24,15 @@ public class Serie extends Content{
 
     public Serie(long id, String nom, File img) {
         super(id, nom,img);
-
     }
+
+
+    public Serie(long id, String nom, File img, List<String> listegenre, LocalDate annerdesortie,List<Actor> actorList) {
+        super(id, nom,img,listegenre,annerdesortie);
+        this.actorList = actorList;
+    }
+
+
 
     public Serie(String nom) {
         super(nom);

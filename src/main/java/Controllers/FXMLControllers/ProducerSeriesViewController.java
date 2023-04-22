@@ -2,9 +2,8 @@ package Controllers.FXMLControllers;
 
 import Controllers.SeasonController;
 import Controllers.SerieController;
-import Controllers.UserController;
+import Entities.Genre;
 import Entities.Season;
-import Entities.Serie;
 import Utils.DataHolder;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
@@ -13,7 +12,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -28,10 +26,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.*;
+import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProducerSeriesViewController implements Initializable {
 
@@ -66,6 +66,37 @@ public class ProducerSeriesViewController implements Initializable {
 //
 //    public void OnSeriesNameBtn(ActionEvent actionEvent) {
 //    }
+
+    ObservableList<Genre> genres = observableArrayList(
+            new Genre("Action"),
+            new Genre("Adventure"),
+            new Genre("Animation"),
+            new Genre("Biography"),
+            new Genre("Comedy"),
+            new Genre("Crime"),
+            new Genre("Documentary"),
+            new Genre("Drama"),
+            new Genre("Family"),
+            new Genre("Fantasy"),
+            new Genre("Film-Noir"),
+            new Genre("Game-Show"),
+            new Genre("History"),
+            new Genre("Horror"),
+            new Genre("Music"),
+            new Genre("Musical"),
+            new Genre("Mystery"),
+            new Genre("News"),
+            new Genre("Reality-TV"),
+            new Genre("Romance"),
+            new Genre("Sci-Fi"),
+            new Genre("Sport"),
+            new Genre("Talk-Show"),
+            new Genre("Thriller"),
+            new Genre("War"),
+            new Genre("Western")
+    );
+
+
     @FXML
     public void handleImageClick(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
@@ -95,70 +126,103 @@ public class ProducerSeriesViewController implements Initializable {
         DataHolderSeason.setPreviousPage("ProducerSeriesView");
         DataHolderSeries.setIDSerie(DataHolderSeries.getSelectedSeries().getId());
         HelloApplication.SetRoot("AddSeason");
+
     }
 
 
     public void OnSeriesNameBtn() throws SQLException {
         if (SeriesName.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your Series Title field is empty");
+            showMessage(AlertText,"Your New Series Title field is empty");
         } else {
             SerieController.modifnom(DataHolderSeries.getSelectedSeries(),SeriesName.getText());
             DataHolderSeries.getSelectedSeries().setNom(SeriesName.getText());
             Title.setText(SeriesName.getText());
+            showMessage(AlertText,"Attribute changed successfully");
+
         }
     }
 
+
+    public void LoadSelectedGenres(){
+        List<String> seriesGenre= DataHolderSeries.getSelectedSeries().getListegenre();
+        for(String genre:seriesGenre){
+            for(Genre genreName:genres){
+                if(genre.equals(genreName.getNom())){
+                    genreName.getSelect().setSelected(true);
+                    break;
+                }
+            }
+        }
+    }
+
+
     public void OnDebutDateBtn() throws SQLException {
         if (DebutDatePicker.getValue().equals(DataHolderSeries.getSelectedSeries().getAnnerdesortie())) {
-            showErrorMessage(AlertText, "You didnt change the Debut Date");
+            showMessage(AlertText, "You didnt change the Debut Date");
+        } else if (DebutDatePicker.getValue()==null) {
+            showMessage(AlertText, "Your new DebutDate is Empty");
         } else {
+            System.out.println(DebutDatePicker.getValue());
             SerieController.modifAnnerdesoritie(DataHolderSeries.getSelectedSeries(),DebutDatePicker.getValue());
             DataHolderSeries.getSelectedSeries().setAnnerdesortie(DebutDatePicker.getValue());
+            showMessage(AlertText,"Attribute changed successfully");
 
         }
     }
 
     public void onGenreBtn() throws SQLException {
-        if (GenreSelector.getCheckModel().getCheckedItems() == null) {
-            showErrorMessage(AlertText,"Series must have at least a genre");
-        }else
-        {
+        if (GenreSelector.getCheckModel().getCheckedItems().isEmpty()) {
+            showMessage(AlertText,"Series must have at least a genre");
+        } else if (GenreSelector.getCheckModel().getCheckedItems().equals(DataHolderSeries.getSelectedSeries().getListegenre())) {
+            showMessage(AlertText,"You didn't change the genre");
+        } else {
             SerieController.modiflistegenre(DataHolderSeries.getSelectedSeries(),GenreSelector.getCheckModel().getCheckedItems());
             DataHolderSeries.getSelectedSeries().setListegenre(GenreSelector.getCheckModel().getCheckedItems());
+            showMessage(AlertText,"Attribute changed successfully");
+
         }
     }
 
     public void onCountryBtn() throws SQLException {
         if (CountrySelector.getValue()==null) {
-            showErrorMessage(AlertText,"Series must have a country");
-        }else
-        {
+            showMessage(AlertText,"New Series must have a country");
+        } else if (CountrySelector.getValue().equals(DataHolderSeries.getSelectedSeries().getPaysorigine())) {
+            showMessage(AlertText,"You didn't change the country");
+        } else {
             SerieController.modifpaysoregine(DataHolderSeries.getSelectedSeries(), (String) CountrySelector.getValue());
             DataHolderSeries.getSelectedSeries().setPaysorigine((String) CountrySelector.getValue());
             CountryOfOrigin.setText(DataHolderSeries.getSelectedSeries().getPaysorigine());
+            showMessage(AlertText,"Attribute changed successfully");
+
         }
     }
 
     public void onLanguageBtn() throws SQLException {
         if (LanguageSelector.getValue()==null) {
-            showErrorMessage(AlertText,"Series must have a language");
-        }else
-        {
+            showMessage(AlertText,"Series must have a language");
+        } else if (LanguageSelector.getValue().equals(DataHolderSeries.getSelectedSeries().getLangue())) {
+            showMessage(AlertText,"You didn't change the language");
+        } else {
             SerieController.modiflangues(DataHolderSeries.getSelectedSeries(), (String) LanguageSelector.getValue());
             DataHolderSeries.getSelectedSeries().setLangue((String) LanguageSelector.getValue());
             Language.setText(DataHolderSeries.getSelectedSeries().getLangue());
+            showMessage(AlertText,"Attribute changed successfully");
+
         }
     }
 
 
     public void ChangeDescriptionBtn() throws SQLException {
         if (New_Description.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Series must have a description");
-        } else
-        {
+            showMessage(AlertText,"Series must have a description");
+        } else if (New_Description.getText().equals(DataHolderSeries.getDescription())) {
+            showMessage(AlertText,"You didn't change the Description");
+        } else {
             SerieController.modifdescription(DataHolderSeries.getSelectedSeries(),New_Description.getText() );
             DataHolderSeries.getSelectedSeries().setDescription(New_Description.getText() );
             Old_Description.setText(New_Description.getText());
+            showMessage(AlertText,"Attribute changed successfully");
+
         }
     }
 
@@ -313,7 +377,7 @@ public class ProducerSeriesViewController implements Initializable {
     }
 
 
-    private void showErrorMessage(Label label, String message) {
+    private void showMessage(Label label, String message) {
         label.setText(message);
         label.setOpacity(1);
 
