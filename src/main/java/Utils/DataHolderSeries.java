@@ -2,6 +2,7 @@ package Utils;
 
 import Entities.Actor;
 import Entities.Serie;
+import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -22,6 +23,15 @@ public class DataHolderSeries {
     private static List<Long> MainActorsList;
     private static List<Long> SuppActorsList;
     private static Serie selectedSeries;
+    private static ObservableList<Serie> series;
+
+    public static ObservableList<Serie> getSeries() {
+        return series;
+    }
+
+    public static void setSeries(ObservableList<Serie> series) {
+        DataHolderSeries.series = series;
+    }
 
     public static Serie getSelectedSeries() {
         return selectedSeries;

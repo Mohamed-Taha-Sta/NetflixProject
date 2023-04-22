@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Avis_SeasonDAO {
 
@@ -87,7 +89,7 @@ public class Avis_SeasonDAO {
         ResultSet rs;
 
         try {
-            sql = "SELECT avis FROM avis_saison WHERE id_serie = ? and id_saison=?";
+            sql = "SELECT avis FROM avis_saison WHERE id_user = ? and id_saison=?";
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(2,user.getID() );
@@ -99,6 +101,29 @@ public class Avis_SeasonDAO {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             String st="tu dois avoid un commentaire pour le supprimer";
             return st;
+        }
+
+
+    }
+
+    public static List<String> FindAll(Season s){
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
+        List<String> opinionList = new ArrayList<>();
+
+        try {
+            sql = "SELECT avis FROM avis_saison WHERE id_saison=?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,s.getID());
+            rs=pstmt.executeQuery();
+            while (rs.next())
+                opinionList.add(rs.getString(1));
+            return opinionList;
+        } catch (SQLException ex) {
+
+            return opinionList;
         }
 
 

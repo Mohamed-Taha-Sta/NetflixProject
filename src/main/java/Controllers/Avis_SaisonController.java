@@ -5,6 +5,8 @@ import Entities.Season;
 import Entities.User;
 import Services.Avis_SaisonService;
 
+import java.util.List;
+
 public class Avis_SaisonController {
     public static boolean add_avis(Season s, User user, String avis){
         return Avis_SaisonService.add_avis(s,user,avis);
@@ -18,4 +20,9 @@ public class Avis_SaisonController {
     public static String FIND_avis(Season s, User user){
         return Avis_SaisonService.FIND_avis(s,user);
     }
+
+    public static List<String> FindAll(Season s){
+        return Avis_SaisonService.FindAll(s);
+    }
+
 }

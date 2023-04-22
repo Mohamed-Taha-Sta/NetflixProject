@@ -33,10 +33,13 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="116.0" fitWidth="121.0">
                            <image>
-                              <Image url="@../../../Images/profilepicture.png" />
+                              <Image url="@../../../Images/ProducerDefault-removebg-preview.png" />
                            </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
                         </ImageView>
                      </children>
                   </HBox>

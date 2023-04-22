@@ -387,6 +387,68 @@
     -fx-control-inner-background: #B3253D;
 }
 
+/*ListView EDIT*/
+.list-cell {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+
+}
+.list-view .scroll-bar:horizontal .increment-arrow,
+.list-view .scroll-bar:horizontal .decrement-arrow,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-padding:0;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: rgba(0, 0, 0, 0.14);
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: rgba(0, 0, 0, 0.29);
+}
+
+.list-view .scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+.list-view .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+
+.list-view .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+.list-view .scroll-bar > .increment-button:hover,
+.list-view .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+.list-view .scroll-bar > .increment-button > .arrow,
+.list-view.scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+
+.list-view .scroll-bar > .increment-button:hover > .arrow,
+.list-view.scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
+
+.list-cell:selected {
+    -fx-background-color: #fc0000;
+    -fx-text-fill: white;
+}
+
 
 /* TABLE EDIT*/
 .table-view .table-cell {

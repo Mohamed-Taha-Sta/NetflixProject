@@ -4,6 +4,8 @@ import DAO.Avis_EpisodeDAO;
 import Entities.Episode;
 import Entities.User;
 
+import java.util.List;
+
 public class Avis_EpisodeService {
     public static boolean add_avis(Episode ep, User user, String avis){
         return Avis_EpisodeDAO.add_avis(ep,user,avis);
@@ -17,4 +19,9 @@ public class Avis_EpisodeService {
     public static String FIND_avis(Episode ep, User user){
         return Avis_EpisodeDAO.affiche_avis(ep,user);
     }
+
+    public static List<String> FindAll(Episode ep) {
+        return Avis_EpisodeDAO.FindAll(ep);
+    }
+
 }

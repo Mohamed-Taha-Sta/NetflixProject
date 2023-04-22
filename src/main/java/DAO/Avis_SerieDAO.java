@@ -109,7 +109,7 @@ public class Avis_SerieDAO {
         ResultSet rs;
 
         try {
-            sql = "SELECT avis FROM avis_film WHERE id_serie = ? ";
+            sql = "SELECT avis FROM AVIS_SERIE WHERE id_serie = ? ";
 
 
             pstmt = conn.prepareStatement(sql);

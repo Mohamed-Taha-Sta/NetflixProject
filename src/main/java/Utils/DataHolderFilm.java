@@ -2,6 +2,8 @@ package Utils;
 
 import Entities.Actor;
 import Entities.Film;
+import Entities.Serie;
+import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -19,6 +21,7 @@ public class DataHolderFilm {
     private static String Description;
     private static String Language;
     private static String CountryOfOrigin;
+    private static ObservableList<Film> Films;
     private static List<String> GenreList;
     private static List<Actor> MainActorsList;
     private static List<Actor> SuppActorsList;
@@ -136,5 +139,14 @@ public class DataHolderFilm {
     public static void setDuration(String duration) {
         Duration = duration;
     }
+    public static ObservableList<Film> getFilms() {
+        return Films;
+    }
+
+    public static void setFilms(ObservableList<Film> films) {
+        Films = films;
+    }
+
+
 
 }

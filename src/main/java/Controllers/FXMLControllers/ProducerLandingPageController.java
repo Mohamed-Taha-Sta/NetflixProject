@@ -25,9 +25,11 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.collections.FXCollections.observableArrayList;
+import static javafx.collections.FXCollections.singletonObservableList;
 
 public class ProducerLandingPageController implements Initializable {
 
@@ -188,8 +190,9 @@ public class ProducerLandingPageController implements Initializable {
 
     public ProducerLandingPageController() throws SQLException, IOException {
     }
-    ObservableList<Serie> Series = FXCollections.observableList(SerieController.GetSeriesByProducer(DataHolder.getProducer()));
-    ObservableList<Film> Films = FXCollections.observableList(FilmController.FindByproducer(DataHolder.getProducer()));
+
+    public static ObservableList<Serie> Series ;
+    public static ObservableList<Film> Films;
 
 
     public void OnloadProfile() throws Exception {
@@ -212,12 +215,52 @@ public class ProducerLandingPageController implements Initializable {
             throw new RuntimeException(e);
         }
 
+
         MovieName.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
+        if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
+
+            System.out.println("Salem Series");
+            List<Serie> seriesList = null;
+            try {
+                seriesList = SerieController.GetSeriesByProducer(DataHolder.getProducer());
+                System.out.println(seriesList);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Series = FXCollections.observableArrayList(seriesList);
+
+            DataHolderSeries.setSeries(Series);
+        }
+
+        if (DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
+            System.out.println("Salem Film");
+
+            List<Film> filmList = null;
+            filmList = FilmController.FindByproducer(DataHolder.getProducer());
+            System.out.println(filmList);
+            Films = FXCollections.observableArrayList(filmList);
+
+            DataHolderFilm.setFilms(Films);
+        }
+
         MoviesTable.setItems(Films);
         SeriesTable.setItems(Series);
+
+//
+//        if ((Series == null )||(Series.isEmpty())||(!Series.equals(DataHolderSeries.getSeries()))) {
+//                Series = DataHolderSeries.getSeries();
+//        }
+//
+//        if ((Films == null)||(Films.isEmpty())||(!Films.equals(DataHolderFilm.getFilms()))) {
+//            Films = FXCollections.observableList(FilmController.FindByproducer(DataHolder.getProducer()));
+//        }
+
+
 
 
 

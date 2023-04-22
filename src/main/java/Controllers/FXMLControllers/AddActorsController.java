@@ -76,6 +76,10 @@ public class AddActorsController implements Initializable {
                     DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
 
             DataHolderSeries.setIDSerie(idSeries);
+            DataHolderSeries.getSeries().add(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
+                    DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
+                    DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
+                    DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
 
             HelloApplication.SetRoot("AddSeason");
         }

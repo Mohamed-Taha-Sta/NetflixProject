@@ -1,20 +1,18 @@
 package Controllers.FXMLControllers;
 
+import Controllers.Avis_SaisonController;
 import Controllers.Avis_serieController;
+import Controllers.SeasonController;
 import Controllers.SerieController;
-
-import Entities.Film;
-import Utils.DataHolder;
+import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,10 +20,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CheckStatsProdSerieController implements Initializable {
+public class CheckStatsProdSeasonController implements Initializable {
 
 
-    public Label SeriesTitle;
+    public Label SeasonTitle;
     public Label ScoreLabel;
     public Label DebutDateLabel;
 
@@ -33,27 +31,26 @@ public class CheckStatsProdSerieController implements Initializable {
     private ListView<String> opinionList;
 
 
-    public void onBack() throws Exception {
-        HelloApplication.SetRoot("ProducerSeriesView");
+    public void onBack(ActionEvent actionEvent) throws Exception {
+        HelloApplication.SetRoot("ProducerSeasonView");
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        opinionList.setPlaceholder(new Label("No opinions for this series"));
+        opinionList.setPlaceholder(new Label("No opinions for this season"));
 
-        SeriesTitle.setText(DataHolderSeries.getSelectedSeries().getNom());
+        SeasonTitle.setText(DataHolderSeason.getSelectedSeason().getName());
         try {
-            ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+"%");
+            ScoreLabel.setText(String.valueOf(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()))+"%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             System.out.println("Error printing rating");
             throw new RuntimeException(e);
         }
-        DebutDateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
+        DebutDateLabel.setText(DataHolderSeason.getSelectedSeason().getDebutDate().toString());
 
-        List<String> opnions = Avis_serieController.FindAvisAllSerie(DataHolderSeries.getSelectedSeries());
+        List<String> opnions = Avis_SaisonController.FindAll(DataHolderSeason.getSelectedSeason());
         opinionList.getItems().addAll(opnions);
 
         opinionList.setCellFactory(param -> new ListCell<String>(){
@@ -82,6 +79,5 @@ public class CheckStatsProdSerieController implements Initializable {
             }
         });
     }
-
 
 }

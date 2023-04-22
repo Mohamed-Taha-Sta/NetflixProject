@@ -81,6 +81,11 @@ public class AddActorsFilmController implements Initializable {
                     DataHolderFilm.getGenreList(),DataHolderFilm.getThumbnail(),DataHolderFilm.getDuration(),
                     DataHolderFilm.getSynopsis(),DataHolderFilm.getVideo(), DataHolder.getProducer().getId(),DataHolderFilm.getAllTheActors()));
 
+            DataHolderFilm.getFilms().add(new Film(DataHolderFilm.getName(),DataHolderFilm.getDescription(),
+                    DataHolderFilm.getDebutDate(),DataHolderFilm.getLanguage(),DataHolderFilm.getCountryOfOrigin(),
+                    DataHolderFilm.getGenreList(),DataHolderFilm.getThumbnail(),DataHolderFilm.getDuration(),
+                    DataHolderFilm.getSynopsis(),DataHolderFilm.getVideo(), DataHolder.getProducer().getId(),DataHolderFilm.getAllTheActors()));
+
             HelloApplication.SetRoot("ProducerLandingPage");
         }
 
