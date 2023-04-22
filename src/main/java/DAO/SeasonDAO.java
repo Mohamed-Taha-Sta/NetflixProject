@@ -76,12 +76,12 @@ public class SeasonDAO {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
             long ID_SERIE = rs.getLong("ID_SERIE");
-            String Description = rs.getString("DESCRIPTION");
-            int num = rs.getInt("NUM");
-            Date DebutDate = rs.getDate("DEBUT_DATE");
+//            String Description = rs.getString("DESCRIPTION");
+//            int num = rs.getInt("NUM");
+//            Date DebutDate = rs.getDate("DEBUT_DATE");
             Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
             InputStream SeasonThumbnail = ThumbnailBlob.getBinaryStream();
-            InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
