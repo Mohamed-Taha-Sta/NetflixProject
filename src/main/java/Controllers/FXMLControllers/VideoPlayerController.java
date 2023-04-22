@@ -66,9 +66,6 @@ public class VideoPlayerController implements Initializable {
         pageName=page;
     }
 
-    public void OnReturn()throws Exception{
-        HelloApplication.SetRoot(pageName);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -121,6 +118,16 @@ public class VideoPlayerController implements Initializable {
 
         ButtonPPR.setGraphic(ivPlay);
         mpVideo.volumeProperty().bindBidirectional(SliderVolume.valueProperty());
+
+        ReturnBtn.setOnAction(actionEvent -> {
+            mpVideo.pause();
+            ButtonPPR.setGraphic(ivPause);
+            try {
+                HelloApplication.SetRoot(pageName);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         ButtonPPR.setOnAction(actionEvent -> {
             Button buttonPlay = (Button) actionEvent.getSource();
