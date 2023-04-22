@@ -31,7 +31,7 @@
                            <children>
                               <HBox prefHeight="71.0" prefWidth="992.0">
                                  <children>
-                                    <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="37.0" prefWidth="40.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                                    <Button id="button" fx:id="login1" mnemonicParsing="false" prefHeight="37.0" prefWidth="39.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri Bold" size="14.0" />
                                        </font>
@@ -48,9 +48,9 @@
                               </HBox>
                               <TableView id="OverviewTable" prefHeight="430.0" prefWidth="992.0" stylesheets="@../../../Style.css">
                                 <columns>
-                                  <TableColumn prefWidth="423.0" text="Name" />
-                                  <TableColumn minWidth="1.0" prefWidth="208.0" text="Type" />
-                                    <TableColumn prefWidth="132.0" text="Views" />
+                                  <TableColumn prefWidth="151.0" text="Name" />
+                                  <TableColumn minWidth="1.0" prefWidth="480.0" text="Avis" />
+                                    <TableColumn prefWidth="132.0" text="Type" />
                                     <TableColumn prefWidth="228.0" text="Debut Date" />
                                 </columns>
                               </TableView>

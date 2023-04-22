@@ -1,5 +1,6 @@
 package Utils;
 
+import Entities.Season;
 import javafx.scene.control.DatePicker;
 
 import java.io.File;
@@ -9,6 +10,8 @@ public class DataHolderSeason {
 
     private static long IDSeason;
     private static String Name;
+
+    private static Season selectedSeason;
     private static String Description;
     private static String PreviousPage;
     private static LocalDate DebutDate;
@@ -68,6 +71,15 @@ public class DataHolderSeason {
     public static void setPreviousPage(String previousPage) {
         PreviousPage = previousPage;
     }
+
+    public static Season getSelectedSeason() {
+        return selectedSeason;
+    }
+
+    public static void setSelectedSeason(Season selectedSeason) {
+        DataHolderSeason.selectedSeason = selectedSeason;
+    }
+
 
 
 }

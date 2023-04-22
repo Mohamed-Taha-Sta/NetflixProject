@@ -1,8 +1,6 @@
 package Controllers;
 
-import DAO.SerieDAO;
 import Entities.Actor;
-import Entities.MainActor;
 import Entities.Producer;
 import Entities.Serie;
 import Services.SerieService;
@@ -12,8 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SerieController {
