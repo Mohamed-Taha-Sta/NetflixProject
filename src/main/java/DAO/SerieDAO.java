@@ -171,7 +171,7 @@ public class SerieDAO {
         while (rs.next()) {
 
             long ID = rs.getLong("ID_SERIE");
-//            long ID_PROD = rs.getLong("ID_PROD");
+            long ID_PROD = rs.getLong("ID_PROD");
 //            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
 //            String Language = rs.getString("LANGUAGE");
@@ -214,7 +214,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -424,7 +424,7 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-//            long ID_PROD = rs.getLong("ID_PROD");
+            long ID_PROD = rs.getLong("ID_PROD");
 //            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
 //            String Language = rs.getString("LANGUAGE");
@@ -467,7 +467,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -495,7 +495,7 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-//            long ID_PROD = rs.getLong("ID_PROD");
+            long ID_PROD = rs.getLong("ID_PROD");
 //            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
 //            String Language = rs.getString("LANGUAGE");
@@ -538,7 +538,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -570,7 +570,7 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
-//            long ID_PROD = rs.getLong("ID_PROD");
+            long ID_PROD = rs.getLong("ID_PROD");
 //            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
 //            String Language = rs.getString("LANGUAGE");
@@ -613,7 +613,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         }
@@ -1073,6 +1073,7 @@ public class SerieDAO {
 
         while (rs.next()) {
             long ID = rs.getLong("ID_SERIE");
+            long ID_PROD = rs.getLong("ID_PROD");
             String SerieName = rs.getString("NAME");
             Blob Thumbnail = rs.getBlob("IMAGE");
             String StringGenre = rs.getString("LISTEGENRE");
@@ -1095,7 +1096,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            Serie serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
 
             serieList.add(serie);
@@ -1121,6 +1122,7 @@ public class SerieDAO {
 
         while (rs.next()) {
             long ID = rs.getLong("ID_SERIE");
+            long ID_PROD = rs.getLong("ID_PROD");
             String SerieName = rs.getString("NAME");
             Blob Thumbnail = rs.getBlob("IMAGE");
             String StringGenre = rs.getString("LISTEGENRE");
@@ -1143,7 +1145,7 @@ public class SerieDAO {
 
             ActorList.addAll(SuppActorList);
 
-            Serie serie = new Serie(ID,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+            Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection
