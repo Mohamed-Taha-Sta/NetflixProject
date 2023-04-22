@@ -1,9 +1,11 @@
 package Controllers.FXMLControllers;
 
+import Controllers.Avis_serieController;
 import Controllers.ProducerController;
 import Controllers.SeasonController;
 import Entities.Producer;
 import Entities.Season;
+import Utils.DataHolder;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -31,7 +33,6 @@ public class SerieViewController implements Initializable {
     public TextArea SerieOpinion;
     public Button EditBtn;
     public Button SaveBtn;
-    public Button Cancelbtn;
 
     public Button homeButton;
     public Button seriesButoon;
@@ -45,13 +46,24 @@ public class SerieViewController implements Initializable {
     public TextArea Description;
     public Label dateLabel;
     public Label genreLabel;
+    public Button DeleteBtn;
 
+    static String path="HomePage";
+
+    public static String getPath() {
+        return path;
+    }
+
+    public static void setPath(String path) {
+        SerieViewController.path = path;
+    }
 
     List<Season> seasons;
 
     static Producer prod=ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
     public void OnBack() throws Exception {
-        HelloApplication.SetRoot("HomePage");
+
+        HelloApplication.SetRoot(path);
     }
     @FXML
     public void OnFilmClick() throws Exception {
@@ -76,6 +88,7 @@ public class SerieViewController implements Initializable {
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
         dateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().format(formatter));
         genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());
+        SerieOpinion.setText(Avis_serieController.FIND_avis(DataHolderSeries.getSelectedSeries(),DataHolder.getUser()));
     }
 
     public List<Season> RetrieveSeasons(){
@@ -94,17 +107,11 @@ public class SerieViewController implements Initializable {
     }
 
     public void OnSave(){
-        if(SerieOpinion.isEditable()){
-            SerieOpinion.setEditable(false);
-            System.out.println(SerieOpinion.getText());
-        }
+
+
     }
 
-    public void OnCancel(){
-        if(SerieOpinion.isEditable()){
-            SerieOpinion.setEditable(false);
-            System.out.println(SerieOpinion.getText());
-        }
+    public void OnDelete(){
 
     }
 
@@ -132,7 +139,6 @@ public class SerieViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         seasons= RetrieveSeasons();
-
         VBox seasonHolder = new VBox();
         HBox season2 = new HBox();
         int seasonNbr = 0;

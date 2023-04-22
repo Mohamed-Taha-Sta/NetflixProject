@@ -83,7 +83,7 @@
                                           <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="174.0" spacing="10.0">
                                              <children>
                                                 <Label id="Category" text="Genre:" />
-                                                <Label id="Category" fx:id="genreLabel" text="Label" wrapText="true" HBox.hgrow="SOMETIMES" />
+                                                <Label id="Category" fx:id="genreLabel" text="Label" wrapText="true" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -114,7 +114,7 @@
                                        <children>
                                           <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
                                           <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSave" text="Save" />
-                                          <Button fx:id="Cancelbtn" mnemonicParsing="false" onAction="#OnCancel" text="Cancel" />
+                                          <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
                                        </children>
                                     </VBox>
                                  </children>

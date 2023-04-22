@@ -27,9 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.IconSetter;
-import static Utils.RepeatableFunction.ImageClipper;
-import static javafx.collections.FXCollections.observableArrayList;
+import static Utils.RepeatableFunction.*;
 
 public class ProfilePageController implements Initializable {
 
@@ -88,34 +86,7 @@ public class ProfilePageController implements Initializable {
 
 
     ObservableList<Actor> actors;
-    ObservableList<Genre> genres = observableArrayList(
-            new Genre("Action"),
-            new Genre("Adventure"),
-            new Genre("Animation"),
-            new Genre("Biography"),
-            new Genre("Comedy"),
-            new Genre("Crime"),
-            new Genre("Documentary"),
-            new Genre("Drama"),
-            new Genre("Family"),
-            new Genre("Fantasy"),
-            new Genre("Film-Noir"),
-            new Genre("Game-Show"),
-            new Genre("History"),
-            new Genre("Horror"),
-            new Genre("Music"),
-            new Genre("Musical"),
-            new Genre("Mystery"),
-            new Genre("News"),
-            new Genre("Reality-TV"),
-            new Genre("Romance"),
-            new Genre("Sci-Fi"),
-            new Genre("Sport"),
-            new Genre("Talk-Show"),
-            new Genre("Thriller"),
-            new Genre("War"),
-            new Genre("Western")
-    );
+    ObservableList<Genre> genres = GetGenres();
 
     public void LoadSelectedActors(){
         actors= FXCollections.observableList(ActorController.GetAllActors(""));

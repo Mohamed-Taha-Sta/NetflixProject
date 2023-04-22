@@ -2,91 +2,187 @@ package Controllers.FXMLControllers;
 
 import Controllers.SerieController;
 import Entities.Serie;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SeriesPageController implements Initializable {
+import static Utils.RepeatableFunction.ImageClipper;
+import static Utils.RepeatableFunction.ImageSetter;
 
-    public VBox ContentHolder;
+public class SeriesPageController implements Initializable {
+    public List<Serie> series;
+
+    public VBox SeriesViewer = new VBox();
     public TextField searchBar;
 
-    public List<Serie> series=new ArrayList<>();
+
     public Button homeButton;
     public Button seriesButoon;
     public Button filmButton;
     public Label welcome;
     public Button SearchButton;
     public CheckComboBox<String> GenresSelector;
+    public ComboBox<String> YearSelect;
+
 
     @FXML
-    public void onSearch() throws Exception {
-        series = SerieController.GetSerieByName(searchBar.getText());
-        ContentHolder.getChildren().clear();
-        initialize(null,null);
-    }
-
-    @FXML
-    public void OnFilmClick()throws Exception{
+    public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
     }
-    public void OnHomeClick()throws Exception{
+
+    public void OnHomeClick() throws Exception {
         HelloApplication.SetRoot("HomePage");
     }
 
-
-    public void OnLoad(){
-
-    }
-
-    public List<Serie> RetrieveSeries(){
-        try{
-            return SerieController.GetManySeries(30);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return new ArrayList<>();
+    public void handleImageClick(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        Serie selectedSerie = null;
+        for (Serie s : series) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
+                selectedSerie = s;
+                break;
+            }
         }
-
+        if (selectedSerie != null) {
+            try {
+                DataHolderSeries.setSelectedSeries(selectedSerie);
+                DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeries.getSelectedSeries().getId()).get(0));
+                SerieViewController.setPath("SeriesPage");
+                HelloApplication.SetRoot("SerieView");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
+    public void ShowSeries(List<Serie> toShow) {
+
+        if (toShow == null || toShow.isEmpty()) {
+            System.out.println("Nothing to show");
+        } else {
+            HBox shelf = new HBox();
+            shelf.setSpacing(20);
+            shelf.setAlignment(Pos.CENTER_LEFT);
+            int counter = 0;
+            for (Serie s : toShow) {
+                ImageView imgView = new ImageView();
+                ImageSetter(imgView, s.getImg().toURI().toString(), 176, 99);
+                ImageClipper(imgView);
+                imgView.setCursor(Cursor.cursor("hand"));
+                imgView.setOnMouseClicked(this::handleImageClick);
+                shelf.getChildren().add(imgView);
+                System.out.println("SerieNbr: " + counter);
+                counter++;
+                if (counter == 6) {
+                    SeriesViewer.getChildren().add(shelf);
+                    shelf = new HBox();
+                    shelf.setSpacing(20);
+                    shelf.setAlignment(Pos.CENTER_LEFT);
+                    counter = 0;
+                }
+
+            }
+            if (counter > 0) {
+                SeriesViewer.getChildren().add(shelf);
+            }
+        }
+    }
+
+    public List<Serie> searchSeries(List<Serie> seriesList, String searchText, List<String> selectedGenres, String selectedYear) {
+        if (searchText.isEmpty() && selectedGenres.isEmpty() && (selectedYear == null || selectedYear.equals("All"))) {
+            return seriesList;
+        }
+        List<Serie> filteredList = new ArrayList<>();
+        for (Serie serie : seriesList) {
+            if ((searchText.isEmpty() || serie.getNom().toLowerCase().contains(searchText.toLowerCase())) &&
+                    (selectedGenres.isEmpty() || new HashSet<>(serie.getListegenre()).containsAll(selectedGenres)) &&
+                    (selectedYear == null || selectedYear.equals("All") || serie.getAnnerdesortie().getYear() == Integer.parseInt(selectedYear))) {
+                filteredList.add(serie);
+            }
+        }
+        return filteredList;
+    }
+
+
+    public void OnSearch(){
+        List<Serie> filteredSeries;
+        filteredSeries=searchSeries(series,searchBar.getText(),GenresSelector.getCheckModel().getCheckedItems(),YearSelect.getValue());
+        SeriesViewer.getChildren().clear();
+        ShowSeries(filteredSeries);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FilmPageController.PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
-        series=RetrieveSeries();
-        if (series.isEmpty()) {
-            System.out.println("Series is empty");
-        } else {
-            HBox line = new HBox();
-            for (int i = 0; i < series.size(); i++) {
-                ImageView imageView = null;
-                try {
-                    imageView = new ImageView(String.valueOf(series.get(i).getImg().toURI()));
-                    imageView.setCursor(Cursor.cursor("Hand"));
-                    imageView.setFitHeight(100);
-                    imageView.setFitWidth(150);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                line.getChildren().add(imageView);
-                if (i == 5) {
-                    ContentHolder.getChildren().add(line);
-                    line = new HBox();
-                }
-            }
-
+        try {
+            series = SerieController.GetAllSeries();
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
         }
+        GenresSelector.getItems().addAll(genreNames);
+        yearList.add("All");
+        YearSelect.getItems().addAll(yearList);
+        YearSelect.setValue("All");
+        OnSearch();
+
+
+
+
+
+
+
     }
+
+    ObservableList<String> yearList = FXCollections.observableArrayList("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
+
+    ObservableList<String> genreNames = FXCollections.observableArrayList(
+            "Action",
+            "Adventure",
+            "Animation",
+            "Biography",
+            "Comedy",
+            "Crime",
+            "Documentary",
+            "Drama",
+            "Family",
+            "Fantasy",
+            "Film-Noir",
+            "Game-Show",
+            "History",
+            "Horror",
+            "Music",
+            "Musical",
+            "Mystery",
+            "News",
+            "Reality-TV",
+            "Romance",
+            "Sci-Fi",
+            "Sport",
+            "Talk-Show",
+            "Thriller",
+            "War",
+            "Western"
+    );
 }
