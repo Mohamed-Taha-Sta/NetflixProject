@@ -4,23 +4,23 @@ import Controllers.ProducerController;
 import Controllers.SeasonController;
 import Entities.Producer;
 import Entities.Season;
-import Entities.Serie;
+import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,15 +28,17 @@ import static Utils.RepeatableFunction.*;
 
 public class SerieViewController implements Initializable {
     public VBox SeasonView;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public TextArea SerieOpinion;
+    public Button EditBtn;
+    public Button SaveBtn;
+    public Button Cancelbtn;
+
     public Button homeButton;
     public Button seriesButoon;
     public Button filmButton;
     public Label SerieName;
     public Label DirectLabel;
     public ImageView Thumbnail;
-    public Button ThumbUp;
-    public Button ThumbDown;
     public Button BackBtn;
     public Button SynopsisBtn;
 
@@ -44,10 +46,13 @@ public class SerieViewController implements Initializable {
     public Label dateLabel;
     public Label genreLabel;
 
+
+    List<Season> seasons;
+
+    static Producer prod=ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
     public void OnBack() throws Exception {
         HelloApplication.SetRoot("HomePage");
     }
-
     @FXML
     public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
@@ -65,7 +70,7 @@ public class SerieViewController implements Initializable {
 
     public void InfoSetter() {
         SerieName.setText(DataHolderSeries.getSelectedSeries().getNom());
-        Producer prod=ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
+
         DirectLabel.setText(prod.getNom()+" "+prod.getPrenom() );
         ImageSetter(Thumbnail, DataHolderSeries.getSelectedSeries().getImg().toURI().toString(), 240, 135);
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
@@ -73,23 +78,60 @@ public class SerieViewController implements Initializable {
         genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());
     }
 
-    public List<Season> RetrieveSeasons()throws Exception{
-        return SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());
+    public List<Season> RetrieveSeasons(){
+        try {
+            return SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
-    public void ScrollItems(List<?> items){
+    public void OnEdit(){
+        if(!SerieOpinion.isEditable()){
+            SerieOpinion.setEditable(true);
+        }
+    }
+
+    public void OnSave(){
+        if(SerieOpinion.isEditable()){
+            SerieOpinion.setEditable(false);
+            System.out.println(SerieOpinion.getText());
+        }
+    }
+
+    public void OnCancel(){
+        if(SerieOpinion.isEditable()){
+            SerieOpinion.setEditable(false);
+            System.out.println(SerieOpinion.getText());
+        }
 
     }
+
+    public void handleImageClick(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        Season selectedSeason = null;
+        for (Season s : seasons) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getThumbnail().toURI()))) {
+                selectedSeason = s;
+                break;
+            }
+        }
+        if (selectedSeason != null) {
+            try {
+                DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(selectedSeason.getID()).get(0));
+                System.out.println(selectedSeason);
+                HelloApplication.SetRoot("SeasonView");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        List<Season> seasons;
-        try {
-            seasons = RetrieveSeasons();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        seasons= RetrieveSeasons();
 
         VBox seasonHolder = new VBox();
         HBox season2 = new HBox();
@@ -98,18 +140,20 @@ public class SerieViewController implements Initializable {
         season2.setAlignment(Pos.CENTER);
         for (Season s : seasons) {
             seasonHolder.setSpacing(10);
-            System.out.println(s.getName());
+            seasonHolder.setAlignment(Pos.CENTER);
             Label seasonLabel = new Label(s.getName());
-            System.out.println(seasonLabel);
             ImageView imgView = new ImageView();
             ImageSetter(imgView, s.getThumbnail().toURI().toString(), 160, 90);
             ImageClipper(imgView);
+            seasonLabel.setCursor(Cursor.cursor("hand"));
+            imgView.setCursor(Cursor.cursor("hand"));
+            seasonLabel.setOnMouseClicked(this::handleImageClick);
+            imgView.setOnMouseClicked(this::handleImageClick);
             seasonHolder.getChildren().addAll(imgView, seasonLabel);
             season2.getChildren().add(seasonHolder);
-
             seasonHolder = new VBox();
             seasonNbr++;
-            if (seasonNbr == 2) {
+            if (seasonNbr == 3) {
                 SeasonView.getChildren().add(season2);
                 seasonNbr = 0;
                 season2 = new HBox();
@@ -125,8 +169,6 @@ public class SerieViewController implements Initializable {
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", 40);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
         ImageClipper(Thumbnail);
-        IconSetter(ThumbUp, "src/main/resources/Images/Design/ThumbUp.png", 40);
-        IconSetter(ThumbDown, "src/main/resources/Images/Design/ThumbDown.png", 40);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
         InfoSetter();
 

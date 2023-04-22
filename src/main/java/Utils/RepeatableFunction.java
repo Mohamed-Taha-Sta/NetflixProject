@@ -8,8 +8,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 
 public class RepeatableFunction {
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static void ImageSetter(ImageView Imageview, String path,int width, int height){
         Image image = new Image(path);
         Imageview.setImage(image);

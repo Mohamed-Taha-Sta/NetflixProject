@@ -284,6 +284,7 @@ public class ProfilePageController implements Initializable {
             DataHolder.getUser().setPrename(prenameField.getText());
             PrenameLable.setText(prenameField.getText());
             ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
+            prenameField.setText("");
         }
     }
 
@@ -294,6 +295,7 @@ public class ProfilePageController implements Initializable {
             System.out.println(UserController.Mail(mailfield.getText()));
             DataHolder.getUser().setMail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
+            mailfield.setText("");
         }
     }
 
@@ -305,6 +307,7 @@ public class ProfilePageController implements Initializable {
             DataHolder.getUser().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
             ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
+            namefield.setText("");
         }
     }
 

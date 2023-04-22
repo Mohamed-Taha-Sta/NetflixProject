@@ -15,6 +15,8 @@
     -fx-text-fill: white;
 }
 
+
+
 #MenuBtn {
     -fx-background-color: transparent;
     -fx-cursor: hand;
@@ -328,6 +330,40 @@
 
 }
 
+
+
+#Opinion {
+    -fx-background-color: transparent;
+    -fx-background-radius: 15px;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-border-width: 3px;
+    -fx-border-color: #801336;
+    -fx-border-radius: 15px;
+}
+
+#Opinion .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+
+}
+
+#Opinion .scroll-pane .viewport{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+
+}
+
+
+#Opinion .scroll-pane .content{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+
+
+}
 
 #DescriptionBox {
     -fx-border-color: #661332;

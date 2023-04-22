@@ -1,5 +1,7 @@
 package Utils;
 
+import Entities.Episode;
+
 import java.io.File;
 import java.time.LocalDate;
 
@@ -11,6 +13,8 @@ public class DataHolderEpisode {
     private static File Synopsis;
     private static File Video;
     private static LocalDate PremiereDate;
+
+    private static Episode SelectedEpisode;
 
     private static LocalDate DebutDate;
     private static String Description;
@@ -80,4 +84,11 @@ public class DataHolderEpisode {
         DataHolderEpisode.IDEpisode = IDEpisode;
     }
 
+    public static Episode getSelectedEpisode() {
+        return SelectedEpisode;
+    }
+
+    public static void setSelectedEpisode(Episode selectedEpisode) {
+        SelectedEpisode = selectedEpisode;
+    }
 }
