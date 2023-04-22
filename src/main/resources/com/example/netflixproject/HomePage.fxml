@@ -97,7 +97,7 @@
                               <Insets bottom="8.0" left="8.0" />
                            </padding>
                         </VBox>
-                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="166.0" prefWidth="1174.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
+                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
                           <content>
                               <VBox prefHeight="143.0" prefWidth="674.0" spacing="10.0">
                                  <children>
@@ -110,27 +110,26 @@
                                  </children>
                               </VBox>
                           </content>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
                         </ScrollPane>
-                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" layoutX="10.0" layoutY="225.0" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="191.0" prefWidth="1174.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
+                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" layoutX="10.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
                            <content>
-                              <VBox prefHeight="143.0" prefWidth="674.0" spacing="10.0">
+                              <VBox spacing="10.0">
                                  <children>
                                     <Label id="Category" text="Based On Your Prefrences" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri" size="22.0" />
                                        </font>
                                     </Label>
-                                    <AnchorPane id="MiniAnchor" prefWidth="674.0" stylesheets="@../../../Style.css">
-                                       <children>
-                                          <HBox id="hbox" fx:id="ThumbnailViewer1" alignment="CENTER_LEFT" layoutX="7.0" layoutY="14.0" prefHeight="102.0" prefWidth="646.0" spacing="20.0" stylesheets="@../../../Style.css" />
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </AnchorPane>
+                                    <HBox id="hbox" fx:id="ThumbnailViewer1" alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="646.0" spacing="20.0" stylesheets="@../../../Style.css" />
                                  </children>
                               </VBox>
                            </content>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
                         </ScrollPane>
                      </children>
                   </VBox>

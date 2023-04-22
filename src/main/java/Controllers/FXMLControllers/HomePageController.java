@@ -63,19 +63,13 @@ public class HomePageController implements Initializable {
         if (selectedSerie != null) {
             try {
                 DataHolderSeries.setSelectedSeries(selectedSerie);
+                DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeries.getSelectedSeries().getId()).get(0));
                 HelloApplication.SetRoot("SerieView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
     }
-
-
-
-
-
-
-
 
 
     @FXML

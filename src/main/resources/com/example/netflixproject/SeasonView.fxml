@@ -103,11 +103,11 @@
                                 <VBox fillWidth="false" spacing="10.0" HBox.hgrow="SOMETIMES">
                                     <children>
                                         <Label id="Category" text="Description:" />
-                                        <TextArea fx:id="Description" prefHeight="200.0" prefWidth="540.0" wrapText="true" />
+                                        <TextArea fx:id="Description" editable="false" prefHeight="200.0" prefWidth="540.0" wrapText="true" />
                               <Label id="Category" layoutX="40.0" layoutY="40.0" text="Your Opinion:" />
                                         <HBox spacing="10.0">
                                             <children>
-                                                <TextArea id="Opinion" fx:id="SeasonOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" wrapText="true" />
+                                                <TextArea fx:id="SeasonOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here..." wrapText="true" />
                                                 <VBox alignment="TOP_CENTER" prefWidth="49.0" spacing="10.0">
                                                     <children>
                                                         <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />

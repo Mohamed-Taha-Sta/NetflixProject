@@ -70,9 +70,9 @@ public class SerieViewController implements Initializable {
 
     public void InfoSetter() {
         SerieName.setText(DataHolderSeries.getSelectedSeries().getNom());
-
         DirectLabel.setText(prod.getNom()+" "+prod.getPrenom() );
         ImageSetter(Thumbnail, DataHolderSeries.getSelectedSeries().getImg().toURI().toString(), 240, 135);
+        System.out.println(DataHolderSeries.getSelectedSeries().getDescription());
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
         dateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().format(formatter));
         genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());

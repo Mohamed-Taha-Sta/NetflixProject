@@ -83,6 +83,7 @@ public class SeasonViewController implements Initializable {
 
     public void InfoSetter() throws SQLException, IOException {
         SeasonName.setText(DataHolderSeries.getSelectedSeries().getNom()+" "+ DataHolderSeason.getSelectedSeason().getName());
+        System.out.println("SeasonDescription: "+DataHolderSeason.getSelectedSeason().getDescription());
         Description.setText(DataHolderSeason.getSelectedSeason().getDescription());
         dateLabel.setText(DataHolderSeason.getSelectedSeason().getDebutDate().format(formatter));
         genreLabel.setText(String.valueOf(RetrieveEpisodes().size()));
