@@ -23,7 +23,6 @@ public class SeriesPageController implements Initializable {
 
     public VBox ContentHolder;
     public TextField searchBar;
-    public Button searchButton;
 
     public List<Serie> series=new ArrayList<>();
     public Button homeButton;

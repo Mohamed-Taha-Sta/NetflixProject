@@ -122,6 +122,9 @@ public class VideoPlayerController implements Initializable {
         ReturnBtn.setOnAction(actionEvent -> {
             mpVideo.pause();
             ButtonPPR.setGraphic(ivPause);
+            Button label = (Button) actionEvent.getSource();
+            Stage stage = (Stage) label.getScene().getWindow();
+            stage.setFullScreen(false);
             try {
                 HelloApplication.SetRoot(pageName);
             } catch (Exception e) {

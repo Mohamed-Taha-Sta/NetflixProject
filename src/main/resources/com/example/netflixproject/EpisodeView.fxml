@@ -63,7 +63,7 @@
                                                 </ImageView>
                                                 <VBox alignment="CENTER_LEFT" spacing="25.0" HBox.hgrow="SOMETIMES">
                                                     <children>
-                                                        <Label id="Title" fx:id="EpisodeName" text="Title" />
+                                                        <Label id="Title" fx:id="EpisodeName" text="Title" wrapText="true" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="Produced by:" />
@@ -72,8 +72,9 @@
                                                         </HBox>
                                                     </children>
                                                 </VBox>
-                                                <VBox alignment="TOP_CENTER" prefHeight="156.0" prefWidth="301.0" spacing="20.0" HBox.hgrow="NEVER">
+                                                <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="20.0" HBox.hgrow="NEVER">
                                                     <children>
+                                                        <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                                         <HBox alignment="CENTER" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="DebutDate:" />
@@ -86,8 +87,13 @@
                                                 <Button id="MenuBtn" fx:id="ThumbDown" mnemonicParsing="false" />
                                              </children>
                                                         </HBox>
-                                                        <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                                     </children>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
                                                 </VBox>
                                             </children>
                                         </HBox>

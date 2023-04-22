@@ -63,17 +63,18 @@
                                                 </ImageView>
                                                 <VBox alignment="CENTER_LEFT" spacing="25.0" HBox.hgrow="SOMETIMES">
                                                     <children>
-                                                        <Label id="Title" fx:id="SeasonName" text="Title" />
+                                                        <Label id="Title" fx:id="SeasonName" text="Title" wrapText="true" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="Produced by:" />
-                                                                <Label id="Category" fx:id="DirectLabel" text="Label" />
+                                                                <Label id="Category" fx:id="DirectLabel" text="Label" wrapText="true" />
                                                             </children>
                                                         </HBox>
                                                     </children>
                                                 </VBox>
-                                                <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="SOMETIMES">
+                                                <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0">
                                                     <children>
+                                                        <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="DebutDate:" />
@@ -86,8 +87,10 @@
                                                                 <Label id="Category" fx:id="genreLabel" text="Label" />
                                                             </children>
                                                         </HBox>
-                                                        <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                                     </children>
+                                       <padding>
+                                          <Insets top="10.0" />
+                                       </padding>
                                                 </VBox>
                                             </children>
                                         </HBox>
@@ -128,7 +131,7 @@
                                 <Line endX="-97.51477813720703" endY="206.3651580810547" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0" />
                         <ScrollPane id="scroll-pane" HBox.hgrow="SOMETIMES">
                            <content>
-                              <VBox fx:id="EpisodeView" alignment="CENTER" prefHeight="460.0" prefWidth="500.0" spacing="10.0" />
+                              <VBox fx:id="EpisodeView" alignment="CENTER" prefHeight="460.0" prefWidth="526.0" spacing="10.0" />
                            </content>
                            <HBox.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
