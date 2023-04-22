@@ -40,7 +40,7 @@ public class AddEpisodeController implements Initializable {
 
     @FXML
     protected void OnBack() throws Exception {
-        HelloApplication.SetRoot("AddSeason");
+        HelloApplication.SetRoot(DataHolderEpisode.getPreviousPage());
     }
 
 

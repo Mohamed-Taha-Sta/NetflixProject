@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.SeasonController;
 import Entities.Season;
+import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -66,6 +67,7 @@ public class AddSeasonController implements Initializable {
                     DataHolderSeason.getName(),DataHolderSeason.getDebutDate(),DataHolderSeason.getThumbnail(),
                     DataHolderSeason.getSynopsis()));
             DataHolderSeason.setIDSeason(idSeason);
+            DataHolderEpisode.setPreviousPage("AddSeason");
             HelloApplication.SetRoot("AddEpisode");
         }
     }

@@ -1,5 +1,6 @@
 package Controllers;
 
+import DAO.SerieDAO;
 import Entities.Actor;
 import Entities.Producer;
 import Entities.Serie;
@@ -141,6 +142,10 @@ public class SerieController {
 
     public static List<Serie> searchSeries(List<String> searchTerms) throws SQLException, IOException {
         /** Keep in mind, this returns everything on null except ID, Name and Thumbnail*/
+        return SerieService.searchSeries(searchTerms);
+    }
+
+    public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
         return SerieService.searchSeries(searchTerms);
     }
 

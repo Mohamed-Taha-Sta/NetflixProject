@@ -207,7 +207,7 @@ public class HomePageController implements Initializable {
         List<Film> prefFilms=new ArrayList<>();
         List<Content> items = new ArrayList<>();
         try {
-            prefSeries=SerieController.searchSeries(DataHolder.getUser().getGenreList());
+            prefSeries=SerieController.searchSeriesOR(DataHolder.getUser().getGenreList());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

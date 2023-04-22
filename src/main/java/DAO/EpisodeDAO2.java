@@ -199,19 +199,19 @@ public class EpisodeDAO2 {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
-            Long seasonID = rs.getLong("season_ID");
-            int episodeNumber = rs.getInt("NUM");
-            long episodeViews = rs.getLong("VIEW_NBR");
-            long episodeScore = rs.getLong("SCORE");
-            long episodeVotes = rs.getLong("VOTES");
             long ID = rs.getLong("ID");
+            Long seasonID = rs.getLong("season_ID");
+//            int episodeNumber = rs.getInt("NUM");
+//            long episodeViews = rs.getLong("VIEW_NBR");
+//            long episodeScore = rs.getLong("SCORE");
+//            long episodeVotes = rs.getLong("VOTES");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImageB = rs.getBlob("image");
             InputStream episodeImage = episodeImageB.getBinaryStream();
-            String Description = rs.getString("Description");
-            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
-            InputStream episodeVideo = rs.getBinaryStream("video");
+//            String Description = rs.getString("Description");
+//            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream episodeVideo = rs.getBinaryStream("video");
 
             //Converting Blob into An Image
 //                    byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
@@ -236,37 +236,37 @@ public class EpisodeDAO2 {
             //                // Handle the exception
             //            }
 
-            //Handeling the Video, from inputStream
-            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
-            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the video");
-            }
-            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
-            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
+//            //Handeling the Video, from inputStream
+//            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
+//            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+//                    outputStream.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the video");
+//            }
+//            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
+//            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
 
+//
+//
+//            File fileSynopsis = null;
+//            //Handeling Synopsis Export
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
 
-
-            File fileSynopsis = null;
-            //Handeling Synopsis Export
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-
-            episode = new Episode(ID, seasonID,Description, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, fileSynopsis, file, episodeViews, episodeScore, episodeVotes);
+            episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
 
             episodeList.add(episode);
         }
@@ -290,18 +290,18 @@ public class EpisodeDAO2 {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             Long ID = rs.getLong("ID");
-            int episodeNumber = rs.getInt("NUM");
-            long episodeViews = rs.getInt("VIEW_NBR");
-            long episodeScore = rs.getInt("SCORE");
-            long episodeVotes = rs.getInt("VOTES");
+//            int episodeNumber = rs.getInt("NUM");
+//            long episodeViews = rs.getInt("VIEW_NBR");
+//            long episodeScore = rs.getInt("SCORE");
+//            long episodeVotes = rs.getInt("VOTES");
             String EpisodeName = rs.getString("NAME");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImageB = rs.getBlob("image");
             InputStream episodeImage = episodeImageB.getBinaryStream();
-            String Description = rs.getString("Description");
-            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
-            InputStream episodeVideo = rs.getBinaryStream("video");
+//            String Description = rs.getString("Description");
+//            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
+//            InputStream episodeVideo = rs.getBinaryStream("video");
 
             //Converting Blob Image to Jpeg File
             File fileImg = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
@@ -311,37 +311,38 @@ public class EpisodeDAO2 {
             while ((length = episodeImage.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-            //Handeling the Video, from inputStream
-            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
-            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the video");
-            }
 
-            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
-            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
+//            //Handeling the Video, from inputStream
+//            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
+//            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
+//                    outputStream.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the video");
+//            }
+//
+//            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
+//            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
+//
 
-
-            File fileSynopsis = null;
+//            File fileSynopsis = null;
             //Handeling Synopsis Export
-            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-                byte[] buffer = new byte[4096];
-                int bytesRead;
-                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
-                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                System.out.println("Error Handelling the Synopsis");
-            }
-            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
+//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
+//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+//                byte[] buffer = new byte[4096];
+//                int bytesRead;
+//                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
+//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+//                }
+//            } catch (IOException e) {
+//                System.out.println("Error Handelling the Synopsis");
+//            }
+//            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
 
-            episode = new Episode(ID, seasonID,Description, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, fileSynopsis, file, episodeViews, episodeScore, episodeVotes);
+            episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
 
             episodeList.add(episode);
 

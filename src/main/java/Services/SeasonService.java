@@ -5,8 +5,10 @@ import DAO.SeasonDAO;
 import Entities.Episode;
 import Entities.Season;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,6 +71,31 @@ public class SeasonService {
     public static long AddSeason(Season season) throws SQLException, IOException {
         return SeasonDAO.AddSeason(season);
     }
+
+    public static boolean modifimg(Season season, File img) throws SQLException {
+        return SeasonDAO.modifimg(season,img);
+    }
+
+
+    public static boolean ModifSynopsisSeason(Season season,File NewSynopsis) throws SQLException {
+        return SeasonDAO.ModifSynopsisSeason(season,NewSynopsis);
+    }
+
+
+    public static boolean modifnom(Season season, String nom) throws SQLException {
+        return SeasonDAO.modifnom(season,nom);
+    }
+
+
+    public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
+        return SeasonDAO.modifAnnerdesoritie(season,date);
+    }
+
+
+    public static boolean modifdescription(Season season,String description) throws SQLException {
+        return SeasonDAO.modifdescription(season,description);
+    }
+
 
 
 

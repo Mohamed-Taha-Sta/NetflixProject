@@ -148,7 +148,7 @@ public class SerieDAO {
             SerieID = rs.getLong("ID_SERIE");
         else
             System.out.println("Error getting SerieID");
-        rs.close();
+//        rs.close();
 //        pstmt.close();
 //        conn.close();
         return SerieID;
@@ -219,7 +219,7 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        rs.close();
+//        rs.close();
 //        pstmt.close();
 //        conn.close();
         return serieList;
@@ -293,7 +293,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return serieList;
     }
 
@@ -316,7 +316,7 @@ public class SerieDAO {
         System.out.println("Got Main Actors = "+listIDActor);
 //        pstmtGetID.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return listIDActor;
     }
 
@@ -339,7 +339,7 @@ public class SerieDAO {
         System.out.println("Got Support Actors = "+listIDActor);
 //        pstmtGetID.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return listIDActor;
     }
 
@@ -367,7 +367,7 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-            rs.close();
+//            rs.close();
         }
 //        pstmtGetID.close();
 //        conn.close();
@@ -399,7 +399,7 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-            rs.close();
+//            rs.close();
 
         }
 //        pstmtGetID.close();
@@ -479,7 +479,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return serieList;
     }
 
@@ -552,7 +552,7 @@ public class SerieDAO {
 //
 //        pstmt.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return serieList;
 
     }
@@ -627,7 +627,7 @@ public class SerieDAO {
         }
 //        pstmt.close();
 //        conn.close();
-        rs.close();
+//        rs.close();
         return serieList;
     }
 
@@ -846,9 +846,9 @@ public class SerieDAO {
 //            conn.close();
             return false;
         }
-
-
     }
+
+
     public static boolean modifdescription(Serie serie,String description) throws SQLException {
         PreparedStatement pstmt = null;
         ResultSet rs;
@@ -1113,7 +1113,66 @@ public class SerieDAO {
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
-        rs.close();
+//        rs.close();
+//        stmt.close();
+//        conn.close();
+        return serieList;
+    }
+
+
+    public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
+        StringBuilder sqlBuilder = new StringBuilder();
+        sqlBuilder.append("SELECT * FROM SERIE WHERE ");
+        List<Serie> serieList = new ArrayList<>();
+        for (int i = 0; i < searchTerms.size(); i++) {
+            if (i > 0) {
+                sqlBuilder.append(" OR ");
+            }
+            sqlBuilder.append("LISTEGENRE LIKE ?");
+        }
+        String sql = sqlBuilder.toString();
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        for (int i = 0; i < searchTerms.size(); i++) {
+            stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            long ID = rs.getLong("ID_SERIE");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String SerieName = rs.getString("NAME");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
+            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
+
+            ActorList.addAll(SuppActorList);
+
+            Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
+
+
+            serieList.add(serie);
+
+        }
+
+        // Close the ResultSet, PreparedStatement, and database connection
+//        rs.close();
 //        stmt.close();
 //        conn.close();
         return serieList;
@@ -1158,7 +1217,7 @@ public class SerieDAO {
 
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection
-        rs.close();
+//        rs.close();
 //        stmt.close();
 //        connection.close();
             }

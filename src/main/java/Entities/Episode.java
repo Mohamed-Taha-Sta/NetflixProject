@@ -37,6 +37,15 @@ public class Episode {
                 '}';
     }
 
+    public Episode(long ID, long seasonParentID, String name, LocalDate debutDate,LocalDate premiereDate , File image) {
+        this.ID = ID;
+        SeasonParentID = seasonParentID;
+        Name = name;
+        DebutDate = debutDate;
+        this.PremiereDate = premiereDate;
+        this.image = image;
+    }
+
     public Episode(long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, File Synopsis, File media, long vueNbr, long score, long votes) {
         SeasonParentID = seasonParentID;
         Name = name;

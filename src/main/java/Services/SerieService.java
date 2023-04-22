@@ -107,6 +107,10 @@ public class SerieService {
         return SerieDAO.searchSeries(searchTerms);
     }
 
+    public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
+        return SerieDAO.searchSeries(searchTerms);
+    }
+
     public static List<Serie> GetSerieByID(long ID) throws SQLException, IOException {
         return SerieDAO.GetSerieByID(ID);
     }

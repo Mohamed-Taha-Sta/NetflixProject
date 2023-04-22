@@ -57,6 +57,30 @@ public class SeasonController {
 
 
 
+    public static boolean modifimg(Season season, File img) throws SQLException {
+        return SeasonService.modifimg(season,img);
+    }
+
+
+    public static boolean ModifSynopsisSeason(Season season,File NewSynopsis) throws SQLException {
+        return SeasonService.ModifSynopsisSeason(season,NewSynopsis);
+    }
+
+
+    public static boolean modifnom(Season season, String nom) throws SQLException {
+        return SeasonService.modifnom(season,nom);
+    }
+
+
+    public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
+        return SeasonService.modifAnnerdesoritie(season,date);
+    }
+
+
+    public static boolean modifdescription(Season season,String description) throws SQLException {
+        return SeasonService.modifdescription(season,description);
+    }
+
 
 
 

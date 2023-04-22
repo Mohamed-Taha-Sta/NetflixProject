@@ -86,7 +86,7 @@ public class FilmController {
 //        FilmDAO.recherche_film(8L);
 
 
-        ProducerDAO.createprod(new Producer("fares","eeee","fffffff","eeeee"));
+//        ProducerDAO.createprod(new Producer("fares","eeee","fffffff","eeeee"));
 
                // liste1.add(new MainActor("jasser","hamdi","taha@gmail.com","zzzz"));
 //        liste1.add(new MainActor("jasser","","taha@gmail.com","zzzz"));
@@ -139,10 +139,10 @@ public class FilmController {
 //FilmDAO.deleteFilm_actsec(new Film(2,"caffer","express",LocalDate.now(),"arabic","tunisie",list,FileImage, "lyoumsba7",liste1,x,x,x,FileSynopsis,FileVideo,x),new Actor(42,"fares","makki","faresmakki21@gmail.com","tahajasser"));
 
 
-        UserDAO.ajout_User(new User("user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null));
-Long lff= Long.valueOf(1);
+//        UserDAO.ajout_User(new User("user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null));
+        Long lff= Long.valueOf(1);
           // new User()
-Avis_FilmDAO.add_avis(new Film(lf,"caffer","eee",LocalDate.now(),"arabic","tunisie",null,null, "lyoumsba7",null,lf,lf,lf,null,null,lf),new User(lff,"user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null),"bla bla");
+        Avis_FilmDAO.add_avis(new Film(lf,"caffer","eee",LocalDate.now(),"arabic","tunisie",null,null, "lyoumsba7",null,lf,lf,lf,null,null,lf),new User(2,"user","prenom","faresmakki@gmail.com","fares",LocalDate.now(),l,lo,LocalDate.now(),null),"bla bla");
 
 
 

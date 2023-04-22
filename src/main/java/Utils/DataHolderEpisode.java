@@ -7,8 +7,11 @@ import java.time.LocalDate;
 
 public class DataHolderEpisode {
 
+    private static Episode selectedEpisode;
     private static long IDEpisode;
+    private static long SeasonID;
     private static String Name;
+    private static String PreviousPage;
     private static File Thumbnail;
     private static File Synopsis;
     private static File Video;
@@ -91,4 +94,13 @@ public class DataHolderEpisode {
     public static void setSelectedEpisode(Episode selectedEpisode) {
         SelectedEpisode = selectedEpisode;
     }
+
+    public static String getPreviousPage() {
+        return PreviousPage;
+    }
+
+    public static void setPreviousPage(String previousPage) {
+        PreviousPage = previousPage;
+    }
+
 }

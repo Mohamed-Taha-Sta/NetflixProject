@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ProducerSeasonViewController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/Design/Background.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-9.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox id="Vbox" alignment="TOP_CENTER" prefHeight="720.0" prefWidth="65.0" spacing="20.0" stylesheets="@../../../Style.css">
+               <children>
+                  <ImageView fx:id="Logo" cache="true" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/Design/Copy_of_Blue_Geometric_Party_Movie_Night_Invitation-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+            <Line endX="-99.17283630371094" endY="761.594970703125" startX="-99.17298889160156" startY="79.86698913574219" stroke="#d62e4a" strokeMiterLimit="15.0" strokeWidth="2.0" />
+            <VBox prefHeight="650.0" prefWidth="1202.0" spacing="15.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="220.0" prefWidth="1182.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
+                     <children>
+                        <VBox alignment="CENTER_LEFT" maxHeight="221.0" prefHeight="221.0" prefWidth="1174.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="225.0" prefWidth="1174.0" spacing="10.0">
+                                 <children>
+                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" onAction="#onBack" stylesheets="@../../../Style.css" />
+                                    <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" onMouseClicked="#onEditSeasonImg" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ImageView>
+                                    <VBox prefHeight="180.0" prefWidth="592.0" spacing="25.0">
+                                       <children>
+                                          <Label fx:id="SeasonOverView" alignment="CENTER" contentDisplay="RIGHT" onMouseClicked="#SeasonOverviewBtn" prefHeight="185.0" prefWidth="592.0" style="-fx-font-size: 50;" text="Click for Season Overview" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                             <font>
+                                                <Font name="Calibri Bold" size="25.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="129.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="200.0">
+                                             <children>
+                                                <Label id="Category" alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="88.0" text="Rating: ">
+                                                   <font>
+                                                      <Font size="22.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label id="Category" fx:id="RatingLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="35.0" prefWidth="79.0" text="Label" textAlignment="CENTER">
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <Button id="SynopsisBtn" fx:id="AddEpisode" mnemonicParsing="false" onAction="#onAddEpisode" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Add Episode" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" layoutX="98.0" layoutY="61.0" mnemonicParsing="false" onAction="#onEdtSynosisBtn" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Edit Synopsis" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" />
+                     </padding>
+                  </VBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="338.0" prefWidth="1182.0" style="-fx-background-radius: 40px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
+                     <children>
+                        <VBox prefHeight="310.0" prefWidth="774.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="98.0" prefWidth="541.0" spacing="20.0" />
+                              <VBox alignment="TOP_CENTER" prefHeight="456.0" prefWidth="627.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="541.0" spacing="20.0">
+                                       <children>
+                                          <Label id="Category" text="Season Title:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label id="Category" fx:id="Title" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <TextField id="TextFields" fx:id="SeasonName" prefHeight="30.0" prefWidth="190.0" promptText="New Series Title" />
+                                          <Button id="button" fx:id="SeriesNameBtn" mnemonicParsing="false" onAction="#OnSeasonNameBtn" prefHeight="30.0" text="Change" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="32.0" prefWidth="531.0" spacing="10.0">
+                                       <children>
+                                          <Label id="Category" text="DebutDate:" />
+                                          <Label id="Category" fx:id="DebutDateLabel" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="531.0">
+                                       <children>
+                                          <HBox alignment="CENTER" spacing="20.0">
+                                             <children>
+                                                <DatePicker fx:id="DebutDatePicker" editable="false" prefHeight="30.0" prefWidth="190.0" promptText="DebutDate" />
+                                                <Button id="button" fx:id="DebutDateBtn" mnemonicParsing="false" onAction="#OnDebutDateBtn" text="Change" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <Label fx:id="AlertText">
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </padding>
+                        </VBox>
+                        <Line endX="-99.34319305419922" endY="44.16514587402344" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                        </Line>
+                        <VBox prefHeight="310.0" prefWidth="804.0" spacing="10.0">
+                           <children>
+                              <Label id="Category" text="Description:">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextArea id="modifyDescp" fx:id="Old_Description" editable="false" prefHeight="107.0" prefWidth="589.0" stylesheets="@../../../Style.css" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                              <TextArea id="modifyDescp" fx:id="New_Description" layoutX="20.0" layoutY="56.0" prefHeight="118.0" prefWidth="589.0" promptText="New Description Here" stylesheets="@../../../Style.css" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="5.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                              <Button id="button" fx:id="ChangeDescriptionBtn" mnemonicParsing="false" onAction="#ChangeDescriptionBtn" prefHeight="33.0" prefWidth="70.0" text="Change">
+                                 <VBox.margin>
+                                    <Insets bottom="8.0" left="500.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <ScrollPane id="scroll-pane" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <HBox fx:id="EpisodeViewer" prefHeight="100.0" prefWidth="200.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="15.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -56,9 +56,7 @@ public class ProducerSeriesViewController implements Initializable {
     public Label DebutDateLabel;
     private List<Season> seasonList;
     public Label RatingLabel;
-    public Label DirectLabel;
-    public Label dateLabel;
-    public Label genreLabel;
+
     public TextArea Description;
     public ImageView Thumbnail;
     public Button BackBtn;
@@ -114,8 +112,8 @@ public class ProducerSeriesViewController implements Initializable {
         }
         if (selectedSeason != null) {
             try {
-                DataHolderSeason.setSelectedSeason(selectedSeason);
-//                HelloApplication.SetRoot("SerView");
+                DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(selectedSeason.getID()).get(0));
+                HelloApplication.SetRoot("ProducerSeasonView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -290,8 +288,8 @@ public class ProducerSeriesViewController implements Initializable {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setHeaderText("Invalid Image Size");
-                alert.setContentText("Please select an image with dimensions of 1920x1080 pixels.");
+                alert.setHeaderText("Invalid Synopsis");
+                alert.setContentText("Please select a valid Synopsis");
                 alert.showAndWait();
             }
         }
@@ -404,8 +402,6 @@ public class ProducerSeriesViewController implements Initializable {
         LanguageSelector.getItems().addAll(languages);
 
         SeasonViewer.setSpacing(15);
-
-        Image img=new Image(new File("src/main/resources/Images/theWitcher.jpg").toURI().toString());
 
         try {
             seasonList = SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());

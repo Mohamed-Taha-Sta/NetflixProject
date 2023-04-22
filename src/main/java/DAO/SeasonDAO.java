@@ -1,8 +1,7 @@
 package DAO;
 
-import Controllers.SeasonController;
-import Entities.Episode;
 import Entities.Season;
+import Entities.Serie;
 import Utils.ConxDB;
 
 import java.io.*;
@@ -10,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -235,6 +235,152 @@ public class SeasonDAO {
         return SeasonList;
 
     }
+
+
+
+    public static boolean modifimg(Season season, File img) throws SQLException {
+        PreparedStatement pstmt = null;
+        String sql;
+
+        try {
+            // On lit le contenu du fichier dans un tableau de bytes
+            byte[] imgBytes = Files.readAllBytes(img.toPath());
+
+            // On prépare la requête SQL avec un paramètre pour le tableau de bytes
+            sql = "UPDATE SEASON SET THUMBNAIL = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+
+            // On affecte le paramètre avec le tableau de bytes
+            pstmt.setBytes(1, imgBytes);
+            pstmt.setLong(2, season.getID());
+
+            pstmt.executeUpdate();
+            //     pstmt.close();
+            //     conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
+//            pstmt.close();
+//            conn.close();
+            return false;
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }
+    }
+
+
+
+    public static boolean ModifSynopsisSeason(Season season,File NewSynopsis) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+            InputStream inputStreamSynopsisSeason = new FileInputStream(NewSynopsis);
+            sql = "UPDATE SEASON SET SYNOPSIS = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setBlob(1, inputStreamSynopsisSeason);
+            pstmt.setLong(2,season.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+//            pstmt.close();
+//            conn.close();
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+
+        }
+
+    }
+
+
+
+    public static boolean modifnom(Season season, String nom) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+            sql = "UPDATE SEASON SET Name = '" + nom + "' WHERE ID = " + season.getID();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+    public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+            sql = "UPDATE SEASON SET DEBUT_DATE = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setLong(2,season.getID());
+            pstmt.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+    public static boolean modifdescription(Season season,String description) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs;
+        String sql;
+
+        try {
+
+
+            sql = "UPDATE SEASON SET description = ? WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,description);
+            pstmt.setLong(2,season.getID());
+            pstmt.executeQuery();
+//            pstmt.close();
+//            conn.close();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("error dans la connection de la base");
+//            pstmt.close();
+//            conn.close();
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
 //
 //    Was Moved to SeasonService and further optimised
