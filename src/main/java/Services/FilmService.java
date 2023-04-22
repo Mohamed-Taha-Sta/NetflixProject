@@ -5,6 +5,8 @@ import Entities.Actor;
 import Entities.Film;
 import Entities.Producer;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,5 +37,13 @@ public class FilmService {
                     .filter(film -> film.getListegenre().toString().contains(genreFilter))
                     .collect(Collectors.toList());
         }
-
+    public static List<Film> searchFilm(List<String> searchTerms) throws SQLException, IOException {
+        return FilmDAO.searchFilm(searchTerms);
+    }
+    public static List<Film> searchFilmOR(List<String> searchTerms) throws SQLException, IOException {
+        return FilmDAO.searchFilmOR(searchTerms);
+    }
+    public static List<Film> getMostRecentFilm(int numSeries) throws SQLException, IOException{
+        return FilmDAO.getMostRecentFilm(numSeries);
+    }
 }

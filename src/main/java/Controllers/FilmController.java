@@ -174,7 +174,13 @@ public class FilmController {
         return FilmService.FindByproducer(prod);
     }
 
-
-
-
+    public static List<Film> searchFilm(List<String> searchTerms) throws SQLException, IOException {
+        return FilmService.searchFilm(searchTerms);
+    }
+    public static List<Film> searchFilmOR(List<String> searchTerms) throws SQLException, IOException {
+        return FilmService.searchFilmOR(searchTerms);
+    }
+    public static List<Film> getMostRecentFilm(int numSeries) throws SQLException, IOException{
+        return FilmService.getMostRecentFilm(numSeries);
+    }
 }
