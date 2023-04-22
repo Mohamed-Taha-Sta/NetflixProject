@@ -123,7 +123,7 @@
                                           <Font name="Calibri" size="22.0" />
                                        </font>
                                     </Label>
-                                    <HBox id="hbox" fx:id="ThumbnailViewer1" alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="646.0" spacing="20.0" stylesheets="@../../../Style.css" />
+                                    <HBox id="hbox" fx:id="PrefrencesViewer" alignment="CENTER_LEFT" prefHeight="102.0" prefWidth="646.0" spacing="20.0" stylesheets="@../../../Style.css" />
                                  </children>
                               </VBox>
                            </content>

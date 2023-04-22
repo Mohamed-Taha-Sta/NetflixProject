@@ -49,11 +49,24 @@ public class SeriesPageController implements Initializable {
     }
 
 
+    public void OnLoad(){
+
+    }
+
+    public List<Serie> RetrieveSeries(){
+        try{
+            return SerieController.GetManySeries(30);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ArrayList<>();
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FilmPageController.PageSetter(GenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
-
+        series=RetrieveSeries();
         if (series.isEmpty()) {
             System.out.println("Series is empty");
         } else {

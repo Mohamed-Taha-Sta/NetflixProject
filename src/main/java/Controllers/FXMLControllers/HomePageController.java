@@ -1,9 +1,11 @@
 package Controllers.FXMLControllers;
 
+import Controllers.FilmController;
 import Controllers.SerieController;
 import DAO.UserDAO;
 import Entities.Content;
 import Entities.Film;
+import Entities.Genre;
 import Entities.Serie;
 import Utils.DataHolder;
 import Utils.DataHolderFilm;
@@ -28,17 +30,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.IconSetter;
-import static Utils.RepeatableFunction.ImageClipper;
+import static Utils.RepeatableFunction.*;
 
 public class HomePageController implements Initializable {
 
+    public static List<Content> latestStuff ;
+    static List<Serie> series;
+    static List<Content> sFByGENRE;
+
+
     public HBox ThumbnailViewer;
-
-
     public Button homeButton;
     public Button seriesButoon;
     public Button filmButton;
@@ -46,20 +51,26 @@ public class HomePageController implements Initializable {
     public Button NotificationButton;
     public ImageView ProfileBtn;
 
+    public HBox PrefrencesViewer;
 
-
-    List<Serie> serie ;
+    // static List<Film> films;
     @FXML
-
     public void handleImageClick(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
         Serie selectedSerie = null;
-        for (Serie s : serie) {
+       // Film selectedFilm = null;
+        for (Serie s : series) {
             if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
                 selectedSerie = s;
                 break;
             }
         }
+//        for (Film f : films) {
+//            if (imageView.getImage().getUrl().equals(String.valueOf(f.getImg().toURI()))) {
+//                selectedFilm = f;
+//                break;
+//            }
+//        }
         if (selectedSerie != null) {
             try {
                 DataHolderSeries.setSelectedSeries(selectedSerie);
@@ -69,23 +80,27 @@ public class HomePageController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+//        else if (selectedFilm != null) {
+//            try {
+//                DataHolderFilm.setSelectedFilm(selectedFilm);
+//                DataHolderFilm.setSelectedFilm(FilmController.getFilmById(DataHolderFilm.getSelectedFilm().getId()));
+//                HelloApplication.SetRoot("FilmView");
+//            } catch (Exception e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
     }
-
-
     @FXML
     public void OnProfileClick() throws Exception {
         HelloApplication.SetRoot("ProfilePage");
     }
-
     @FXML
     public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
     }
-
     public void OnSeriesClick() throws Exception {
         HelloApplication.SetRoot("SeriesPage");
     }
-
     public void SetUserImage() {
         UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
         File imageFile = DataHolder.getImage();
@@ -100,7 +115,6 @@ public class HomePageController implements Initializable {
             System.out.println("No image found for user.");
         }
     }
-
     public SearchableComboBox<Content> searchBar;
 
     public void navigateToPage(Content selectedItem) throws Exception {
@@ -165,8 +179,64 @@ public class HomePageController implements Initializable {
 
     }
 
+    public List<Content> LatestInit() {
+        List<Serie> latestSeries = new ArrayList<>();
+        List<Film> latestFilms = new ArrayList<>();
+        List<Content> items = new ArrayList<>();
+
+        try {
+            latestSeries = SerieController.getMostRecentSeries(3);
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+//        try {
+//            films= FilmController.getMostRecentFilms(3);
+//        }catch (SQLException | IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        items.addAll(latestSeries);
+        items.addAll(latestFilms);
+        Collections.shuffle(items);
+        return items;
+    }
+
+
+    public List<Content> Prefrences(){
+        List<Serie> prefSeries=new ArrayList<>();
+        List<Film> prefFilms=new ArrayList<>();
+        List<Content> items = new ArrayList<>();
+        try {
+            prefSeries=SerieController.searchSeries(DataHolder.getUser().getGenreList());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+//        try {
+//            prefFilms= FilmController.searchFilms(DataHolder.getUser().getGenreList());
+//        }catch (Exception e){
+//            System.out.println(e.getMessage());
+//        }
+        items.addAll(prefFilms);
+        items.addAll(prefSeries);
+
+        Collections.shuffle(items);
+        return items;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(sFByGENRE==null){
+            sFByGENRE=new ArrayList<>();
+            sFByGENRE.addAll(Prefrences());
+        }
+
+        if (latestStuff==null) {
+            latestStuff=new ArrayList<>();
+            System.out.println("latest Stuff loaded");
+            latestStuff.addAll(LatestInit());
+        }else {
+            System.out.println("lateststuff not loaded");
+        }
 
         SetUserImage();
         final int IV_Size = 40;
@@ -180,25 +250,51 @@ public class HomePageController implements Initializable {
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", IV_Size);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", IV_Size);
 
-        try {
-            serie = SerieController.GetAllSeries();
-        } catch (SQLException | IOException e) {
-            throw new RuntimeException(e);
+        if(series==null){
+            try {
+                series=new ArrayList<>();
+                series = SerieController.GetAllSeries();
+                System.out.println("search loaded");
+            } catch (SQLException | IOException e) {
+                System.out.println("search already loaded");
+                throw new RuntimeException(e);
+
+            }
         }
-        searchBarInit(serie, films);
 
+//        else if(films.isEmpty()){
+//            films=FilmController.GetAllFilms();
+//        }
 
+        searchBarInit(series, films);
 
-        for (Serie s : serie) {
-            ImageView imageView;
-            imageView = new ImageView(String.valueOf(s.getImg().toURI()));
-            imageView.setCursor(Cursor.cursor("hand"));
-            imageView.setFitHeight(100);
-            imageView.setFitWidth(150);
-            ImageClipper(imageView);
-            imageView.setOnMouseClicked(this::handleImageClick);
-            ThumbnailViewer.getChildren().add(imageView);
+        Collections.shuffle(latestStuff);
+        for (Content c : latestStuff) {
+            ImageView imgView = new ImageView();
+            ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
+            ImageClipper(imgView);
+            imgView.setCursor(Cursor.cursor("hand"));
+            imgView.setOnMouseClicked(this::handleImageClick);
+            ThumbnailViewer.getChildren().add(imgView);
         }
+
+
+        Collections.shuffle(sFByGENRE);
+        int num=0;
+        for (Content c : sFByGENRE) {
+            ImageView imgView = new ImageView();
+            ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
+            ImageClipper(imgView);
+            imgView.setCursor(Cursor.cursor("hand"));
+            imgView.setOnMouseClicked(this::handleImageClick);
+            PrefrencesViewer.getChildren().add(imgView);
+            num++;
+            if(num==6){
+                break;
+            }
+        }
+
+
     }
 }
 

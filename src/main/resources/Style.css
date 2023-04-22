@@ -128,6 +128,12 @@
 #SearchBtn {
     -fx-background-radius: 0px 12px 12px 0px;
     -fx-background-color: #212121;
+}#SearchBtn:hover {
+    -fx-background-radius: 0px 12px 12px 0px;
+    -fx-background-color: #212121;
+}#SearchBtn:pressed {
+    -fx-background-radius: 0px 12px 12px 0px;
+    -fx-background-color: #212121;
 }
 
 

@@ -49,61 +49,58 @@
                </children>
             </VBox>
             <Line endX="-99.17283630371094" endY="761.594970703125" startX="-99.17298889160156" startY="79.86698913574219" stroke="#d62e4a" strokeMiterLimit="15.0" strokeWidth="2.0" />
-            <ScrollPane id="scroll-pane" fitToWidth="true" prefHeight="700.0" prefWidth="1175.0" stylesheets="@../../../Style.css">
-               <content>
-                  <VBox alignment="CENTER" prefWidth="1174.0" spacing="15.0">
+            <VBox alignment="TOP_CENTER" prefWidth="1174.0" spacing="15.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #510A32; -fx-background-radius: 25;">
+                        <VBox alignment="CENTER_LEFT" maxHeight="200.0" prefHeight="200.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
                            <children>
-                              <VBox alignment="CENTER_LEFT" maxHeight="200.0" prefHeight="200.0" spacing="40.0" style="-fx-background-color: #801336; -fx-background-radius: 15;">
+                              <Label id="Title" fx:id="welcome" text="Search for your Series!" wrapText="true">
+                                 <font>
+                                    <Font name="Calibri Bold Italic" size="48.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefWidth="1146.0">
+                                 <VBox.margin>
+                                    <Insets right="10.0" />
+                                 </VBox.margin>
                                  <children>
-                                    <Label id="Title" fx:id="welcome" text="Search for your Series!" wrapText="true">
+                                    <TextField id="SearchField" fx:id="searchBar" prefHeight="35.0" prefWidth="202.0" promptText="Search" />
+                                    <Button id="SearchBtn" fx:id="SearchButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="35.0" HBox.hgrow="ALWAYS">
                                        <font>
-                                          <Font name="Calibri Bold Italic" size="48.0" />
+                                          <Font size="14.0" />
                                        </font>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" prefWidth="1146.0">
-                                       <VBox.margin>
-                                          <Insets right="10.0" />
-                                       </VBox.margin>
-                                       <children>
-                                          <TextField id="SearchField" fx:id="searchBar" prefHeight="35.0" prefWidth="202.0" promptText="Search" />
-                                          <Button id="SearchBtn" fx:id="SearchButton" mnemonicParsing="false" prefHeight="34.0" prefWidth="35.0" HBox.hgrow="ALWAYS">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <HBox.margin>
-                                                <Insets bottom="1.0" />
-                                             </HBox.margin>
-                                          </Button>
-                                          <CheckComboBox id="myCheckComboBox" fx:id="GenresSelector" prefHeight="26.0" prefWidth="152.0" title="Select Genres">
-                                             <HBox.margin>
-                                                <Insets left="50.0" />
-                                             </HBox.margin>
-                                          </CheckComboBox>
-                                       </children>
-                                    </HBox>
+                                       <HBox.margin>
+                                          <Insets bottom="1.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <CheckComboBox id="myCheckComboBox" fx:id="GenresSelector" prefHeight="26.0" prefWidth="152.0" title="Select Genres">
+                                       <HBox.margin>
+                                          <Insets left="50.0" />
+                                       </HBox.margin>
+                                    </CheckComboBox>
                                  </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </VBox>
+                              </HBox>
                            </children>
                            <padding>
-                              <Insets bottom="8.0" left="8.0" />
+                              <Insets left="20.0" />
                            </padding>
                         </VBox>
-                        <VBox prefHeight="464.0" prefWidth="1174.0" />
                      </children>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" />
+                     </padding>
                   </VBox>
-               </content>
+                  <ScrollPane id="scroll-pane" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="SeriesViewer" alignment="TOP_CENTER" prefHeight="468.0" prefWidth="1139.0" spacing="20.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="15.0" left="15.0" top="15.0" />
                </padding>
-               <HBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </HBox.margin>
-            </ScrollPane>
+            </VBox>
          </children>
       </HBox>
    </children>
