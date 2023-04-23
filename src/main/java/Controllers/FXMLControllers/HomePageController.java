@@ -195,7 +195,7 @@ public class HomePageController implements Initializable {
         }
 
         try {
-            films= FilmController.getMostRecentFilm(3);
+            latestFilms= FilmController.getMostRecentFilm(3);
         }catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
