@@ -2,7 +2,6 @@ package Controllers.FXMLControllers;
 
 import Controllers.ActorController;
 import Controllers.FilmController;
-import Controllers.ProducerController;
 import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
@@ -22,10 +21,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.*;
 
 public class ActorLandingPageController implements Initializable {

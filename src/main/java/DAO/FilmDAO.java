@@ -2,7 +2,6 @@ package DAO;
 
 import Entities.*;
 import Utils.ConxDB;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,11 +9,7 @@ import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static DAO.SerieDAO.getPrincActorSerie;
-import static DAO.SerieDAO.getSuppActorSerie;
 
 public class FilmDAO {
 
@@ -556,7 +551,7 @@ public class FilmDAO {
             System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
             return false;
         }
-        try {;
+        try {
             score = score + 1;
             votes=votes+1;
             sql = "UPDATE film SET score = '" + score + "' WHERE id_film = " + film.getId();
@@ -586,7 +581,7 @@ public class FilmDAO {
             System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
             return false;
         }
-        try {;
+        try {
             votes++;
             sql = "UPDATE film SET vote = '" + votes + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -612,7 +607,7 @@ public class FilmDAO {
             System.out.println("Error retrieving vuenbr in UpdatePositiveScoreEpisode Function ");
             return false;
         }
-        try {;
+        try {
             vuenbr++;
             sql = "UPDATE film SET vuenbr = '" + vuenbr + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -620,6 +615,7 @@ public class FilmDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -631,7 +627,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE film SET nom = '" + nom + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -640,6 +636,7 @@ public class FilmDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -650,7 +647,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE film SET description = '" + description + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -659,6 +656,7 @@ public class FilmDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -669,7 +667,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE film SET langue = '" + langue + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -678,6 +676,7 @@ public class FilmDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -688,7 +687,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE film SET paysorigine = '" + paysorgine + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -697,6 +696,7 @@ public class FilmDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -707,15 +707,18 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
-            sql = "UPDATE film SET ANNEE_SORTIE = '" + java.sql.Date.valueOf(date) + "' WHERE id_film = " + film.getId();
+            sql = "UPDATE film SET ANNEE_SORTIE = ? WHERE id_film = ?";
             pstmt = conn.prepareStatement(sql);
+            pstmt.setDate(1, Date.valueOf(date));
+            pstmt.setLong(2,film.getId());
             pstmt.executeQuery();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -726,16 +729,17 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
             String genreListString = String.join(",", listegenre.stream().map(Object::toString).toArray(String[]::new));
 
-            sql = "UPDATE film SET listegenre = '" + genreListString + "' WHERE id_film = " + film.getId();
+            sql = "UPDATE film SET listegenre = '" + genreListString + "' WHERE ID_FILM = " + film.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -746,7 +750,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             sql = "UPDATE film SET duree = '" + duree + "' WHERE id_film = " + film.getId();
             pstmt = conn.prepareStatement(sql);
@@ -754,7 +758,7 @@ public class FilmDAO {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
+            e.printStackTrace();
             return false;
         }
 
@@ -765,7 +769,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
            InputStream inputStreamSynopsisimg = new FileInputStream(img);
 
             sql = "UPDATE film SET img = '" + inputStreamSynopsisimg + "' WHERE id_film = " + film.getId();
@@ -787,7 +791,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
              InputStream inputStreamSynopsissynops=new FileInputStream(synop);
 
             sql = "UPDATE film SET synopsis = '" + inputStreamSynopsissynops + "' WHERE id_film = " + film.getId();
@@ -809,7 +813,7 @@ public class FilmDAO {
         ResultSet rs;
         String sql;
 
-        try {;
+        try {
 
             InputStream inputStreamSynopsisfilm=new FileInputStream(vid);
 

@@ -53,7 +53,7 @@ public class ProducerEpisodeViewController implements Initializable {
     public void onEditEpisodeImg(MouseEvent mouseEvent) throws SQLException {
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose a Season Thumbnail");
+        fileChooser.setTitle("Choose an Episode Thumbnail");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
         fileChooser.getExtensionFilters().add(imageFilter);
@@ -178,7 +178,7 @@ public class ProducerEpisodeViewController implements Initializable {
 
     public void OnEpisodeNameBtn(ActionEvent actionEvent) throws SQLException {
         if (EpisodeName.getText().isEmpty()) {
-            showMessage(AlertText,"Your New Series Title field is empty");
+            showMessage(AlertText,"Your New Episode Title field is empty");
         } else {
             EpisodeController.modifNom(DataHolderEpisode.getSelectedEpisode(),EpisodeName.getText());
             DataHolderEpisode.getSelectedEpisode().setName(EpisodeName.getText());

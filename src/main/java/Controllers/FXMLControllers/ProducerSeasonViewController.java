@@ -141,7 +141,7 @@ public class ProducerSeasonViewController implements Initializable {
 
     public void OnSeasonNameBtn(ActionEvent actionEvent) throws SQLException {
         if (SeasonName.getText().isEmpty()) {
-            showMessage(AlertText,"Your New Series Title field is empty");
+            showMessage(AlertText,"Your New Season Title field is empty");
         } else {
             SeasonController.modifnom(DataHolderSeason.getSelectedSeason(),SeasonName.getText());
             DataHolderSeason.getSelectedSeason().setName(SeasonName.getText());

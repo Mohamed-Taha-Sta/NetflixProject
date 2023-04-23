@@ -2,20 +2,13 @@ package Controllers.FXMLControllers;
 
 import Controllers.Avis_serieController;
 import Controllers.SerieController;
-
-import Entities.Film;
-import Utils.DataHolder;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

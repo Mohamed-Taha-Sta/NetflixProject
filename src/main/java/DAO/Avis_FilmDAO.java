@@ -142,6 +142,7 @@ public class Avis_FilmDAO {
         } catch (SQLException ex) {
             System.out.println("Error finding avis Film"+ ex.getMessage());
         }
+        System.out.println("DAOOO FILM OP"+opinions);
         return opinions;
     }
 

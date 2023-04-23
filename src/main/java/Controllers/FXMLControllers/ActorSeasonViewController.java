@@ -4,10 +4,8 @@ import Controllers.Avis_SaisonController;
 import Controllers.EpisodeController;
 import Controllers.SeasonController;
 import Entities.Episode;
-import Entities.Season;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

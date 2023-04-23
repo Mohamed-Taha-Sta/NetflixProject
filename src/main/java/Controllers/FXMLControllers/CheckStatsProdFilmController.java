@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ActorFilmViewController implements Initializable {
+public class CheckStatsProdFilmController implements Initializable {
 
     public ListView opinionList;
     public Label FilmTitle;
@@ -21,8 +21,7 @@ public class ActorFilmViewController implements Initializable {
     public Label DebutDateLabel;
 
     public void onBack(ActionEvent actionEvent) throws Exception {
-        DataHolderFilm.setSelectedFilm(null);
-        HelloApplication.SetRoot("ActorLandingPage");
+        HelloApplication.SetRoot("ProducerFilmView");
     }
 
 
@@ -32,16 +31,10 @@ public class ActorFilmViewController implements Initializable {
         opinionList.setPlaceholder(new Label("No opinions for this film"));
 
         FilmTitle.setText(DataHolderFilm.getSelectedFilm().getNom());
-
-        //MAKE SURE POURCENTAGE
-
-        ScoreLabel.setText(FilmController.getscorepourcantage(DataHolderFilm.getSelectedFilm())+"%");
-
+        ScoreLabel.setText(String.valueOf(FilmController.getscorepourcantage(DataHolderFilm.getSelectedFilm()))+"%");
         DebutDateLabel.setText(DataHolderFilm.getSelectedFilm().getAnnerdesortie().toString());
 
         List<String> opnions = Avis_FilmController.FindAll(DataHolderFilm.getSelectedFilm());
-        System.out.println(opnions);
-        System.out.println("Ya salah");
         opinionList.getItems().addAll(opnions);
 
         opinionList.setCellFactory(param -> new ListCell<String>(){
@@ -51,6 +44,7 @@ public class ActorFilmViewController implements Initializable {
                 if (empty || item==null) {
                     setGraphic(null);
                     setText(null);
+                    // other stuff to do...
 
                 }else{
 
@@ -68,9 +62,7 @@ public class ActorFilmViewController implements Initializable {
                 }
             }
         });
-
-
-
     }
+
 
 }
