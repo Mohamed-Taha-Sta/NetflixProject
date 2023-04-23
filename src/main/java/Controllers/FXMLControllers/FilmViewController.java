@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.Avis_FilmController;
 import Controllers.ProducerController;
+import Controllers.ScoreFilmController;
 import Entities.Film;
 import Entities.Producer;
 import Utils.DataHolder;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import org.controlsfx.control.Rating;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -58,12 +60,8 @@ public class FilmViewController implements Initializable {
     public Button DeleteBtn;
     @FXML
     public VBox SeasonView;
-    public Button thumbUp;
-    public Button thumbDown;
-
     public Button WatchBtn;
-
-
+    public Rating ratings;
 
 
     public static void setPath(String path) {
@@ -135,6 +133,21 @@ public class FilmViewController implements Initializable {
         if(Avis_FilmController.Avis_Exist(DataHolderFilm.getSelectedFilm(), DataHolder.getUser())){
             FilmOpinion.setText(Avis_FilmController.FIND_avis(DataHolderFilm.getSelectedFilm(), DataHolder.getUser()));
         }
+        if(ScoreFilmController.Score_Exist(DataHolderFilm.getSelectedFilm(),DataHolder.getUser())){
+
+            ratings.setRating(ScoreFilmController.RetrieveUserScore(DataHolderFilm.getSelectedFilm(), DataHolder.getUser()));
+            System.out.println("Your old rating "+ratings.getRating());
+        }
+    }
+
+    public void OnRating(){
+        if(ScoreFilmController.Score_Exist(DataHolderFilm.getSelectedFilm(), DataHolder.getUser())){
+            ScoreFilmController.Update_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+        }
+        else{
+            ScoreFilmController.Add_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+        }
+
 
     }
 

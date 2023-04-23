@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import org.controlsfx.control.Rating?>
 
 <AnchorPane minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.FilmViewController">
     <children>
@@ -74,12 +75,7 @@
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
-                                          <HBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
-                                             <children>
-                                                <Button fx:id="thumbUp" mnemonicParsing="false" text="Button" />
-                                                <Button fx:id="thumbDown" mnemonicParsing="false" text="Button" />
-                                             </children>
-                                          </HBox>
+                                          <Rating fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
                                           <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label id="Category" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />
