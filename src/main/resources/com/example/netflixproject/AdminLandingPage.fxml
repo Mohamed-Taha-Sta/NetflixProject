@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="Anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.AdminLandingPageController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1313.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../Images/Design/Background.png" />
+         </image>
+      </ImageView>
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="4.800000190734863" prefHeight="720.0" prefWidth="188.0" spacing="30.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="returnBtn" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                        <ImageView fitHeight="115.0" fitWidth="117.0">
+                           <image>
+                              <Image url="@../../../Images/AdminDefault__1_-removebg-preview.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Text fx:id="ProfileName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName">
+                     <font>
+                        <Font name="Calibri Bold" size="18.0" />
+                     </font>
+                  </Text>
+                  <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="200.0" spacing="10.0" stylesheets="@../../../Style.css">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="179.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../../../Images/miniProfile.png" />
+                           </image>
+                        </ImageView>
+                        <Button id="button" fx:id="ProfileBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnProfilebtn" prefHeight="33.0" prefWidth="111.0" stylesheets="@../../../Style.css" text="Profile" textFill="WHITE" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="231.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Images/Password.png" />
+                           </image>
+                        </ImageView>
+                        <Button id="button" fx:id="PassBtn" mnemonicParsing="false" onAction="#OnPassbtn" prefHeight="33.0" prefWidth="111.0" stylesheets="@../../../Style.css" text="Password" textFill="WHITE" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Images/LogOut.png" />
+                           </image>
+                        </ImageView>
+                        <Button id="button" fx:id="LogoutBtn" mnemonicParsing="false" onAction="#OnLogOutBtn" prefHeight="33.0" prefWidth="108.0" stylesheets="@../../../Style.css" text="LogOut" textFill="WHITE" />
+                     </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="449.0" prefHeight="32.0" prefWidth="200.0" spacing="10.0">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <Line endX="-98.96443176269531" endY="141.69288635253906" layoutX="303.5786437988281" layoutY="559.0248413085938" startX="-97.92887878417969" startY="-539.2106323242188" stroke="#d62e4a" strokeWidth="2.0" />
+            <AnchorPane fx:id="ProfileMenu" layoutX="217.60000610351562" layoutY="32.0" prefHeight="720.0" prefWidth="1060.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1017.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="720.0" prefWidth="371.0" spacing="20.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <VBox alignment="CENTER_LEFT" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <Label text="Your First Name: ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="PrenameLable" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <TextField id="TextFields" fx:id="prenameField" prefHeight="30.0" prefWidth="190.0" promptText="New first name" />
+                                          <Button id="button" fx:id="PrenameBtn" mnemonicParsing="false" onAction="#OnPrenameBtn" prefHeight="30.0" text="Change" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="290.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <Label text="Your Last Name: ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="NameLabel" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <TextField id="TextFields" fx:id="namefield" prefHeight="30.0" prefWidth="190.0" promptText="New last name" stylesheets="@../../../Style.css" />
+                                          <Button id="button" fx:id="NameBtn" mnemonicParsing="false" onAction="#OnNameBtn" prefHeight="30.0" text="Change" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="323.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <Label text="Your Mail: ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="MailLabel" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" spacing="20.0">
+                                       <children>
+                                          <TextField id="TextFields" fx:id="mailfield" prefHeight="30.0" prefWidth="190.0" promptText="New mail" />
+                                          <Button id="button" fx:id="MailBtn" mnemonicParsing="false" onAction="#OnMailBtn" text="Change" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="421.0" spacing="10.0">
+                                 <children>
+                                    <HBox alignment="CENTER" spacing="20.0" />
+                                    <HBox alignment="CENTER" spacing="20.0" />
+                                 </children>
+                              </VBox>
+                              <Label fx:id="AlertText" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="30.0">
+                           <children>
+                              <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label prefHeight="38.0" prefWidth="53.0" text="Movies:">
+                                             <font>
+                                                <Font size="28.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="13.0" top="70.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TableView id="Table" fx:id="MoviesTable" onMouseClicked="#OnClickMovie" prefHeight="521.0" prefWidth="280.0" stylesheets="@../../../Style.css">
+                                             <columns>
+                                                <TableColumn fx:id="MovieName" prefWidth="204.0" text="Movie Name" />
+                                                <TableColumn fx:id="MovieScore" prefWidth="74.0" text="Score" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </TableView>
+                                          <Label fx:id="MovieAlertText" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="53.0" prefWidth="137.0" text="Series:" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="28.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="60.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox id="ComboBox" fx:id="YearSelect" prefHeight="14.0" prefWidth="119.0" promptText="Year">
+                                                   <HBox.margin>
+                                                      <Insets top="65.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                             </children>
+                                          </HBox>
+                                          <TableView id="Table" fx:id="SeriesTable" onMouseClicked="#OnClickSeries" prefHeight="474.0" prefWidth="280.0" stylesheets="@../../../Style.css">
+                                             <columns>
+                                                <TableColumn fx:id="SeriesName" prefWidth="194.0" text="Series Name" />
+                                                <TableColumn fx:id="numSaisons" prefWidth="84.0" text="NumSeason" />
+                                             </columns>
+                                             <columnResizePolicy>
+                                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                             </columnResizePolicy>
+                                          </TableView>
+                                          <Label fx:id="SeriesAlertText" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label fx:id="Advice" text="In Order to Get More Information About a Piece of Content, Please Do Click on Said Content." />
+                              <Label fx:id="Advice1" layoutX="10.0" layoutY="662.0" text="Press 'Enter' After Selecting Year" />
+                              <HBox alignment="CENTER" spacing="230.0">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="PassMenu" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox style="-fx-background-color: #801336; -fx-background-radius: 20px;">
+                           <VBox.margin>
+                              <Insets left="300.0" right="300.0" />
+                           </VBox.margin>
+                           <children>
+                              <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20px;">
+                                 <children>
+                                    <Label text="Change your password:">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField id="TextFields" fx:id="OldPass" prefHeight="35.0" prefWidth="230.0" promptText="Old password" />
+                                    <TextField id="TextFields" fx:id="newPass" layoutX="428.0" layoutY="357.0" prefHeight="35.0" prefWidth="230.0" promptText="New password" />
+                                    <TextField id="TextFields" fx:id="PassConf" layoutX="428.0" layoutY="380.0" prefHeight="35.0" prefWidth="230.0" promptText="Confirm password" />
+                                    <Label fx:id="passAlert" />
+                                    <Button id="button" fx:id="confirmBtn" mnemonicParsing="false" onAction="#OnConfirm" text="Confirm" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="50.0" top="50.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
