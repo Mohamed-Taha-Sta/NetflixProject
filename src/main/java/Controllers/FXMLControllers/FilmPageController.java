@@ -28,8 +28,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.ImageClipper;
-import static Utils.RepeatableFunction.ImageSetter;
+import static Utils.RepeatableFunction.*;
+import static Utils.RepeatableFunction.IconSetter;
 
 public class FilmPageController implements Initializable {
     @FXML
@@ -116,6 +116,10 @@ public class FilmPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        IconSetter(SearchButton,"src/main/resources/Images/HomePage/search.png",20);
+        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",40);
+        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
+        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",40);
         GenresSelector.getItems().addAll(genreNames);
         YearSelect.getItems().addAll(yearList);
 

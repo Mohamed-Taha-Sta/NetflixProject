@@ -1212,7 +1212,7 @@ public class FilmDAO {
     }
     public static List<Film> getMostRecentFilm(int numSeries) throws SQLException, IOException {
         List<Film> List = new ArrayList<>();
-        String sql = "SELECT * FROM Serie ORDER BY DEBUT_DATE DESC FETCH FIRST ? ROWS ONLY";
+        String sql = "SELECT * FROM Film ORDER BY ANNEE_SORTIE DESC FETCH FIRST ? ROWS ONLY";
 
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setInt(1, numSeries);

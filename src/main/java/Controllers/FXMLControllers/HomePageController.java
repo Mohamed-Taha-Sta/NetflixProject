@@ -193,11 +193,11 @@ public class HomePageController implements Initializable {
             throw new RuntimeException(e);
         }
 
-//        try {
-//            films= FilmController.getMostRecentFilm(3);
-//        }catch (SQLException | IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            films= FilmController.getMostRecentFilm(3);
+        }catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
         items.addAll(latestSeries);
         items.addAll(latestFilms);
         Collections.shuffle(items);
