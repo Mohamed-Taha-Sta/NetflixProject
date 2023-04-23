@@ -48,7 +48,8 @@ public class SerieViewController implements Initializable {
     public Label genreLabel;
     public Button DeleteBtn;
 
-    static String path="HomePage";
+    static String path = "HomePage";
+    public Button SubmitBtn;
 
 
     public static void setPath(String path) {
@@ -57,11 +58,14 @@ public class SerieViewController implements Initializable {
 
     List<Season> seasons;
 
-    static Producer prod=ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
+
+    static Producer prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
+
     public void OnBack() throws Exception {
 
         HelloApplication.SetRoot(path);
     }
+
     @FXML
     public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
@@ -71,7 +75,7 @@ public class SerieViewController implements Initializable {
         HelloApplication.SetRoot("SeriesPage");
     }
 
-    public void OnSynopsisClick()throws Exception{
+    public void OnSynopsisClick() throws Exception {
         VideoPlayerController.SetPath(DataHolderSeries.getSelectedSeries().getSynopsis().getPath());
         VideoPlayerController.setPageName("SerieView");
         HelloApplication.SetRoot("VideoPlayer");
@@ -79,37 +83,48 @@ public class SerieViewController implements Initializable {
 
     public void InfoSetter() {
         SerieName.setText(DataHolderSeries.getSelectedSeries().getNom());
-        DirectLabel.setText(prod.getNom()+" "+prod.getPrenom() );
+        DirectLabel.setText(prod.getNom() + " " + prod.getPrenom());
         ImageSetter(Thumbnail, DataHolderSeries.getSelectedSeries().getImg().toURI().toString(), 240, 135);
         System.out.println(DataHolderSeries.getSelectedSeries().getDescription());
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
         dateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().format(formatter));
         genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());
-        SerieOpinion.setText(Avis_serieController.FIND_avis(DataHolderSeries.getSelectedSeries(),DataHolder.getUser()));
+        if (Avis_serieController.Avis_Exist(DataHolderSeries.getSelectedSeries(), DataHolder.getUser())) {
+            SerieOpinion.setText(Avis_serieController.FIND_avis(DataHolderSeries.getSelectedSeries(), DataHolder.getUser()));
+        }
     }
 
-    public List<Season> RetrieveSeasons(){
+    public List<Season> RetrieveSeasons() {
         try {
             return SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ArrayList<>();
         }
     }
 
-    public void OnEdit(){
-        if(!SerieOpinion.isEditable()){
-            SerieOpinion.setEditable(true);
+    public void OnEdit() {
+        SerieOpinion.setEditable(true);
+    }
+
+    public void OnSubmit() {
+        if (SerieOpinion.isEditable()) {
+            if (Avis_serieController.Avis_Exist(DataHolderSeries.getSelectedSeries(), DataHolder.getUser())) {
+                Avis_serieController.modif_avis(DataHolderSeries.getSelectedSeries(), DataHolder.getUser(), SerieOpinion.getText());
+                SerieOpinion.setEditable(false);
+            } else {
+                SerieOpinion.setEditable(false);
+                Avis_serieController.add_avis(DataHolderSeries.getSelectedSeries(), DataHolder.getUser(), SerieOpinion.getText());
+            }
+
         }
-    }
-
-    public void OnSave(){
-
 
     }
 
-    public void OnDelete(){
-
+    public void OnDelete() {
+        SerieOpinion.setText("");
+        Avis_serieController.delete_avis(DataHolderSeries.getSelectedSeries(), DataHolder.getUser());
+        SerieOpinion.setEditable(false);
     }
 
     public void handleImageClick(MouseEvent event) {
@@ -132,10 +147,14 @@ public class SerieViewController implements Initializable {
         }
     }
 
+    public void OnHomeClick() throws Exception {
+        HelloApplication.SetRoot("HomePage");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        seasons= RetrieveSeasons();
+        seasons = RetrieveSeasons();
         VBox seasonHolder = new VBox();
         HBox season2 = new HBox();
         int seasonNbr = 0;

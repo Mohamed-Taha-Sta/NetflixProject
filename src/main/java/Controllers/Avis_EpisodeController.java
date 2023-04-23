@@ -8,6 +8,12 @@ import Services.Avis_EpisodeService;
 import java.util.List;
 
 public class Avis_EpisodeController {
+
+
+    public static boolean Avis_Exist(Episode episode, User user){
+        return Avis_EpisodeService.Avis_Exist(episode, user);
+    }
+
     public static boolean add_avis(Episode ep, User user, String avis){
         return Avis_EpisodeService.add_avis(ep,user,avis);
     }

@@ -7,6 +7,11 @@ import Entities.User;
 import java.util.List;
 
 public class Avis_EpisodeService {
+
+    public static boolean Avis_Exist(Episode episode, User user){
+        return Avis_EpisodeDAO.Avis_Exist(episode, user);
+    }
+
     public static boolean add_avis(Episode ep, User user, String avis){
         return Avis_EpisodeDAO.add_avis(ep,user,avis);
     }

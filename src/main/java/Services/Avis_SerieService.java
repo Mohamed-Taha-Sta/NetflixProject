@@ -15,6 +15,11 @@ public class Avis_SerieService {
     public static boolean modif_avis(Serie serie, User user, String avis){
         return Avis_SerieDAO.modif_avis(serie,user,avis);
     }
+
+
+    public static boolean Avis_Exist(Serie serie, User user){
+        return Avis_SerieDAO.Avis_Exist(serie, user);
+    }
     public static boolean delete_avis(Serie serie, User user){
         return Avis_SerieDAO.delete_avis(serie,user);
     }

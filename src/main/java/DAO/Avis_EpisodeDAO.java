@@ -1,6 +1,7 @@
 package DAO;
 
 import Entities.Episode;
+import Entities.Season;
 import Entities.Serie;
 import Entities.User;
 import Utils.ConxDB;
@@ -16,10 +17,30 @@ public class Avis_EpisodeDAO {
 
     private static final Connection conn = ConxDB.getInstance();
 
+
+
+    public static boolean Avis_Exist(Episode episode, User user){
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
+        try{
+            sql="Select * from AVIS_EPISODES where ID_USER=? and ID_EPISODE=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, (int) user.getID());
+            pstmt.setInt(2, (int) episode.getID());
+            rs = pstmt.executeQuery();
+            return rs.next();
+        }catch (Exception e){
+            System.out.println("Error searching for avis episode");
+            return false;
+        }
+
+    }
+
+
     public static boolean add_avis(Episode ep, User user, String avis){
         PreparedStatement pstmt = null;
         String sql;
-
 
         try {
             sql = "INSERT INTO avis_episodes (id_user,id_episode,avis) VALUES (?,?,?)";

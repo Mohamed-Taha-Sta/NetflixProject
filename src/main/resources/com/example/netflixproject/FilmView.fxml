@@ -31,11 +31,11 @@
                         </ImageView>
                         <VBox alignment="CENTER" spacing="20.0">
                             <children>
-                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false"  />
-                                <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false"  />
+                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnHomeClick" />
+                                <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
                         <VBox alignment="CENTER">
                            <children>
-                                      <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" />
+                                      <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" onAction="#OnFilmClick" />
                                         <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </VBox>
@@ -55,7 +55,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
-                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false"  stylesheets="@../../../Style.css" />
+                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" onAction="#OnBack" stylesheets="@../../../Style.css" />
                                     <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
@@ -106,21 +106,15 @@
                            <children>
                               <Label id="Category" text="Description:" />
                               <TextArea fx:id="Description" editable="false" prefHeight="200.0" prefWidth="540.0" wrapText="true" />
-                              <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="545.0" spacing="5.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label id="Category" graphicTextGap="2.0" text="Genre:" wrapText="true" HBox.hgrow="NEVER" />
-                                    <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="473.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
                               <Label id="Category" layoutX="40.0" layoutY="40.0" text="Your Opinion: " />
                               <HBox spacing="10.0">
                                  <children>
                                     <TextArea fx:id="FilmOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here.." wrapText="true" />
                                     <VBox alignment="TOP_CENTER" spacing="10.0">
                                        <children>
-                                          <Button fx:id="EditBtn" mnemonicParsing="false"  text="Edit" />
-                                          <Button fx:id="SaveBtn" mnemonicParsing="false"  text="Save" />
-                                          <Button fx:id="DeleteBtn" mnemonicParsing="false"  text="Delete" />
+                                          <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
+                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSubmit" text="Submit" />
+                                          <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -138,10 +132,10 @@
                            <content>
                               <VBox fx:id="SeasonView" alignment="CENTER" prefHeight="460.0" prefWidth="500.0" spacing="10.0">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="545.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label id="Category" text="Acteurs:" />
-                                          <Label id="Category" fx:id="Actors" layoutX="10.0" layoutY="47.0" text="Label" />
+                                          <Label id="Category" graphicTextGap="2.0" prefHeight="50.0" prefWidth="134.0" text="Genre:" wrapText="true" HBox.hgrow="NEVER" />
+                                          <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="473.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                     <Button fx:id="WatchBtn" mnemonicParsing="false" text="Button" />

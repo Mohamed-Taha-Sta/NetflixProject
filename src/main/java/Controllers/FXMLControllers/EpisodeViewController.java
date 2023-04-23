@@ -1,5 +1,7 @@
 package Controllers.FXMLControllers;
 
+import Controllers.Avis_EpisodeController;
+import Utils.DataHolder;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
@@ -48,12 +50,9 @@ public class EpisodeViewController implements Initializable {
     @FXML
     public Button EditBtn;
     @FXML
-    public Button SaveBtn;
-    @FXML
-    public Button Cancelbtn;
-
-    @FXML
     public Button watchBtn;
+    public Button SubmitBtn;
+    public Button DeleteBtn;
 
     public void OnBack() throws Exception {
         HelloApplication.SetRoot("SeasonView");
@@ -74,24 +73,26 @@ public class EpisodeViewController implements Initializable {
     }
 
     public void OnEdit(){
-        if(!EpisodeOpinion.isEditable()){
-            EpisodeOpinion.setEditable(true);
-        }
+        EpisodeOpinion.setEditable(true);
     }
 
-    public void OnSave(){
+    public void OnSubmit(){
         if(EpisodeOpinion.isEditable()){
-            EpisodeOpinion.setEditable(false);
-            System.out.println(EpisodeOpinion.getText());
+            if(Avis_EpisodeController.Avis_Exist(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser())){
+                Avis_EpisodeController.modif_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),EpisodeOpinion.getText());
+                EpisodeOpinion.setEditable(false);
+            }
+            else {
+                Avis_EpisodeController.add_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),EpisodeOpinion.getText());
+                EpisodeOpinion.setEditable(false);
+            }
         }
     }
 
-    public void OnCancel(){
-        if(EpisodeOpinion
-                .isEditable()){
-            EpisodeOpinion.setEditable(false);
-            System.out.println(EpisodeOpinion.getText());
-        }
+    public void OnDelete(){
+        EpisodeOpinion.setText("");
+        Avis_EpisodeController.delete_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser());
+        EpisodeOpinion.setEditable(false);
 
     }
 
@@ -101,6 +102,9 @@ public class EpisodeViewController implements Initializable {
         dateLabel.setText(DataHolderEpisode.getSelectedEpisode().getPremiereDate().format(formatter));
         Description.setText(DataHolderEpisode.getSelectedEpisode().getDescription());
         ImageSetter(Thumbnail,DataHolderEpisode.getSelectedEpisode().getImage().toURI().toString(),240,135);
+        if(Avis_EpisodeController.Avis_Exist(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser())){
+           EpisodeOpinion.setText(Avis_EpisodeController.FIND_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser()));
+        }
 
     }
 

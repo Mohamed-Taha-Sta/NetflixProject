@@ -111,11 +111,11 @@
                                         <HBox spacing="10.0">
                                             <children>
                                                 <TextArea fx:id="SeasonOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here..." wrapText="true" />
-                                                <VBox alignment="TOP_CENTER" prefWidth="49.0" spacing="10.0">
+                                                <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="58.0" spacing="10.0">
                                                     <children>
                                                         <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
-                                                        <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSave" text="Save" />
-                                                        <Button fx:id="Cancelbtn" mnemonicParsing="false" onAction="#OnCancel" text="Cancel" />
+                                                        <Button fx:id="SubmitBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="61.0" text="Submit" />
+                                                        <Button fx:id="Delete" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
                                                     </children>
                                                 </VBox>
                                             </children>

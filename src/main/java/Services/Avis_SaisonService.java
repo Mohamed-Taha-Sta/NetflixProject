@@ -9,6 +9,11 @@ import Entities.User;
 import java.util.List;
 
 public class Avis_SaisonService {
+
+    public static boolean Avis_Exist(Season season, User user){
+        return Avis_SeasonDAO.Avis_Exist(season, user);
+    }
+
     public static boolean add_avis(Season s, User user, String avis){
         return Avis_SeasonDAO.add_avis(s,user,avis);
     }

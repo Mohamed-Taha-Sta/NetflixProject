@@ -8,6 +8,10 @@ import Services.Avis_SerieService;
 import java.util.List;
 
 public class Avis_serieController {
+
+    public static boolean Avis_Exist(Serie serie, User user){
+        return Avis_SerieService.Avis_Exist(serie, user);
+    }
     public static boolean add_avis(Serie serie, User user, String avis){
         return Avis_SerieService.add_avis(serie,user,avis);
     }

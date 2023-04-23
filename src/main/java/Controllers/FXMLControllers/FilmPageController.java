@@ -77,6 +77,7 @@ public class FilmPageController implements Initializable {
         if (selectedFilm != null) {
             try {
                 DataHolderFilm.setSelectedFilm(selectedFilm);
+                FilmViewController.setPath("FilmPage");
                 DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
                 HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
@@ -146,6 +147,7 @@ public class FilmPageController implements Initializable {
         IconSetter(homeButton, "src/main/resources/Images/HomePage/HomeButton.png", 40);
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", 40);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
+
         GenresSelector.getItems().addAll(genreNames);
         YearSelect.getItems().addAll(yearList);
 

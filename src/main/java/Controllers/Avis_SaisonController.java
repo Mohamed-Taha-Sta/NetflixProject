@@ -8,6 +8,9 @@ import Services.Avis_SaisonService;
 import java.util.List;
 
 public class Avis_SaisonController {
+    public static boolean Avis_Exist(Season season, User user){
+        return Avis_SaisonService.Avis_Exist(season, user);
+    }
     public static boolean add_avis(Season s, User user, String avis){
         return Avis_SaisonService.add_avis(s,user,avis);
     }

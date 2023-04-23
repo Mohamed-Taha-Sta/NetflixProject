@@ -85,8 +85,8 @@ public class HomePageController implements Initializable {
         } else if (selectedFilm != null) {
             try {
                 DataHolderFilm.setSelectedFilm(selectedFilm);
-                System.out.println(selectedFilm);
                 DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
+                FilmViewController.setPath("HomePage");
                 HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -108,10 +108,8 @@ public class HomePageController implements Initializable {
     public void SetUserImage() {
         UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
         File imageFile = DataHolder.getImage();
-        System.out.println("image file: " + imageFile);
         if (imageFile != null) {
             Image profileImage = new Image(imageFile.toURI().toString());
-            System.out.println("Profile image in profilepage: " + profileImage);
 
             ProfileBtn.setImage(profileImage);
             ImageClipper(ProfileBtn);
@@ -217,6 +215,7 @@ public class HomePageController implements Initializable {
         }
         try {
             prefFilms= FilmController.searchFilm(DataHolder.getUser().getGenreList());
+            System.out.println("filmPrefere: "+prefFilms);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -233,9 +232,7 @@ public class HomePageController implements Initializable {
             try {
                 series=new ArrayList<>();
                 series = SerieController.GetAllSeries();
-                System.out.println("series loaded");
             } catch (SQLException | IOException e) {
-                System.out.println("series already loaded");
                 throw new RuntimeException(e);
 
             }
@@ -246,7 +243,6 @@ public class HomePageController implements Initializable {
         if (films == null || films.isEmpty()) {
             films = new ArrayList<>();
             films = FilmController.GetAllFilms();
-            System.out.println("Films: " +films);
         }
         else {
             System.out.println("films already loaded");
@@ -267,20 +263,36 @@ public class HomePageController implements Initializable {
 
 
     public void LoadPreferredReleases(){
-        Collections.shuffle(sFByGENRE);
-        int num=0;
-        for (Content c : sFByGENRE) {
-            ImageView imgView = new ImageView();
-            ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
-            ImageClipper(imgView);
-            imgView.setCursor(Cursor.cursor("hand"));
-            imgView.setOnMouseClicked(this::handleImageClick);
-            PrefrencesViewer.getChildren().add(imgView);
-            num++;
-            if(num==6){
-                break;
+        if(!sFByGENRE.isEmpty()){
+            Collections.shuffle(sFByGENRE);
+            int num=0;
+            for (Content c : sFByGENRE) {
+                ImageView imgView = new ImageView();
+                ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
+                ImageClipper(imgView);
+                imgView.setCursor(Cursor.cursor("hand"));
+                imgView.setOnMouseClicked(this::handleImageClick);
+                PrefrencesViewer.getChildren().add(imgView);
+                num++;
+                if(num==6){
+                    break;
+                }
             }
         }
+        else{
+            Collections.shuffle(latestStuff);
+            for (Content c : latestStuff) {
+                ImageView imgView = new ImageView();
+                ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
+                ImageClipper(imgView);
+                imgView.setCursor(Cursor.cursor("hand"));
+                imgView.setOnMouseClicked(this::handleImageClick);
+                PrefrencesViewer.getChildren().add(imgView);
+            }
+        }
+
+
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -300,7 +312,6 @@ public class HomePageController implements Initializable {
         //load latest Releases bar
         if (latestStuff==null) {
             latestStuff=new ArrayList<>();
-            System.out.println("latest Stuff loaded");
             latestStuff.addAll(LatestInit());
         }
         LoadLatestReleases();

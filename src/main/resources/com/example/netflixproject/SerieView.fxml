@@ -31,7 +31,7 @@
                         </ImageView>
                         <VBox alignment="CENTER" spacing="20.0">
                             <children>
-                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnBack" />
+                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnHomeClick" />
                         <VBox alignment="CENTER">
                            <children>
                                       <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
@@ -113,7 +113,7 @@
                                     <VBox alignment="TOP_CENTER" spacing="10.0">
                                        <children>
                                           <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
-                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSave" text="Save" />
+                                          <Button fx:id="SubmitBtn" mnemonicParsing="false" onAction="#OnSubmit" text="Submit" />
                                           <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
                                        </children>
                                     </VBox>

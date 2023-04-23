@@ -1,7 +1,9 @@
 package Controllers.FXMLControllers;
 
+import Controllers.Avis_SaisonController;
 import Controllers.EpisodeController;
 import Entities.Episode;
+import Utils.DataHolder;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
@@ -56,16 +58,16 @@ public class SeasonViewController implements Initializable {
     @FXML
     public Button EditBtn;
     @FXML
-    public Button SaveBtn;
-    @FXML
-    public Button Cancelbtn;
-    @FXML
     public VBox EpisodeView;
+    public Button SubmitBtn;
+    public Button Delete;
 
     List<Episode> episodes;
+
     public void OnBack() throws Exception {
         HelloApplication.SetRoot("SerieView");
     }
+
     @FXML
     public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
@@ -75,24 +77,26 @@ public class SeasonViewController implements Initializable {
         HelloApplication.SetRoot("SeriesPage");
     }
 
-    public void OnSynopsisClick()throws Exception{
+    public void OnSynopsisClick() throws Exception {
         VideoPlayerController.SetPath(DataHolderSeason.getSelectedSeason().getSynopsis().getPath());
         VideoPlayerController.setPageName("SeasonView");
         HelloApplication.SetRoot("VideoPlayer");
     }
 
     public void InfoSetter() throws SQLException, IOException {
-        SeasonName.setText(DataHolderSeries.getSelectedSeries().getNom()+" "+ DataHolderSeason.getSelectedSeason().getName());
-        System.out.println("SeasonDescription: "+DataHolderSeason.getSelectedSeason().getDescription());
+        SeasonName.setText(DataHolderSeries.getSelectedSeries().getNom() + " " + DataHolderSeason.getSelectedSeason().getName());
+        System.out.println("SeasonDescription: " + DataHolderSeason.getSelectedSeason().getDescription());
         Description.setText(DataHolderSeason.getSelectedSeason().getDescription());
         dateLabel.setText(DataHolderSeason.getSelectedSeason().getDebutDate().format(formatter));
         genreLabel.setText(String.valueOf(RetrieveEpisodes().size()));
 
         DirectLabel.setText(prod.getNom() + " " + prod.getPrenom());
-        ImageSetter(Thumbnail,DataHolderSeason.getSelectedSeason().getThumbnail().toURI().toString(),240,135);
-        //SeasonOpinion.setText(whatever Im calling);
+        ImageSetter(Thumbnail, DataHolderSeason.getSelectedSeason().getThumbnail().toURI().toString(), 240, 135);
+        if (Avis_SaisonController.Avis_Exist(DataHolderSeason.getSelectedSeason(), DataHolder.getUser())) {
+            System.out.println("there is an opinion");
+            SeasonOpinion.setText(Avis_SaisonController.FIND_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser()));
+        }
     }
-
 
 
     public List<Episode> RetrieveEpisodes() {
@@ -129,14 +133,14 @@ public class SeasonViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        episodes=RetrieveEpisodes();
+        episodes = RetrieveEpisodes();
         try {
             InfoSetter();
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
         System.out.println("retrieved episodes" + episodes);
-        List<Episode> episodes=RetrieveEpisodes();
+        List<Episode> episodes = RetrieveEpisodes();
         VBox episodeHolder = new VBox();
         HBox episode2 = new HBox();
         int episodeNbr = 0;
@@ -176,24 +180,30 @@ public class SeasonViewController implements Initializable {
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
     }
 
-    public void OnEdit(){
-        if(!SeasonOpinion.isEditable()){
-            SeasonOpinion.setEditable(true);
+    public void OnEdit() {
+        SeasonOpinion.setEditable(true);
+        System.out.println("Your are editing");
+    }
+
+    public void OnSubmit() {
+        if (SeasonOpinion.isEditable()) {
+            if (Avis_SaisonController.Avis_Exist(DataHolderSeason.getSelectedSeason(), DataHolder.getUser())) {
+                Avis_SaisonController.modif_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser(), SeasonOpinion.getText());
+                System.out.println("submission on top");
+                SeasonOpinion.setEditable(false);
+            }
+            else{
+                Avis_SaisonController.add_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser(), SeasonOpinion.getText());
+                System.out.println("new submission");
+                SeasonOpinion.setEditable(false);
+
+            }
         }
     }
 
-    public void OnSave(){
-        if(SeasonOpinion.isEditable()){
+    public void OnDelete() {
+            SeasonOpinion.setText("");
+            Avis_SaisonController.delete_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser());
             SeasonOpinion.setEditable(false);
-            System.out.println(SeasonOpinion.getText());
-        }
-    }
-
-    public void OnCancel(){
-        if(SeasonOpinion.isEditable()){
-            SeasonOpinion.setEditable(false);
-            System.out.println(SeasonOpinion.getText());
-        }
-
     }
 }
