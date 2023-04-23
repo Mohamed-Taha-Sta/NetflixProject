@@ -50,6 +50,18 @@ public class Film extends Content{
         Votes = votes;
     }
 
+
+    //Constructeur Jesser
+    public Film(Long id, String nom, String desription, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree,Long vue , Long score, Long vote ,  File synopsis, File film,Long idrealisateur) {
+        super(id, nom, desription, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        VueNbr = vue;
+        Score = score;
+        Votes = vote;
+        this.synopsis = synopsis;
+        this.film = film;
+        this.id_realisateur=idrealisateur;
+    }
     public Film(String nom, String desription, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, File synopsis, File film,Long idrealisateur) {
         super(nom, desription, annerdesortie, langue, paysorigine, listegenre, img);
         this.duree = duree;

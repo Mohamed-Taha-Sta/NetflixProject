@@ -219,7 +219,7 @@ public class FilmDAO {
                 }
 
 
-                Film filmm=new Film(nom,description,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
+                Film filmm=new Film(id,nom,description,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
                 list.add(filmm);
             }
 

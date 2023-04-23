@@ -45,6 +45,7 @@ public class HomePageController implements Initializable {
     static List<Film> films;
     static List<Content> sFByGENRE;
 
+    static List<Content> items;
 
     public HBox ThumbnailViewer;
     public Button homeButton;
@@ -56,43 +57,38 @@ public class HomePageController implements Initializable {
 
     public HBox PrefrencesViewer;
 
-    @FXML
     public void handleImageClick(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
-        Serie selectedSerie = null;
-        Film selectedFilm = null;
-        for (Serie s : series) {
-            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
-                selectedSerie = s;
+        Content selectedContent = null;
+        for (Content content : items) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(content.getImg().toURI()))) {
+                selectedContent = content;
                 break;
             }
         }
-        for (Film f : films) {
-            if (imageView.getImage().getUrl().equals(String.valueOf(f.getImg().toURI()))) {
-                selectedFilm = f;
-                break;
-            }
-        }
-        if (selectedSerie != null) {
+        if (selectedContent instanceof Serie) {
             try {
-                DataHolderSeries.setSelectedSeries(selectedSerie);
+                DataHolderSeries.setSelectedSeries((Serie) selectedContent);
                 DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeries.getSelectedSeries().getId()).get(0));
                 SerieViewController.setPath("HomePage");
                 HelloApplication.SetRoot("SerieView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }
-        else if (selectedFilm != null) {
+        } else if (selectedContent instanceof Film) {
             try {
-                DataHolderFilm.setSelectedFilm(selectedFilm);
-                DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
+                DataHolderFilm.setSelectedFilm((Film) selectedContent);
+                System.out.println("Selectedcontent: "+selectedContent);
+                System.out.println("SelectedFilm id" + ((Film) selectedContent).getId());
+                System.out.println("Selectedcontent film: "+DataHolderFilm.getSelectedFilm());
+                DataHolderFilm.setSelectedFilm((Film) FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
                 HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
     @FXML
     public void OnProfileClick() throws Exception {
         HelloApplication.SetRoot("ProfilePage");
@@ -315,6 +311,12 @@ public class HomePageController implements Initializable {
         //SETTING UP SEARCH bar
         LoadAllSeries();
         LoadAllFilms();
+        if(items==null||items.isEmpty()){
+            items=new ArrayList<>();
+            items.addAll(series);
+            items.addAll(films);
+        }
+
         searchBarInit(series, films);
 
 
