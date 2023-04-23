@@ -412,6 +412,9 @@ public class FilmDAO {
 
     }
 
+
+
+
     public static ArrayList<Film> GetAllFilms() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
