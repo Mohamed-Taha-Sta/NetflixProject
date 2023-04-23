@@ -32,7 +32,7 @@ public class SeasonService {
         double averageScore = listScore.stream()
                 .collect(Collectors.averagingDouble(Double::doubleValue));
         double percentage = numVotes * 5.0;
-        return averageScore / percentage * 100.0;
+        return  Math.round(averageScore / percentage * 100.0);
     }
 
 

@@ -36,8 +36,8 @@ public class SerieService {
         {
             scoreSeason.add(SeasonController.StreamAverageScore(season));
         }
-        return scoreSeason.stream()
-                .collect(Collectors.averagingDouble(Double::doubleValue));
+        return Math.round(scoreSeason.stream()
+                .collect(Collectors.averagingDouble(Double::doubleValue))) ;
     }
 
 

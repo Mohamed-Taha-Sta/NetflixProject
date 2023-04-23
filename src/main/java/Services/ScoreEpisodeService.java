@@ -7,7 +7,7 @@ import Entities.User;
 public class ScoreEpisodeService {
 
     public static  double GetEpisodeAvgScore(Episode episode){
-        return GetEpisodeScore(episode)/GetNumberVotesEpisode(episode)*100;
+        return Math.round(GetEpisodeScore(episode)/GetNumberVotesEpisode(episode)*100) ;
     }
 
     public static int GetNumberVotesEpisode(Episode episode) {
