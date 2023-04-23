@@ -1,6 +1,7 @@
 package Controllers.FXMLControllers;
 
 import Controllers.Avis_EpisodeController;
+import Controllers.ScoreEpisodeController;
 import Utils.DataHolder;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import org.controlsfx.control.Rating;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +55,7 @@ public class EpisodeViewController implements Initializable {
     public Button watchBtn;
     public Button SubmitBtn;
     public Button DeleteBtn;
+    public Rating ratings;
 
     public void OnBack() throws Exception {
         HelloApplication.SetRoot("SeasonView");
@@ -105,7 +108,20 @@ public class EpisodeViewController implements Initializable {
         if(Avis_EpisodeController.Avis_Exist(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser())){
            EpisodeOpinion.setText(Avis_EpisodeController.FIND_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser()));
         }
+        if(ScoreEpisodeController.Score_Exist(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser())){
+            ratings.setRating(ScoreEpisodeController.RetrieveUserScore(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser()));
+            ratings.setUpdateOnHover(false);
+        }
 
+    }
+    public void OnRating(){
+        if(ScoreEpisodeController.Score_Exist(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser())){
+            ScoreEpisodeController.Update_Score(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),ratings.getRating());
+        }
+        else {
+            ScoreEpisodeController.Add_Score(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),ratings.getRating());
+            ratings.setUpdateOnHover(false);
+        }
     }
 
     public void OnWatch() throws Exception{
@@ -113,6 +129,8 @@ public class EpisodeViewController implements Initializable {
         VideoPlayerController.setPageName("EpisodeView");
         HelloApplication.SetRoot("VideoPlayer");
     }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -122,7 +140,5 @@ public class EpisodeViewController implements Initializable {
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
         ImageClipper(Thumbnail);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
-        IconSetter(ThumbUp,"src/main/resources/Images/Design/ThumbUp.png",40);
-        IconSetter(ThumbDown,"src/main/resources/Images/Design/ThumbDown.png",40);
     }
 }

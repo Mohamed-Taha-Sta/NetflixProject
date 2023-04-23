@@ -97,6 +97,10 @@ public class Season {
         this.episodeList = episodeList;
     }
 
+    public Season(long i) {
+        this.ID=i;
+    }
+
     public long getID() {
         return ID;
     }

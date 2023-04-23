@@ -18,16 +18,29 @@ public class SerieService {
 
 
 
-    public static long StreamAverageScore(Serie serie) throws SQLException, IOException {
+//    public static long StreamAverageScore(Serie serie) throws SQLException, IOException {
+//        List<Season> seasonList = SeasonController.FindSeasonSerieID(serie.getId());
+//        List<Long> scoreSeason = new ArrayList<>();
+//        for(Season season : seasonList)
+//        {
+//            scoreSeason.add(SeasonController.StreamAverageScore(season));
+//        }
+//        return Math.round(scoreSeason.stream()
+//                .collect(Collectors.averagingLong(Long::longValue)));
+//    }
+
+    public static double StreamAverageScore(Serie serie) throws SQLException, IOException {
         List<Season> seasonList = SeasonController.FindSeasonSerieID(serie.getId());
-        List<Long> scoreSeason = new ArrayList<>();
+        List<Double> scoreSeason = new ArrayList<>();
         for(Season season : seasonList)
         {
             scoreSeason.add(SeasonController.StreamAverageScore(season));
         }
-        return Math.round(scoreSeason.stream()
-                .collect(Collectors.averagingLong(Long::longValue)));
+        return scoreSeason.stream()
+                .collect(Collectors.averagingDouble(Double::doubleValue));
     }
+
+
 
     public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
         return SerieDAO.AddSerie(Serie);

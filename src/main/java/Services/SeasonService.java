@@ -1,5 +1,6 @@
 package Services;
 
+import Controllers.ScoreEpisodeController;
 import Controllers.SeasonController;
 import DAO.SeasonDAO;
 import Entities.Episode;
@@ -14,20 +15,49 @@ import java.util.stream.Collectors;
 
 public class SeasonService {
 
-    public static long StreamAverageScore(Season season) throws SQLException, IOException {
+//    public static long StreamAverageScore(Season season) throws SQLException, IOException {
+//        List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
+//        List<Long> listScore = getScoreEpisodeList(episodeList);
+//        return Math.round(listScore.stream()
+//                .collect(Collectors.averagingLong(Long::longValue)));
+//    }
+
+    public static double StreamAverageScore(Season season) throws SQLException, IOException {
         List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
-        List<Long> listScore = getScoreEpisodeList(episodeList);
-        return Math.round(listScore.stream()
-                .collect(Collectors.averagingLong(Long::longValue)));
+
+        List<Double> listScore = getScoreEpisodeList(episodeList);
+        int numVotes = episodeList.stream()
+                .mapToInt(episode -> ScoreEpisodeService.GetNumberVotesEpisode(episode))
+                .sum();
+        double averageScore = listScore.stream()
+                .collect(Collectors.averagingDouble(Double::doubleValue));
+        double percentage = numVotes * 5.0;
+        return averageScore / percentage * 100.0;
     }
 
-//    public static long StreamSumViewNumber(List<Episode> episodeList) {
+
+
+
+    public static void main(String[] args) throws SQLException, IOException {
+        System.out.println(StreamAverageScore(new Season(2)));
+    }
+
+
+
+//    public static List<Long> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
 //
 //        return episodeList.stream()
-//                .map(episode -> episode.getVueNbr())
-//                .reduce((aLong, aLong2) -> aLong+aLong2)
-//                .get();
+//                .map(episode -> episode.getScore())
+//                .collect(Collectors.toList());
 //    }
+   public static List<Double> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
+
+        return episodeList.stream()
+                .map(episode -> ScoreEpisodeController.GetEpisodeScore(episode))
+                .collect(Collectors.toList());
+    }
+
+
 
     public static long getVotesSeason(Season season) throws SQLException, IOException {
 
@@ -39,6 +69,15 @@ public class SeasonService {
                 .get();
 
     }
+
+
+    //    public static long StreamSumViewNumber(List<Episode> episodeList) {
+//
+//        return episodeList.stream()
+//                .map(episode -> episode.getVueNbr())
+//                .reduce((aLong, aLong2) -> aLong+aLong2)
+//                .get();
+//    }
     public static long StreamSumViewNumber(Season season) throws SQLException, IOException {
 
         List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
@@ -49,12 +88,7 @@ public class SeasonService {
                 .get();
 
     }
-    public static List<Long> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
 
-        return episodeList.stream()
-                .map(episode -> episode.getScore())
-                .collect(Collectors.toList());
-    }
 
     public static List<Season> FindSeasonSerieID(Long SerieID) throws SQLException, IOException {
         return SeasonDAO.FindSeasonSerieID(SerieID);

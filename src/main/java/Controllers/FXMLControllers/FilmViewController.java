@@ -134,18 +134,19 @@ public class FilmViewController implements Initializable {
             FilmOpinion.setText(Avis_FilmController.FIND_avis(DataHolderFilm.getSelectedFilm(), DataHolder.getUser()));
         }
         if(ScoreFilmController.Score_Exist(DataHolderFilm.getSelectedFilm(),DataHolder.getUser())){
-
             ratings.setRating(ScoreFilmController.RetrieveUserScore(DataHolderFilm.getSelectedFilm(), DataHolder.getUser()));
-            System.out.println("Your old rating "+ratings.getRating());
+            ratings.setUpdateOnHover(false);
         }
     }
 
     public void OnRating(){
         if(ScoreFilmController.Score_Exist(DataHolderFilm.getSelectedFilm(), DataHolder.getUser())){
             ScoreFilmController.Update_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+
         }
         else{
             ScoreFilmController.Add_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+            ratings.setUpdateOnHover(false);
         }
 
 

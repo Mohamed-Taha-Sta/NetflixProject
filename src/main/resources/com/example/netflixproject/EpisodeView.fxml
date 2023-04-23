@@ -12,6 +12,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import org.controlsfx.control.Rating?>
 
 <AnchorPane minHeight="720.0" minWidth="1280.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.EpisodeViewController">
     <children>
@@ -72,20 +73,15 @@
                                                         </HBox>
                                                     </children>
                                                 </VBox>
-                                                <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="20.0" HBox.hgrow="NEVER">
+                                                <VBox alignment="TOP_CENTER" prefHeight="158.0" prefWidth="265.0" spacing="20.0" HBox.hgrow="NEVER">
                                                     <children>
                                                         <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
+                                          <Rating fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" rating="0.0" updateOnHover="true" />
                                                         <HBox alignment="CENTER" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="DebutDate:" />
                                                                 <Label id="Category" fx:id="dateLabel" text="Label" />
                                                             </children>
-                                                        </HBox>
-                                                        <HBox alignment="CENTER" spacing="50.0">
-                                             <children>
-                                                <Button id="MenuBtn" fx:id="ThumbUp" mnemonicParsing="false" />
-                                                <Button id="MenuBtn" fx:id="ThumbDown" mnemonicParsing="false" />
-                                             </children>
                                                         </HBox>
                                                     </children>
                                        <HBox.margin>

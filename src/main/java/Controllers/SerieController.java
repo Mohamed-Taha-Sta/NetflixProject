@@ -81,7 +81,7 @@ public class SerieController {
         return SerieService.GetSeriesByProducer(producer);
     }
 
-    public static long StreamAverageScore(Serie serie) throws SQLException, IOException {
+    public static double StreamAverageScore(Serie serie) throws SQLException, IOException {
         return SerieService.StreamAverageScore(serie);
     }
 
