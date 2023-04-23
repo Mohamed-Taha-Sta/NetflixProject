@@ -73,7 +73,7 @@
                                     </VBox>
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
-                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                           <HBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Button fx:id="thumbUp" mnemonicParsing="false" text="Button" />
@@ -138,7 +138,7 @@
                                           <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="473.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
-                                    <Button fx:id="WatchBtn" mnemonicParsing="false" text="Button" />
+                                    <Button id="SynopsisBtn" fx:id="WatchBtn" mnemonicParsing="false" onAction="#OnWatch" prefHeight="54.0" prefWidth="110.0" text="Watch Now" />
                                  </children></VBox>
                            </content>
                            <HBox.margin>

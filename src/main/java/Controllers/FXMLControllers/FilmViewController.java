@@ -71,6 +71,17 @@ public class FilmViewController implements Initializable {
     }
 
 
+    public void OnSynopsis() throws Exception {
+        VideoPlayerController.SetPath(DataHolderFilm.getSelectedFilm().getSynopsis().getPath());
+        VideoPlayerController.setPageName("FilmView");
+        HelloApplication.SetRoot("VideoPlayer");
+    }
+
+    public void OnWatch() throws Exception {
+        VideoPlayerController.SetPath(DataHolderFilm.getSelectedFilm().getFilm().getPath());
+        VideoPlayerController.setPageName("FilmView");
+        HelloApplication.SetRoot("VideoPlayer");
+    }
 
 
 
