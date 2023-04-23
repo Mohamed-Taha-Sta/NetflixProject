@@ -4,6 +4,8 @@ import DAO.Avis_FilmDAO;
 import Entities.Film;
 import Entities.User;
 
+import java.util.List;
+
 public class Avis_FilmService {
     public static boolean add_avis(Film film, User user, String avis){
        return Avis_FilmDAO.add_avis(film,user,avis);
@@ -21,4 +23,7 @@ public class Avis_FilmService {
     public static boolean Avis_Exist(Film film, User user){
         return Avis_FilmDAO.Avis_Exist(film,user);
     }
-}
+    public static List<String> FindAll(Film film) {
+        return Avis_FilmDAO.FindAll(film);
+    }
+    }

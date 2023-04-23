@@ -38,7 +38,7 @@ public class ActorEpisodeViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        opinionList.setPlaceholder(new Label("No opinions for this season"));
+        opinionList.setPlaceholder(new Label("No opinions for this episode"));
 
         EpisodeTitle.setText(DataHolderEpisode.getSelectedEpisode().getName());
 

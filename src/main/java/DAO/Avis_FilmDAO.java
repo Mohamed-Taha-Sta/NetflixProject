@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Avis_FilmDAO {
     private static final Connection conn = ConxDB.getInstance();
@@ -121,4 +123,26 @@ public class Avis_FilmDAO {
         }
 
     }
+
+
+    public static List<String> FindAll(Film film){
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
+        List<String> opinions= new ArrayList<>();
+
+        try {
+            sql = "SELECT avis FROM avis_film WHERE id_film = ?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, film.getId());
+            rs=pstmt.executeQuery();
+            while (rs.next())
+                opinions.add(rs.getString(1));
+        } catch (SQLException ex) {
+            System.out.println("Error finding avis Film"+ ex.getMessage());
+        }
+        return opinions;
+    }
+
 }
