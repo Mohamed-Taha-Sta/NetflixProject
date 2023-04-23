@@ -34,7 +34,7 @@ public class ActorSeasonViewController implements Initializable {
 
     public void onBack(ActionEvent actionEvent) throws Exception {
         DataHolderEpisode.setEpisodeOBList(null);
-        DataHolderEpisode.setSelectedEpisode(null);
+        //        DataHolderEpisode.setSelectedEpisode(null); //Try this
         HelloApplication.SetRoot("ActorSeriesView");
     }
 

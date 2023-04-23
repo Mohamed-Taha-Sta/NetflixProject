@@ -81,7 +81,7 @@ public class HomePageController implements Initializable {
                 System.out.println("Selectedcontent: "+selectedContent);
                 System.out.println("SelectedFilm id" + ((Film) selectedContent).getId());
                 System.out.println("Selectedcontent film: "+DataHolderFilm.getSelectedFilm());
-                DataHolderFilm.setSelectedFilm((Film) FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
+                DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
                 HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
                 throw new RuntimeException(e);

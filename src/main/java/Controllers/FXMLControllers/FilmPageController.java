@@ -78,8 +78,7 @@ public class FilmPageController implements Initializable {
             try {
                 DataHolderFilm.setSelectedFilm(selectedFilm);
                 DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
-                SerieViewController.setPath("SeriesPage");
-                HelloApplication.SetRoot("SerieView");
+                HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -175,7 +175,7 @@ public class Film extends Content{
                 ", resume='" + id_realisateur + '\'' +
                 ", id=" + id +
                 ", nom='" + nom + '\'' +
-                ", realisateur='" + Description + '\'' +
+                ", Description='" + Description + '\'' +
                 ", annerdesortie=" + annerdesortie +
                 ", langue='" + langue + '\'' +
                 ", paysorigine='" + paysorigine + '\'' +

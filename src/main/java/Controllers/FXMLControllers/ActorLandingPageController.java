@@ -26,8 +26,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ActorLandingPageController implements Initializable {
 
@@ -210,16 +209,18 @@ public class ActorLandingPageController implements Initializable {
         if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
 
             List<Serie> seriesList = SerieController.FindSeriesByActor(DataHolder.getActor());
-            Series = FXCollections.observableArrayList(seriesList);
-
+            Set<Serie> serieSet = new HashSet<>(seriesList);
+            List<Serie> uniqueSeries = new ArrayList<>(serieSet);
+            Series = FXCollections.observableArrayList(uniqueSeries);
             DataHolderSeries.setSeries(Series);
         }
 
         if(DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
 
-            List<Film> filmList = null;
-            filmList = FilmController.FindByActor(DataHolder.getActor());
-            Films = FXCollections.observableArrayList(filmList);
+            List<Film> filmList = FilmController.FindByActor(DataHolder.getActor());
+            Set<Film> filmSet = new HashSet<>(filmList);
+            List<Film> uniqueFilms = new ArrayList<>(filmSet);
+            Films = FXCollections.observableArrayList(uniqueFilms);
 
             DataHolderFilm.setFilms(Films);
         }

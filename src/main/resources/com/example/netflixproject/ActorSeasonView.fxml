@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ActorSeasonViewController">
@@ -113,10 +114,15 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <ListView fx:id="opinionList" prefHeight="443.0" prefWidth="356.0" stylesheets="@../../../Style.css" />
+                                    <ListView fx:id="opinionList" prefHeight="471.0" prefWidth="332.0" stylesheets="@../../../Style.css" />
+                                    <Line endX="-100.8994369506836" endY="232.16514587402344" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0">
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </Line>
                                     <TableView fx:id="EpisodesTable" onMouseClicked="#OnClickEpisode" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../Style.css">
                                       <columns>
-                                        <TableColumn fx:id="EpisodeName" editable="false" prefWidth="179.0" text="Episodes" />
+                                        <TableColumn fx:id="EpisodeName" editable="false" prefWidth="178.0" text="Episodes" />
                                       </columns>
                                     </TableView>
                                  </children>
