@@ -19,4 +19,8 @@ public class Avis_FilmController {
     public static String FIND_avis(Film film, User user){
         return Avis_FilmService.FIND_avis(film,user);
     }
+
+    public static boolean Avis_Exist(Film film, User user){
+        return Avis_FilmService.Avis_Exist(film,user);
+    }
 }

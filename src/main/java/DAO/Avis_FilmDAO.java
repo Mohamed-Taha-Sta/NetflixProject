@@ -13,6 +13,25 @@ import java.sql.SQLException;
 public class Avis_FilmDAO {
     private static final Connection conn = ConxDB.getInstance();
 
+
+    public static boolean Avis_Exist(Film film, User user){
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs;
+        try{
+            sql="Select * from avis_film where ID_USER=? and ID_FILM=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, (int) user.getID());
+            pstmt.setInt(2, (int) film.getId());
+            rs = pstmt.executeQuery();
+            return rs.next();
+        }catch (Exception e){
+            System.out.println("Error searching for avis film");
+            return false;
+        }
+
+    }
+
     public static boolean add_avis(Film film, User user, String avis){
         PreparedStatement pstmt = null;
         String sql;

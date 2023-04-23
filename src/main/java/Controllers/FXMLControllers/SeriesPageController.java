@@ -23,14 +23,12 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.*;
-import static Utils.RepeatableFunction.IconSetter;
 
 public class SeriesPageController implements Initializable {
     public static List<Serie> series;
@@ -152,9 +150,6 @@ public class SeriesPageController implements Initializable {
         }
 
             GenresSelector.getItems().addAll(genreNames);
-
-
-            yearList.add("All");
             YearSelect.getItems().addAll(yearList);
             YearSelect.setValue("All");
 
@@ -163,7 +158,7 @@ public class SeriesPageController implements Initializable {
 
     }
 
-    ObservableList<String> yearList = FXCollections.observableArrayList("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
+    ObservableList<String> yearList = FXCollections.observableArrayList("All","2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
 
     ObservableList<String> genreNames = FXCollections.observableArrayList(
             "Action",

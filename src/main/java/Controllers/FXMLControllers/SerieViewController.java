@@ -50,9 +50,6 @@ public class SerieViewController implements Initializable {
 
     static String path="HomePage";
 
-    public static String getPath() {
-        return path;
-    }
 
     public static void setPath(String path) {
         SerieViewController.path = path;

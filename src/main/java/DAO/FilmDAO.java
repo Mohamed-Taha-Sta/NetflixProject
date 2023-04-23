@@ -428,7 +428,9 @@ public class FilmDAO {
                 while (rs.next()) {
 
                     list= (ArrayList<Film>) FindByID(rs.getLong(1));
+                    System.out.println("Your film list is: " + list);
                     for (int i = 0; i < list.size(); i++) {
+
                         list1.add(list.get(i));
                     }
                 }

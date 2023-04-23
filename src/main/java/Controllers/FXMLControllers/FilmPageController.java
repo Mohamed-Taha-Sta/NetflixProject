@@ -1,83 +1,164 @@
 package Controllers.FXMLControllers;
 
+import Controllers.FilmController;
+import Controllers.SerieController;
+import Entities.Film;
+import Entities.Serie;
+import Utils.DataHolderFilm;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 
-import java.io.File;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.IconSetter;
+import static Utils.RepeatableFunction.ImageClipper;
+import static Utils.RepeatableFunction.ImageSetter;
 
-public class FilmPageController implements Initializable  {
-
-    public TextField searchBar;
-
-
-    public Button homeButton;
-    public Button seriesButoon;
-    public Button filmButton;
-    public Button SearchButton;
-    public CheckComboBox<String> FilmGenresSelector;
-
-
+public class FilmPageController implements Initializable {
     @FXML
-    public void OnHomeClick()throws Exception{
+    public Button homeButton;
+    @FXML
+    public Button seriesButoon;
+    @FXML
+    public Button filmButton;
+    @FXML
+    public Label welcome;
+    @FXML
+    public TextField searchBar;
+    @FXML
+    public Button SearchButton;
+    @FXML
+    public CheckComboBox<String> GenresSelector;
+    @FXML
+    public ComboBox<String> YearSelect;
+    @FXML
+    public VBox FilmsViewer;
+
+    public static List<Film> films;
+
+    public void OnHomeClick() throws Exception {
         HelloApplication.SetRoot("HomePage");
     }
 
-    public void OnSeriesClick()throws Exception{
+    public void OnSeriesClick() throws Exception {
         HelloApplication.SetRoot("SeriesPage");
     }
+
+    public void handleImageClick(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        Film selectedFilm = null;
+        for (Film s : films) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
+                selectedFilm = s;
+                break;
+            }
+        }
+        if (selectedFilm != null) {
+            try {
+                DataHolderFilm.setSelectedFilm(selectedFilm);
+                DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
+                SerieViewController.setPath("SeriesPage");
+                HelloApplication.SetRoot("SerieView");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void ShowSeries(List<Serie> toShow) {
+
+        if (toShow == null || toShow.isEmpty()) {
+            System.out.println("Nothing to show");
+        } else {
+            HBox shelf = new HBox();
+            shelf.setSpacing(20);
+            shelf.setAlignment(Pos.CENTER_LEFT);
+            int counter = 0;
+            for (Serie s : toShow) {
+                ImageView imgView = new ImageView();
+                ImageSetter(imgView, s.getImg().toURI().toString(), 176, 99);
+                ImageClipper(imgView);
+                imgView.setCursor(Cursor.cursor("hand"));
+                imgView.setOnMouseClicked(this::handleImageClick);
+                shelf.getChildren().add(imgView);
+                counter++;
+                if (counter == 6) {
+                    FilmsViewer.getChildren().add(shelf);
+                    shelf = new HBox();
+                    shelf.setSpacing(20);
+                    shelf.setAlignment(Pos.CENTER_LEFT);
+                    counter = 0;
+                }
+
+            }
+            if (counter > 0) {
+                FilmsViewer.getChildren().add(shelf);
+            }
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        PageSetter(FilmGenresSelector, SearchButton, homeButton, seriesButoon, filmButton);
+        GenresSelector.getItems().addAll(genreNames);
+        YearSelect.getItems().addAll(yearList);
+
 
 
     }
 
-    public static void PageSetter(CheckComboBox<String> genresSelector, Button searchButton, Button homeButton, Button seriesButoon, Button filmButton) {
-        ObservableList<String> genreNames = FXCollections.observableArrayList(
-                "Action",
-                "Adventure",
-                "Animation",
-                "Biography",
-                "Comedy",
-                "Crime",
-                "Documentary",
-                "Drama",
-                "Family",
-                "Fantasy",
-                "Film-Noir",
-                "Game-Show",
-                "History",
-                "Horror",
-                "Music",
-                "Musical",
-                "Mystery",
-                "News",
-                "Reality-TV",
-                "Romance",
-                "Sci-Fi",
-                "Sport",
-                "Talk-Show",
-                "Thriller",
-                "War",
-                "Western"
-        );
-        genresSelector.getItems().addAll(genreNames);
-        IconSetter(searchButton,"src/main/resources/Images/HomePage/search.png",20);
-        IconSetter(homeButton,"src/main/resources/Images/HomePage/HomeButton.png",40);
-        IconSetter(seriesButoon,"src/main/resources/Images/HomePage/Series.png",40);
-        IconSetter(filmButton,"src/main/resources/Images/HomePage/Movie.png",40);
-    }
+
+
+
+
+
+    ObservableList<String> yearList = FXCollections.observableArrayList( "All","2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
+
+    ObservableList<String> genreNames = FXCollections.observableArrayList(
+            "Action",
+            "Adventure",
+            "Animation",
+            "Biography",
+            "Comedy",
+            "Crime",
+            "Documentary",
+            "Drama",
+            "Family",
+            "Fantasy",
+            "Film-Noir",
+            "Game-Show",
+            "History",
+            "Horror",
+            "Music",
+            "Musical",
+            "Mystery",
+            "News",
+            "Reality-TV",
+            "Romance",
+            "Sci-Fi",
+            "Sport",
+            "Talk-Show",
+            "Thriller",
+            "War",
+            "Western"
+    );
+
+
+
 }

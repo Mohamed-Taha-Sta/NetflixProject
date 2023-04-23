@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.FilmController;
 import Controllers.SerieController;
+import DAO.FilmDAO;
 import DAO.UserDAO;
 import Entities.Content;
 import Entities.Film;
@@ -193,7 +194,7 @@ public class HomePageController implements Initializable {
         }
 
 //        try {
-//            films= FilmController.getMostRecentFilms(3);
+//            films= FilmController.getMostRecentFilm(3);
 //        }catch (SQLException | IOException e) {
 //            throw new RuntimeException(e);
 //        }
@@ -213,11 +214,11 @@ public class HomePageController implements Initializable {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-//        try {
-//            prefFilms= FilmController.(DataHolder.getUser().getGenreList());
-//        }catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            prefFilms= FilmController.searchFilm(DataHolder.getUser().getGenreList());
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         items.addAll(prefFilms);
         items.addAll(prefSeries);
 
@@ -243,8 +244,9 @@ public class HomePageController implements Initializable {
     public void LoadAllFilms(){
         if(films==null){
             films=new ArrayList<>();
-            films=FilmController.GetAllFilms();
+            films= FilmDAO.GetAllFilms();
             System.out.println("films loaded");
+            System.out.println("Your films are: " +films);
         }
         else {
             System.out.println("films already loaded");

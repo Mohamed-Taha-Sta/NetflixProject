@@ -18,4 +18,7 @@ public class Avis_FilmService {
         return Avis_FilmDAO.affiche_avis(film,user);
     }
 
+    public static boolean Avis_Exist(Film film, User user){
+        return Avis_FilmDAO.Avis_Exist(film,user);
+    }
 }
