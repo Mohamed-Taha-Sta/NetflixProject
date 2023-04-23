@@ -39,7 +39,7 @@ public class SeasonService {
 
 
     public static void main(String[] args) throws SQLException, IOException {
-        System.out.println(StreamAverageScore(new Season(2)));
+        System.out.println(getVotesSeason(new Season(2)));
     }
 
 
@@ -59,16 +59,31 @@ public class SeasonService {
 
 
 
+//    public static long getVotesSeason(Season season) throws SQLException, IOException {
+//
+//        List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
+//
+//        return episodeList.stream()
+//                .map(episode -> episode.getVotes())
+//                .reduce((aLong, aLong2) -> aLong+aLong2)
+//                .get();
+//
+//    }
+
     public static long getVotesSeason(Season season) throws SQLException, IOException {
 
         List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
 
         return episodeList.stream()
-                .map(episode -> episode.getVotes())
+                .map(episode -> ScoreEpisodeController.GetNumberVotesEpisode(episode))
                 .reduce((aLong, aLong2) -> aLong+aLong2)
                 .get();
 
     }
+
+
+
+
 
 
     //    public static long StreamSumViewNumber(List<Episode> episodeList) {

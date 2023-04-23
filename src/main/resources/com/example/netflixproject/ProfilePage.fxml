@@ -86,7 +86,7 @@
                               <Image url="@../../../Images/Password.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="PassBtn" mnemonicParsing="false" onAction="#OnPassbtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Password" textFill="WHITE" />
+                        <Button id="button" fx:id="PassBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnPassbtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Password" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />
@@ -99,7 +99,7 @@
                               <Image url="@../../../Images/LogOut.png" />
                            </image>
                         </ImageView>
-                        <Button id="button" fx:id="LogoutBtn" mnemonicParsing="false" onAction="#OnLogOutBtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="LogOut" textFill="WHITE" />
+                        <Button id="button" fx:id="LogoutBtn" alignment="CENTER" mnemonicParsing="false" onAction="#OnLogOutBtn" prefHeight="35.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="LogOut" textFill="WHITE" />
                      </children>
                      <padding>
                         <Insets left="20.0" />

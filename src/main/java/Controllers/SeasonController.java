@@ -39,7 +39,7 @@ public class SeasonController {
     }
 
 
-    public static Double StreamAverageScore(Season season) throws SQLException, IOException {return SeasonService.StreamAverageScore(season);}
+    public static double StreamAverageScore(Season season) throws SQLException, IOException {return SeasonService.StreamAverageScore(season);}
 
     public static long StreamSumViewNumber(Season season) throws SQLException, IOException {return SeasonService.StreamSumViewNumber(season);}
 

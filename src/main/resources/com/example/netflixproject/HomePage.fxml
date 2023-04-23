@@ -74,7 +74,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_RIGHT" fillHeight="false" spacing="10.0">
                                              <children>
-                                                <Button fx:id="NotificationButton" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+                                                <Button id="MenuBtn" fx:id="NotiBtn" layoutX="10.0" layoutY="23.0" mnemonicParsing="false" onAction="#OnNotification" />
                                                 <ImageView fx:id="ProfileBtn" fitHeight="48.0" fitWidth="48.0" onMouseClicked="#OnProfileClick" pickOnBounds="true" preserveRatio="true">
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
@@ -97,11 +97,11 @@
                               <Insets bottom="8.0" left="8.0" />
                            </padding>
                         </VBox>
-                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
+                        <ScrollPane id="scroll-pane" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" prefHeight="160.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
                           <content>
                               <VBox prefHeight="143.0" prefWidth="674.0" spacing="10.0">
                                  <children>
-                                    <Label id="Category" text="Latest Series And Movies" textFill="WHITE">
+                                    <Label id="Category" text="Latest Releases" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri" size="22.0" />
                                        </font>
@@ -114,7 +114,7 @@
                               <Insets top="50.0" />
                            </VBox.margin>
                         </ScrollPane>
-                        <ScrollPane id="scroll-pane" hbarPolicy="ALWAYS" layoutX="10.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
+                        <ScrollPane id="scroll-pane" hbarPolicy="NEVER" layoutX="10.0" layoutY="225.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="160.0" prefWidth="1174.0" stylesheets="@../../../Style.css" vbarPolicy="NEVER">
                            <content>
                               <VBox spacing="10.0">
                                  <children>
@@ -128,7 +128,7 @@
                               </VBox>
                            </content>
                            <VBox.margin>
-                              <Insets top="50.0" />
+                              <Insets top="30.0" />
                            </VBox.margin>
                         </ScrollPane>
                      </children>

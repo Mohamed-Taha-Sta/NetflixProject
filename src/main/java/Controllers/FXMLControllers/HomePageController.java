@@ -2,11 +2,9 @@ package Controllers.FXMLControllers;
 
 import Controllers.FilmController;
 import Controllers.SerieController;
-import DAO.FilmDAO;
 import DAO.UserDAO;
 import Entities.Content;
 import Entities.Film;
-import Entities.Genre;
 import Entities.Serie;
 import Utils.DataHolder;
 import Utils.DataHolderFilm;
@@ -35,6 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static Controllers.FXMLControllers.ProfilePageController.setNoti;
 import static Utils.RepeatableFunction.*;
 
 public class HomePageController implements Initializable {
@@ -52,10 +51,11 @@ public class HomePageController implements Initializable {
     public Button seriesButoon;
     public Button filmButton;
     public Label welcome;
-    public Button NotificationButton;
+
     public ImageView ProfileBtn;
 
     public HBox PrefrencesViewer;
+    public Button NotiBtn;
 
     public void handleImageClick(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
@@ -92,6 +92,12 @@ public class HomePageController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    @FXML
+    public void OnNotification() throws Exception {
+        setNoti(true);
+        HelloApplication.SetRoot("ProfilePage");
     }
 
     @FXML
@@ -303,7 +309,7 @@ public class HomePageController implements Initializable {
         }
         //Icon Sizes
         final int IV_Size = 40;
-        IconSetter(NotificationButton, "src/main/resources/Images/HomePage/Notification.png", IV_Size);
+        IconSetter(NotiBtn, "src/main/resources/Images/HomePage/Notification.png", IV_Size);
         IconSetter(homeButton, "src/main/resources/Images/HomePage/HomeButton.png", IV_Size);
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", IV_Size);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", IV_Size);

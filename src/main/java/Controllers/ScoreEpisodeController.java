@@ -8,6 +8,9 @@ import Services.ScoreEpisodeService;
 public class ScoreEpisodeController {
 
 
+    public static  double GetEpisodeAvgScore(Episode episode){
+        return ScoreEpisodeService.GetEpisodeAvgScore(episode);
+    }
 
     public static int GetNumberVotesEpisode(Episode episode) {
         return ScoreEpisodeService.GetNumberVotesEpisode(episode);

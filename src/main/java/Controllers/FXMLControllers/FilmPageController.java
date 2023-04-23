@@ -150,6 +150,7 @@ public class FilmPageController implements Initializable {
 
         GenresSelector.getItems().addAll(genreNames);
         YearSelect.getItems().addAll(yearList);
+        YearSelect.setValue("All");
 
         if (films == null || films.isEmpty()) {
             films = new ArrayList<>();

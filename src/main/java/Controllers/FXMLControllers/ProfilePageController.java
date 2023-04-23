@@ -84,6 +84,11 @@ public class ProfilePageController implements Initializable {
     public Label GenreAlertText;
     public Label ActorsAlertText;
 
+    public static boolean noti=false;
+
+    public static void setNoti(boolean noti) {
+        ProfilePageController.noti = noti;
+    }
 
     ObservableList<Actor> actors;
     ObservableList<Genre> genres = GetGenres();
@@ -190,6 +195,7 @@ public class ProfilePageController implements Initializable {
     }
 
     public void OnReturn() throws Exception {
+        setNoti(false);
         HelloApplication.SetRoot("HomePage");
     }
 
@@ -339,6 +345,12 @@ public class ProfilePageController implements Initializable {
             throw new RuntimeException(e);
         }
         TableSetter();
+        if(noti){
+            OnNotibtn();
+        }
+
+
+
 
     }
 

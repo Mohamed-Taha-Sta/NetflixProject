@@ -22,7 +22,7 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="20.0" layoutY="30.0" spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Label text="Tell Us More About Yourself :)">
+            <Label id="Title" text="Tell Us More About Yourself :)">
                <font>
                   <Font size="48.0" />
                </font>
@@ -31,16 +31,16 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
+                        <TextField id="TextFields" fx:id="ActorSearch" disable="true" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css" visible="false">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
                         <Label text="Favourite Actors:">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <TextField id="TextFields" fx:id="ActorSearch" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TextField>
                         <TableView id="Table" fx:id="ActorTable" stylesheets="@../../../Style.css">
                           <columns>
                             <TableColumn fx:id="ActorNameColumn" prefWidth="524.0000419616699" />
@@ -58,16 +58,16 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
+                        <TextField id="TextFields" disable="true" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css" visible="false">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </TextField>
                         <Label text="Favourite Genres:">
                            <font>
                               <Font size="28.0" />
                            </font>
                         </Label>
-                        <TextField id="TextFields" prefHeight="35.0" promptText="Search..." stylesheets="@../../../Style.css">
-                           <VBox.margin>
-                              <Insets />
-                           </VBox.margin>
-                        </TextField>
                         <TableView id="Table" fx:id="GenreTable" stylesheets="@../../../Style.css">
                            <columns>
                               <TableColumn fx:id="GenreColumn" prefWidth="195.2000732421875" />

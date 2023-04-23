@@ -70,11 +70,12 @@ public class ChoicesController implements Initializable {
         }
 
     }
-    ObservableList<Actor> actors;
+    static ObservableList<Actor> actors;
      ObservableList<Genre> genres = GetGenres();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        
         actors= FXCollections.observableList(ActorController.GetAllActors(ActorSearch.getText()));
 
         ActorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
