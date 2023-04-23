@@ -101,6 +101,12 @@ public class Season {
         this.ID=i;
     }
 
+    public Season(long id, String seasonName, long idSerie) {
+        this.ID=id;
+        this.name=seasonName;
+        this.SERIE_ID=idSerie;
+    }
+
     public long getID() {
         return ID;
     }

@@ -136,6 +136,10 @@ public class SerieService {
         return SerieDAO.FindSeriesByActor(act);
     }
 
+    public static List<Serie> streamYear(List<Serie> uniqueSeries,LocalDate localDate) {
+        return uniqueSeries.stream().filter(serie -> serie.getAnnerdesortie().isAfter(localDate))
+                .collect(Collectors.toList());
+    }
 
 
     }

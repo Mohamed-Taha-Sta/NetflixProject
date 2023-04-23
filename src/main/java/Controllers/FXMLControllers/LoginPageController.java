@@ -1,6 +1,7 @@
 package Controllers.FXMLControllers;
 
 import Controllers.ActorController;
+import Controllers.AdminController;
 import Controllers.ProducerController;
 import Controllers.UserController;
 import Utils.DataHolder;
@@ -41,6 +42,11 @@ public class LoginPageController implements Initializable {
             DataHolder.setUserType("Producer");
             System.out.println("Logged as Producer");
             HelloApplication.SetRoot("ProducerLandingPage");
+
+        } else if (AdminController.authenticate(mail.getText(),Password.getText())) {
+            DataHolder.setUserType("Admin");
+            System.out.println("Logged as Admin");
+            HelloApplication.SetRoot("AdminLandingPage");
 
         } else {
             AlertText.setText("Email or password invalid");

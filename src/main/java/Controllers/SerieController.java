@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SerieController {
 
@@ -163,12 +164,7 @@ public class SerieController {
         return SerieService.FindSeriesByActor(act);
     }
 
-
-
-
-
-
-
-
-
+    public static List<Serie> streamYear(List<Serie> uniqueSeries,LocalDate localDate) {
+        return SerieService.streamYear(uniqueSeries,localDate);
+    }
 }

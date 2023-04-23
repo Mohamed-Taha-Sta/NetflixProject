@@ -1,6 +1,7 @@
 package Utils;
 
 import Entities.Actor;
+import Entities.Admin;
 import Entities.Producer;
 import Entities.User;
 
@@ -18,7 +19,25 @@ public  class DataHolder {
     private static User user;
     private static Actor actor;
     private static Producer producer;
+    private static Admin admin;
+    private static String selectedYear;
     private static int EpidodeId;
+
+    public static String getSelectedYear() {
+        return selectedYear;
+    }
+
+    public static void setSelectedYear(String selectedYear) {
+        DataHolder.selectedYear = selectedYear;
+    }
+
+    public static Admin getAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(Admin admin) {
+        DataHolder.admin = admin;
+    }
 
 
     public static Producer getProducer() {

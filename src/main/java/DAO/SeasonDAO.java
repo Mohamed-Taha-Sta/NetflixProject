@@ -118,6 +118,34 @@ public class SeasonDAO {
 
     }
 
+    public static List<Season> GetAllSeasons() throws SQLException, IOException {
+
+
+        Season season = null;
+
+        List<Season> SeasonList = new ArrayList<>();
+
+        String sql = "SELECT * FROM SEASON";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // Retrieve the values from the ResultSet and store them in variables
+            long ID = rs.getLong("ID");
+            String SeasonName = rs.getString("NAME");
+            long ID_SERIE = rs.getLong("ID_SERIE");
+            season = new Season(ID,SeasonName,ID_SERIE);
+            SeasonList.add(season);
+        }
+        rs.close();
+        return SeasonList;
+
+
+    }
+
+
     public static List<Season> FindSeasonID(long ID) throws SQLException, IOException {
 
         Season season = null;

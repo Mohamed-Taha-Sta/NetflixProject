@@ -130,8 +130,15 @@ public class SeasonService {
         return SeasonDAO.modifdescription(season,description);
     }
 
+    public static List<Season> GetAllSeasons() throws SQLException, IOException {
+        return SeasonDAO.GetAllSeasons();
+    }
 
-
+    public static long StreamSpecificSeasons(long SerieID) throws SQLException, IOException {
+        return GetAllSeasons().stream()
+                .filter(season -> season.getSERIE_ID()==SerieID)
+                .count();
+    }
 
 
 

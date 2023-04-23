@@ -1,6 +1,7 @@
 package Controllers.FXMLControllers;
 
 import Controllers.EpisodeController;
+import Controllers.ScoreEpisodeController;
 import Utils.DataHolderEpisode;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
@@ -193,12 +194,7 @@ public class ProducerEpisodeViewController implements Initializable {
         IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
 
         Title.setText(DataHolderEpisode.getSelectedEpisode().getName());
-        try {
-            RatingLabel.setText(String.valueOf(EpisodeController.getScoreEpisode(DataHolderEpisode.getSelectedEpisode())+"%"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+        RatingLabel.setText(Math.round(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode()))+"%");
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
         PremiereDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getPremiereDate().toString());
         Old_Description.setText(DataHolderEpisode.getSelectedEpisode().getDescription());

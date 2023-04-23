@@ -71,22 +71,25 @@ public class SeasonController {
         return SeasonService.modifnom(season,nom);
     }
 
-
     public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
         return SeasonService.modifAnnerdesoritie(season,date);
     }
-
 
     public static boolean modifdescription(Season season,String description) throws SQLException {
         return SeasonService.modifdescription(season,description);
     }
 
+    public static List<Season> GetAllSeasons() throws SQLException, IOException {
+        return SeasonService.GetAllSeasons();
+    }
+
+    public static long StreamSpecificSeasons(long SerieID) throws SQLException, IOException {
+        return SeasonService.StreamSpecificSeasons(SerieID);
+    }
 
 
 
 
 
 
-
-
-}
+    }
