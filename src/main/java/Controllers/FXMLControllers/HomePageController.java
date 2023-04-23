@@ -59,28 +59,33 @@ public class HomePageController implements Initializable {
 
     public void handleImageClick(MouseEvent event) {
         ImageView imageView = (ImageView) event.getSource();
-        Content selectedContent = null;
-        for (Content content : items) {
-            if (imageView.getImage().getUrl().equals(String.valueOf(content.getImg().toURI()))) {
-                selectedContent = content;
+        Serie selectedSerie = null;
+        Film selectedFilm = null;
+        for (Serie s : series) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
+                selectedSerie = s;
                 break;
             }
         }
-        if (selectedContent instanceof Serie) {
+
+        for (Film s : films) {
+            if (imageView.getImage().getUrl().equals(String.valueOf(s.getImg().toURI()))) {
+                selectedFilm = s;
+                break;
+            }
+        }
+        if (selectedSerie != null) {
             try {
-                DataHolderSeries.setSelectedSeries((Serie) selectedContent);
+                DataHolderSeries.setSelectedSeries(selectedSerie);
                 DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeries.getSelectedSeries().getId()).get(0));
-                SerieViewController.setPath("HomePage");
                 HelloApplication.SetRoot("SerieView");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        } else if (selectedContent instanceof Film) {
+        } else if (selectedFilm != null) {
             try {
-                DataHolderFilm.setSelectedFilm((Film) selectedContent);
-                System.out.println("Selectedcontent: "+selectedContent);
-                System.out.println("SelectedFilm id" + ((Film) selectedContent).getId());
-                System.out.println("Selectedcontent film: "+DataHolderFilm.getSelectedFilm());
+                DataHolderFilm.setSelectedFilm(selectedFilm);
+                System.out.println(selectedFilm);
                 DataHolderFilm.setSelectedFilm(FilmController.FindByID(DataHolderFilm.getSelectedFilm().getId()).get(0));
                 HelloApplication.SetRoot("FilmView");
             } catch (Exception e) {
@@ -190,7 +195,7 @@ public class HomePageController implements Initializable {
         }
 
         try {
-            films= FilmController.getMostRecentFilm(3);
+            latestFilms= FilmController.getMostRecentFilm(3);
         }catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -238,11 +243,10 @@ public class HomePageController implements Initializable {
     }
 
     public void LoadAllFilms(){
-        if(films==null){
-            films=new ArrayList<>();
-            films= FilmDAO.GetAllFilms();
-            System.out.println("films loaded");
-            System.out.println("Your films are: " +films);
+        if (films == null || films.isEmpty()) {
+            films = new ArrayList<>();
+            films = FilmController.GetAllFilms();
+            System.out.println("Films: " +films);
         }
         else {
             System.out.println("films already loaded");

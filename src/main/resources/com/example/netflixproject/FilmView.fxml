@@ -31,11 +31,11 @@
                         </ImageView>
                         <VBox alignment="CENTER" spacing="20.0">
                             <children>
-                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnBack" />
-                                <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
+                                  <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false"  />
+                                <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false"  />
                         <VBox alignment="CENTER">
                            <children>
-                                      <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" onAction="#OnFilmClick" />
+                                      <Button id="MenuBtn" fx:id="filmButton" mnemonicParsing="false" />
                                         <Circle fill="WHITE" radius="6.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </VBox>
@@ -55,7 +55,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" spacing="10.0">
                                  <children>
-                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false" onAction="#OnBack" stylesheets="@../../../Style.css" />
+                                    <Button id="MenuBtn" fx:id="BackBtn" mnemonicParsing="false"  stylesheets="@../../../Style.css" />
                                     <ImageView fx:id="Thumbnail" fitHeight="135.0" fitWidth="240.0" pickOnBounds="true" preserveRatio="true">
                                        <HBox.margin>
                                           <Insets bottom="10.0" top="10.0" />
@@ -73,7 +73,7 @@
                                     </VBox>
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
-                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                           <HBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Button fx:id="thumbUp" mnemonicParsing="false" text="Button" />
@@ -118,9 +118,9 @@
                                     <TextArea fx:id="FilmOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here.." wrapText="true" />
                                     <VBox alignment="TOP_CENTER" spacing="10.0">
                                        <children>
-                                          <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
-                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSave" text="Save" />
-                                          <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
+                                          <Button fx:id="EditBtn" mnemonicParsing="false"  text="Edit" />
+                                          <Button fx:id="SaveBtn" mnemonicParsing="false"  text="Save" />
+                                          <Button fx:id="DeleteBtn" mnemonicParsing="false"  text="Delete" />
                                        </children>
                                     </VBox>
                                  </children>
