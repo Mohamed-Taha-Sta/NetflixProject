@@ -183,4 +183,8 @@ public class FilmController {
     public static List<Film> getMostRecentFilm(int numSeries) throws SQLException, IOException{
         return FilmService.getMostRecentFilm(numSeries);
     }
-}
+    public static Long getscorepourcantage(Film film) {
+        return FilmService.getscorepourcantage(film);
+    }
+
+    }

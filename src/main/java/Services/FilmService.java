@@ -46,4 +46,12 @@ public class FilmService {
     public static List<Film> getMostRecentFilm(int numSeries) throws SQLException, IOException{
         return FilmDAO.getMostRecentFilm(numSeries);
     }
+
+    public static Long getscorepourcantage(Film film){
+        Long socore=film.getScore();
+        Long votesTotal=film.getVotes();
+        return((socore*100)/votesTotal);
+    }
+
+
 }

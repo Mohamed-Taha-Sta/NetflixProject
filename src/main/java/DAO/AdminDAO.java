@@ -3,6 +3,7 @@ package DAO;
 import Entities.Admin;
 import Entities.Episode;
 import Entities.Film;
+import Services.FilmService;
 import Utils.ConxDB;
 
 import java.sql.Connection;
@@ -112,7 +113,7 @@ public class AdminDAO {
         return FilmDAO.getscore(film);
     }
     public static Long consult_score_filmpourcentage(Film film) {
-        return FilmDAO.getscorepourcantage(film);
+        return FilmService.getscorepourcantage(film);
     }
     public static Long consult_vote_film(Film film) {
         return FilmDAO.getvote(film);

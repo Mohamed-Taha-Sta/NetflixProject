@@ -36,11 +36,9 @@ public class ActorFilmViewController implements Initializable {
 
         FilmTitle.setText(DataHolderFilm.getSelectedFilm().getNom());
 
-
         //MAKE SURE POURCENTAGE
 
-
-        ScoreLabel.setText(DataHolderFilm.getSelectedFilm().getScore()+"%");
+        ScoreLabel.setText(FilmController.getscorepourcantage(DataHolderFilm.getSelectedFilm())+"%");
 
         DebutDateLabel.setText(DataHolderFilm.getSelectedFilm().getAnnerdesortie().toString());
 

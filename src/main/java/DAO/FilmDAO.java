@@ -626,24 +626,6 @@ public class FilmDAO {
 
     }
 
-    public static Long getscorepourcantage(Film film){
-        Long socore=getscore(film);
-        Long votesTotal=getvote(film);
-        return((socore*100)/votesTotal);
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
     public static boolean modifnom(Film film,String nom) {
         PreparedStatement pstmt;
         ResultSet rs;
