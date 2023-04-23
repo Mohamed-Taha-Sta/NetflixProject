@@ -60,22 +60,23 @@ public class ActorSeasonViewController implements Initializable {
 
         EpisodeName.setCellValueFactory(new PropertyValueFactory<>("name")); //Try name
 
+        System.out.println("the state of 1"+episodeOBList);
 
         if (DataHolderEpisode.getEpisodeOBList()==null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
-
+            System.out.println("the state of 2"+episodeOBList);
             List<Episode> episodeList = null;
             try {
                 episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
                 episodeOBList = FXCollections.observableArrayList(episodeList);
                 DataHolderEpisode.setEpisodeOBList(episodeOBList);
-                EpisodesTable.setItems(episodeOBList);
             } catch (Exception e) {
 //                e.printStackTrace();
                 System.out.println("No Episodes in seasons Passing");
                 EpisodesTable.setItems(null);
             }
-
         }
+        EpisodesTable.setItems(episodeOBList);
+
 
         opinionList.setPlaceholder(new Label("No opinions for this season"));
 

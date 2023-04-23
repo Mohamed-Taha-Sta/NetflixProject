@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.Avis_EpisodeController;
 import Controllers.Avis_SaisonController;
+import Controllers.EpisodeController;
 import Controllers.SeasonController;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
@@ -26,6 +27,8 @@ public class ActorEpisodeViewController implements Initializable {
     public Label DebutDateLabel;
 
     public void onBack(ActionEvent actionEvent) throws Exception {
+        DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(DataHolderEpisode.getSelectedEpisode().getSeasonParentID()).get(0));
+//        DataHolderEpisode.setEpisodeOBList(SeasonController.FindEpisodeSeasonID());
         DataHolderEpisode.setSelectedEpisode(null);
         HelloApplication.SetRoot("ActorSeasonView");
     }
