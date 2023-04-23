@@ -119,6 +119,9 @@ public class SerieService {
     public static List<Serie> getMostRecentSeries(int numSeries) throws SQLException, IOException {
         return SerieDAO.getMostRecentSeries(numSeries);
     }
+    public static List<Serie> FindSeriesByActor(Actor act) {
+        return SerieDAO.FindSeriesByActor(act);
+    }
 
 
 

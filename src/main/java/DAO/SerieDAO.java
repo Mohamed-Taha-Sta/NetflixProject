@@ -1223,4 +1223,75 @@ public class SerieDAO {
             }
         return serieList;
     }
+
+    public static List<Serie> FindSeriesByActor(Actor act) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Serie> serieList=new ArrayList<>();
+        long idact= act.getID();
+        String sql;
+        try {
+            try{sql = "SELECT ID_SERIE FROM SerieActorSupp WHERE id_act = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setLong(1,idact);
+                rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+                    serieList.add(GetSerieByID(rs.getLong(1)).get(0));
+                }
+
+            }catch (Exception e){
+                System.out.println("Error Retrieving as Supporting Actor");
+            }
+
+            try{ sql = "SELECT ID_SERIE FROM SerieActorPrinc WHERE id_act = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setLong(1,idact);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    serieList.add(GetSerieByID(rs.getLong(1)).get(0));
+                }
+
+            }catch (Exception e){
+                System.out.println("Error Retrieving as Main Actor");
+            }
+
+
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return serieList;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

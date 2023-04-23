@@ -1,6 +1,7 @@
 package Utils;
 
 import Entities.Season;
+import javafx.collections.ObservableList;
 import javafx.scene.control.DatePicker;
 
 import java.io.File;
@@ -17,6 +18,15 @@ public class DataHolderSeason {
     private static LocalDate DebutDate;
     private static File Thumbnail;
     private static File Synopsis;
+    private static ObservableList<Season> seasonObservableList;
+
+    public static ObservableList<Season> getSeasonObservableList() {
+        return seasonObservableList;
+    }
+
+    public static void setSeasonObservableList(ObservableList<Season> seasonObservableList) {
+        DataHolderSeason.seasonObservableList = seasonObservableList;
+    }
 
     public static String getName() {return Name;}
 

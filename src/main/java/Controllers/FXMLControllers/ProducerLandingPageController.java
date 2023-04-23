@@ -3,7 +3,6 @@ package Controllers.FXMLControllers;
 import Controllers.FilmController;
 import Controllers.ProducerController;
 import Controllers.SerieController;
-import Controllers.UserController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
@@ -21,15 +20,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import static javafx.collections.FXCollections.observableArrayList;
-import static javafx.collections.FXCollections.singletonObservableList;
 
 public class ProducerLandingPageController implements Initializable {
 
@@ -201,8 +196,6 @@ public class ProducerLandingPageController implements Initializable {
         NameLabel.setText(DataHolder.getProducer().getNom());
         PrenameLable.setText(DataHolder.getProducer().getPrenom());
         MailLabel.setText(DataHolder.getProducer().getEmail());
-
-
     }
 
 
@@ -222,7 +215,6 @@ public class ProducerLandingPageController implements Initializable {
 
         if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
 
-            System.out.println("Salem Series");
             List<Serie> seriesList = null;
             try {
                 seriesList = SerieController.GetSeriesByProducer(DataHolder.getProducer());
@@ -238,7 +230,6 @@ public class ProducerLandingPageController implements Initializable {
         }
 
         if (DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
-            System.out.println("Salem Film");
 
             List<Film> filmList = null;
             filmList = FilmController.FindByproducer(DataHolder.getProducer());

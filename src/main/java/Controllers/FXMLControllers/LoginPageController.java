@@ -36,7 +36,7 @@ public class LoginPageController implements Initializable {
         } else if (ActorController.authenticate(mail.getText(),Password.getText())) {
             DataHolder.setUserType("Actor");
             System.out.println("Logged as Actor");
-//            HelloApplication.SetRoot("ActorDashboard");
+            HelloApplication.SetRoot("ActorLandingPage");
         } else if (ProducerController.authenticate(mail.getText(),Password.getText())) {
             DataHolder.setUserType("Producer");
             System.out.println("Logged as Producer");

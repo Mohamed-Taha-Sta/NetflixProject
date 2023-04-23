@@ -19,4 +19,20 @@ public class ActorService {
     }
 
 
-}
+    public static void modifnom(Long id,String nom) {
+        ActorDAO.modifnom(id,nom);
+    }
+
+    public static void modifprenom(Long id,String prenom) {
+        ActorDAO.modifprenom(id,prenom);
+    }
+
+    public static void modifmail(Long id,String mail) {
+        ActorDAO.modifmail(id,mail);
+    }
+
+    public static void modifpassword(Long id,String password) {
+        ActorDAO.modifpassword(id,password);
+    }
+
+    }

@@ -159,6 +159,11 @@ public class SerieController {
         return SerieService.GetSerieByID(ID);
     }
 
+    public static List<Serie> FindSeriesByActor(Actor act) {
+        return SerieService.FindSeriesByActor(act);
+    }
+
+
 
 
 

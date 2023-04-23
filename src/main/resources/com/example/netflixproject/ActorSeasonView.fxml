@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.ActorSeasonViewController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" layoutX="14.0" layoutY="14.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="564.0" prefWidth="1098.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
+               <padding>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </padding>
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="637.0" prefWidth="1167.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 20;">
+                     <padding>
+                        <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="518.0" prefWidth="965.0">
+                           <children>
+                              <HBox prefHeight="71.0" prefWidth="992.0">
+                                 <children>
+                                    <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#onBack" prefHeight="37.0" prefWidth="39.0" style="-fx-border-radius: 30px; -fx-background-radius: 30px;" stylesheets="@../../../Style.css" text="&lt;" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font name="Calibri Bold" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="3.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="45.0" prefWidth="289.0" text="Season Overview:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Calibri Bold" size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="495.0" prefWidth="992.0">
+                                 <children>
+                                    <VBox prefHeight="471.0" prefWidth="498.0" spacing="15.0">
+                                       <children>
+                                          <HBox prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="82.0" text="Title:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="SeasonTitle" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="41.0" prefWidth="327.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" top="30.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="10.0" prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="218.0" text="Overall Score:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="ScoreLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="44.0" prefWidth="233.0" text="label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <HBox layoutX="10.0" layoutY="72.0" prefHeight="47.0" prefWidth="517.0">
+                                             <children>
+                                                <Label contentDisplay="RIGHT" prefHeight="45.0" prefWidth="203.0" text="Debut Date:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="DebutDateLabel" alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="44.0" prefWidth="246.0" text="label" textFill="WHITE" wrapText="true">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="36.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets top="3.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets left="40.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                    <ListView fx:id="opinionList" prefHeight="443.0" prefWidth="356.0" stylesheets="@../../../Style.css" />
+                                    <TableView fx:id="EpisodesTable" onMouseClicked="#OnClickEpisode" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../Style.css">
+                                      <columns>
+                                        <TableColumn fx:id="EpisodeName" editable="false" prefWidth="179.0" text="Episodes" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

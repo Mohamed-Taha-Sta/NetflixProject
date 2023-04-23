@@ -1,13 +1,13 @@
 package Utils;
 
 import Entities.Episode;
+import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.time.LocalDate;
 
 public class DataHolderEpisode {
 
-    private static Episode selectedEpisode;
     private static long IDEpisode;
     private static long SeasonID;
     private static String Name;
@@ -21,6 +21,23 @@ public class DataHolderEpisode {
 
     private static LocalDate DebutDate;
     private static String Description;
+    private static ObservableList<Episode> episodeOBList;
+
+    public static long getSeasonID() {
+        return SeasonID;
+    }
+
+    public static void setSeasonID(long seasonID) {
+        SeasonID = seasonID;
+    }
+
+    public static ObservableList<Episode> getEpisodeOBList() {
+        return episodeOBList;
+    }
+
+    public static void setEpisodeOBList(ObservableList<Episode> episodeOBList) {
+        DataHolderEpisode.episodeOBList = episodeOBList;
+    }
 
     public static String getName() {
         return Name;

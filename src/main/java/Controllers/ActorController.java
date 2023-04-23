@@ -21,4 +21,20 @@ public class ActorController {
     }
 
 
+    public static void modifnom(Long id,String nom) {
+        ActorService.modifnom(id,nom);
+    }
+
+    public static void modifprenom(Long id,String prenom) {
+        ActorService.modifprenom(id,prenom);
+    }
+
+    public static void modifmail(Long id,String mail) {
+        ActorService.modifmail(id,mail);
+    }
+
+    public static void modifpassword(Long id,String password) {
+        ActorService.modifpassword(id,password);
+    }
+
 }
