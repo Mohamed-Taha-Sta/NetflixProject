@@ -1,10 +1,8 @@
 package Controllers.FXMLControllers;
 
-import Controllers.SeasonController;
+import Controllers.*;
+import Entities.Season;
 import javafx.event.EventHandler;
-import Controllers.AdminController;
-import Controllers.FilmController;
-import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.DataHolder;
@@ -53,8 +51,9 @@ public class AdminLandingPageController implements Initializable {
     public TableColumn<Film,String> MovieScore;
     public Label NameLabel;
     public TableView<Serie> SeriesTable = new TableView<>();
-    public TableColumn<Film,String> SeriesName;
-    public TableColumn<Film,String> numSaisons;
+    public TableColumn<Serie,String> SeriesName;
+    public TableColumn<Serie,String> numSaisons;
+    public TableColumn <Serie,String> numEp;
     public Label SeriesAlertText;
     public Button AddMovie;
     public Button AddSeries;
@@ -67,7 +66,6 @@ public class AdminLandingPageController implements Initializable {
     public Label MovieAlertText;
 
     private static Set<Serie> serieSetAll = GetSeriesContainer();
-
 
 
     public void OnProfilebtn(ActionEvent actionEvent) {
@@ -154,20 +152,6 @@ public class AdminLandingPageController implements Initializable {
     }
 
 
-    public void OnClickMovie(MouseEvent mouseEvent) throws Exception {
-        Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
-        if (selectedMovie == null)
-        {
-            showMessage(MovieAlertText,"No movie was selected");
-        }
-        else
-        {
-            DataHolderFilm.setSelectedFilm(selectedMovie);
-            HelloApplication.SetRoot("AdminFilmView");
-        }
-    }
-
-
     public void OnClickSeries() throws Exception {
 
         Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
@@ -237,6 +221,7 @@ public class AdminLandingPageController implements Initializable {
 
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         numSaisons.setCellValueFactory(new PropertyValueFactory<>("SeasonNumber"));
+        numEp.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
 
 
         if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
@@ -245,6 +230,9 @@ public class AdminLandingPageController implements Initializable {
             {
                 try {
                     serie.setSeasonNumber(SeasonController.StreamSpecificSeasons(serie.getId()));
+                    List<Season> listSeason = SeasonController.FindSeasonSerieID(serie.getId());
+                    for(Season season: listSeason)
+                        serie.setEpisodeNumber(EpisodeController.StreamSpecificEpisodes(season.getID()));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {

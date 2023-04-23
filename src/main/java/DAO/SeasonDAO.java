@@ -141,8 +141,6 @@ public class SeasonDAO {
         }
         rs.close();
         return SeasonList;
-
-
     }
 
 
@@ -399,15 +397,6 @@ public class SeasonDAO {
             return false;
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 //

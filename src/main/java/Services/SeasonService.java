@@ -157,6 +157,14 @@ public class SeasonService {
 
 
 
+    public static List<Season> StreamSpecificSeasonsPremiereDate(long SerieID) throws SQLException, IOException {
+        return GetAllSeasons().stream()
+                .filter(season -> season.getSERIE_ID()==SerieID)
+                .collect(Collectors.toList());
+    }
+
+
+
 
 
     }

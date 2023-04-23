@@ -8,12 +8,13 @@ public class Serie extends Content{
     private long SeasonNumber;
     private long ID_PROD;
     private File synopsis;
+    private long EpisodeNumber;
     private List<Season> seasonList;
     private List<Actor> actorList;
     private List<Long> IDMainactorList;
     private List<Long> IDSuppactorList;
 
-    public Serie(long id,long ID_PROD, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
+    public Serie(long id, long ID_PROD, String nom, String Description, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, long seasonNumber, File synopsis, List<Season> seasonList, List<Actor> actorList) {
         super(id, nom, Description, annerdesortie, langue, paysorigine, listegenre, img);
         SeasonNumber = seasonNumber;
         this.synopsis = synopsis;
@@ -110,6 +111,14 @@ public class Serie extends Content{
         this.ID_PROD = ID_PROD;
     }
 
+
+    public long getEpisodeNumber() {
+        return EpisodeNumber;
+    }
+
+    public void setEpisodeNumber(long episodeNumber) {
+        EpisodeNumber = episodeNumber;
+    }
 
     public Serie() {
     }

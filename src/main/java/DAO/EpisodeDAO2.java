@@ -180,6 +180,60 @@ public class EpisodeDAO2 {
         return episodeList;
     }
 
+    public static List<Episode> GetAllEpisodes() throws SQLException, IOException {
+
+
+        Episode episode = null;
+
+        List<Episode> episodeList = new ArrayList<>();
+
+        String sql = "SELECT * FROM EPISODES";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // Retrieve the values from the ResultSet and store them in variables
+            long ID = rs.getLong("ID");
+            String EpsisodeName = rs.getString("NAME");
+            long SEASON_ID = rs.getLong("SEASON_ID");
+            episode = new Episode(ID,EpsisodeName,SEASON_ID);
+            episodeList.add(episode);
+        }
+        rs.close();
+        return episodeList;
+    }
+
+
+
+    public static List<Episode> GetAllEpisodesPremiereDate() throws SQLException, IOException {
+
+        Episode episode = null;
+
+        List<Episode> episodeList = new ArrayList<>();
+
+        String sql = "SELECT * FROM EPISODES";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // Retrieve the values from the ResultSet and store them in variables
+            long ID = rs.getLong("ID");
+            String EpsisodeName = rs.getString("NAME");
+            long SEASON_ID = rs.getLong("SEASON_ID");
+            episode = new Episode(ID,EpsisodeName,SEASON_ID);
+            episodeList.add(episode);
+        }
+        rs.close();
+        return episodeList;
+    }
+
+
+
+
     public static List<Episode> FindEpisodeName(String EpisodeName) throws SQLException, IOException {
 
         List<Episode> episodeList = new ArrayList<>();

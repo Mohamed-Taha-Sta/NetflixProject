@@ -136,9 +136,7 @@ public class EpisodeController {
     }
 
 
-
-
-
-
-
+    public static long StreamSpecificEpisodes(long id) throws SQLException, IOException {
+        return EpisodeService.StreamSpecificEpisodes(id);
+    }
 }

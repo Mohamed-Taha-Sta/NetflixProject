@@ -22,6 +22,12 @@ public class Episode {
     private long Score;
     private long Votes;
 
+    public Episode(long id, String epsisodeName, long seasonId) {
+        this.ID = id;
+        this.Name = epsisodeName;
+        this.SeasonParentID = seasonId;
+    }
+
     @Override
     public String toString() {
         return "\nEpisode{" +

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EpisodeService {
 
@@ -81,7 +82,22 @@ public class EpisodeService {
     public static boolean modifDescription(Episode episode,String description) throws SQLException {
         return EpisodeDAO2.modifDescription(episode,description);
     }
+    public static List<Episode> GetAllEpisodes() throws SQLException, IOException {
+        return EpisodeDAO2.GetAllEpisodes();
+    }
 
+    public static List<Episode> GetAllEpisodesPremiereDate() throws SQLException, IOException {
+        return EpisodeDAO2.GetAllEpisodesPremiereDate();
+    }
 
-
+    public static long StreamSpecificEpisodes(long id) throws SQLException, IOException {
+        return GetAllEpisodes().stream()
+                .filter(episode -> episode.getSeasonParentID()==id)
+                .count();
+    }
+    public static List<Episode> StreamSpecificEpisodesPremiereDate(long id) throws SQLException, IOException {
+        return GetAllEpisodesPremiereDate().stream()
+                .filter(episode -> episode.getSeasonParentID()==id)
+                .collect(Collectors.toList());
+    }
 }
