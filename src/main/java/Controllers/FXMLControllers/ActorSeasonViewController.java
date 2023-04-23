@@ -33,16 +33,20 @@ public class ActorSeasonViewController implements Initializable {
 
 
     public void onBack(ActionEvent actionEvent) throws Exception {
-        DataHolderSeason.setSelectedSeason(null);
-        DataHolderSeason.setSeasonObservableList(null);
+        DataHolderEpisode.setEpisodeOBList(null);
+        DataHolderEpisode.setSelectedEpisode(null);
         HelloApplication.SetRoot("ActorSeriesView");
     }
 
     public void OnClickEpisode() throws Exception {
 
         Episode selectedEpisodes = EpisodesTable.getSelectionModel().getSelectedItem();
-        if (selectedEpisodes != null)
+        if (selectedEpisodes == null)
         {
+            System.out.println("Episode selected is null");
+        } else
+        {
+            System.out.println("Selected Episode");
             DataHolderEpisode.setSelectedEpisode(EpisodeController.FindEpisodeID(selectedEpisodes.getID()).get(0));
             HelloApplication.SetRoot("ActorEpisodeView");
         }
@@ -54,25 +58,24 @@ public class ActorSeasonViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        EpisodeName.setCellValueFactory(new PropertyValueFactory<>("Name")); //Try name
+        EpisodeName.setCellValueFactory(new PropertyValueFactory<>("name")); //Try name
 
 
         if (DataHolderEpisode.getEpisodeOBList()==null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
 
             List<Episode> episodeList = null;
             try {
-                episodeList = EpisodeController.FindEpisodeID(DataHolderEpisode.getSelectedEpisode().getID());
+                episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
                 episodeOBList = FXCollections.observableArrayList(episodeList);
                 DataHolderEpisode.setEpisodeOBList(episodeOBList);
+                EpisodesTable.setItems(episodeOBList);
             } catch (Exception e) {
-                System.out.println("passing");
+//                e.printStackTrace();
+                System.out.println("No Episodes in seasons Passing");
+                EpisodesTable.setItems(null);
             }
 
         }
-
-        EpisodesTable.setItems(episodeOBList);
-
-
 
         opinionList.setPlaceholder(new Label("No opinions for this season"));
 

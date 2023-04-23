@@ -35,6 +35,8 @@ public class ActorSeriesViewController implements Initializable {
 
     public void onBack(ActionEvent actionEvent) throws Exception {
         DataHolderSeries.setSelectedSeries(null);
+        DataHolderSeason.setSeasonObservableList(null);
+        DataHolderSeason.setSelectedSeason(null);
         HelloApplication.SetRoot("ActorLandingPage");
     }
 

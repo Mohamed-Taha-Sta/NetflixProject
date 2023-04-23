@@ -116,7 +116,7 @@
                                     <ListView fx:id="opinionList" prefHeight="471.0" prefWidth="412.0" stylesheets="@../../../Style.css" />
                                     <TableView fx:id="SeasonTable" onMouseClicked="#OnClickSeason" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../../Style.css">
                                       <columns>
-                                        <TableColumn fx:id="SeasonName" editable="false" prefWidth="162.0" text="Seasons" />
+                                        <TableColumn fx:id="SeasonName" editable="false" prefWidth="159.0" text="Seasons" />
                                       </columns>
                                     </TableView>
                                  </children>

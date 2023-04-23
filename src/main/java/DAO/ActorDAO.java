@@ -229,14 +229,14 @@ public class ActorDAO {
     public static void modifprenom(Long id,String prenom){
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE ACTOR SET prenom = '"+prenom+"' WHERE id_act = "+id;
+        String sql = "UPDATE ACTOR SET prenome = '"+prenom+"' WHERE id_act = "+id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
     public static void modifmail(Long id,String mail){
@@ -249,6 +249,7 @@ public class ActorDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         }catch (Exception e){
+            System.out.println("ActorDAO Error");
 
         }
     }
@@ -262,6 +263,7 @@ public class ActorDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
         }catch (Exception e){
+            System.out.println("ActorDAO Error");
 
         }
     }
