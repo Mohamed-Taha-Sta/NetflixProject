@@ -138,7 +138,7 @@ public class ScoreEpisodeDAO {
     public static int GetNumberVotesEpisode(Episode episode) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         int count = 0;
 
         try {
@@ -151,6 +151,17 @@ public class ScoreEpisodeDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return count;

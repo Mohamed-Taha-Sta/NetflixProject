@@ -39,7 +39,11 @@ import static Utils.RepeatableFunction.*;
 public class HomePageController implements Initializable {
 
     public static List<Content> latestStuff ;
-    static List<Serie> series;
+    public static List<Serie> series;
+
+    public static List<Serie> getSeries() {
+        return series;
+    }
 
     static List<Film> films;
     static List<Content> sFByGENRE;
@@ -99,6 +103,7 @@ public class HomePageController implements Initializable {
         setNoti(true);
         HelloApplication.SetRoot("ProfilePage");
     }
+
 
     @FXML
     public void OnProfileClick() throws Exception {

@@ -88,7 +88,9 @@ public class SeasonController {
     }
 
 
-
+    public static List<Season> StreamSpecificSeasonsPremiereDate(long SerieID) throws SQLException, IOException{
+        return SeasonService.StreamSpecificSeasonsPremiereDate(SerieID);
+    }
 
 
 

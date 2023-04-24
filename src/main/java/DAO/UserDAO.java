@@ -24,33 +24,29 @@ public class UserDAO {
     private static final Connection conn = ConxDB.getInstance();
 
     public static boolean check_Mail(String mail) {
-        PreparedStatement pstmt;
-        String sql;
-        ResultSet rs;
-        try {
-            sql = "SELECT * FROM Utilisateurs where MAIL=?";
-            pstmt = conn.prepareStatement(sql);
+        String sql = "SELECT * FROM Utilisateurs where MAIL=?";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, mail);
-            rs = pstmt.executeQuery();
-            if (!rs.next()) {
-                System.out.println("its unique");
-                return true;
-            } else {
-                System.out.println("its not unique");
-                return false;
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (!rs.next()) {
+                    System.out.println("its unique");
+                    return true;
+                } else {
+                    System.out.println("its not unique");
+                    return false;
+                }
             }
         } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }
-
     }
 
-    public static boolean authenticate(String mail, String pass) {
-        PreparedStatement pstmt;
-        String sql;
-        ResultSet rs;
 
+    public static boolean authenticate(String mail, String pass) {
+        PreparedStatement pstmt = null;
+        String sql;
+        ResultSet rs = null;
 
         try {
             sql = "SELECT * FROM Utilisateurs WHERE MAIL=? AND password =?";
@@ -95,13 +91,25 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("Error authenticating user: " + e.toString());
             return false;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
     }
 
+
     public static int ajout_User(User user) {
-        PreparedStatement pstmt;
+        PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         int newID = -1;
         LocalDate today = LocalDate.now();
 
@@ -138,12 +146,28 @@ public class UserDAO {
             pstmt.executeUpdate();
             authenticate(user.getMail(), user.getPassword());
             System.out.println("exucuted correctly");
-            return newID;
         } catch (Exception e) {
             System.out.println(e.toString());
-            return newID;
+            newID = -1;
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+        return newID;
     }
+
 
     public static boolean changeName(String newName) {
         PreparedStatement pstmt;
@@ -299,11 +323,13 @@ public class UserDAO {
     }
 
     public static void retrieve_Image(int userId) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try {
             String sql = "SELECT image FROM Utilisateurs WHERE id=?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
+            rs = pstmt.executeQuery();
             if (rs.next()) {
                 Blob blob = rs.getBlob("image");
                 InputStream inputStream = blob.getBinaryStream();
@@ -314,48 +340,24 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    public static boolean votepositivefilm(Film film) {
-        return FilmDAO.UpdatePositiveScoreFilm(film);
-    }
-
-    public static boolean votenegativefilm(Film film) {
-        return FilmDAO.UpdatenegativeScoreFilm(film);
-    }
-
-    public static boolean regarderfilm(Film film) {
-        return FilmDAO.UpdatevuenbrFilm(film);
-    }
-
-    public static boolean votepositiveepisode(Episode ep) {
-        try {
-            return EpisodeDAO2.UpdatePositiveScoreEpisode(ep);
-        } catch (SQLException E) {
-            System.out.println("error dans la connection du base");
-            return false;
-        }
-    }
-
-    public static boolean votenegativeepisode(Episode ep) {
-        try {
-            return EpisodeDAO2.UpdateNegativeScoreEpisode(ep);
-
-        } catch (SQLException E) {
-            System.out.println("error dans la connection du base");
-            return false;
-        }
-    }
-
-    public static boolean regarederepisode(Episode ep) {
-        try {
-            return EpisodeDAO2.UpdateViewNbrEpisode(ep);
-        } catch (SQLException E) {
-            System.out.println("error dans la connection du base");
-            return false;
-        }
-    }
 
 
 }

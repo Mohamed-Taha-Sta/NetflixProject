@@ -1,9 +1,7 @@
 package Controllers;
 
 import DAO.SerieDAO;
-import Entities.Actor;
-import Entities.Producer;
-import Entities.Serie;
+import Entities.*;
 import Services.SerieService;
 
 import java.io.File;
@@ -167,4 +165,9 @@ public class SerieController {
     public static List<Serie> streamYear(List<Serie> uniqueSeries,LocalDate localDate) {
         return SerieService.streamYear(uniqueSeries,localDate);
     }
+    public static List<Serie> GetReleasedEpisode(List<Episode> episode, User user) {
+        return SerieService.GetReleasedEpisode(episode, user);
+    }
+
+
 }

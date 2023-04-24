@@ -139,4 +139,12 @@ public class EpisodeController {
     public static long StreamSpecificEpisodes(long id) throws SQLException, IOException {
         return EpisodeService.StreamSpecificEpisodes(id);
     }
+
+    public static List<Episode> StreamSpecificEpisodesPremiereDate(long id) throws SQLException, IOException{
+        return  EpisodeService.StreamSpecificEpisodesPremiereDate(id);
+    }
+
+    public static List<Episode> GetAllEpisodes() throws SQLException, IOException {
+        return EpisodeService.GetAllEpisodes();
+    }
 }

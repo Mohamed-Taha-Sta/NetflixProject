@@ -1,10 +1,13 @@
 package Controllers.FXMLControllers;
 
 import Controllers.ActorController;
+import Controllers.EpisodeController;
+import Controllers.SerieController;
 import Controllers.UserController;
 import DAO.UserDAO;
 import Entities.Actor;
 import Entities.Genre;
+import Entities.Serie;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
@@ -18,13 +21,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.*;
@@ -71,8 +78,9 @@ public class ProfilePageController implements Initializable {
 
     //Notification Menu Anchor
     public AnchorPane NotificationMenu;
-    public ListView<String> NotificationPane;
+    public VBox NotificationPane;
 
+    List<Serie> series=new ArrayList<>();
 
     //Password Menu
     public AnchorPane PassMenu;
@@ -89,6 +97,8 @@ public class ProfilePageController implements Initializable {
     public static void setNoti(boolean noti) {
         ProfilePageController.noti = noti;
     }
+
+    
 
     ObservableList<Actor> actors;
     ObservableList<Genre> genres = GetGenres();
@@ -348,8 +358,24 @@ public class ProfilePageController implements Initializable {
         if(noti){
             OnNotibtn();
         }
-
-
+        try {
+           series= SerieController.GetReleasedEpisode(EpisodeController.GetAllEpisodes(),DataHolder.getUser()) ;
+            System.out.println("parsed all episodes");
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        if(!series.isEmpty()){
+            for(Serie s:series){
+                Label label=new Label();
+                label.setText("A new Episode of  " + s.getNom()+ " has been released");
+                NotificationPane.getChildren().add(label);
+            }
+        }
+        else{
+            Label label=new Label();
+            label.setText("No new Notifications");
+            NotificationPane.getChildren().add(label);
+        }
 
 
     }

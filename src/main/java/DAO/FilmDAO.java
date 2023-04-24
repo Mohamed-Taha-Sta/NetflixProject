@@ -18,14 +18,12 @@ public class FilmDAO {
     public static boolean Add(Film film) {
         boolean etat = true;
         PreparedStatement pstmt = null;
-        //java.sql.Time sqlTime = java.sql.Time.valueOf(film.getDuree());
-        ResultSet rs;
+        ResultSet rs = null;
         String sql3;
 
-        /*    public Film(String nom, String realisateur, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, LocalTime duree, ArrayList<Actor> acteur, , long vueNbr, long score, long votes, File file, File synopsis, File film) {
-         */
+
         try {
-           // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
+
             String genreListString = String.join(",", film.getListegenre().stream().map(Object::toString).toArray(String[]::new));
             String sql = "INSERT INTO Film (nom,description,annee_sortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod)" +
                     " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -74,12 +72,12 @@ public class FilmDAO {
                     sql3 = "INSERT INTO Acteurprinc_Film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
-//                    ActorDAO.ajout_acteur(act.get(i));
+//
                 }else{
                     sql3 = "INSERT INTO acteursec_film (id_act, id_film) VALUES ('" + Long.toString(act.get(i).getID()) + "', '" + Integer.toString(idfilm) + "')";
                     pstmt = conn.prepareStatement(sql3);
                     pstmt.executeUpdate();
-//                    ActorDAO.ajout_acteur(act.get(i));
+//
                 }
 
             }
@@ -90,65 +88,32 @@ public class FilmDAO {
         } catch (FileNotFoundException e) {
 
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return etat;
     }
 
 
-  /*  public static List<String> recherche_film(String filmname) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        List<String>list=new ArrayList<>();
-        try {
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,duree from Film where Film.nom=%"+filmname+"%";
-            pstmt = conn.prepareStatement(sql);
 
-            pstmt.executeQuery();
-            rs = pstmt.getGeneratedKeys();
-            while (rs.next()) {
-            list.add(rs.getString(1));
-            list.add(rs.getString(2));
-            list.add(rs.getString(3));
-            list.add(rs.getString(4));
-            list.add(rs.getString(5));
-            list.add(rs.getString(6));
-            list.add(rs.getString(7));}
-
-        }catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-
-        return list;
-    }
-    public static void recherche_filmact(Actor act) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        Long idact=ActorDAO.getactid(act.getName(),act.getPrename());
-        try {
-
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            String sql="select id_film from relation where relation.id_act="+Long.toString(idact);
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.executeQuery();
-            rs = pstmt.getGeneratedKeys();
-            while (rs.next()) {
-            recherche_film(rs.getLong(1));
-            }
-
-        }catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-
-    }*/
     public static List<Film> FindByID(Long filmid) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Film>list=new ArrayList<>();
         try {
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
             String sql="select id_film,nom,description,ANNEE_SORTIE,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film,id_prod from Film where Film.id_film="+filmid;
             pstmt = conn.prepareStatement(sql);
 
@@ -225,6 +190,22 @@ public class FilmDAO {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         return list;
     }
@@ -234,8 +215,6 @@ public class FilmDAO {
         ResultSet rs = null;
         ArrayList<Film>list=new ArrayList<>();
         try {
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            //String sql="select id_film,nom,realisateur,annerdesortie,langue,paysorigine,listegenre,img,duree,vuenbr,score,vote,synopsis,film from Film where Film.nom like %"+filmnom+"%";
             String sql="SELECT id_film, nom, description, ANNEE_SORTIE, langue, paysorigine, listegenre, img, duree, vuenbr, score, vote, synopsis, film,id_prod " +
                     "FROM Film " +
                     "WHERE Film.nom LIKE '%" + filmnom + "%'";
@@ -315,6 +294,21 @@ public class FilmDAO {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -330,8 +324,6 @@ public class FilmDAO {
         String sql;
         try {
 
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
             try{sql = "SELECT id_film FROM acteursec_film WHERE id_act = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,idact);
@@ -366,6 +358,21 @@ public class FilmDAO {
 
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return list1;
 
@@ -380,8 +387,6 @@ public class FilmDAO {
         String sql;
         try {
 
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
             try{sql = "SELECT id_film FROM Film WHERE id_prod = ?";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setLong(1,prod.getId());
@@ -398,16 +403,28 @@ public class FilmDAO {
             }
 
 
-
-
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return list1;
 
     }
-
-
 
 
     public static ArrayList<Film> GetAllFilms() {
@@ -443,16 +460,9 @@ public class FilmDAO {
 
     }
 
-
-
     public static boolean deleteFilm(Film film) {
            PreparedStatement pstmt = null;
-
-
            String sql;
-
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
             try{sql = "delete FROM Film WHERE id_film = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,film.getId());
@@ -463,7 +473,15 @@ public class FilmDAO {
                 System.out.println("Film n'exite pas");
                 return false;
             }
-
+            finally {
+                if (pstmt != null) {
+                    try {
+                        pstmt.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
 
 
@@ -482,6 +500,22 @@ public class FilmDAO {
         }catch (Exception e){
             System.out.println("film nexiste pas");
             return Long.valueOf(-1);
+        }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -503,6 +537,22 @@ public class FilmDAO {
             System.out.println("film nexiste pas");
             return Long.valueOf(-1);
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
 
@@ -523,19 +573,31 @@ public class FilmDAO {
             System.out.println("film nexiste pas");
             return Long.valueOf(-1);
         }
-
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
 
 
     }
 
-
-
-
     public static boolean UpdatePositiveScoreFilm(Film film) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
         long score = getscore(film);
         long votes = getvote(film);
@@ -565,12 +627,28 @@ public class FilmDAO {
             System.out.println("error dans la connection de la base");
             return false;
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
     }
     public static boolean UpdatenegativeScoreFilm(Film film) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
         long votes = getvote(film);
 
@@ -591,12 +669,28 @@ public class FilmDAO {
             System.out.println("error dans la connection de la base");
             return false;
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
     }
     public static boolean UpdatevuenbrFilm(Film film) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
         long vuenbr = getnbrvue(film);
 
@@ -617,14 +711,29 @@ public class FilmDAO {
             System.out.println("error dans la connection de la base");
             e.printStackTrace();
             return false;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
     }
 
     public static boolean modifnom(Film film,String nom) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
 
         try {
@@ -638,13 +747,28 @@ public class FilmDAO {
             System.out.println("error dans la connection de la base");
             e.printStackTrace();
             return false;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
     }
     public static boolean modifdescription(Film film,String description) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
 
         try {
@@ -658,13 +782,28 @@ public class FilmDAO {
             System.out.println("error dans la connection de la base");
             e.printStackTrace();
             return false;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
     }
     public static boolean modiflangues(Film film,String langue) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
 
         try {
@@ -679,12 +818,27 @@ public class FilmDAO {
             e.printStackTrace();
             return false;
         }
-
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
     public static boolean modifpaysoregine(Film film,String paysorgine) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
 
         try {
@@ -699,12 +853,27 @@ public class FilmDAO {
             e.printStackTrace();
             return false;
         }
-
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
     }
     public static boolean modifAnnerdesoritie(Film film, LocalDate date) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
 
         try {
@@ -721,12 +890,28 @@ public class FilmDAO {
             e.printStackTrace();
             return false;
         }
+        finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
     }
     public static boolean modiflistegenre(Film film,List<String> listegenre ) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+
         String sql;
 
         try {
@@ -742,12 +927,22 @@ public class FilmDAO {
             e.printStackTrace();
             return false;
         }
+        finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
     }
     public static boolean modifduree(Film film,String duree ) {
-        PreparedStatement pstmt;
-        ResultSet rs;
+        PreparedStatement pstmt = null;
+
         String sql;
 
         try {
@@ -760,81 +955,22 @@ public class FilmDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }   finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
     }
-    /*public static boolean modifimg(Film film,File img ) {
-        PreparedStatement pstmt;
-        ResultSet rs;
-        String sql;
 
-        try {
-           InputStream inputStreamSynopsisimg = new FileInputStream(img);
-
-            sql = "UPDATE film SET img = '" + inputStreamSynopsisimg + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            return false;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }*/
-    /*public static boolean modifsynop(Film film,File synop ) {
-        PreparedStatement pstmt;
-        ResultSet rs;
-        String sql;
-
-        try {
-             InputStream inputStreamSynopsissynops=new FileInputStream(synop);
-
-            sql = "UPDATE film SET synopsis = '" + inputStreamSynopsissynops + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            return false;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }*/
-    /*public static boolean modiffilmvedio(Film film,File vid ) {
-        PreparedStatement pstmt;
-        ResultSet rs;
-        String sql;
-
-        try {
-
-            InputStream inputStreamSynopsisfilm=new FileInputStream(vid);
-
-
-            sql = "UPDATE film SET film = '" + inputStreamSynopsisfilm + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.executeQuery();
-
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            return false;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }*/
     public static boolean modifimg(Film film, File img) {
-        PreparedStatement pstmt;
+        PreparedStatement pstmt = null;
         String sql;
 
         try {
@@ -858,9 +994,19 @@ public class FilmDAO {
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
+        finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     public static boolean modiffilmvedio(Film film, File vid) {
-        PreparedStatement pstmt;
+        PreparedStatement pstmt = null;
         String sql;
 
         try {
@@ -884,9 +1030,19 @@ public class FilmDAO {
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
+        finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     public static boolean modifsynop(Film film, File synop) {
-        PreparedStatement pstmt;
+        PreparedStatement pstmt = null;
         String sql;
 
         try {
@@ -910,15 +1066,21 @@ public class FilmDAO {
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
+        finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     public static boolean deleteFilm_actsec(Film film,Actor act) {
         PreparedStatement pstmt = null;
 
-
         String sql;
-
-        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
 
         try{sql = "delete FROM acteursec_film WHERE id_film = ? and id_act=?";
             pstmt = conn.prepareStatement(sql);
@@ -932,6 +1094,16 @@ public class FilmDAO {
             System.out.println("acteur n'exite pas");
             return false;
         }
+        finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
 
 
@@ -939,11 +1111,8 @@ public class FilmDAO {
     public static boolean deleteFilm_actprinc(Film film,Actor act) {
         PreparedStatement pstmt = null;
 
-
         String sql;
 
-        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
         try{sql = "delete FROM acteurprinc_film WHERE id_film = ? and id_act=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,film.getId());
@@ -963,11 +1132,8 @@ public class FilmDAO {
     public static boolean ajoutFilm_actprinc(Film film,Actor act) {
         PreparedStatement pstmt = null;
 
-
         String sql;
 
-        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
         try {
             sql = "INSERT INTO acteurprinc_film (id_act,id_film)" +
                     " VALUES (?,?)";
@@ -981,6 +1147,15 @@ public class FilmDAO {
 
         } catch (Exception e) {
             return false;
+        }   finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -991,8 +1166,6 @@ public class FilmDAO {
 
         String sql;
 
-        // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-        //String sql="select id_film from Acteurprinc_Film where Acteurprinc_Film.id_act="+Long.toString(idact);
         try {
             sql = "INSERT INTO acteursec_film (id_act,id_film)" +
                     " VALUES (?,?)";
@@ -1006,11 +1179,19 @@ public class FilmDAO {
 
         } catch (Exception e) {
             return false;
+        }   finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
     }
-
 
     public static List<Film> searchFilm(List<String> searchTerms) throws SQLException, IOException {
         StringBuilder sqlBuilder = new StringBuilder();
@@ -1098,14 +1279,12 @@ public class FilmDAO {
 
         }
 
-        // Close the ResultSet, PreparedStatement, and database connection
+
         rs.close();
-//        stmt.close();
+        stmt.close();
 //        conn.close();
         return list;
     }
-
-
 
     public static List<Film> searchFilmOR(List<String> searchTerms) throws SQLException, IOException {
         StringBuilder sqlBuilder = new StringBuilder();
@@ -1195,7 +1374,7 @@ public class FilmDAO {
 
         // Close the ResultSet, PreparedStatement, and database connection
         rs.close();
-//        stmt.close();
+       stmt.close();
 //        conn.close();
         return list;
     }
@@ -1273,6 +1452,9 @@ public class FilmDAO {
             Film filmm=new Film(nom,decription,annerdesortie.toLocalDate(),langue,paysorigine,genrelist,fileImage,duree,vunbr,score,vote,filesynop,filmvedio,idrealisateur);
             List.add(filmm);
         }
+
+        rs.close();
+        stmt.close();
         return List;
     }
 
