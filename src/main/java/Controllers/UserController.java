@@ -2,10 +2,7 @@ package Controllers;
 
 import Entities.User;
 import Services.UserService;
-
-import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class UserController {
 
