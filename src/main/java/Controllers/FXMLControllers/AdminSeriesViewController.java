@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -30,6 +31,7 @@ public class AdminSeriesViewController implements Initializable {
     public Label DebutDateLabel;
     public TableView<Season> SeasonTable = new TableView<>();
     public TableColumn<Season,String> SeasonName;
+    public Label NumberOfVoters;
 
     public void onBack(ActionEvent actionEvent) throws Exception {
         DataHolderSeries.setSelectedSeries(null);
@@ -75,6 +77,7 @@ public class AdminSeriesViewController implements Initializable {
 
 
         SeriesTitle.setText(DataHolderSeries.getSelectedSeries().getNom());
+//        NumberOfVoters.setText();
 
         try {
             ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+"%");
@@ -86,6 +89,15 @@ public class AdminSeriesViewController implements Initializable {
         }
 
         DebutDateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
+
+        List<Season> seasonList = null;
+        try {
+            seasonList = SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (seasonList!=null)
+            NumberOfVoters.setText(String.valueOf(ScoreSeriesController.GetNumberOfVotersSeason(seasonList)));
 
 
 

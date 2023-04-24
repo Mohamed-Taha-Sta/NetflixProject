@@ -57,10 +57,7 @@ public class ActorSeasonViewController implements Initializable {
 
         EpisodeName.setCellValueFactory(new PropertyValueFactory<>("name")); //Try name
 
-        System.out.println("the state of 1"+episodeOBList);
-
         if (DataHolderEpisode.getEpisodeOBList()==null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
-            System.out.println("the state of 2"+episodeOBList);
             List<Episode> episodeList = null;
             try {
                 episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());

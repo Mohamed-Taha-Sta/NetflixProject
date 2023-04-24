@@ -299,7 +299,6 @@ public class SeasonDAO {
 
     public static boolean ModifSynopsisSeason(Season season,File NewSynopsis) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -329,7 +328,6 @@ public class SeasonDAO {
 
     public static boolean modifnom(Season season, String nom) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -352,7 +350,6 @@ public class SeasonDAO {
 
     public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -375,7 +372,6 @@ public class SeasonDAO {
 
     public static boolean modifdescription(Season season,String description) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
