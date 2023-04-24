@@ -23,6 +23,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.isTextExceedingLength;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class RegisterPage implements Initializable {
@@ -57,7 +58,14 @@ public class RegisterPage implements Initializable {
     protected void OnSignUp() throws Exception {
         if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserPassword.getText().isEmpty()) {
             showErrorMessage("Must fill all the fields!");
-
+        } else if (isTextExceedingLength(UserName, 50)) {
+            showErrorMessage("Last Name field is too long");
+        } else if (isTextExceedingLength(UserPrename, 50)) {
+            showErrorMessage("First Name field is too long");
+        } else if (isTextExceedingLength(UserEmail, 50)) {
+            showErrorMessage("Email field is too long");
+        } else if (isTextExceedingLength(UserPassword, 50)) {
+            showErrorMessage("Password field is too long");
         } else if (!UserController.isEmail(UserEmail.getText())) {
             showErrorMessage("This email address is not recognized!");
         } else if (!UserController.check_Mail(UserEmail.getText())) {
@@ -66,7 +74,6 @@ public class RegisterPage implements Initializable {
             showErrorMessage("Another producer with same mail exists!");
         } else if (!ActorController.check_Mail(UserEmail.getText())) {
             showErrorMessage("Another actor with same mail exists!");
-
         } else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
             showErrorMessage("Must fill all the fields!");
         } else {
@@ -77,15 +84,13 @@ public class RegisterPage implements Initializable {
                 DataHolder.setBirthday(String.valueOf(UserBirthday.getValue()));
             }
             DataHolder.setPassword(UserPassword.getText());
-            if(identity.getValue().equals("Producer")){
-                long ID_PROD = ProducerController.createprod(new Producer(DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword()));
-                DataHolder.setProducer(new Producer(ID_PROD,DataHolder.getName(),DataHolder.getPrename(),DataHolder.getEmail(),DataHolder.getPassword()));
+            if (identity.getValue().equals("Producer")) {
+                long ID_PROD = ProducerController.createprod(new Producer(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword()));
+                DataHolder.setProducer(new Producer(ID_PROD, DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword()));
                 HelloApplication.SetRoot("ProducerLandingPage");
-            }
-            else if (identity.getValue().equals("User")){
+            } else if (identity.getValue().equals("User")) {
                 HelloApplication.SetRoot("ChoicesMenu");
-            }
-            else if(identity.getValue().equals("Admin")){
+            } else if (identity.getValue().equals("Admin")) {
                 System.out.println("FINISH THE ADMIN");
             }
 

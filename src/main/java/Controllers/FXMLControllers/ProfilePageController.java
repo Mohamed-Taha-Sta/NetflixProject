@@ -259,7 +259,6 @@ public class ProfilePageController implements Initializable {
     }
 
     public void OnLogOutBtn() throws Exception {
-        HelloApplication.SetRoot("LoginPage");
         DataHolder.setUser(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
@@ -279,11 +278,15 @@ public class ProfilePageController implements Initializable {
         DataHolderFilm.setMainActorsList(null);
         DataHolderFilm.setFilms(null);
         DataHolderFilm.setAllTheActors(null);
+        HelloApplication.SetRoot("LoginPage");
+
     }
 
     public void OnPrenameBtn() {
         if (prenameField.getText().isEmpty()) {
             showErrorMessage(AlertText,"Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField,50)) {
+            showErrorMessage(AlertText,"First Name field is too long");
         } else {
             System.out.println(UserController.FirstName(prenameField.getText()));
             DataHolder.getUser().setPrename(prenameField.getText());
@@ -296,6 +299,8 @@ public class ProfilePageController implements Initializable {
     public void OnMailBtn()  {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
+        } else if (isTextExceedingLength(mailfield,50)) {
+            showErrorMessage(AlertText,"Email field is too long");
         } else {
             System.out.println(UserController.Mail(mailfield.getText()));
             DataHolder.getUser().setMail(mailfield.getText());
@@ -307,7 +312,10 @@ public class ProfilePageController implements Initializable {
     public void OnNameBtn()  {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
             showErrorMessage( AlertText,"Your LastName field is empty");
-        } else {
+        }else if (isTextExceedingLength(namefield,50)){
+            showErrorMessage(AlertText,"Last Name field is too long");
+        }
+        else {
             System.out.println(UserController.LastName(namefield.getText()));
             DataHolder.getUser().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
@@ -329,13 +337,15 @@ public class ProfilePageController implements Initializable {
     public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
-        } else if (newPass.getText().isEmpty()) {
+        }
+        else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
+        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+            showErrorMessage(passAlert, "Password field is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showErrorMessage(passAlert, "Your confirm password is wrong!");
-
         } else if (newPass.getText().equals(OldPass.getText())) {
             showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getUser().getPassword())) {

@@ -130,6 +130,8 @@ public class ProducerSeriesViewController implements Initializable {
     public void OnSeriesNameBtn() throws SQLException {
         if (SeriesName.getText().isEmpty()) {
             showMessage(AlertText,"Your New Series Title field is empty");
+        } else if (isTextExceedingLength(SeriesName,50)) {
+            showMessage(AlertText,"Your New Series Title field is Toooo long");
         } else {
             SerieController.modifnom(DataHolderSeries.getSelectedSeries(),SeriesName.getText());
             DataHolderSeries.getSelectedSeries().setNom(SeriesName.getText());
@@ -219,6 +221,8 @@ public class ProducerSeriesViewController implements Initializable {
     public void ChangeDescriptionBtn() throws SQLException {
         if (New_Description.getText().isEmpty()) {
             showMessage(AlertText,"Series must have a description");
+        } else if (isTextExceedingLength(New_Description,150)) {
+            showMessage(AlertText,"Your Description is longer than series");
         } else if (New_Description.getText().equals(DataHolderSeries.getDescription())) {
             showMessage(AlertText,"You didn't change the Description");
         } else {
