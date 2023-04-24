@@ -33,7 +33,6 @@ public class SerieViewController implements Initializable {
     public VBox SeasonView;
     public TextArea SerieOpinion;
     public Button EditBtn;
-    public Button SaveBtn;
 
     public Button homeButton;
     public Button seriesButoon;
@@ -63,16 +62,19 @@ public class SerieViewController implements Initializable {
     static Producer prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
 
     public void OnBack() throws Exception {
+        prod=null;
         DataHolderSeries.setSelectedSeries(null);
         HelloApplication.SetRoot(path);
     }
 
     @FXML
     public void OnFilmClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("FilmPage");
     }
 
     public void OnSeriesClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("SeriesPage");
     }
 
@@ -149,6 +151,7 @@ public class SerieViewController implements Initializable {
     }
 
     public void OnHomeClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("HomePage");
     }
 

@@ -22,8 +22,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static Utils.RepeatableFunction.IconSetter;
-import static Utils.RepeatableFunction.ImageClipper;
+import static Utils.RepeatableFunction.*;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class ProducerFilmViewController implements Initializable {
@@ -186,12 +185,21 @@ public class ProducerFilmViewController implements Initializable {
 
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
+            double aspectRatio = (double) width / height; // calculate aspect ratio
+
             if (width <= 1920 && height <= 1080) {
-                Thumbnail.setImage(image);
-                FilmController.modifimg(DataHolderFilm.getSelectedFilm(),selectedFile);
-                showMessage(AlertText,"Thumbnail Changed successfully");
-
-
+                if(aspectRatio <= 16.0/9.0) {
+                    Thumbnail.setImage(image);
+                    FilmController.modifimg(DataHolderFilm.getSelectedFilm(),selectedFile);
+                    showErrorMessage(AlertText,"Thumbnail Changed successfully");
+                } else {
+                    // If the selected image does not have the required aspect ratio, display an error message
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Aspect Ratio");
+                    alert.setContentText("Please select an image with an aspect ratio of 16:9 or less.");
+                    alert.showAndWait();
+                }
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -201,9 +209,8 @@ public class ProducerFilmViewController implements Initializable {
                 alert.showAndWait();
             }
         }
-
-
     }
+
 
     public void FilmOverviewBtn(MouseEvent mouseEvent) throws Exception {
         HelloApplication.SetRoot("CheckStatsProdFilm");
@@ -222,7 +229,7 @@ public class ProducerFilmViewController implements Initializable {
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
                 FilmController.modiffilmvedio(DataHolderFilm.getSelectedFilm(),selectedFile);
-                showMessage(AlertText,"Video Changed successfully");
+                showErrorMessage(AlertText,"Video Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -249,7 +256,7 @@ public class ProducerFilmViewController implements Initializable {
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
                 FilmController.modifsynop(DataHolderFilm.getSelectedFilm(),selectedFile);
-                showMessage(AlertText,"Synopsis Changed successfully");
+                showErrorMessage(AlertText,"Synopsis Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -265,77 +272,81 @@ public class ProducerFilmViewController implements Initializable {
 
     public void OnFilmBtn(ActionEvent actionEvent) {
         if (FilmName.getText().isEmpty()) {
-            showMessage(AlertText,"Your New Film Title field is empty");
+            showErrorMessage(AlertText,"Your New Film Title field is empty");
+        } else if (isTextExceedingLength(FilmName,50)) {
+            showErrorMessage(AlertText,"Your new film name is waaayyy too long");
         } else {
             FilmController.modifnom(DataHolderFilm.getSelectedFilm(),FilmName.getText());
             DataHolderFilm.getSelectedFilm().setNom(FilmName.getText());
             Title.setText(FilmName.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
         }
     }
 
     public void OnDebutDateBtn(ActionEvent actionEvent) {
         if (DebutDatePicker.getValue().equals(DataHolderFilm.getSelectedFilm().getAnnerdesortie())) {
-            showMessage(AlertText, "You didnt change the Debut Date");
+            showErrorMessage(AlertText, "You didnt change the Debut Date");
         } else if (DebutDatePicker.getValue()==null) {
-            showMessage(AlertText, "Your new DebutDate is Empty");
+            showErrorMessage(AlertText, "Your new DebutDate is Empty");
         } else {
             FilmController.modifAnnerdesoritie(DataHolderFilm.getSelectedFilm(),DebutDatePicker.getValue());
             DataHolderFilm.getSelectedFilm().setAnnerdesortie(DebutDatePicker.getValue());
             DebutDateLabel.setText(DebutDatePicker.getValue().toString());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
         }
     }
 
     public void onGenreBtn(ActionEvent actionEvent) {
         if (GenreSelector.getCheckModel().getCheckedItems().isEmpty()) {
-            showMessage(AlertText,"Film must have at least a genre");
+            showErrorMessage(AlertText,"Film must have at least a genre");
         } else if (GenreSelector.getCheckModel().getCheckedItems().equals(DataHolderFilm.getSelectedFilm().getListegenre())) {
-            showMessage(AlertText,"You didn't change the genre");
+            showErrorMessage(AlertText,"You didn't change the genre");
         } else {
             FilmController.modiflistegenre(DataHolderFilm.getSelectedFilm(),GenreSelector.getCheckModel().getCheckedItems());
             DataHolderFilm.getSelectedFilm().setListegenre(GenreSelector.getCheckModel().getCheckedItems());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
         }
     }
 
     public void onCountryBtn(ActionEvent actionEvent) {
         if (CountrySelector.getValue()==null) {
-            showMessage(AlertText,"New Film must have a country");
+            showErrorMessage(AlertText,"New Film must have a country");
         } else if (CountrySelector.getValue().equals(DataHolderFilm.getSelectedFilm().getPaysorigine())) {
-            showMessage(AlertText,"You didn't change the country");
+            showErrorMessage(AlertText,"You didn't change the country");
         } else {
             FilmController.modifpaysoregine(DataHolderFilm.getSelectedFilm(), (String) CountrySelector.getValue());
             DataHolderFilm.getSelectedFilm().setPaysorigine((String) CountrySelector.getValue());
             CountryOfOrigin.setText(DataHolderFilm.getSelectedFilm().getPaysorigine());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
 
         }
     }
 
     public void onLanguageBtn(ActionEvent actionEvent) {
         if (LanguageSelector.getValue()==null) {
-            showMessage(AlertText,"Film must have a language");
+            showErrorMessage(AlertText,"Film must have a language");
         } else if (LanguageSelector.getValue().equals(DataHolderFilm.getSelectedFilm().getLangue())) {
-            showMessage(AlertText,"You didn't change the language");
+            showErrorMessage(AlertText,"You didn't change the language");
         } else {
             FilmController.modiflangues(DataHolderFilm.getSelectedFilm(), (String) LanguageSelector.getValue());
             DataHolderFilm.getSelectedFilm().setLangue((String) LanguageSelector.getValue());
             Language.setText(DataHolderFilm.getSelectedFilm().getLangue());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
         }
     }
 
     public void ChangeDescriptionBtn(ActionEvent actionEvent) {
         if (New_Description.getText().isEmpty()) {
-            showMessage(AlertText,"Film must have a description");
+            showErrorMessage(AlertText,"Film must have a description");
+        } else if (isTextExceedingLength(New_Description,150)) {
+            showErrorMessage(AlertText,"Your film description is longer than the film");
         } else if (New_Description.getText().equals(DataHolderFilm.getSelectedFilm().getDescription())) {
-            showMessage(AlertText,"You didn't change the Description");
+            showErrorMessage(AlertText,"You didn't change the Description");
         } else {
             FilmController.modifdescription(DataHolderFilm.getSelectedFilm(),New_Description.getText() );
             DataHolderFilm.getSelectedFilm().setDescription(New_Description.getText() );
             Old_Description.setText(New_Description.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
 
         }
     }
@@ -385,15 +396,7 @@ public class ProducerFilmViewController implements Initializable {
     }
 
 
-    private void showMessage(Label label, String message) {
-        label.setText(message);
-        label.setOpacity(1);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            label.setOpacity(0);
-        }));
-        timeline.play();
-    }
 
 
 }

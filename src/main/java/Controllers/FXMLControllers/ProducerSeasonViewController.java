@@ -65,13 +65,21 @@ public class ProducerSeasonViewController implements Initializable {
 
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
-            if (width <= 1920 && height <= 1080) {
-                Thumbnail.setImage(image);
-                SeasonController.modifimg(DataHolderSeason.getSelectedSeason(),selectedFile);
-                showMessage(AlertText,"Thumbnail Changed successfully");
 
+            if (width <= 1920 && height <= 1080) {
+                double aspectRatio = (double) width / (double) height;
+                if (aspectRatio <= 16.0 / 9.0) {
+                    Thumbnail.setImage(image);
+                    SeasonController.modifimg(DataHolderSeason.getSelectedSeason(),selectedFile);
+                    showErrorMessage(AlertText,"Thumbnail Changed successfully");
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Aspect Ratio");
+                    alert.setContentText("Please select an image with an aspect ratio of 16:9 or smaller.");
+                    alert.showAndWait();
+                }
             } else {
-                // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Image Size");
@@ -79,6 +87,7 @@ public class ProducerSeasonViewController implements Initializable {
                 alert.showAndWait();
             }
         }
+
 
     }
 
@@ -116,7 +125,7 @@ public class ProducerSeasonViewController implements Initializable {
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
                 SeasonController.ModifSynopsisSeason(DataHolderSeason.getSelectedSeason(),selectedFile);
-                showMessage(AlertText,"Synopsis Changed successfully");
+                showErrorMessage(AlertText,"Synopsis Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -141,51 +150,47 @@ public class ProducerSeasonViewController implements Initializable {
 
     public void OnSeasonNameBtn(ActionEvent actionEvent) throws SQLException {
         if (SeasonName.getText().isEmpty()) {
-            showMessage(AlertText,"Your New Season Title field is empty");
+            showErrorMessage(AlertText,"Your New Season Title field is empty");
+        } else if (isTextExceedingLength(SeasonName,50)) {
+            showErrorMessage(AlertText,"Your New Season Title field is too long");
         } else {
             SeasonController.modifnom(DataHolderSeason.getSelectedSeason(),SeasonName.getText());
             DataHolderSeason.getSelectedSeason().setName(SeasonName.getText());
             Title.setText(SeasonName.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
 
         }
     }
     public void OnDebutDateBtn(ActionEvent actionEvent) throws SQLException {
         if (DebutDatePicker.getValue().equals(DataHolderSeason.getSelectedSeason().getDebutDate())) {
-            showMessage(AlertText, "You didnt change the Debut Date");
+            showErrorMessage(AlertText, "You didnt change the Debut Date");
         } else if (DebutDatePicker.getValue()==null) {
-            showMessage(AlertText, "Your new DebutDate is Empty");
+            showErrorMessage(AlertText, "Your new DebutDate is Empty");
         } else {
             SeasonController.modifAnnerdesoritie(DataHolderSeason.getSelectedSeason(),DebutDatePicker.getValue());
             DataHolderSeason.getSelectedSeason().setDebutDate(DebutDatePicker.getValue());
             DebutDateLabel.setText(DebutDatePicker.getValue().toString());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
         }
     }
 
     public void ChangeDescriptionBtn(ActionEvent actionEvent) throws SQLException {
         if (New_Description.getText().isEmpty()) {
-            showMessage(AlertText,"Season must have a description");
+            showErrorMessage(AlertText,"Season must have a description");
+        } else if (isTextExceedingLength(New_Description,150)) {
+            showErrorMessage(AlertText,"Season's new description is too long");
         } else if (New_Description.getText().equals(DataHolderSeason.getSelectedSeason().getDescription())) {
-            showMessage(AlertText,"You didn't change the Description");
+            showErrorMessage(AlertText,"You didn't change the Description");
         } else {
             SeasonController.modifdescription(DataHolderSeason.getSelectedSeason(),New_Description.getText() );
             DataHolderSeason.getSelectedSeason().setDescription(New_Description.getText() );
             Old_Description.setText(New_Description.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText,"Attribute changed successfully");
 
         }
     }
 
-    private void showMessage(Label label, String message) {
-        label.setText(message);
-        label.setOpacity(1);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            label.setOpacity(0);
-        }));
-        timeline.play();
-    }
 
 
     @Override
@@ -195,9 +200,7 @@ public class ProducerSeasonViewController implements Initializable {
         IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
         try {
             episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -217,9 +220,7 @@ public class ProducerSeasonViewController implements Initializable {
         Title.setText(DataHolderSeason.getSelectedSeason().getName());
         try {
             RatingLabel.setText(String.valueOf(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason())+"%"));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
         DebutDateLabel.setText(DataHolderSeason.getSelectedSeason().getDebutDate().toString());
