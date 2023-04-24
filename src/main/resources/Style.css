@@ -14,7 +14,27 @@
     -fx-font-style: italic;
     -fx-text-fill: white;
 }
+/*.rating > .container > .button {
+    -fx-background-image: url("star.png");
+}
+.rating > .container > .button.strong {
+    -fx-background-image: url("starfilled.png");
+}*/
 
+.rating > .container > .button {
+    -fx-background-image: url("star.png");
+    -fx-pref-width: 20 ;
+    -fx-pref-height: 20 ;
+    -fx-background-size: cover;
+    -fx-padding:18 18;
+}
+.rating > .container > .button.strong {
+    -fx-background-image: url("starfilled.png");
+    -fx-pref-width: 20 ;
+    -fx-pref-height: 20 ;
+    -fx-background-size: cover;
+    -fx-padding: 18 18;
+}
 
 
 #MenuBtn {

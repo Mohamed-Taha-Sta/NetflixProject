@@ -2,6 +2,7 @@ package Controllers.FXMLControllers;
 
 import Controllers.Avis_EpisodeController;
 import Controllers.ScoreEpisodeController;
+import Controllers.VuesEpisodeController;
 import Utils.DataHolder;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
@@ -127,6 +128,9 @@ public class EpisodeViewController implements Initializable {
     public void OnWatch() throws Exception{
         VideoPlayerController.SetPath(DataHolderEpisode.getSelectedEpisode().getMedia().getPath());
         VideoPlayerController.setPageName("EpisodeView");
+        if(!VuesEpisodeController.Vue_Exist(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser())){
+            VuesEpisodeController.Add_Vues(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser());
+        }
         HelloApplication.SetRoot("VideoPlayer");
     }
 

@@ -20,7 +20,7 @@ public class Avis_SerieDAO {
     public static boolean Avis_Exist(Serie serie, User user){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         try{
             sql="Select * from AVIS_SERIE where ID_USER=? and ID_SERIE=?";
             pstmt = conn.prepareStatement(sql);
@@ -31,6 +31,21 @@ public class Avis_SerieDAO {
         }catch (Exception e){
             System.out.println("Error searching for avis serie");
             return false;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -54,6 +69,15 @@ public class Avis_SerieDAO {
         } catch (SQLException ex) {
             System.out.println("tu peut mettre un seul commentaire");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -75,6 +99,15 @@ public class Avis_SerieDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le modifier");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -96,13 +129,22 @@ public class Avis_SerieDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
     public static String affiche_avis(Serie serie, User user){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "SELECT avis FROM AVIS_SERIE WHERE id_serie = ? and id_user=?";
@@ -118,6 +160,21 @@ public class Avis_SerieDAO {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             String s="tu dois avoid un commentaire pour le supprimer";
             return s;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -125,7 +182,7 @@ public class Avis_SerieDAO {
         PreparedStatement pstmt = null;
         String sql;
         List<String> avisList = new ArrayList<>();
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "SELECT avis FROM AVIS_SERIE WHERE id_serie = ? ";
@@ -142,6 +199,21 @@ public class Avis_SerieDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             return avisList;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }

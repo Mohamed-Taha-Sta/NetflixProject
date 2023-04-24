@@ -75,7 +75,7 @@
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
-                                          <Rating fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
+                                          <Rating id="rating" fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
                                           <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label id="Category" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />

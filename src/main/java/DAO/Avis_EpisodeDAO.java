@@ -33,6 +33,14 @@ public class Avis_EpisodeDAO {
         }catch (Exception e){
             System.out.println("Error searching for avis episode");
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -56,6 +64,15 @@ public class Avis_EpisodeDAO {
         } catch (SQLException ex) {
             System.out.println("tu peut mettre un seul commentaire");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -77,6 +94,15 @@ public class Avis_EpisodeDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le modifier");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -98,13 +124,21 @@ public class Avis_EpisodeDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
     public static String affiche_avis(Episode ep, User user){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "SELECT avis FROM avis_episodes WHERE id_user = ? and id_episode=?";
@@ -120,6 +154,21 @@ public class Avis_EpisodeDAO {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             String s="tu dois avoid un commentaire pour le supprimer";
             return s;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -127,7 +176,7 @@ public class Avis_EpisodeDAO {
     public static List<String> FindAll(Episode ep){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         List<String> opinions = new ArrayList<>();
 
         try {
@@ -142,6 +191,21 @@ public class Avis_EpisodeDAO {
             return opinions;
         } catch (SQLException ex) {
             return opinions;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }

@@ -3,6 +3,7 @@ package Controllers.FXMLControllers;
 import Controllers.Avis_FilmController;
 import Controllers.ProducerController;
 import Controllers.ScoreFilmController;
+import Controllers.VuesFilmController;
 import Entities.Film;
 import Entities.Producer;
 import Utils.DataHolder;
@@ -77,6 +78,9 @@ public class FilmViewController implements Initializable {
 
     public void OnWatch() throws Exception {
         VideoPlayerController.SetPath(DataHolderFilm.getSelectedFilm().getFilm().getPath());
+        if(!VuesFilmController.Vue_Exist(DataHolderFilm.getSelectedFilm(),DataHolder.getUser())){
+            VuesFilmController.Add_Vues(DataHolderFilm.getSelectedFilm(),DataHolder.getUser());
+        }
         VideoPlayerController.setPageName("FilmView");
         HelloApplication.SetRoot("VideoPlayer");
     }
@@ -123,6 +127,7 @@ public class FilmViewController implements Initializable {
     }
 
     public void InfoSetter(){
+
         FilmName.setText(DataHolderFilm.getSelectedFilm().getNom());
         DirectLabel.setText(prod.getNom()+" "+prod.getPrenom());
         dateLabel.setText(DataHolderFilm.getSelectedFilm().getAnnerdesortie().format(formatter));
@@ -142,10 +147,12 @@ public class FilmViewController implements Initializable {
     public void OnRating(){
         if(ScoreFilmController.Score_Exist(DataHolderFilm.getSelectedFilm(), DataHolder.getUser())){
             ScoreFilmController.Update_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+            System.out.println("changed rating ");
 
         }
         else{
             ScoreFilmController.Add_Score(DataHolderFilm.getSelectedFilm(), DataHolder.getUser(),ratings.getRating());
+            System.out.println("changed rating ");
             ratings.setUpdateOnHover(false);
         }
 

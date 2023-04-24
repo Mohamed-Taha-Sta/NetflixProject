@@ -81,7 +81,6 @@ public class ScoreFilmDAO {
     public static boolean Add_Score(Film film, User user, double score) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs = null;
         try {
             sql = "INSERT INTO score_film (id_user,id_film,score) VALUES (?,?,?)";
             pstmt = conn.prepareStatement(sql);
@@ -95,9 +94,6 @@ public class ScoreFilmDAO {
             throw new RuntimeException(e);
         }finally {
             try {
-                if (rs != null) {
-                    rs.close();
-                }
                 if (pstmt != null) {
                     pstmt.close();
                 }

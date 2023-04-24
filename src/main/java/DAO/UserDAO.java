@@ -30,9 +30,13 @@ public class UserDAO {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (!rs.next()) {
                     System.out.println("its unique");
+                    rs.close();
+                    pstmt.close();
                     return true;
                 } else {
                     System.out.println("its not unique");
+                    rs.close();
+                    pstmt.close();
                     return false;
                 }
             }
@@ -40,6 +44,7 @@ public class UserDAO {
             System.out.println(e.toString());
             return false;
         }
+
     }
 
 
@@ -167,7 +172,6 @@ public class UserDAO {
         }
         return newID;
     }
-
 
     public static boolean changeName(String newName) {
         PreparedStatement pstmt;

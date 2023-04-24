@@ -19,7 +19,7 @@ public class Avis_FilmDAO {
     public static boolean Avis_Exist(Film film, User user){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         try{
             sql="Select * from avis_film where ID_USER=? and ID_FILM=?";
             pstmt = conn.prepareStatement(sql);
@@ -30,7 +30,23 @@ public class Avis_FilmDAO {
         }catch (Exception e){
             System.out.println("Error searching for avis film");
             return false;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
 
     }
 
@@ -56,6 +72,14 @@ public class Avis_FilmDAO {
         } catch (SQLException ex) {
             System.out.println("tu peut mettre un seul commentaire");
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -77,6 +101,15 @@ public class Avis_FilmDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le modifier");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -98,13 +131,22 @@ public class Avis_FilmDAO {
         } catch (SQLException ex) {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
     public static String affiche_avis(Film film, User user){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "SELECT avis FROM avis_film WHERE id_film = ? and id_user=?";
@@ -120,6 +162,21 @@ public class Avis_FilmDAO {
             System.out.println("tu dois avoid un commentaire pour le supprimer");
             String s="tu dois avoid un commentaire pour le supprimer";
             return s;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -128,7 +185,7 @@ public class Avis_FilmDAO {
     public static List<String> FindAll(Film film){
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         List<String> opinions= new ArrayList<>();
 
         try {
@@ -141,6 +198,21 @@ public class Avis_FilmDAO {
                 opinions.add(rs.getString(1));
         } catch (SQLException ex) {
             System.out.println("Error finding avis Film"+ ex.getMessage());
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         System.out.println("DAOOO FILM OP"+opinions);
         return opinions;
