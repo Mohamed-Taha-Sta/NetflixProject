@@ -91,7 +91,7 @@ public class EpisodeDAO2 {
 
     }
 
-    public static List<Episode> FindEpisodeID(Long ID) throws SQLException, IOException {
+    public static List<Episode> FindEpisodeID(long ID) throws SQLException, IOException {
         List<Episode> episodeList = new ArrayList<>();
         Episode episode;
         String sql = "SELECT * FROM episodes WHERE id = ?";
