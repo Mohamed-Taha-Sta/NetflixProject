@@ -30,7 +30,7 @@ public class Episode {
 
     public Episode(Long id, long seasonID, String description, String episodeName, int episodeNumber,
                    LocalDate DebDate, LocalDate premDate, File fileImage, File fileSynopsis, File file) {
-        this.ID = ID;
+        this.ID = id;
         SeasonParentID = seasonID;
         this.Description = description;
         Name = episodeName;
