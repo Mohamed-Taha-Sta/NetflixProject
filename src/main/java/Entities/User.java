@@ -59,6 +59,11 @@ public class User {
     }
 
 
+    public User(long ID) {
+        this.ID = ID;
+    }
+
+
 
     public long getID() {
         return ID;

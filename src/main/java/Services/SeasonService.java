@@ -34,14 +34,6 @@ public class SeasonService {
     }
 
 
-
-
-    public static void main(String[] args) throws SQLException, IOException {
-        System.out.println(getVotesSeason(new Season(2)));
-    }
-
-
-
 //    public static List<Long> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
 //
 //        return episodeList.stream()

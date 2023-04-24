@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -131,7 +132,7 @@ public class SerieService {
     public static List<Serie> GetReleasedEpisode(List<Episode> episode, User user) {
         return episode.stream()
                 .filter(episode1 -> ScoreEpisodeController.RetrieveUserScore(episode1, user) > 2.5)
-                .map(episode1 -> episode1.getSeasonParentID())
+                .map(Episode::getSeasonParentID)
                 .map(seasonId -> {
                     try {
                         return SeasonController.FindSeasonID(seasonId);
@@ -179,7 +180,7 @@ public class SerieService {
                     }
                 })
                 .flatMap(List::stream)
-                .filter(episode1 -> episode1.getPremiereDate().equals(LocalDate.now()))
+                .filter(episode1 -> episode1.getPremiereDate().isAfter(LocalDate.now()) && episode1.getPremiereDate().isBefore(LocalDate.now().plusDays(14)))
                 .map(Episode::getSeasonParentID)
                 .map(seasonId -> {
                     try {
@@ -202,5 +203,11 @@ public class SerieService {
 
     }
 
+    public static void main(String[] args) {
+        List<Episode> episodeList = Arrays.asList(new Episode(105,"esm",64), new Episode(103,"esm",46)
+                ,new Episode(121,"Hethi Shiha",46));
+
+        GetReleasedEpisode(episodeList,new User(1));
+    }
 
 }

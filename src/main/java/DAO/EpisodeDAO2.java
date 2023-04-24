@@ -26,13 +26,13 @@ public class EpisodeDAO2 {
 
         if (episode.getDescription() != null && episode.getSynopsis() != null) {
             sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Description,Synopsis) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }else if(episode.getDescription() != null){
             sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Description) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         }else if (episode.getSynopsis() != null){
             sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Synopsis) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         }
 
         InputStream inputStream = new FileInputStream(episode.getImage());
@@ -52,16 +52,13 @@ public class EpisodeDAO2 {
             pstmt.setDate(5, java.sql.Date.valueOf(episode.getPremiereDate()));
             pstmt.setBlob(6, inputStream);
             pstmt.setBlob(7, inputStreamVideo);
-            pstmt.setLong(8, 0);
-            pstmt.setLong(9, 0);
-            pstmt.setLong(10, 0);
             if (episode.getDescription() != null && episode.getSynopsis() != null) {
-                pstmt.setString(11, episode.getDescription());
-                pstmt.setBlob(12, inputStreamSynopsis);
+                pstmt.setString(8, episode.getDescription());
+                pstmt.setBlob(9, inputStreamSynopsis);
             } else if (episode.getDescription() != null) {
-                pstmt.setString(11, episode.getDescription());
+                pstmt.setString(8, episode.getDescription());
             } else if (episode.getSynopsis() != null)
-                pstmt.setBlob(11, inputStreamSynopsis);
+                pstmt.setBlob(8, inputStreamSynopsis);
             pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
