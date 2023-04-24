@@ -2,8 +2,10 @@ package Services;
 
 import Controllers.ScoreEpisodeController;
 import Entities.Episode;
+import Entities.Season;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScoreSeasonService {
 
@@ -12,7 +14,12 @@ public class ScoreSeasonService {
         return episodeList.stream()
                 .map(episode -> ScoreEpisodeController.GetNumberVotesEpisode(episode))
                 .reduce((integer, integer2) -> integer+integer2)
-                .get();
+                .orElse(0);
     }
 
+    public static Double GetSeasonScore(List<Episode> episodeList) {
+        return episodeList.stream()
+                .map(episode -> ScoreEpisodeController.GetEpisodeScore(episode))
+                .collect(Collectors.averagingDouble(Double::doubleValue));
+    }
 }

@@ -1,9 +1,7 @@
 package DAO;
 
 import Entities.Season;
-import Entities.Serie;
 import Utils.ConxDB;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,6 +53,7 @@ public class SeasonDAO {
             e.printStackTrace();
             return -1;
         }
+        pstmt.close();
         return id;
     }
 
@@ -76,12 +75,8 @@ public class SeasonDAO {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
             long ID_SERIE = rs.getLong("ID_SERIE");
-//            String Description = rs.getString("DESCRIPTION");
-//            int num = rs.getInt("NUM");
-//            Date DebutDate = rs.getDate("DEBUT_DATE");
             Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
             InputStream SeasonThumbnail = ThumbnailBlob.getBinaryStream();
-//            InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
@@ -92,21 +87,6 @@ public class SeasonDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SeasonSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
-
-//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
             season = new Season(ID,SeasonName,ID_SERIE,fileThumb);
 
@@ -114,6 +94,7 @@ public class SeasonDAO {
 
         }
         rs.close();
+        pstmt.close();
         return SeasonList;
 
     }
@@ -140,6 +121,7 @@ public class SeasonDAO {
             SeasonList.add(season);
         }
         rs.close();
+        pstmt.close();
         return SeasonList;
     }
 
@@ -160,7 +142,7 @@ public class SeasonDAO {
 
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
-//            long ID = rs.getLong("ID");
+
             long ID_SERIE = rs.getLong("ID_SERIE");
             String SeasonName = rs.getString("NAME");
             String Description = rs.getString("Description");
@@ -193,13 +175,12 @@ public class SeasonDAO {
             File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
             File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
 
-//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
-
             season = new Season(ID,SeasonName,Description,fileSynopsis,ID_SERIE,num,DebutDate.toLocalDate(),fileThumbnail);
 
             SeasonList.add(season);
         }
         rs.close();
+        pstmt.close();
         return SeasonList;
 
     }
@@ -222,11 +203,9 @@ public class SeasonDAO {
         while (rs.next()) {
             long ID = rs.getLong("ID");
             String name = rs.getString("NAME");
-//            int num = rs.getInt("NUM");
-//            Date DebutDate = rs.getDate("DEBUT_DATE");
+
             Blob ThumbnailBlob = rs.getBlob("THUMBNAIL");
             InputStream SeasonThumbnail = ThumbnailBlob.getBinaryStream();
-//            InputStream SeasonSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
@@ -237,27 +216,13 @@ public class SeasonDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-//            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SeasonSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSeason"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSeason"+ID+".jpeg");
-
-//            List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(ID);
 
             season = new Season(ID,name,SerieID,fileThumb);
 
             SeasonList.add(season);
         }
         rs.close();
+        pstmt.close();
         return SeasonList;
 
     }
@@ -281,17 +246,21 @@ public class SeasonDAO {
             pstmt.setLong(2, season.getID());
 
             pstmt.executeUpdate();
-            //     pstmt.close();
-            //     conn.close();
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -308,18 +277,22 @@ public class SeasonDAO {
             pstmt.setBlob(1, inputStreamSynopsisSeason);
             pstmt.setLong(2,season.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return false;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
 
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -335,15 +308,19 @@ public class SeasonDAO {
             sql = "UPDATE SEASON SET Name = '" + nom + "' WHERE ID = " + season.getID();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -359,13 +336,18 @@ public class SeasonDAO {
             pstmt.setDate(1, Date.valueOf(date));
             pstmt.setLong(2,season.getID());
             pstmt.executeQuery();
-
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -375,58 +357,26 @@ public class SeasonDAO {
         String sql;
 
         try {
-
-
             sql = "UPDATE SEASON SET description = ? WHERE ID = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,description);
             pstmt.setLong(2,season.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
-
-//
-//    Was Moved to SeasonService and further optimised
-//
-//    public static long getScoreSeason(Season season) throws SQLException, IOException {
-//
-//        List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(season.getID());
-//
-//        List<Long> listScore = new ArrayList<>();
-//
-//        for(Episode episode : episodeList)
-//        {
-//            long score = EpisodeDAO2.getScoreEpisode(episode);
-//            listScore.add(score);
-//        }
-//
-//        return SeasonController.StreamAverageScore(listScore);
-//
-//    }
-
-
-//
-//    Was Moved to SeasonService and further optimised
-//
-//    public static long getViewNbrSeason(Season season) throws SQLException, IOException {
-//
-//        List<Episode> episodeList = EpisodeDAO2.FindEpisodeSeasonID(season.getID());
-//
-//        return SeasonController.StreamSumViewNumber(episodeList);
-//    }
-//
-
-
 
 
 }

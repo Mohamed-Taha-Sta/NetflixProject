@@ -111,7 +111,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="720.0" prefWidth="1017.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="720.0" prefWidth="371.0" spacing="20.0">
+                        <VBox alignment="CENTER" prefHeight="720.0" prefWidth="302.0" spacing="20.0">
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="10.0" top="10.0" />
                            </padding>
@@ -202,7 +202,7 @@
                                           <TableView id="Table" fx:id="MoviesTable" prefHeight="521.0" prefWidth="280.0" stylesheets="@../../../Style.css">
                                              <columns>
                                                 <TableColumn fx:id="MovieName" editable="false" prefWidth="208.0" text="Movie Name" />
-                                                <TableColumn fx:id="MovieScore" editable="false" prefWidth="90.0" text="Score in %" />
+                                                <TableColumn fx:id="MovieScore" editable="false" prefWidth="90.0" text="Score%" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -214,7 +214,7 @@
                                           <Label fx:id="MovieAlertText" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" prefHeight="420.0" prefWidth="269.0" spacing="20.0" HBox.hgrow="ALWAYS">
+                                    <VBox alignment="CENTER" prefHeight="574.0" prefWidth="357.0" spacing="20.0" HBox.hgrow="ALWAYS">
                                        <children>
                                           <HBox prefHeight="100.0" prefWidth="200.0">
                                              <children>
@@ -233,11 +233,12 @@
                                                 </ComboBox>
                                              </children>
                                           </HBox>
-                                          <TableView id="Table" fx:id="SeriesTable" onMouseClicked="#OnClickSeries" prefHeight="474.0" prefWidth="280.0" stylesheets="@../../../Style.css">
+                                          <TableView id="Table" fx:id="SeriesTable" onMouseClicked="#OnClickSeries" prefHeight="414.0" prefWidth="336.0" stylesheets="@../../../Style.css">
                                              <columns>
-                                                <TableColumn fx:id="SeriesName" editable="false" minWidth="0.0" prefWidth="110.0" text="Series Name" />
-                                                <TableColumn fx:id="numSaisons" editable="false" maxWidth="2500.0" minWidth="0.0" prefWidth="141.0" text="NumSea" />
-                                                <TableColumn fx:id="numEp" editable="false" maxWidth="2500.0" minWidth="0.0" prefWidth="58.0" text="NumEp" />
+                                                <TableColumn fx:id="SeriesName" editable="false" minWidth="0.0" prefWidth="165.0" text="Series Name" />
+                                                <TableColumn fx:id="Score" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="70.0" text="Score%" />
+                                                <TableColumn fx:id="numSaisons" editable="false" maxWidth="1700.0" minWidth="0.0" prefWidth="75.0" text="NumSea" />
+                                                <TableColumn fx:id="numEp" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="58.0" text="NumEp" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

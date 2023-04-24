@@ -1,6 +1,6 @@
 package Controllers.FXMLControllers;
 
-import Controllers.Avis_serieController;
+import Controllers.ScoreSeriesController;
 import Controllers.SeasonController;
 import Controllers.SerieController;
 import Entities.Season;
@@ -20,7 +20,6 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -96,6 +95,8 @@ public class AdminSeriesViewController implements Initializable {
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
+
+
         if (seasonList!=null)
             NumberOfVoters.setText(String.valueOf(ScoreSeriesController.GetNumberOfVotersSeason(seasonList)));
 

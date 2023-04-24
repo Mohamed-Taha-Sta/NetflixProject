@@ -5,9 +5,7 @@ import Controllers.ProducerController;
 import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
-import Utils.DataHolder;
-import Utils.DataHolderFilm;
-import Utils.DataHolderSeries;
+import Utils.*;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -121,7 +119,25 @@ public class ProducerLandingPageController implements Initializable {
 
     public void OnLogOutBtn() throws Exception {
         HelloApplication.SetRoot("LoginPage");
-        DataHolder.setUser(null);
+        DataHolder.setProducer(null);
+        DataHolder.setUserType(null);
+        DataHolder.setEmail(null);
+        DataHolder.setPassword(null);
+        DataHolderSeries.setSelectedSeries(null);
+        DataHolderSeries.setSeries(null);
+        DataHolderSeries.setMainActorsList(null);
+        DataHolderSeries.setSuppActorsList(null);
+        DataHolderSeason.setSelectedSeason(null);
+        DataHolderSeason.setPreviousPage(null);
+        DataHolderSeason.setSeasonObservableList(null);
+        DataHolderEpisode.setEpisodeOBList(null);
+        DataHolderEpisode.setPreviousPage(null);
+        DataHolderEpisode.setSelectedEpisode(null);
+        DataHolderFilm.setSelectedFilm(null);
+        DataHolderFilm.setCountryOfOrigin(null);
+        DataHolderFilm.setMainActorsList(null);
+        DataHolderFilm.setFilms(null);
+        DataHolderFilm.setAllTheActors(null);
     }
 
     public void OnPrenameBtn() {

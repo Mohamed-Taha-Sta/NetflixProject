@@ -2,7 +2,6 @@ package DAO;
 
 import Entities.*;
 import Utils.ConxDB;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -66,7 +65,7 @@ public class SerieDAO {
         }
         InsertMainActSerie(id,Serie.getIDMainactorList());
         InsertSuppActSerie(id,Serie.getIDSuppactorList());
-//        pstmt.close();
+        pstmt.close();
 //        conn.close();
         return id;
     }
@@ -97,7 +96,7 @@ public class SerieDAO {
 //            conn.close();
             return false;
         }
-//        pstmt.close();
+        pstmt.close();
 //        conn.close();
         return true;
     }
@@ -127,7 +126,7 @@ public class SerieDAO {
 //            conn.close();
             return false;
         }
-//        pstmt.close();
+        pstmt.close();
 //        conn.close();
         return true;
     }
@@ -148,8 +147,8 @@ public class SerieDAO {
             SerieID = rs.getLong("ID_SERIE");
         else
             System.out.println("Error getting SerieID");
-//        rs.close();
-//        pstmt.close();
+        rs.close();
+        pstmt.close();
 //        conn.close();
         return SerieID;
     }
@@ -173,17 +172,12 @@ public class SerieDAO {
 
             long ID = rs.getLong("ID_SERIE");
             long ID_PROD = rs.getLong("ID_PROD");
-//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-//            String Language = rs.getString("LANGUAGE");
-//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -194,22 +188,6 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-//
-//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
-
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
@@ -219,8 +197,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-//        rs.close();
-//        pstmt.close();
+        rs.close();
+        pstmt.close();
 //        conn.close();
         return serieList;
     }
@@ -291,9 +269,9 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-//        pstmt.close();
+        rs.close();
+        pstmt.close();
 //        conn.close();
-//        rs.close();
         return serieList;
     }
 
@@ -314,9 +292,9 @@ public class SerieDAO {
             listIDActor.add(IDActeurPrinc);
         }
         System.out.println("Got Main Actors = "+listIDActor);
-//        pstmtGetID.close();
+        rs.close();
+        pstmtGetID.close();
 //        conn.close();
-//        rs.close();
         return listIDActor;
     }
 
@@ -337,9 +315,9 @@ public class SerieDAO {
             listIDActor.add(IDActeurSupp);
         }
         System.out.println("Got Support Actors = "+listIDActor);
-//        pstmtGetID.close();
+        rs.close();
+        pstmtGetID.close();
 //        conn.close();
-//        rs.close();
         return listIDActor;
     }
 
@@ -347,13 +325,14 @@ public class SerieDAO {
         List<Actor> actorList = new ArrayList<>();
 
         String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
+        ResultSet rs = null;
 
         PreparedStatement pstmtGetID = conn.prepareStatement(sql);
 
         for(Long lo : IDactors)
         {
             pstmtGetID.setLong(1, lo);
-            ResultSet rs = pstmtGetID.executeQuery();
+            rs = pstmtGetID.executeQuery();
 
             if (rs.next())
             {
@@ -367,9 +346,11 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-//            rs.close();
+//
         }
-//        pstmtGetID.close();
+        assert rs != null;
+            rs.close();
+        pstmtGetID.close();
 //        conn.close();
         return actorList;
 
@@ -380,12 +361,14 @@ public class SerieDAO {
 
         String sql = "SELECT * FROM ACTOR WHERE ID_ACT = ?";
 
+        ResultSet rs = null;
+
         PreparedStatement pstmtGetID = conn.prepareStatement(sql);
 
         for(Long lo : IDactors)
         {
             pstmtGetID.setLong(1, lo);
-            ResultSet rs = pstmtGetID.executeQuery();
+            rs = pstmtGetID.executeQuery();
 
             if (rs.next())
             {
@@ -399,10 +382,11 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-//            rs.close();
 
         }
-//        pstmtGetID.close();
+        assert rs != null;
+            rs.close();
+        pstmtGetID.close();
 //        conn.close();
         return actorList;
 
@@ -431,17 +415,12 @@ public class SerieDAO {
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
             long ID_PROD = rs.getLong("ID_PROD");
-//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-//            String Language = rs.getString("LANGUAGE");
-//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -452,22 +431,6 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-//            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-//
-//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
-
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
@@ -477,9 +440,9 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-//        pstmt.close();
+        rs.close();
+        pstmt.close();
 //        conn.close();
-//        rs.close();
         return serieList;
     }
 
@@ -503,17 +466,12 @@ public class SerieDAO {
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
             long ID_PROD = rs.getLong("ID_PROD");
-//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-//            String Language = rs.getString("LANGUAGE");
-//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -523,23 +481,7 @@ public class SerieDAO {
             while ((length = SerieThumbnail.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-//
-//            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-//
-//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
-//
+
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
@@ -549,10 +491,10 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-//
-//        pstmt.close();
+
+        rs.close();
+        pstmt.close();
 //        conn.close();
-//        rs.close();
         return serieList;
 
     }
@@ -579,17 +521,12 @@ public class SerieDAO {
             long ID = rs.getLong("ID_SERIE");
             String SerieName = rs.getString("NAME");
             long ID_PROD = rs.getLong("ID_PROD");
-//            String DESCRIPTION = rs.getString("DESCRIPTION");
             Date DebutDate = rs.getDate("DEBUT_DATE");
-//            String Language = rs.getString("LANGUAGE");
-//            String Country = rs.getString("COUNTRY");
             Blob Thumbnail = rs.getBlob("IMAGE");
-//            int numsSeasons= rs.getInt("NUM_SEASONS");
             String StringGenre = rs.getString("LISTEGENRE");
             String[] genreArray = StringGenre.split(",");
             ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
             InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-//            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
 
             //Converting Blob Image to Jpeg File
             File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
@@ -600,21 +537,6 @@ public class SerieDAO {
                 outS.write(bufferImg, 0, length);
             }
 
-//            //Converting Blob Synopsis to video File .mp4
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
-//            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-//
-//            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
 
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
@@ -625,93 +547,15 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-//        pstmt.close();
+        rs.close();
+        pstmt.close();
 //        conn.close();
-//        rs.close();
         return serieList;
     }
 
 
 
 
-
-
-    ///////////////////////////////////////////////////// Fonction Fares
-//
-//    public static List<Serie> FindByproducer(Producer prod) {
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        List<Serie> list = new ArrayList<>();
-//        List<Serie> list1 = new ArrayList<>();
-//        long idprod = ProducerDAO.getprodId(prod.getNom(),prod.getPrenom());
-//
-//        String sql;
-//        try {
-//            sql = "SELECT ID_SERIE FROM SERIE WHERE id_prod = ?";
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setLong(1,idprod);
-//            rs = pstmt.executeQuery();
-//
-//            while (rs.next()) {
-//
-//                list = GetSerieByID(rs.getLong(1));
-//                for (int i = 0; i < list.size(); i++) {
-//                    list1.add(list.get(i));
-//                }
-//            }
-//        }catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        return list1;
-//    }
-//
-//    public static List<Serie> FindByActor(Actor act) {
-//        PreparedStatement pstmt = null;
-//        ResultSet rs = null;
-//        List<Serie> list = new ArrayList<>();
-//        List<Serie> list1 = new ArrayList<>();
-//        long idact=ActorDAO.getActId(act.getName(),act.getPrename());
-//
-//        String sql;
-//        try {
-//
-//            try{sql = "SELECT ID_SERIE FROM SERIEACTORSUPP WHERE id_act = ?";
-//                pstmt = conn.prepareStatement(sql);
-//                pstmt.setLong(1,idact);
-//                rs = pstmt.executeQuery();
-//
-//                while (rs.next()) {
-//
-//                    list = GetSerieByID(rs.getLong(1));
-//                    for (int i = 0; i < list.size(); i++) {
-//                        list1.add(list.get(i));
-//                    }
-//                }}catch (Exception e){
-//                System.out.println("Serie n'a pas d'acteurs secandaires");
-//            }
-//
-//            try{ sql = "SELECT ID_SERIE FROM SERIEACTORPRINC WHERE id_act = ?";
-//                pstmt = conn.prepareStatement(sql);
-//                pstmt.setLong(1,idact);
-//
-//                rs = pstmt.executeQuery();
-//
-//                while (rs.next()) {
-//
-//                    list = GetSerieByID(rs.getLong(1));
-//                    for (int i = 0; i < list.size(); i++) {
-//                        list1.add(list.get(i));
-//                    }
-//                }}catch (Exception e){
-//                System.out.println("Serie n'a pas d'acteurs principales");
-//            }
-//
-//        }catch (Exception ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        return list1;
-//
-//    }
 
 
 
@@ -726,11 +570,13 @@ public class SerieDAO {
             pstmt.executeUpdate();
             DeleteCorrespMainActorSerie(serie);
             DeleteCorrespSuppActorSerie(serie);
+            pstmt.close();
             return true;
 
         }catch (Exception e){
-            System.out.println("Serie n'exite pas");
-//            pstmt.close();
+            e.printStackTrace();
+            assert pstmt != null;
+            pstmt.close();
 //            conn.close();
             return false;
         }
@@ -749,9 +595,16 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
-//            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -768,6 +621,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -797,6 +658,14 @@ public class SerieDAO {
             return false;
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -824,6 +693,14 @@ public class SerieDAO {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
 
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -848,6 +725,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -874,6 +759,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -895,6 +788,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -917,6 +818,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -939,6 +848,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -961,6 +878,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -985,6 +910,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -1009,6 +942,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -1033,6 +974,15 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -1059,6 +1009,14 @@ public class SerieDAO {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
@@ -1116,8 +1074,8 @@ public class SerieDAO {
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
-//        rs.close();
-//        stmt.close();
+        rs.close();
+        stmt.close();
 //        conn.close();
         return serieList;
     }
@@ -1175,8 +1133,8 @@ public class SerieDAO {
         }
 
         // Close the ResultSet, PreparedStatement, and database connection
-//        rs.close();
-//        stmt.close();
+        rs.close();
+        stmt.close();
 //        conn.close();
         return serieList;
     }
@@ -1220,10 +1178,11 @@ public class SerieDAO {
 
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection
-//        rs.close();
-//        stmt.close();
+
 //        connection.close();
             }
+        rs.close();
+        stmt.close();
         return serieList;
     }
 
@@ -1262,6 +1221,21 @@ public class SerieDAO {
 
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return serieList;
 

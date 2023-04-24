@@ -16,12 +16,13 @@ public class EpisodeDAO2 {
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public EpisodeDAO2() throws SQLException {
+    public EpisodeDAO2() {
     }
 
-    public static long AddEpisode(Episode episode) throws SQLException, FileNotFoundException {
+    public static long AddEpisode(Episode episode) throws FileNotFoundException {
         String sql = null;
         long id = -1;
+        PreparedStatement pstmt = null;
 
         if (episode.getDescription() != null && episode.getSynopsis() != null) {
             sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR,Description,Synopsis) " +
@@ -34,7 +35,6 @@ public class EpisodeDAO2 {
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
 
-//        InputStream inputStream = new FileInputStream("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\LionTest.jpeg");
         InputStream inputStream = new FileInputStream(episode.getImage());
         InputStream inputStreamVideo = new FileInputStream(episode.getMedia());
         InputStream inputStreamSynopsis = null;
@@ -42,7 +42,7 @@ public class EpisodeDAO2 {
             inputStreamSynopsis = new FileInputStream(episode.getSynopsis());
 
         try {
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"ID"});
+            pstmt = conn.prepareStatement(sql, new String[]{"ID"});
 
             // Set the values for the parameters
             pstmt.setLong(1, episode.getSeasonParentID());
@@ -50,8 +50,8 @@ public class EpisodeDAO2 {
             pstmt.setString(3, episode.getName());
             pstmt.setDate(4, java.sql.Date.valueOf(episode.getDebutDate()));
             pstmt.setDate(5, java.sql.Date.valueOf(episode.getPremiereDate()));
-            pstmt.setBlob(6, inputStream); // replace inputStream with the actual image data
-            pstmt.setBlob(7, inputStreamVideo); // replace "https://example.com/video.mp4" with the actual video URL value
+            pstmt.setBlob(6, inputStream);
+            pstmt.setBlob(7, inputStreamVideo);
             pstmt.setLong(8, 0);
             pstmt.setLong(9, 0);
             pstmt.setLong(10, 0);
@@ -79,7 +79,15 @@ public class EpisodeDAO2 {
             // Handle errors for Class.forName
             e.printStackTrace();
             return -1;
-        }  // end finally try
+        } finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         return id;
 
@@ -91,8 +99,6 @@ public class EpisodeDAO2 {
 
         Episode episode = null;
 
-        Resume resume = null;
-
         String sql = "SELECT * FROM episodes WHERE id = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -102,7 +108,7 @@ public class EpisodeDAO2 {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
-            Long seasonID = rs.getLong("season_ID");
+            long seasonID = rs.getLong("season_ID");
             int episodeNumber = rs.getInt("NUM");
             long episodeViews = rs.getInt("VIEW_NBR");
             long episodeScore = rs.getInt("SCORE");
@@ -117,11 +123,6 @@ public class EpisodeDAO2 {
             InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
             InputStream episodeVideo = rs.getBinaryStream("video");
 
-            //Converting Blob into An Image
-//            byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
-//            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
-//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-
 
             //Converting Blob into An JPEG File
             File fileImg = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
@@ -131,15 +132,6 @@ public class EpisodeDAO2 {
             while ((length = episodeImage.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
-            //DO NOT DELETE THIS CODE
-            //            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
-            //
-            //            try {
-            //                ImageIO.write(bufferedImage, "jpeg", outputFile);
-            //            } catch (IOException e) {
-            //                // Handle the exception
-            //            }
 
             //Handeling the Video, from inputStream
             Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
@@ -154,8 +146,6 @@ public class EpisodeDAO2 {
             }
             File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
             File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
-
-//            System.out.println(episodeSynopsis);
 
             File fileSynopsis = null;
             //Handeling Synopsis Export
@@ -176,7 +166,8 @@ public class EpisodeDAO2 {
             episodeList.add(episode);
 
         }
-
+        rs.close();
+        pstmt.close();
         return episodeList;
     }
 
@@ -202,6 +193,7 @@ public class EpisodeDAO2 {
             episodeList.add(episode);
         }
         rs.close();
+        pstmt.close();
         return episodeList;
     }
 
@@ -228,6 +220,7 @@ public class EpisodeDAO2 {
             episodeList.add(episode);
         }
         rs.close();
+        pstmt.close();
         return episodeList;
     }
 
@@ -253,22 +246,11 @@ public class EpisodeDAO2 {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
             Long seasonID = rs.getLong("season_ID");
-//            int episodeNumber = rs.getInt("NUM");
-//            long episodeViews = rs.getLong("VIEW_NBR");
-//            long episodeScore = rs.getLong("SCORE");
-//            long episodeVotes = rs.getLong("VOTES");
+
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImageB = rs.getBlob("image");
             InputStream episodeImage = episodeImageB.getBinaryStream();
-//            String Description = rs.getString("Description");
-//            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
-//            InputStream episodeVideo = rs.getBinaryStream("video");
-
-            //Converting Blob into An Image
-//                    byte[] imageData = episodeImage.getBytes(1, (int) episodeImage.length());
-//                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
-//                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 
             //Converting Blob Image to Jpeg File
             File fileImg = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
@@ -279,49 +261,12 @@ public class EpisodeDAO2 {
                 outS.write(bufferImg, 0, length);
             }
 
-            //DO NOT DELETE THIS CODE
-            //            File outputFile = new File("C:\\Users\\Taha\\IdeaProjects\\NetflixProject1\\src\\main\\java\\Test\\test.jpeg");
-            //
-            //            try {
-            //                ImageIO.write(bufferedImage, "jpeg", outputFile);
-            //            } catch (IOException e) {
-            //                // Handle the exception
-            //            }
-
-//            //Handeling the Video, from inputStream
-//            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
-//            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
-//                    outputStream.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the video");
-//            }
-//            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
-//            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
-
-//
-//
-//            File fileSynopsis = null;
-//            //Handeling Synopsis Export
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-
             episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
 
             episodeList.add(episode);
         }
+        rs.close();
+        pstmt.close();
         return episodeList;
     }
 
@@ -342,18 +287,12 @@ public class EpisodeDAO2 {
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             Long ID = rs.getLong("ID");
-//            int episodeNumber = rs.getInt("NUM");
-//            long episodeViews = rs.getInt("VIEW_NBR");
-//            long episodeScore = rs.getInt("SCORE");
-//            long episodeVotes = rs.getInt("VOTES");
+
             String EpisodeName = rs.getString("NAME");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImageB = rs.getBlob("image");
             InputStream episodeImage = episodeImageB.getBinaryStream();
-//            String Description = rs.getString("Description");
-//            InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
-//            InputStream episodeVideo = rs.getBinaryStream("video");
 
             //Converting Blob Image to Jpeg File
             File fileImg = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
@@ -364,42 +303,13 @@ public class EpisodeDAO2 {
                 outS.write(bufferImg, 0, length);
             }
 
-//            //Handeling the Video, from inputStream
-//            Path outputFilePath = Paths.get("src/main/java/Temp/VideoEp" + ID + ".mp4");
-//            try (OutputStream outputStream = Files.newOutputStream(outputFilePath)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = episodeVideo.read(buffer)) != -1) {
-//                    outputStream.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the video");
-//            }
-//
-//            File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
-//            File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
-//
-
-//            File fileSynopsis = null;
-            //Handeling Synopsis Export
-//            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-//            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
-//                byte[] buffer = new byte[4096];
-//                int bytesRead;
-//                while ((bytesRead = episodeSynopsis.read(buffer)) != -1) {
-//                    outputStreamSynopsis.write(buffer, 0, bytesRead);
-//                }
-//            } catch (IOException e) {
-//                System.out.println("Error Handelling the Synopsis");
-//            }
-//            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-
             episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
 
             episodeList.add(episode);
 
         }
-
+        rs.close();
+        pstmt.close();
         return episodeList;
     }
 
@@ -426,6 +336,21 @@ public class EpisodeDAO2 {
         }catch (Exception e){
             System.out.println("Episode "+ep.getID()+" vote retrieval failed");
             return -1;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return nbrVotes;
     }
@@ -452,6 +377,21 @@ public class EpisodeDAO2 {
         }catch (Exception e){
             System.out.println("Episode "+ep.getID()+" score retrieval failed");
             return -1;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return score;
     }
@@ -478,6 +418,21 @@ public class EpisodeDAO2 {
         }catch (Exception e){
             System.out.println("Episode "+ep.getID()+" view number retrieval failed");
             return -1;
+        }finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return nbr_view;
     }
@@ -498,6 +453,12 @@ public class EpisodeDAO2 {
         {
             e.printStackTrace();
             return false;
+        }finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return true;
@@ -519,6 +480,12 @@ public class EpisodeDAO2 {
         {
             e.printStackTrace();
             return false;
+        }finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return true;
     }
@@ -665,17 +632,21 @@ public class EpisodeDAO2 {
             pstmt.setLong(2, episode.getID());
 
             pstmt.executeUpdate();
-            //     pstmt.close();
-            //     conn.close();
 
             return true;
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -691,26 +662,28 @@ public class EpisodeDAO2 {
             pstmt.setBlob(1, inputStreamSynopsisEpisode);
             pstmt.setLong(2,episode.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("error dans la connection de la base"+e.getMessage());
-//            pstmt.close();
-//            conn.close();
             return false;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
+        }finally {
 
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
 
     public static boolean modifVideo(Episode episode,File NewVideo) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -720,25 +693,27 @@ public class EpisodeDAO2 {
             pstmt.setBlob(1, inputStreamSynopsisEpisode);
             pstmt.setLong(2,episode.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base"+e.getMessage());
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
 
     public static boolean modifNom(Episode episode, String nom) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -748,8 +723,7 @@ public class EpisodeDAO2 {
             pstmt.setString(1,nom);
             pstmt.setLong(2,episode.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
+
 
             return true;
         } catch (SQLException e) {
@@ -757,13 +731,20 @@ public class EpisodeDAO2 {
 //            pstmt.close();
 //            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
 
     public static boolean modifDebutDate(Episode episode, LocalDate date) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -776,19 +757,21 @@ public class EpisodeDAO2 {
 
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base"+e.getMessage());
-
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-
-
     public static boolean modifPremiereDate(Episode episode, LocalDate date) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -802,16 +785,21 @@ public class EpisodeDAO2 {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base"+e.getMessage());
-//            pstmt.close();
-//            conn.close();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
 
     public static boolean modifDescription(Episode episode,String description) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -820,21 +808,19 @@ public class EpisodeDAO2 {
             pstmt.setString(1,description);
             pstmt.setLong(2,episode.getID());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
-
             return true;
         } catch (SQLException e) {
-            System.out.println("error dans la connection de la base"+e.getMessage());
-//            pstmt.close();
-//            conn.close();
+            e.printStackTrace();
             return false;
+        }finally {
+            if (pstmt != null) {
+                try {
+                    pstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
-
-
-
-
 
 }

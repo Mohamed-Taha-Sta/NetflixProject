@@ -1,13 +1,13 @@
 package Controllers.FXMLControllers;
 
 import Controllers.*;
+import Entities.Episode;
 import Entities.Season;
+import Services.SerieService;
+import Utils.*;
 import javafx.event.EventHandler;
 import Entities.Film;
 import Entities.Serie;
-import Utils.DataHolder;
-import Utils.DataHolderFilm;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -54,6 +54,7 @@ public class AdminLandingPageController implements Initializable {
     public TableColumn<Serie,String> SeriesName;
     public TableColumn<Serie,String> numSaisons;
     public TableColumn <Serie,String> numEp;
+    public TableColumn <Serie,Double> Score;
     public Label SeriesAlertText;
     public Button AddMovie;
     public Button AddSeries;
@@ -81,6 +82,25 @@ public class AdminLandingPageController implements Initializable {
     public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setAdmin(null);
+        DataHolder.setActor(null);
+        DataHolder.setUserType(null);
+        DataHolder.setEmail(null);
+        DataHolder.setPassword(null);
+        DataHolderSeries.setSelectedSeries(null);
+        DataHolderSeries.setSeries(null);
+        DataHolderSeries.setMainActorsList(null);
+        DataHolderSeries.setSuppActorsList(null);
+        DataHolderSeason.setSelectedSeason(null);
+        DataHolderSeason.setPreviousPage(null);
+        DataHolderSeason.setSeasonObservableList(null);
+        DataHolderEpisode.setEpisodeOBList(null);
+        DataHolderEpisode.setPreviousPage(null);
+        DataHolderEpisode.setSelectedEpisode(null);
+        DataHolderFilm.setSelectedFilm(null);
+        DataHolderFilm.setCountryOfOrigin(null);
+        DataHolderFilm.setMainActorsList(null);
+        DataHolderFilm.setFilms(null);
+        DataHolderFilm.setAllTheActors(null);
     }
 
     public void OnPrenameBtn(ActionEvent actionEvent) {
@@ -213,6 +233,7 @@ public class AdminLandingPageController implements Initializable {
             throw new RuntimeException(e);
         }
 
+
         YearSelect.getItems().addAll(yearList);
         YearSelect.setValue("All");
 
@@ -222,6 +243,7 @@ public class AdminLandingPageController implements Initializable {
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         numSaisons.setCellValueFactory(new PropertyValueFactory<>("SeasonNumber"));
         numEp.setCellValueFactory(new PropertyValueFactory<>("EpisodeNumber"));
+        Score.setCellValueFactory(new PropertyValueFactory<>("Score"));
 
 
         if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
@@ -229,13 +251,20 @@ public class AdminLandingPageController implements Initializable {
             for (Serie serie:uniqueSeries)
             {
                 try {
+                    serie.setScore(SerieService.StreamAverageScore(serie));
+                } catch (SQLException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                try {
                     serie.setSeasonNumber(SeasonController.StreamSpecificSeasons(serie.getId()));
                     List<Season> listSeason = SeasonController.FindSeasonSerieID(serie.getId());
                     for(Season season: listSeason)
-                        serie.setEpisodeNumber(EpisodeController.StreamSpecificEpisodes(season.getID()));
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e) {
+                        {
+                            serie.setEpisodeNumber(EpisodeController.StreamSpecificEpisodes(season.getID()));
+
+                        }
+                } catch (SQLException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -257,6 +286,10 @@ public class AdminLandingPageController implements Initializable {
 
         MoviesTable.setItems(Films);
         SeriesTable.setItems(Series);
+        SeriesTable.getSortOrder().add(Score);
+        Score.setSortType(TableColumn.SortType.DESCENDING);
+
+        SeriesTable.sort();
 
         YearSelect.setOnKeyPressed(new EventHandler<KeyEvent>()
         {

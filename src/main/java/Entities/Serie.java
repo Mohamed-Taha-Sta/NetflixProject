@@ -9,6 +9,7 @@ public class Serie extends Content{
     private long ID_PROD;
     private File synopsis;
     private long EpisodeNumber;
+    private double Score;
     private List<Season> seasonList;
     private List<Actor> actorList;
     private List<Long> IDMainactorList;
@@ -118,6 +119,15 @@ public class Serie extends Content{
 
     public void setEpisodeNumber(long episodeNumber) {
         EpisodeNumber = episodeNumber;
+    }
+
+
+    public double getScore() {
+        return Score;
+    }
+
+    public void setScore(double score) {
+        Score = score;
     }
 
     public Serie() {

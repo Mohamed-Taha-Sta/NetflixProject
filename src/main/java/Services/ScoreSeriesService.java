@@ -8,6 +8,7 @@ import Entities.Season;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScoreSeriesService {
 
@@ -28,4 +29,18 @@ public class ScoreSeriesService {
     }
 
 
+    public static Double GetSeriesScore(List<Season> seasonList) {
+        return seasonList.stream()
+                .map(season -> {
+                    try {
+                        return ScoreSeasonController.GetSeasonScore(season);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return 0D;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return 0D;
+                    }
+                }).collect(Collectors.averagingDouble(Double::doubleValue));
+    }
 }

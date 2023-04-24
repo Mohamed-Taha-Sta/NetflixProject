@@ -6,6 +6,7 @@ import Services.ScoreEpisodeService;
 import Services.ScoreSeasonService;
 import Services.SeasonService;
 import Utils.DataHolderSeason;
+import Utils.DataHolderSeries;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,5 +19,12 @@ public class ScoreSeasonController {
 
         return ScoreSeasonService.GetNumberOfVotersSeason(episodeList);
     }
+
+    public static Double GetSeasonScore(Season season) throws SQLException, IOException {
+        List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
+        return ScoreSeasonService.GetSeasonScore(episodeList);
+    }
+
+
 
 }
