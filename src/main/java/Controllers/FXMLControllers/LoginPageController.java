@@ -28,27 +28,29 @@ public class LoginPageController implements Initializable {
 
     @FXML
     private TextField Password;
-    @FXML
-    protected  void onSignIn() throws Exception{
 
-        if(mail.getText().isEmpty()||Password.getText().isEmpty()){
+    @FXML
+    protected void onSignIn() throws Exception {
+
+        if (mail.getText().isEmpty() || Password.getText().isEmpty()) {
             showErrorMessage("Must fill all fields");
-        }else if(isTextExceedingLength(mail,100)|| isTextExceedingLength(Password,100)){
-            showErrorMessage("Text TOOOOO long");
-        }
-        else if (UserController.authenticate(mail.getText(),Password.getText())){
+        } else if (isTextExceedingLength(mail, 50)) {
+            showErrorMessage("Mail field is too long");
+        } else if (isTextExceedingLength(Password, 50)) {
+            showErrorMessage("Password field is too long");
+        } else if (UserController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("User");
             HelloApplication.SetRoot("HomePage");
-        } else if (ActorController.authenticate(mail.getText(),Password.getText())) {
+        } else if (ActorController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("Actor");
             System.out.println("Logged as Actor");
             HelloApplication.SetRoot("ActorLandingPage");
-        } else if (ProducerController.authenticate(mail.getText(),Password.getText())) {
+        } else if (ProducerController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("Producer");
             System.out.println("Logged as Producer");
             HelloApplication.SetRoot("ProducerLandingPage");
 
-        } else if (AdminController.authenticate(mail.getText(),Password.getText())) {
+        } else if (AdminController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("Admin");
             System.out.println("Logged as Admin");
             HelloApplication.SetRoot("AdminLandingPage");
@@ -62,7 +64,7 @@ public class LoginPageController implements Initializable {
     }
 
     @FXML
-    protected void onSignUp() throws Exception{
+    protected void onSignUp() throws Exception {
 
         HelloApplication.SetRoot("RegisterPage");
     }

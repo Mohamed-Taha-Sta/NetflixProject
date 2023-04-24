@@ -18,11 +18,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import static Utils.RepeatableFunction.isTextExceedingLength;
 
 public class ProducerLandingPageController implements Initializable {
 
@@ -49,9 +52,9 @@ public class ProducerLandingPageController implements Initializable {
     public Label AlertText;
 
     public TableView<Film> MoviesTable = new TableView<>();
-    public TableColumn<Film,String> MovieName;
+    public TableColumn<Film, String> MovieName;
     public TableView<Serie> SeriesTable = new TableView<>();
-    public TableColumn<Film,String> SeriesName;
+    public TableColumn<Film, String> SeriesName;
 
 
     //Password Menu
@@ -73,14 +76,13 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-
-    public void OnProfilebtn()  {
+    public void OnProfilebtn() {
         ProfileMenu.setVisible(true);
         PassMenu.setVisible(false);
     }
 
 
-    public void OnPassbtn()  {
+    public void OnPassbtn() {
         ProfileMenu.setVisible(false);
         PassMenu.setVisible(true);
     }
@@ -89,12 +91,9 @@ public class ProducerLandingPageController implements Initializable {
     public void OnClickMovie() throws Exception {
 
         Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
-        if (selectedMovie == null)
-        {
+        if (selectedMovie == null) {
             MovieAlertText.setText("No movie was selected");
-        }
-        else
-        {
+        } else {
             DataHolderFilm.setSelectedFilm(selectedMovie);
             HelloApplication.SetRoot("ProducerFilmView");
         }
@@ -104,12 +103,9 @@ public class ProducerLandingPageController implements Initializable {
     public void OnClickSeries() throws Exception {
 
         Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
-        if (selectedSeries == null)
-        {
+        if (selectedSeries == null) {
             SeriesAlertText.setText("No Series was selected");
-        }
-        else
-        {
+        } else {
             DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(selectedSeries.getId()).get(0));
             HelloApplication.SetRoot("ProducerSeriesView");
         }
@@ -142,9 +138,11 @@ public class ProducerLandingPageController implements Initializable {
 
     public void OnPrenameBtn() {
         if (prenameField.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your FirstName field is empty");
+            showErrorMessage(AlertText, "Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField, 50)) {
+            showErrorMessage(AlertText, "First Name field is too long");
         } else {
-            ProducerController.modifprenom(DataHolder.getProducer().getId(),prenameField.getText());
+            ProducerController.modifprenom(DataHolder.getProducer().getId(), prenameField.getText());
             DataHolder.getProducer().setPrenom(prenameField.getText());
             PrenameLable.setText(prenameField.getText());
             ProfileName.setText(DataHolder.getProducer().getNom() + " " + DataHolder.getProducer().getPrenom());
@@ -152,45 +150,51 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-    public void OnMailBtn()  {
+    public void OnMailBtn() {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
+        } else if (isTextExceedingLength(mailfield, 50)) {
+            showErrorMessage(AlertText, "Email field is too long");
         } else {
-            ProducerController.modifmail(DataHolder.getProducer().getId(),mailfield.getText());
+            ProducerController.modifmail(DataHolder.getProducer().getId(), mailfield.getText());
             DataHolder.getProducer().setEmail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
         }
     }
 
 
-    public void OnNameBtn()  {
+    public void OnNameBtn() {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
-            showErrorMessage( AlertText,"Your LastName field is empty");
+            showErrorMessage(AlertText, "Your LastName field is empty");
+        } else if (isTextExceedingLength(namefield, 50)) {
+            showErrorMessage(AlertText, "Last Name field is too long");
         } else {
-            ProducerController.modifnom(DataHolder.getProducer().getId(),namefield.getText());
+            ProducerController.modifnom(DataHolder.getProducer().getId(), namefield.getText());
             DataHolder.getProducer().setNom(namefield.getText());
             NameLabel.setText(namefield.getText());
             ProfileName.setText(DataHolder.getProducer().getNom() + " " + DataHolder.getProducer().getPrenom());
         }
     }
 
-    public void OnConfirm()  {
+    public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
         } else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
+        } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
+            showErrorMessage(passAlert, "Password field is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showErrorMessage(passAlert, "Your confirm password is wrong!");
 
         } else if (newPass.getText().equals(OldPass.getText())) {
             showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getProducer().getpassword())) {
-            showErrorMessage(passAlert,"Wrong Password!");
+            showErrorMessage(passAlert, "Wrong Password!");
         } else {
-            ProducerController.modifpassword(DataHolder.getProducer().getId(),newPass.getText());
-            showErrorMessage(passAlert,"Your password was changed Successfully!");
+            ProducerController.modifpassword(DataHolder.getProducer().getId(), newPass.getText());
+            showErrorMessage(passAlert, "Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");
             newPass.setText("");
@@ -198,11 +202,10 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-
     public ProducerLandingPageController() throws SQLException, IOException {
     }
 
-    public static ObservableList<Serie> Series ;
+    public static ObservableList<Serie> Series;
     public static ObservableList<Film> Films;
 
 
@@ -229,7 +232,7 @@ public class ProducerLandingPageController implements Initializable {
 
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
-        if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
+        if (DataHolderSeries.getSeries() == null || DataHolderSeries.getSeries().isEmpty()) {
 
             List<Serie> seriesList = null;
             try {
@@ -245,7 +248,7 @@ public class ProducerLandingPageController implements Initializable {
             DataHolderSeries.setSeries(Series);
         }
 
-        if (DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
+        if (DataHolderFilm.getFilms() == null || DataHolderFilm.getFilms().isEmpty()) {
 
             List<Film> filmList = null;
             filmList = FilmController.FindByproducer(DataHolder.getProducer());
@@ -266,10 +269,6 @@ public class ProducerLandingPageController implements Initializable {
 //        if ((Films == null)||(Films.isEmpty())||(!Films.equals(DataHolderFilm.getFilms()))) {
 //            Films = FXCollections.observableList(FilmController.FindByproducer(DataHolder.getProducer()));
 //        }
-
-
-
-
 
 
     }
