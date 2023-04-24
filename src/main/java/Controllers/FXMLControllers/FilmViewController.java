@@ -56,8 +56,6 @@ public class FilmViewController implements Initializable {
     @FXML
     public Button EditBtn;
     @FXML
-    public Button SaveBtn;
-    @FXML
     public Button DeleteBtn;
     @FXML
     public VBox SeasonView;
@@ -166,10 +164,6 @@ public class FilmViewController implements Initializable {
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", 40);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
-
-        if(prod==null){
-            prod= ProducerController.getProdByID(DataHolderFilm.getSelectedFilm().getId_realisateur());
-        }
         InfoSetter();
     }
 }
