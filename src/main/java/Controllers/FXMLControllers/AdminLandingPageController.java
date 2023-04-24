@@ -82,7 +82,6 @@ public class AdminLandingPageController implements Initializable {
     public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setAdmin(null);
-        DataHolder.setActor(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
         DataHolder.setPassword(null);

@@ -48,7 +48,7 @@ public class FilmDAO {
             pstmt.setBlob(7,inputStreamSynopsisimg);
             pstmt.setString(8, film.getDuree());
             pstmt.setLong(9,film.getVueNbr());
-            pstmt.setLong(10,film.getScore());
+            pstmt.setDouble(10,film.getScore());
             pstmt.setLong(11,film.getVotes());
             pstmt.setBlob(12,inputStreamSynopsissynops);
             pstmt.setBlob(13,inputStreamSynopsisfilm);

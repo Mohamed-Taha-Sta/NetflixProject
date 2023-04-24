@@ -169,7 +169,7 @@ public class AdminDAO {
     public static Long consult_score_film(Film film) {
         return FilmDAO.getscore(film);
     }
-    public static Long consult_score_filmpourcentage(Film film) {
+    public static double consult_score_filmpourcentage(Film film) {
         return FilmService.getscorepourcantage(film);
     }
     public static Long consult_vote_film(Film film) {

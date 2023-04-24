@@ -25,6 +25,9 @@ public class ScoreFilmController {
     public static double  GetFilmScore(Film film){
         return ScoreFilmService.GetFilmScore(film);
     }
+    public static double  GetFilmScorePourcentage(Film film){
+        return Math.round(ScoreFilmController.GetFilmScore(film)*20);
+    }
     public static double RetrieveUserScore(Film film, User user){
         return ScoreFilmDAO.RetrieveUserScore(film, user);
     }

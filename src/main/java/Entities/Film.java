@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Controllers.ScoreFilmController.GetFilmScorePourcentage;
+
 public class Film extends Content{
     private String duree;
     private ArrayList<Actor>acteur;
@@ -34,8 +36,8 @@ public class Film extends Content{
         VueNbr = vueNbr;
     }
 
-    public long getScore() {
-        return Score;
+    public double getScore() {
+        return GetFilmScorePourcentage(this);
     }
 
     public void setScore(long score) {

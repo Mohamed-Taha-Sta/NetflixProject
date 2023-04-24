@@ -29,10 +29,8 @@ public class SeasonService {
         int numVotes = episodeList.stream()
                 .mapToInt(episode -> ScoreEpisodeService.GetNumberVotesEpisode(episode))
                 .sum();
-        double averageScore = listScore.stream()
-                .collect(Collectors.averagingDouble(Double::doubleValue));
-        double percentage = numVotes * 5.0;
-        return  Math.round(averageScore / percentage * 100.0);
+        return Math.round(listScore.stream()
+                .collect(Collectors.averagingDouble(Double::doubleValue)));
     }
 
 
@@ -53,7 +51,7 @@ public class SeasonService {
    public static List<Double> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
 
         return episodeList.stream()
-                .map(episode -> ScoreEpisodeController.GetEpisodeScore(episode))
+                .map(ScoreEpisodeController::GetEpisodeScore)
                 .collect(Collectors.toList());
     }
 

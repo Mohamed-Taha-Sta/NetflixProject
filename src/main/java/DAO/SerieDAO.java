@@ -384,8 +384,8 @@ public class SerieDAO {
             }
 
         }
-        assert rs != null;
-            rs.close();
+//        assert rs != null;
+//            rs.close();
         pstmtGetID.close();
 //        conn.close();
         return actorList;

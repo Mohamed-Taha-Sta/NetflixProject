@@ -32,6 +32,6 @@ public class ScoreEpisodeController {
         return ScoreEpisodeService.Update_Score(episode, user, score);
     }
     public static double GetEpisodeScore(Episode episode){
-        return ScoreEpisodeService.GetEpisodeScore(episode);
+        return Math.round(ScoreEpisodeService.GetEpisodeScore(episode)*20);
     }
 }

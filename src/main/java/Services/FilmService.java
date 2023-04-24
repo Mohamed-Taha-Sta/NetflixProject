@@ -49,10 +49,8 @@ public class FilmService {
         return FilmDAO.getMostRecentFilm(numSeries);
     }
 
-    public static Long getscorepourcantage(Film film){
-        Long socore=film.getScore();
-        Long votesTotal=film.getVotes();
-        return((socore*100)/votesTotal);
+    public static double getscorepourcantage(Film film){
+        return film.getScore();
     }
 
     public static boolean modifnom(Film film,String nom) {

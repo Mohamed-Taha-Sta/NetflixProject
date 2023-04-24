@@ -43,6 +43,11 @@
                                           <Font name="Calibri Bold" size="36.0" />
                                        </font>
                                     </Label>
+                                    <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="47.0" prefWidth="527.0" text="Opinion List:" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="Calibri Bold" size="36.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </HBox>
                               <HBox prefHeight="495.0" prefWidth="992.0">
@@ -111,7 +116,11 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <ListView fx:id="opinionList" prefHeight="471.0" prefWidth="492.0" stylesheets="@../../../Style.css" />
+                                    <VBox prefHeight="471.0" prefWidth="495.0">
+                                       <children>
+                                          <ListView fx:id="opinionList" prefHeight="449.0" prefWidth="495.0" stylesheets="@../../../Style.css" />
+                                       </children>
+                                    </VBox>
                                  </children>
                               </HBox>
                            </children>
