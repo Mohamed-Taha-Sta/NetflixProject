@@ -22,6 +22,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
@@ -396,12 +398,16 @@ public class ProfilePageController implements Initializable {
             for(Serie s:series){
                 Label label=new Label();
                 label.setText("A new Episode of  " + s.getNom()+ " has been released");
+                label.setTextFill(Color.WHITE);
+                label.setOpacity(1);
                 NotificationPane.getChildren().add(label);
             }
         }
         else{
             Label label=new Label();
             label.setText("No new Notifications");
+            label.setTextFill(Color.WHITE);
+            label.setOpacity(1);
             NotificationPane.getChildren().add(label);
         }
 

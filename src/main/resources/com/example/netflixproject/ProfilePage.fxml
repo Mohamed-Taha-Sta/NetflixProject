@@ -34,10 +34,13 @@
                               <Insets />
                            </HBox.margin>
                         </Button>
-                        <ImageView fx:id="Profile_Image" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#OnProfileImage" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="Profile_Image" fitHeight="114.0" fitWidth="114.0" onMouseClicked="#OnProfileImage" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../Images/profilepicture.png" />
+                              <Image url="@../../../Images/UserIcon.png" />
                            </image>
+                           <HBox.margin>
+                              <Insets top="10.0" />
+                           </HBox.margin>
                         </ImageView>
                      </children>
                   </HBox>
@@ -269,10 +272,13 @@
             </AnchorPane>
             <AnchorPane fx:id="NotificationMenu" disable="true" layoutX="228.0" layoutY="10.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <padding>
-                  <Insets bottom="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" right="10.0" />
                </padding>
                <children>
-                  <VBox fx:id="NotificationPane" prefHeight="690.0" prefWidth="1000.0" />
+                  <VBox fx:id="NotificationPane" prefHeight="690.0" prefWidth="1000.0">
+                     <padding>
+                        <Insets top="50.0" />
+                     </padding></VBox>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="PassMenu" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
