@@ -72,7 +72,7 @@
                                           </HBox>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0" HBox.hgrow="SOMETIMES">
+                                    <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="300.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                           <Rating id="rating" fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
@@ -106,10 +106,10 @@
                               <HBox spacing="10.0">
                                  <children>
                                     <TextArea fx:id="FilmOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here.." wrapText="true" />
-                                    <VBox alignment="TOP_CENTER" spacing="15.0">
+                                    <VBox alignment="TOP_CENTER" spacing="3.0">
                                        <children>
                                           <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" prefHeight="22.0" prefWidth="55.0" text="Edit" />
-                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="55.0" text="Submit" />
+                                          <Button fx:id="SubmitBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="55.0" text="Submit" />
                                           <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" prefHeight="22.0" prefWidth="55.0" text="Delete" />
                                        </children>
                                     </VBox>

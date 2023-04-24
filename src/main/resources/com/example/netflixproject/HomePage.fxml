@@ -65,7 +65,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" fillHeight="false">
                                              <children>
-                                                <SearchableComboBox id="HomeBar" fx:id="searchBar" minHeight="35.0" minWidth="220.0" stylesheets="@../../../Style.css">
+                                                <SearchableComboBox id="HomeBar" fx:id="searchBar" prefHeight="31.0" prefWidth="250.0" promptText="Search here..." stylesheets="@../../../Style.css">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>
@@ -79,6 +79,9 @@
                                                    <HBox.margin>
                                                       <Insets right="10.0" />
                                                    </HBox.margin>
+                                                   <image>
+                                                      <Image url="@../../../Images/UserIcon.png" />
+                                                   </image>
                                                 </ImageView>
                                              </children>
                                           </HBox>

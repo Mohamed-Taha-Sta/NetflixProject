@@ -60,7 +60,7 @@ public class SeasonViewController implements Initializable {
     @FXML
     public VBox EpisodeView;
     public Button SubmitBtn;
-    public Button Delete;
+    public Button DeleteBtn;
 
     List<Episode> episodes;
 
@@ -84,7 +84,7 @@ public class SeasonViewController implements Initializable {
     }
 
     public void InfoSetter() throws SQLException, IOException {
-        SeasonName.setText(DataHolderSeries.getSelectedSeries().getNom() + " " + DataHolderSeason.getSelectedSeason().getName());
+        SeasonName.setText(DataHolderSeason.getSelectedSeason().getName());
         System.out.println("SeasonDescription: " + DataHolderSeason.getSelectedSeason().getDescription());
         Description.setText(DataHolderSeason.getSelectedSeason().getDescription());
         dateLabel.setText(DataHolderSeason.getSelectedSeason().getDebutDate().format(formatter));

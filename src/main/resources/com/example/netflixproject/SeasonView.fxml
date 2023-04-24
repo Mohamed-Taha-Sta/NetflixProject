@@ -61,7 +61,7 @@
                                                         <Insets bottom="10.0" top="10.0" />
                                                     </HBox.margin>
                                                 </ImageView>
-                                                <VBox alignment="CENTER_LEFT" spacing="25.0" HBox.hgrow="SOMETIMES">
+                                                <VBox alignment="CENTER_LEFT" prefHeight="160.0" prefWidth="618.0" spacing="25.0" HBox.hgrow="NEVER">
                                                     <children>
                                                         <Label id="Title" fx:id="SeasonName" text="Title" wrapText="true" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -72,7 +72,7 @@
                                                         </HBox>
                                                     </children>
                                                 </VBox>
-                                                <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="260.0" spacing="10.0">
+                                                <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="300.0" spacing="10.0">
                                                     <children>
                                                         <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
@@ -111,11 +111,11 @@
                                         <HBox spacing="10.0">
                                             <children>
                                                 <TextArea fx:id="SeasonOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here..." wrapText="true" />
-                                                <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="58.0" spacing="10.0">
+                                                <VBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="58.0" spacing="3.0">
                                                     <children>
-                                                        <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
-                                                        <Button fx:id="SubmitBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="61.0" text="Submit" />
-                                                        <Button fx:id="Delete" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
+                                                        <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" prefHeight="22.0" prefWidth="55.0" text="Edit" />
+                                                        <Button fx:id="SubmitBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="55.0" text="Submit" />
+                                                        <Button id="DeleteBtn" fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" prefHeight="22.0" prefWidth="55.0" text="Delete" />
                                                     </children>
                                                 </VBox>
                                             </children>

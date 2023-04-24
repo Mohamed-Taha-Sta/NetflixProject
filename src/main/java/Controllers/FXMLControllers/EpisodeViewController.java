@@ -101,7 +101,7 @@ public class EpisodeViewController implements Initializable {
     }
 
     public void InfoSetter(){
-        EpisodeName.setText(DataHolderSeries.getSelectedSeries().getNom()+" "+ DataHolderSeason.getSelectedSeason().getName()+" "+ DataHolderEpisode.getSelectedEpisode().getName());
+        EpisodeName.setText(DataHolderEpisode.getSelectedEpisode().getName());
         DirectLabel.setText(prod.getNom() + " " + prod.getPrenom());
         dateLabel.setText(DataHolderEpisode.getSelectedEpisode().getPremiereDate().format(formatter));
         Description.setText(DataHolderEpisode.getSelectedEpisode().getDescription());
