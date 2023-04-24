@@ -490,11 +490,13 @@
     -fx-background-radius: 14px;
     -fx-font-size: 14px;
     -fx-background-insets: 10px;
+    -fx-wrap-text: true;
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
 }
 
 #DescriptionBox .content {
+    -fx-wrap-text: true;
     -fx-background-color: #B3253D;
     -fx-control-inner-background: #B3253D;
 }

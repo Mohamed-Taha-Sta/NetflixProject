@@ -1,13 +1,6 @@
 package Controllers.FXMLControllers;
 
-import Controllers.EpisodeController;
-import Controllers.FilmController;
-import Entities.Episode;
-import Entities.Film;
-import Utils.DataHolder;
-import Utils.DataHolderEpisode;
 import Utils.DataHolderFilm;
-import Utils.DataHolderSeason;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,15 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.File;
 import java.net.URL;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class AddFilmController implements Initializable {
 
@@ -33,12 +26,13 @@ public class AddFilmController implements Initializable {
     public ComboBox<String> CountrySelector;
     public ComboBox<String> LanguageSelector;
 
-    public Text AlertText;
+
     public TextField Thumbnail;
     public TextField Synopsis;
     public TextField Video;
     public TextArea DescriptionBox;
     public DatePicker DebutDate;
+    public Label AlertText;
 
 
     @FXML
@@ -47,45 +41,32 @@ public class AddFilmController implements Initializable {
     }
 
     @FXML
-    protected  void onAdd() throws Exception{
-        if(Name.getText().isEmpty()){
-            AlertText.setText("Film must have a name");
-            AlertText.setOpacity(1);
-        } else if(Name.getText().length()<1){
-            AlertText.setText("Film must have a valid name");
-            AlertText.setOpacity(1);
+    protected void onAdd() throws Exception {
+        if (Name.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Film must have a name");
+        } else if (isTextExceedingLength(Name, 50)) {
+            showErrorMessage(AlertText, "Name field too long");
         } else if (DescriptionBox.getText().isEmpty()) {
-            AlertText.setText("Film must have a Description");
-            AlertText.setOpacity(1);
-        } else if (DescriptionBox.getText().length()<1) {
-            AlertText.setText("Film must have a valid Description");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText, "Film must have a Description");
+        } else if (isTextExceedingLength(DescriptionBox,150)) {
+            showErrorMessage(AlertText,"Description is longer then the film");
         } else if (DebutDate.getValue() == null) {
-            AlertText.setText("Film must have a valid DebutDate");
-            AlertText.setOpacity(1);
-        } else if (CountrySelector.getValue()==null) {
-            AlertText.setText("Film must have a country");
-            AlertText.setOpacity(1);
-        } else if (LanguageSelector.getValue()==null) {
-            AlertText.setText("Film must have a language");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText, "Film must have a valid DebutDate");
+        } else if (CountrySelector.getValue() == null) {
+            showErrorMessage(AlertText, "Film must have a country");
+        } else if (LanguageSelector.getValue() == null) {
+            showErrorMessage(AlertText, "Film must have a language");
         } else if (GenreSelector.getCheckModel().isEmpty()) {
-            AlertText.setText("Film must have at least 1 genre");
-            AlertText.setOpacity(1);
-        } else{
+            showErrorMessage(AlertText, "Film must have at least 1 genre");
+        } else if (Thumbnail.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Film must have a Thumbnail");
+        } else {
             DataHolderFilm.setName(Name.getText());
             DataHolderFilm.setDescription(DescriptionBox.getText());
             DataHolderFilm.setDebutDate(DebutDate.getValue());
             DataHolderFilm.setGenreList(GenreSelector.getCheckModel().getCheckedItems());
             DataHolderFilm.setLanguage(LanguageSelector.getValue());
             DataHolderFilm.setCountryOfOrigin(CountrySelector.getValue());
-
-//            long IdEpisode = EpisodeController.AddEpisode(new Episode(DataHolderSeason.getIDSeason(),DataHolderEpisode.getName(),
-//                    DataHolderEpisode.getDescription(),DataHolderEpisode.getDebutDate(),DataHolderEpisode.getPremiereDate(),
-//                    DataHolderEpisode.getSynopsis(),DataHolderEpisode.getVideo(),DataHolderEpisode.getThumbnail()));
-
-//            DataHolderEpisode.setIDEpisode(IdEpisode);
-
             HelloApplication.SetRoot("PickActorsPage_afterAddingFilm");
         }
     }
@@ -104,9 +85,18 @@ public class AddFilmController implements Initializable {
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
             if (width <= 1920 && height <= 1080) {
-                DataHolderFilm.setThumbnail(selectedFile);
-                Thumbnail.setText(selectedFile.toURI().toString());
-
+                double currentAspectRatio = (double) width / height;
+                if (currentAspectRatio != (16.0 / 9.0)) {
+                    DataHolderFilm.setThumbnail(selectedFile);
+                    Thumbnail.setText(selectedFile.toURI().toString());
+                } else {
+                    // If the selected image does not have the required aspect ratio, display an error message
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Aspect Ratio");
+                    alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+                    alert.showAndWait();
+                }
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -115,6 +105,7 @@ public class AddFilmController implements Initializable {
                 alert.setContentText("Please select an image with dimensions of 1920*1080 pixels.");
                 alert.showAndWait();
             }
+
         }
     }
 
@@ -158,7 +149,7 @@ public class AddFilmController implements Initializable {
             if (extension.equals("mp4")) {
                 DataHolderFilm.setVideo(selectedFile);
                 Video.setText(selectedFile.toURI().toString());
-                Media media=new Media(selectedFile.toURI().toString());
+                Media media = new Media(selectedFile.toURI().toString());
                 String duration = VideoPlayerController.getTime(media.getDuration());
                 DataHolderFilm.setDuration(duration);
 
@@ -172,8 +163,6 @@ public class AddFilmController implements Initializable {
             }
         }
     }
-
-
 
 
     @Override

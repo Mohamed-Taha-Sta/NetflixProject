@@ -10,6 +10,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
@@ -19,11 +21,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class LoginPageController implements Initializable {
 
-    public Text AlertText;
+
     public TextField mail;
+    public Button login;
+    public Button signup;
+    public Label AlertText;
 
 
     @FXML
@@ -33,11 +39,11 @@ public class LoginPageController implements Initializable {
     protected void onSignIn() throws Exception {
 
         if (mail.getText().isEmpty() || Password.getText().isEmpty()) {
-            showErrorMessage("Must fill all fields");
+            showErrorMessage(AlertText,"Must fill all fields");
         } else if (isTextExceedingLength(mail, 50)) {
-            showErrorMessage("Mail field is too long");
+            showErrorMessage(AlertText,"Mail field is too long");
         } else if (isTextExceedingLength(Password, 50)) {
-            showErrorMessage("Password field is too long");
+            showErrorMessage(AlertText,"Password field is too long");
         } else if (UserController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("User");
             HelloApplication.SetRoot("HomePage");
@@ -69,15 +75,15 @@ public class LoginPageController implements Initializable {
         HelloApplication.SetRoot("RegisterPage");
     }
 
-    private void showErrorMessage(String message) {
-        AlertText.setText(message);
-        AlertText.setOpacity(1);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            AlertText.setOpacity(0);
-        }));
-        timeline.play();
-    }
+//    private void showErrorMessage(String message) {
+//        AlertText.setText(message);
+//        AlertText.setOpacity(1);
+//
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+//            AlertText.setOpacity(0);
+//        }));
+//        timeline.play();
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

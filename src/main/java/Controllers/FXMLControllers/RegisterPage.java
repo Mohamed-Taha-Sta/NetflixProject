@@ -3,33 +3,27 @@ package Controllers.FXMLControllers;
 import Controllers.ActorController;
 import Controllers.ProducerController;
 import Controllers.UserController;
-import DAO.ProducerDAO;
-import DAO.UserDAO;
 import Entities.Producer;
-import Entities.User;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
-import static javafx.collections.FXCollections.observableArrayList;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class RegisterPage implements Initializable {
 
 
-    public Text Alerttext;
     public ComboBox<String> identity;
 
     public DatePicker UserBirthday;
@@ -37,6 +31,7 @@ public class RegisterPage implements Initializable {
     public TextField UserEmail;
     public TextField UserPrename;
     public TextField UserName;
+    public Label AlertText;
 
 
     @FXML
@@ -44,38 +39,29 @@ public class RegisterPage implements Initializable {
         HelloApplication.SetRoot("LoginPage");
     }
 
-    private void showErrorMessage(String message) {
-        Alerttext.setText(message);
-        Alerttext.setOpacity(1);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            Alerttext.setOpacity(0);
-        }));
-        timeline.play();
-    }
 
     @FXML
     protected void OnSignUp() throws Exception {
         if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserPassword.getText().isEmpty()) {
-            showErrorMessage("Must fill all the fields!");
+            showErrorMessage(AlertText, "Must fill all the fields!");
         } else if (isTextExceedingLength(UserName, 50)) {
-            showErrorMessage("Last Name field is too long");
+            showErrorMessage(AlertText,"Last Name field is too long");
         } else if (isTextExceedingLength(UserPrename, 50)) {
-            showErrorMessage("First Name field is too long");
+            showErrorMessage(AlertText,"First Name field is too long");
         } else if (isTextExceedingLength(UserEmail, 50)) {
-            showErrorMessage("Email field is too long");
+            showErrorMessage(AlertText, "Email field is too long");
         } else if (isTextExceedingLength(UserPassword, 50)) {
-            showErrorMessage("Password field is too long");
+            showErrorMessage(AlertText, "Password field is too long");
         } else if (!UserController.isEmail(UserEmail.getText())) {
-            showErrorMessage("This email address is not recognized!");
+            showErrorMessage(AlertText,"This email address is not recognized!");
         } else if (!UserController.check_Mail(UserEmail.getText())) {
-            showErrorMessage("Another user with same mail exists!");
+            showErrorMessage(AlertText,"Another user with same mail exists!");
         } else if (!ProducerController.check_Mail(UserEmail.getText())) {
-            showErrorMessage("Another producer with same mail exists!");
+            showErrorMessage(AlertText,"Another producer with same mail exists!");
         } else if (!ActorController.check_Mail(UserEmail.getText())) {
-            showErrorMessage("Another actor with same mail exists!");
+            showErrorMessage(AlertText,"Another actor with same mail exists!");
         } else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
-            showErrorMessage("Must fill all the fields!");
+            showErrorMessage(AlertText,"Must fill all the fields!");
         } else {
             DataHolder.setName(UserName.getText());
             DataHolder.setPrename(UserPrename.getText());

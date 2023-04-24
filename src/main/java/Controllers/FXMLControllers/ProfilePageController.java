@@ -10,8 +10,6 @@ import Entities.Genre;
 import Entities.Serie;
 import Utils.*;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +24,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,7 +126,6 @@ public class ProfilePageController implements Initializable {
             }
         }
     }
-
 
     public void OnUpdateActors(){
         ArrayList<Long> selectedActors = new ArrayList<>();
@@ -415,13 +411,5 @@ public class ProfilePageController implements Initializable {
 
     }
 
-    private void showErrorMessage(Label label, String message) {
-        label.setText(message);
-        label.setOpacity(1);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            label.setOpacity(0);
-        }));
-        timeline.play();
-    }
 }

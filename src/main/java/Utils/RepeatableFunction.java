@@ -20,6 +20,8 @@ import java.time.format.DateTimeFormatter;
 import static javafx.collections.FXCollections.observableArrayList;
 
 public class RepeatableFunction {
+
+
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static void ImageSetter(ImageView Imageview, String path,int width, int height){
         Image image = new Image(path);
@@ -82,5 +84,15 @@ public class RepeatableFunction {
                 new Genre("War"),
                 new Genre("Western")
         );
+    }
+
+    public static void showErrorMessage(Label label, String message) {
+        label.setText(message);
+        label.setOpacity(1);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
+            label.setOpacity(0);
+        }));
+        timeline.play();
     }
 }

@@ -6,7 +6,6 @@ import Entities.Episode;
 import Utils.DataHolder;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

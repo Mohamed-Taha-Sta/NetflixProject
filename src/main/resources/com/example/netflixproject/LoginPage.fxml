@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.LoginPageController">
    <children>
@@ -50,11 +49,7 @@
                               <Font name="Calibri" size="14.0" />
                            </font>
                         </PasswordField>
-                        <Text fx:id="AlertText" fill="WHITE" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must Fill All the fields" textAlignment="CENTER" wrappingWidth="278.1429748535156">
-                           <font>
-                              <Font name="Calibri" size="18.0" />
-                           </font>
-                        </Text>
+                        <Label fx:id="AlertText" prefHeight="18.0" prefWidth="294.0" text="Label" />
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="229.0" spacing="40.0">
                            <children>
                               <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" style="-fx-background-color: transparent;" text="Don't have an account? Join us!" textAlignment="CENTER" textFill="WHITE" underline="true">

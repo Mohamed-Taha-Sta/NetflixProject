@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane style="-fx-background-color: #2D142C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLControllers.RegisterPage">
    <children>
@@ -64,11 +63,7 @@
                               <Insets />
                            </VBox.margin>
                         </DatePicker>
-                        <Text fx:id="Alerttext" fill="#ff3434" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Must fill all the fields" textAlignment="CENTER" wrappingWidth="218.936767578125">
-                           <font>
-                              <Font name="Lucida Bright" size="18.0" />
-                           </font>
-                        </Text>
+                        <Label fx:id="AlertText" text="Label" />
                         <HBox alignment="CENTER" spacing="40.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#OnSignIn" prefHeight="23.0" prefWidth="186.0" style="-fx-background-color: transparent;" text="Already have an account? Sign In!" textFill="WHITE" underline="true">

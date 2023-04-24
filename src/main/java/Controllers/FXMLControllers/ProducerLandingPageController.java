@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class ProducerLandingPageController implements Initializable {
 
@@ -180,15 +181,21 @@ public class ProducerLandingPageController implements Initializable {
     public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
-        } else if (newPass.getText().isEmpty()) {
+        } else if (isTextExceedingLength(OldPass,50)) {
+            showErrorMessage(passAlert,"Your old password is too long");
+        }
+        else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
+        } else if (isTextExceedingLength(newPass,50)) {
+            showErrorMessage(passAlert,"Your new pass is too long");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
+        } else if (isTextExceedingLength(PassConf,50)) {
+            showErrorMessage(AlertText,"your confirmation pass is too long");
         } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
             showErrorMessage(passAlert, "Password field is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showErrorMessage(passAlert, "Your confirm password is wrong!");
-
         } else if (newPass.getText().equals(OldPass.getText())) {
             showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getProducer().getpassword())) {
@@ -262,28 +269,9 @@ public class ProducerLandingPageController implements Initializable {
         MoviesTable.setItems(Films);
         SeriesTable.setItems(Series);
 
-//
-//        if ((Series == null )||(Series.isEmpty())||(!Series.equals(DataHolderSeries.getSeries()))) {
-//                Series = DataHolderSeries.getSeries();
-//        }
-//
-//        if ((Films == null)||(Films.isEmpty())||(!Films.equals(DataHolderFilm.getFilms()))) {
-//            Films = FXCollections.observableList(FilmController.FindByproducer(DataHolder.getProducer()));
-//        }
-
-
     }
 
 
-    private void showErrorMessage(Label label, String message) {
-        label.setText(message);
-        label.setOpacity(1);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            label.setOpacity(0);
-        }));
-        timeline.play();
-    }
 
 
 }
