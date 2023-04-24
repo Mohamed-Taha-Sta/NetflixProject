@@ -6,13 +6,6 @@ import Services.ProducerService;
 
 public class ProducerController {
 
-    public static void main(String[] args) {
-
-        Producer producer = new Producer("WB","","WB@gmail.com","123456");
-
-        createprod(producer);
-    }
-
     public static long createprod(Producer prod) {
         return ProducerService.createprod(prod);
 

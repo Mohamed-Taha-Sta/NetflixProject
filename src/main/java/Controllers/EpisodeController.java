@@ -24,44 +24,6 @@ import java.util.List;
 public class EpisodeController {
 
 
-    public static void main(String[] args) throws SQLException, IOException {
-        EpisodeDAO2 episodeDAO = new EpisodeDAO2();
-
-        //long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, Image image, Resume resume, Media media, long vueNbr, long score, long votes
-
-        String Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. " +
-                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, " +
-                "when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
-
-        File fileVideo = new File("src/main/java/Test/Video.mp4");
-        File fileSynopsis = new File("src/main/java/Test/Synopsis.mp4");
-        File imageFile = new File("src/main/java/Test/EpisodePlaceHolder.jpg");
-
-
-//        Episode episode = new Episode(46,"episode3",4,Description, LocalDate.of(2014,12,9),
-//                LocalDate.of(2011,11,2),fileSynopsis,fileVideo,imageFile);
-//
-//        Episode episode2 = new Episode(46,"Episode2",2,Description, LocalDate.of(1990,3,14),
-//                LocalDate.of(2015,12,12),fileSynopsis,fileVideo,imageFile);
-
-
-//        System.out.println(episodeDAO.AddEpisode(episode));
-//        System.out.println(episodeDAO.AddEpisode(episode2));
-//        List<Episode> episodeList = episodeDAO.FindEpisodeID(90L);
-//        System.out.println(episodeDAO.FindEpisodeName("episode3"));
-
-//        System.out.println(EpisodeDAO2.getViewNbr(episodeList.get(0)));
-
-//        episodeDAO.UpdateViewNbrEpisode(episodeList.get(0));
-//        episodeDAO.UpdateVoteEpisode(episodeList.get(0));
-
-//        episodeDAO.UpdateVoteEpisode(episodeList.get(0));episodeDAO.UpdateScoreEpisode(episodeList.get(0));
-
-//        episodeDAO.UpdatePositiveScoreEpisode(episodeList.get(0));
-
-    }
-
-
     public static List<Episode> FindEpisodeSeasonID(long id) throws SQLException, IOException {
         return EpisodeService.FindEpisodeSeasonID(id);
     }

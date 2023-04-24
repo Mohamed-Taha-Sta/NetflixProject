@@ -14,49 +14,6 @@ import java.util.stream.Collectors;
 
 public class SerieController {
 
-    public static void main(String[] args) throws SQLException, IOException {
-//        File file = new File("src/main/java/Test/Synopsis.mp4");
-
-//        List<String> listGenre = Arrays.asList("Biography","Documentary");
-//        List<Serie> serieList = SerieDAO.searchSeries(listGenre);
-//
-//        System.out.println(serieList);
-
-
-
-//        File imageFile = new File("src/main/java/Test/SeriePlaceHolder.jpg");
-//
-//        List<Long> listMainActors = new ArrayList<>();
-//        List<Long> listSuppActors = new ArrayList<>();
-//        List<String> listGenre = new ArrayList<>();
-
-//        listMainActors.add(21L);
-//        listMainActors.add(10L);
-//
-//        listSuppActors.add(4L);
-//
-////        listGenre.add("Action");
-//        listGenre.add("Comedie");
-//        listGenre.add("Drama");
-//        listGenre.add("Torki");
-
-//        Serie serie = new Serie(65);
-
-
-
-//        ModifSynopsisSerie(serie,file);
-
-//        GetSerieByName("yezfezfez");
-
-//        System.out.println(AddSerie(serie));
-
-
-//        System.out.println(SerieDAO.GetSerieByName("Serie1"));
-
-    }
-
-
-
     public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
         return SerieService.AddSerie(Serie);
     }
