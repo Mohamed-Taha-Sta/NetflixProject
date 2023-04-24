@@ -49,6 +49,7 @@ public class AdminLandingPageController implements Initializable {
     public TableView<Film> MoviesTable = new TableView<>();
     public TableColumn<Film,String> MovieName;
     public TableColumn<Film,String> MovieScore;
+    public TableColumn<Film,String> MovieViews;
     public Label NameLabel;
     public TableView<Serie> SeriesTable = new TableView<>();
     public TableColumn<Serie,String> SeriesName;
@@ -238,6 +239,7 @@ public class AdminLandingPageController implements Initializable {
 
         MovieName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         MovieScore.setCellValueFactory(new PropertyValueFactory<>("score"));
+        MovieViews.setCellValueFactory(new PropertyValueFactory<>("VueNbr"));
 
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
         numSaisons.setCellValueFactory(new PropertyValueFactory<>("SeasonNumber"));
@@ -278,6 +280,8 @@ public class AdminLandingPageController implements Initializable {
             List<Film> filmList = FilmController.GetAllFilms();
             Set<Film> filmSet = new HashSet<>(filmList);
             List<Film> uniqueFilms = new ArrayList<>(filmSet);
+            for (Film film : uniqueFilms)
+                film.setVueNbr(VuesFilmController.GetFilmVues(film));
             Films = FXCollections.observableArrayList(uniqueFilms);
 
             DataHolderFilm.setFilms(Films);
@@ -290,19 +294,13 @@ public class AdminLandingPageController implements Initializable {
 
         SeriesTable.sort();
 
-        YearSelect.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
-            @Override
-            public void handle(KeyEvent ke)
+        YearSelect.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER))
             {
-                if (ke.getCode().equals(KeyCode.ENTER))
-                {
-                    OnChangeOnYear(new ArrayList<>(serieSetAll));
-                }
+                OnChangeOnYear(new ArrayList<>(serieSetAll));
+                SeriesTable.sort();
             }
         });
-
-
 
     }
 }

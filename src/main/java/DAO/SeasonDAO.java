@@ -35,7 +35,7 @@ public class SeasonDAO {
         pstmt.setBlob(5,inputStreamSynopsis);
         pstmt.setString(6,season.getDescription());
 
-        int affectedRows = pstmt.executeUpdate();
+        pstmt.executeUpdate();
 
 
         ResultSet generatedKeys = pstmt.getGeneratedKeys();
@@ -59,7 +59,7 @@ public class SeasonDAO {
 
     public static List<Season> FindSeasonName(String SeasonName) throws SQLException, IOException {
 
-        Season season = null;
+        Season season;
 
         List<Season> SeasonList = new ArrayList<>();
 
@@ -86,12 +86,8 @@ public class SeasonDAO {
             while ((length = SeasonThumbnail.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
-
             season = new Season(ID,SeasonName,ID_SERIE,fileThumb);
-
             SeasonList.add(season);
-
         }
         rs.close();
         pstmt.close();
@@ -100,16 +96,10 @@ public class SeasonDAO {
     }
 
     public static List<Season> GetAllSeasons() throws SQLException, IOException {
-
-
-        Season season = null;
-
+        Season season;
         List<Season> SeasonList = new ArrayList<>();
-
         String sql = "SELECT * FROM SEASON";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         ResultSet rs = pstmt.executeQuery();
 
         while (rs.next()) {
@@ -127,22 +117,14 @@ public class SeasonDAO {
 
 
     public static List<Season> FindSeasonID(long ID) throws SQLException, IOException {
-
-        Season season = null;
-
+        Season season;
         List<Season> SeasonList = new ArrayList<>();
-
         String sql = "SELECT * FROM SEASON WHERE ID = ?";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         pstmt.setLong(1, ID);
-
         ResultSet rs = pstmt.executeQuery();
-
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
-
             long ID_SERIE = rs.getLong("ID_SERIE");
             String SeasonName = rs.getString("NAME");
             String Description = rs.getString("Description");
@@ -227,8 +209,6 @@ public class SeasonDAO {
 
     }
 
-
-
     public static boolean modifimg(Season season, File img) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
@@ -264,8 +244,6 @@ public class SeasonDAO {
         }
     }
 
-
-
     public static boolean ModifSynopsisSeason(Season season,File NewSynopsis) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
@@ -297,8 +275,6 @@ public class SeasonDAO {
 
     }
 
-
-
     public static boolean modifnom(Season season, String nom) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
@@ -328,9 +304,7 @@ public class SeasonDAO {
     public static boolean modifAnnerdesoritie(Season season, LocalDate date) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
-
         try {
-
             sql = "UPDATE SEASON SET DEBUT_DATE = ? WHERE ID = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setDate(1, Date.valueOf(date));
@@ -355,7 +329,6 @@ public class SeasonDAO {
     public static boolean modifdescription(Season season,String description) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
-
         try {
             sql = "UPDATE SEASON SET description = ? WHERE ID = ?";
             pstmt = conn.prepareStatement(sql);
@@ -377,6 +350,4 @@ public class SeasonDAO {
             }
         }
     }
-
-
 }

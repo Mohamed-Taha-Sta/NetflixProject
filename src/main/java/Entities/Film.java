@@ -20,6 +20,7 @@ public class Film extends Content{
     private long id_realisateur;
 
 
+
     public long getId_realisateur() {
         return id_realisateur;
     }
@@ -64,6 +65,40 @@ public class Film extends Content{
         this.film = film;
         this.id_realisateur=idrealisateur;
     }
+
+    //Constructor Taha num 1
+    public Film(Long filmid, String nom, String description, LocalDate toLocalDate, String langue,
+                String paysorigine, ArrayList<String> genrelist, File fileImage, String duree, File filesynop, File filmvedio, Long idrealisateur) {
+        super(filmid, nom, description, toLocalDate, langue, paysorigine, genrelist, fileImage);
+        this.duree = duree;
+        this.synopsis = filesynop;
+        this.film = filmvedio;
+        this.id_realisateur = idrealisateur;
+
+    }
+    //Constructor Taha num 2
+    public Film(Long filmid, String nom, String description, LocalDate toLocalDate, String langue,
+                String paysorigine, ArrayList<String> genrelist, File fileImage, String duree, Long idrealisateur) {
+        super(filmid, nom, description, toLocalDate, langue, paysorigine, genrelist, fileImage);
+        this.duree = duree;
+        this.id_realisateur = idrealisateur;
+    }
+    //Constructor Taha num 3
+    public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine,
+                List<String> listegenre, File img, String duree,
+                File synopsis, File film,Long idrealisateur,ArrayList<Actor> actorArrayList) {
+        super(nom, desc, annerdesortie, langue, paysorigine, listegenre, img);
+        this.duree = duree;
+        VueNbr = 0;
+        Score = 0;
+        Votes = 0;
+        this.acteur = actorArrayList;
+        this.synopsis = synopsis;
+        this.film = film;
+        this.id_realisateur=idrealisateur;
+    }
+
+
     public Film(String nom, String desription, LocalDate annerdesortie, String langue, String paysorigine, List<String> listegenre, File img, String duree, ArrayList<Actor> acteur, File synopsis, File film,Long idrealisateur) {
         super(nom, desription, annerdesortie, langue, paysorigine, listegenre, img);
         this.duree = duree;
@@ -96,21 +131,6 @@ public class Film extends Content{
         VueNbr = vueNbr;
         Score = score;
         Votes = votes;
-        this.synopsis = synopsis;
-        this.film = film;
-        this.id_realisateur=idrealisateur;
-    }
-
-    //Constructor mta3 Taha
-    public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine,
-                List<String> listegenre, File img, String duree,
-                File synopsis, File film,Long idrealisateur,ArrayList<Actor> actorArrayList) {
-        super(nom, desc, annerdesortie, langue, paysorigine, listegenre, img);
-        this.duree = duree;
-        VueNbr = 0;
-        Score = 0;
-        Votes = 0;
-        this.acteur = actorArrayList;
         this.synopsis = synopsis;
         this.film = film;
         this.id_realisateur=idrealisateur;

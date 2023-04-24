@@ -156,7 +156,7 @@ public class ProducerDAO {
 
     }
     public static void modiffilmvedio(Film film,File vid ) {
-        FilmDAO.modiffilmvedio(film,vid);
+        FilmDAO.Editvideo(film,vid);
 
 
 

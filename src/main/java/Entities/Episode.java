@@ -28,6 +28,20 @@ public class Episode {
         this.SeasonParentID = seasonId;
     }
 
+    public Episode(Long id, long seasonID, String description, String episodeName, int episodeNumber,
+                   LocalDate DebDate, LocalDate premDate, File fileImage, File fileSynopsis, File file) {
+        this.ID = ID;
+        SeasonParentID = seasonID;
+        this.Description = description;
+        Name = episodeName;
+        Number = episodeNumber;
+        DebutDate = DebDate;
+        this.PremiereDate = premDate;
+        this.image = fileImage;
+        this.Synopsis = fileSynopsis;
+        this.media = file;
+    }
+
     @Override
     public String toString() {
         return "\nEpisode{" +
@@ -66,7 +80,7 @@ public class Episode {
         Votes = votes;
     }
 
-    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, long vueNbr, long score, long votes) {
+    public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image) {
         this.ID = ID;
         SeasonParentID = seasonParentID;
         Name = name;
@@ -74,9 +88,6 @@ public class Episode {
         DebutDate = debutDate;
         PremiereDate = premiereDate;
         this.image = image;
-        VueNbr = vueNbr;
-        Score = score;
-        Votes = votes;
     }
     public Episode(long ID, long seasonParentID, String name, int number, LocalDate debutDate, LocalDate premiereDate, File image, long vueNbr, long score, long votes,File file) {
         this.ID = ID;

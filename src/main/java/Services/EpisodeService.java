@@ -31,30 +31,6 @@ public class EpisodeService {
         return EpisodeDAO2.FindEpisodeID(id);
     }
 
-    public static long getVotesEpisode(Episode ep) throws SQLException {
-        return EpisodeDAO2.getVotesEpisode(ep);
-    }
-
-    public static long getScoreEpisode(Episode ep) throws SQLException {
-        return EpisodeDAO2.getScoreEpisode(ep);
-    }
-
-    public static long getViewNbrEpisode(Episode ep){
-        return EpisodeDAO2.getViewNbrEpisode(ep);
-    }
-
-    public static boolean UpdatePositiveScoreEpisode(Episode ep) throws SQLException {
-        return EpisodeDAO2.UpdatePositiveScoreEpisode(ep);
-    }
-
-    public static boolean UpdateNegativeScoreEpisode(Episode ep) throws SQLException {
-        return EpisodeDAO2.UpdateNegativeScoreEpisode(ep);
-    }
-
-    public static boolean UpdateViewNbrEpisode(Episode ep) throws SQLException {
-        return EpisodeDAO2.UpdateViewNbrEpisode(ep);
-    }
-
     public static boolean modifImg(Episode episode, File img) throws SQLException {
         return EpisodeDAO2.modifImg(episode,img);
     }
@@ -86,20 +62,9 @@ public class EpisodeService {
         return EpisodeDAO2.GetAllEpisodes();
     }
 
-    public static List<Episode> GetAllEpisodesPremiereDate() throws SQLException, IOException {
-        return EpisodeDAO2.GetAllEpisodesPremiereDate();
-    }
-
-
-
     public static long StreamSpecificEpisodes(long id) throws SQLException, IOException {
         return GetAllEpisodes().stream()
                 .filter(episode -> episode.getSeasonParentID()==id)
                 .count();
-    }
-    public static List<Episode> StreamSpecificEpisodesPremiereDate(long id) throws SQLException, IOException {
-        return GetAllEpisodesPremiereDate().stream()
-                .filter(episode -> episode.getSeasonParentID()==id)
-                .collect(Collectors.toList());
     }
 }

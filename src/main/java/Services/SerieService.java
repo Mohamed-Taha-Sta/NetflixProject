@@ -6,7 +6,6 @@ import Controllers.SeasonController;
 import Controllers.SerieController;
 import DAO.SerieDAO;
 import Entities.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -18,18 +17,6 @@ import java.util.stream.Collectors;
 
 public class SerieService {
 
-
-//    public static long StreamAverageScore(Serie serie) throws SQLException, IOException {
-//        List<Season> seasonList = SeasonController.FindSeasonSerieID(serie.getId());
-//        List<Long> scoreSeason = new ArrayList<>();
-//        for(Season season : seasonList)
-//        {
-//            scoreSeason.add(SeasonController.StreamAverageScore(season));
-//        }
-//        return Math.round(scoreSeason.stream()
-//                .collect(Collectors.averagingLong(Long::longValue)));
-//    }
-
     public static double StreamAverageScore(Serie serie) throws SQLException, IOException {
         List<Season> seasonList = SeasonController.FindSeasonSerieID(serie.getId());
         List<Double> scoreSeason = new ArrayList<>();
@@ -39,7 +26,6 @@ public class SerieService {
         return Math.round(scoreSeason.stream()
                 .collect(Collectors.averagingDouble(Double::doubleValue)));
     }
-
 
     public static long AddSerie(Serie Serie) throws SQLException, FileNotFoundException {
         return SerieDAO.AddSerie(Serie);
@@ -149,9 +135,7 @@ public class SerieService {
                 .map(seasonId -> {
                     try {
                         return SeasonController.FindSeasonID(seasonId);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
@@ -159,19 +143,15 @@ public class SerieService {
                 .filter(season -> {
                     try {
                         return SeasonController.StreamAverageScore(season) > 50;
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
-                .map(season -> season.getSERIE_ID())
+                .map(Season::getSERIE_ID)
                 .map(serieId -> {
                     try {
                         return SerieController.GetSerieByID(serieId);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
@@ -179,19 +159,14 @@ public class SerieService {
                 .filter(serie -> {
                     try {
                         return SerieController.StreamAverageScore(serie) > 50;
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
-
                 .map(serie -> {
                     try {
                         return SeasonController.FindSeasonID(serie.getId());
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
@@ -199,32 +174,26 @@ public class SerieService {
                 .map(season -> {
                     try {
                         return EpisodeController.FindEpisodeSeasonID(season.getID());
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
                 .flatMap(List::stream)
                 .filter(episode1 -> episode1.getPremiereDate().equals(LocalDate.now()))
-                .map(episode1 -> episode1.getSeasonParentID())
+                .map(Episode::getSeasonParentID)
                 .map(seasonId -> {
                     try {
                         return SeasonController.FindSeasonID(seasonId);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
                 .flatMap(List::stream)
-                .map(season -> season.getSERIE_ID())
+                .map(Season::getSERIE_ID)
                 .map(serieId -> {
                     try {
                         return SerieController.GetSerieByID(serieId);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
+                    } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }
                 })

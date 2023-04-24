@@ -201,8 +201,9 @@
                                           </Label>
                                           <TableView id="Table" fx:id="MoviesTable" prefHeight="521.0" prefWidth="280.0" stylesheets="@../../../Style.css">
                                              <columns>
-                                                <TableColumn fx:id="MovieName" editable="false" prefWidth="208.0" text="Movie Name" />
-                                                <TableColumn fx:id="MovieScore" editable="false" prefWidth="90.0" text="Score%" />
+                                                <TableColumn fx:id="MovieName" editable="false" prefWidth="107.0" text="Movie Name" />
+                                                <TableColumn fx:id="MovieScore" editable="false" maxWidth="2500.0" prefWidth="64.0" text="Score%" />
+                                                <TableColumn fx:id="MovieViews" editable="false" maxWidth="2500.0" prefWidth="90.0" text="Views" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -225,20 +226,23 @@
                                                    <HBox.margin>
                                                       <Insets top="60.0" />
                                                    </HBox.margin>
+                                                   <padding>
+                                                      <Insets left="50.0" />
+                                                   </padding>
                                                 </Label>
-                                                <ComboBox id="ComboBox" fx:id="YearSelect" prefHeight="14.0" prefWidth="119.0" promptText="Year">
+                                                <ComboBox id="ComboBox" fx:id="YearSelect" prefHeight="37.0" prefWidth="106.0" promptText="Year">
                                                    <HBox.margin>
-                                                      <Insets top="65.0" />
+                                                      <Insets left="50.0" top="65.0" />
                                                    </HBox.margin>
                                                 </ComboBox>
                                              </children>
                                           </HBox>
                                           <TableView id="Table" fx:id="SeriesTable" onMouseClicked="#OnClickSeries" prefHeight="414.0" prefWidth="336.0" stylesheets="@../../../Style.css">
                                              <columns>
-                                                <TableColumn fx:id="SeriesName" editable="false" minWidth="0.0" prefWidth="165.0" text="Series Name" />
-                                                <TableColumn fx:id="Score" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="70.0" text="Score%" />
-                                                <TableColumn fx:id="numSaisons" editable="false" maxWidth="1700.0" minWidth="0.0" prefWidth="75.0" text="NumSea" />
-                                                <TableColumn fx:id="numEp" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="58.0" text="NumEp" />
+                                                <TableColumn fx:id="SeriesName" editable="false" minWidth="0.0" prefWidth="147.0" text="Series Name" />
+                                                <TableColumn fx:id="Score" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="77.0" sortType="DESCENDING" text="Score%" />
+                                                <TableColumn fx:id="numSaisons" editable="false" maxWidth="1700.0" minWidth="0.0" prefWidth="65.0" sortType="DESCENDING" text="NumSea" />
+                                                <TableColumn fx:id="numEp" editable="false" maxWidth="1500.0" minWidth="0.0" prefWidth="55.0" sortType="DESCENDING" text="NumEp" />
                                              </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

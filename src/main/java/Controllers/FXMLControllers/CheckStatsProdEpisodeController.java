@@ -1,9 +1,6 @@
 package Controllers.FXMLControllers;
 
-import Controllers.Avis_EpisodeController;
-import Controllers.Avis_SaisonController;
-import Controllers.EpisodeController;
-import Controllers.SeasonController;
+import Controllers.*;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import com.example.netflixproject.HelloApplication;
@@ -41,12 +38,7 @@ public class CheckStatsProdEpisodeController implements Initializable {
         opinionList.setPlaceholder(new Label("No opinions for this episode"));
 
         EpisodeTitle.setText(DataHolderEpisode.getSelectedEpisode().getName());
-        try {
-            ScoreLabel.setText(String.valueOf(EpisodeController.getScoreEpisode(DataHolderEpisode.getSelectedEpisode()) +"%"));
-        } catch (SQLException e) {
-            System.out.println("Error printing rating");
-            throw new RuntimeException(e);
-        }
+        ScoreLabel.setText(String.valueOf(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode()) +"%"));
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
 
         List<String> opnions = Avis_EpisodeController.FindAll(DataHolderEpisode.getSelectedEpisode());

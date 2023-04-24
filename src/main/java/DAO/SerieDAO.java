@@ -40,15 +40,12 @@ public class SerieDAO {
             pstmt.setBlob(8,inputStreamSynopsis);
             pstmt.setString(9,String.join(",", Serie.getListegenre().stream().map(Object::toString).toArray(String[]::new)));
             pstmt.setLong(10,Serie.getID_PROD());
-            int affectedRows = pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 id = generatedKeys.getLong(1);
             }
-
-
 
         } catch(SQLException se) {
             // Handle errors for JDBC
@@ -80,7 +77,7 @@ public class SerieDAO {
             {
                 pstmt.setLong(1,idSerie);
                 pstmt.setLong(2,lo);
-                int affectedRows = pstmt.executeUpdate();
+                pstmt.executeUpdate();
 
             }
         } catch(SQLException se) {
@@ -110,7 +107,7 @@ public class SerieDAO {
             {
                 pstmt.setLong(1,idSerie);
                 pstmt.setLong(2,lo);
-                int affectedRows = pstmt.executeUpdate();
+                pstmt.executeUpdate();
 
             }
         } catch(SQLException se) {
@@ -132,31 +129,9 @@ public class SerieDAO {
     }
 
 
-    public static long getSerieID(Serie Serie) throws SQLException {
-        String sql = "Select * from SERIE where NAME = ? and ID_PROD = ? and LANGUAGE = ?";
-        long SerieID=-1;
-        PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-        pstmt.setString(1,Serie.getNom());
-        pstmt.setLong(2,Serie.getID_PROD());
-        pstmt.setString(3,Serie.getLangue());
-
-        ResultSet rs = pstmt.executeQuery();
-
-        if (rs.next())
-            SerieID = rs.getLong("ID_SERIE");
-        else
-            System.out.println("Error getting SerieID");
-        rs.close();
-        pstmt.close();
-//        conn.close();
-        return SerieID;
-    }
-
-
     public static List<Serie> GetSerieByName(String SerieName) throws SQLException, IOException {
 
-        Serie serie = null;
+        Serie serie;
 
         List<Serie> serieList = new ArrayList<>();
 
@@ -451,7 +426,7 @@ public class SerieDAO {
 
     public static List<Serie> GetAllSeries() throws SQLException, IOException {
 
-        Serie serie = null;
+        Serie serie;
 
         List<Serie> serieList = new ArrayList<>();
 
@@ -504,7 +479,7 @@ public class SerieDAO {
 
     public static List<Serie> GetSeriesByProducer(Producer producer) throws SQLException, IOException {
 
-        Serie serie = null;
+        Serie serie ;
 
         List<Serie> serieList = new ArrayList<>();
 
@@ -554,11 +529,6 @@ public class SerieDAO {
     }
 
 
-
-
-
-
-
     public static boolean DeleteSerie(Serie serie) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
@@ -581,9 +551,6 @@ public class SerieDAO {
             return false;
         }
     }
-
-
-
 
 
     public static boolean DeleteCorrespMainActorSerie(Serie serie) throws SQLException {
@@ -671,7 +638,6 @@ public class SerieDAO {
 
     public static boolean ModifSynopsisSerie(Serie serie,File NewSynopsis) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -708,7 +674,6 @@ public class SerieDAO {
 
     public static boolean modifnom(Serie Serie,String nom) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -739,12 +704,9 @@ public class SerieDAO {
 
     public static boolean modifdescription(Serie serie,String description) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
-
-
             sql = "UPDATE Serie SET description = ? WHERE ID_SERIE = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,description);
@@ -772,11 +734,9 @@ public class SerieDAO {
 
     public static boolean modiflangues(Serie Serie,String langue) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
-
             sql = "UPDATE Serie SET Language = '" + langue + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
@@ -801,11 +761,9 @@ public class SerieDAO {
 
     public static boolean modifpaysoregine(Serie Serie,String paysorgine) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
-
             sql = "UPDATE Serie SET Country = '" + paysorgine + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
@@ -831,9 +789,7 @@ public class SerieDAO {
 
     public static boolean modifAnnerdesoritie(Serie serie, LocalDate date) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
-
         try {
 
             sql = "UPDATE Serie SET DEBUT_DATE = ? WHERE ID_SERIE = ?";
@@ -861,7 +817,6 @@ public class SerieDAO {
 
     public static boolean modiflistegenre(Serie serie,List<String> listegenre ) throws SQLException {
         PreparedStatement pstmt = null;
-        ResultSet rs;
         String sql;
 
         try {
@@ -891,9 +846,7 @@ public class SerieDAO {
 
     public static boolean deleteSerie_actsec(Serie serie,Actor act) throws SQLException {
         PreparedStatement pstmt = null;
-
         String sql;
-
         try {
             sql = "delete FROM SERIEACTORSUPP WHERE ID_SERIE = ? and id_act=?";
             pstmt = conn.prepareStatement(sql);
@@ -924,9 +877,7 @@ public class SerieDAO {
 
     public static boolean deleteSerie_actprinc(Serie serie,Actor act) throws SQLException {
         PreparedStatement pstmt = null;
-
         String sql;
-
         try {
             sql = "delete FROM SERIEACTORPRINC WHERE ID_SERIE = ? and id_act=?";
             pstmt = conn.prepareStatement(sql);
@@ -989,9 +940,7 @@ public class SerieDAO {
     }
     public static boolean ajoutSerie_actsec(Serie serie,Actor act) throws SQLException {
         PreparedStatement pstmt = null;
-
         String sql;
-
         try {
             sql = "INSERT INTO SERIEACTORSUPP (id_act,ID_SERIE)" +
                     " VALUES (?,?)";
@@ -1068,18 +1017,14 @@ public class SerieDAO {
 
             Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
 
-
             serieList.add(serie);
-
         }
-
         // Close the ResultSet, PreparedStatement, and database connection
         rs.close();
         stmt.close();
 //        conn.close();
         return serieList;
     }
-
 
     public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
         StringBuilder sqlBuilder = new StringBuilder();
@@ -1119,15 +1064,10 @@ public class SerieDAO {
             while ((length = SerieThumbnail.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
-
             ActorList.addAll(SuppActorList);
-
             Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
-
-
             serieList.add(serie);
 
         }
@@ -1173,9 +1113,7 @@ public class SerieDAO {
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
             ActorList.addAll(SuppActorList);
-
             Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
-
             serieList.add(serie);
         // Close the ResultSet, PreparedStatement, and database connection
 
@@ -1217,7 +1155,6 @@ public class SerieDAO {
             }catch (Exception e){
                 System.out.println("Error Retrieving as Main Actor");
             }
-
 
         }catch (Exception ex) {
             System.out.println(ex.getMessage());

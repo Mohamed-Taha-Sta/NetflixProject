@@ -34,7 +34,6 @@ public class FilmService {
     }
     public static List<Film> filterByGenre( String genreFilter) {
         List<Film> films=FilmDAO.FindByName("");
-
             return films.stream()
                     .filter(film -> film.getListegenre().toString().contains(genreFilter))
                     .collect(Collectors.toList());
@@ -86,7 +85,7 @@ public class FilmService {
     }
 
     public static boolean modiffilmvedio(Film film, File vid) {
-        return FilmDAO.modiffilmvedio(film,vid);
+        return FilmDAO.Editvideo(film,vid);
     }
 
     public static boolean modifsynop(Film film, File synop) {

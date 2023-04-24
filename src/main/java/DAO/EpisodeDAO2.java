@@ -25,13 +25,13 @@ public class EpisodeDAO2 {
         PreparedStatement pstmt = null;
 
         if (episode.getDescription() != null && episode.getSynopsis() != null) {
-            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR,Description,Synopsis) " +
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Description,Synopsis) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }else if(episode.getDescription() != null){
-            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR,Description) " +
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Description) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }else if (episode.getSynopsis() != null){
-            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,VOTES,SCORE,VIEW_NBR,Synopsis) " +
+            sql = "INSERT INTO episodes (season_ID, NUM, name, DEBUT_DATE, premiere_Date,IMAGE,VIDEO,Synopsis) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
 
@@ -62,14 +62,12 @@ public class EpisodeDAO2 {
                 pstmt.setString(11, episode.getDescription());
             } else if (episode.getSynopsis() != null)
                 pstmt.setBlob(11, inputStreamSynopsis);
-            int affectedRows = pstmt.executeUpdate();
-
+            pstmt.executeUpdate();
 
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
             if (generatedKeys.next()) {
                 id = generatedKeys.getLong(1);
             }
-
 
         } catch (SQLException se) {
             // Handle errors for JDBC
@@ -94,35 +92,24 @@ public class EpisodeDAO2 {
     }
 
     public static List<Episode> FindEpisodeID(Long ID) throws SQLException, IOException {
-
         List<Episode> episodeList = new ArrayList<>();
-
-        Episode episode = null;
-
+        Episode episode;
         String sql = "SELECT * FROM episodes WHERE id = ?";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         pstmt.setLong(1, ID);
-
         ResultSet rs = pstmt.executeQuery();
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
             long seasonID = rs.getLong("season_ID");
             int episodeNumber = rs.getInt("NUM");
-            long episodeViews = rs.getInt("VIEW_NBR");
-            long episodeScore = rs.getInt("SCORE");
-            long episodeVotes = rs.getInt("VOTES");
             String EpisodeName = rs.getString("Name");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
             Blob episodeImageB = rs.getBlob("image");
             InputStream episodeImage = episodeImageB.getBinaryStream();
-//            InputStream episodeImage = rs.getBinaryStream("image");
             String Description = rs.getString("Description");
             InputStream episodeSynopsis = rs.getBinaryStream("SYNOPSIS");
             InputStream episodeVideo = rs.getBinaryStream("video");
-
 
             //Converting Blob into An JPEG File
             File fileImg = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
@@ -147,7 +134,6 @@ public class EpisodeDAO2 {
             File file = new File("src/main/java/Temp/VideoEp" + ID + ".mp4");
             File fileImage = new File("src/main/java/Temp/ImgEp" + ID + ".jpeg");
 
-            File fileSynopsis = null;
             //Handeling Synopsis Export
             Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
             try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
@@ -159,9 +145,9 @@ public class EpisodeDAO2 {
             } catch (IOException e) {
                 System.out.println("Error Handelling the Synopsis");
             }
-            fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
 
-            episode = new Episode(ID, seasonID,Description, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, fileSynopsis, file, episodeViews, episodeScore, episodeVotes);
+            episode = new Episode(ID, seasonID,Description, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, fileSynopsis, file);
 
             episodeList.add(episode);
 
@@ -172,18 +158,11 @@ public class EpisodeDAO2 {
     }
 
     public static List<Episode> GetAllEpisodes() throws SQLException, IOException {
-
-
-        Episode episode = null;
-
+        Episode episode;
         List<Episode> episodeList = new ArrayList<>();
-
         String sql = "SELECT * FROM EPISODES";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         ResultSet rs = pstmt.executeQuery();
-
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
@@ -196,52 +175,16 @@ public class EpisodeDAO2 {
         pstmt.close();
         return episodeList;
     }
-
-
-
-    public static List<Episode> GetAllEpisodesPremiereDate() throws SQLException, IOException {
-
-        Episode episode = null;
-
-        List<Episode> episodeList = new ArrayList<>();
-
-        String sql = "SELECT * FROM EPISODES";
-
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        ResultSet rs = pstmt.executeQuery();
-
-        while (rs.next()) {
-            // Retrieve the values from the ResultSet and store them in variables
-            long ID = rs.getLong("ID");
-            String EpsisodeName = rs.getString("NAME");
-            long SEASON_ID = rs.getLong("SEASON_ID");
-            episode = new Episode(ID,EpsisodeName,SEASON_ID);
-            episodeList.add(episode);
-        }
-        rs.close();
-        pstmt.close();
-        return episodeList;
-    }
-
-
 
 
     public static List<Episode> FindEpisodeName(String EpisodeName) throws SQLException, IOException {
-
         List<Episode> episodeList = new ArrayList<>();
-
-        Episode episode = null;
-
-        Resume resume = null;
-
+        Episode episode;
         String sql = "SELECT * FROM episodes WHERE NAME like ?";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         pstmt.setString(1, "%" + EpisodeName + "%");
-
         ResultSet rs = pstmt.executeQuery();
+
         while (rs.next()) {
             // Retrieve the values from the ResultSet and store them in variables
             long ID = rs.getLong("ID");
@@ -260,7 +203,6 @@ public class EpisodeDAO2 {
             while ((length = episodeImage.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
             episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
 
             episodeList.add(episode);
@@ -269,25 +211,16 @@ public class EpisodeDAO2 {
         pstmt.close();
         return episodeList;
     }
-
-    public static List<Episode> FindEpisodeSeasonID(Long seasonID) throws SQLException, IOException {
-
+    public static List<Episode> FindEpisodeSeasonID(long seasonID) throws SQLException, IOException {
         List<Episode> episodeList = new ArrayList<>();
-
-        Episode episode = null;
-
-        Resume resume = null;
-
+        Episode episode;
         String sql = "SELECT * FROM episodes WHERE SEASON_ID = ?";
-
         PreparedStatement pstmt = conn.prepareStatement(sql);
-
         pstmt.setLong(1, seasonID);
-
         ResultSet rs = pstmt.executeQuery();
-        while (rs.next()) {
-            Long ID = rs.getLong("ID");
 
+        while (rs.next()) {
+            long ID = rs.getLong("ID");
             String EpisodeName = rs.getString("NAME");
             Date diffusionDate = rs.getDate("DEBUT_DATE");
             Date premiereDate = rs.getDate("premiere_Date");
@@ -311,307 +244,6 @@ public class EpisodeDAO2 {
         rs.close();
         pstmt.close();
         return episodeList;
-    }
-
-    public static long getVote(Episode ep){
-
-        PreparedStatement pstmt = null;
-
-        long nbrVotes=-1;
-
-        ResultSet rs = null;
-
-        try {
-            String sql="SELECT VOTES FROM EPISODES WHERE ID=?";
-
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.setLong(1, ep.getID());
-
-            rs=pstmt.executeQuery();
-
-            if (rs.next())
-                nbrVotes = rs.getLong(1);
-
-        }catch (Exception e){
-            System.out.println("Episode "+ep.getID()+" vote retrieval failed");
-            return -1;
-        }finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return nbrVotes;
-    }
-
-
-    public static long getScore(Episode ep){
-
-        PreparedStatement pstmt = null;
-
-        long score=-1;
-
-        ResultSet rs = null;
-
-        try {
-            String sql="SELECT SCORE FROM EPISODES WHERE ID = ?";
-
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.setLong(1,ep.getID());
-
-            rs=pstmt.executeQuery();
-            if (rs.next())
-                score = rs.getLong(1);
-        }catch (Exception e){
-            System.out.println("Episode "+ep.getID()+" score retrieval failed");
-            return -1;
-        }finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return score;
-    }
-
-    public static long getViewNbrEpisode(Episode ep){
-
-        PreparedStatement pstmt = null;
-
-        long nbr_view = -1;
-
-        ResultSet rs = null;
-
-        try {
-            String sql="select VIEW_NBR from EPISODES where ID = ?";
-
-            pstmt = conn.prepareStatement(sql);
-
-            pstmt.setLong(1,ep.getID());
-
-            rs=pstmt.executeQuery();
-
-            if (rs.next())
-                nbr_view = rs.getLong(1);
-        }catch (Exception e){
-            System.out.println("Episode "+ep.getID()+" view number retrieval failed");
-            return -1;
-        }finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return nbr_view;
-    }
-
-
-    public static boolean UpdateViewNbrEpisode(Episode ep) throws SQLException {
-        String sql = "update EPISODES set VIEW_NBR = VIEW_NBR + 1 where ID = ?";
-
-        PreparedStatement pstmt = null;
-
-        pstmt = conn.prepareStatement(sql);
-
-        pstmt.setLong(1,ep.getID());
-
-        try {
-            int affectedRows = pstmt.executeUpdate();
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return true;
-
-    }
-
-    public static boolean UpdateVoteEpisode(Episode ep) throws SQLException {
-        String sql = "update EPISODES set VOTES = VOTES + 1 where ID = ?";
-
-        PreparedStatement pstmt = null;
-
-        pstmt = conn.prepareStatement(sql);
-
-        pstmt.setLong(1,ep.getID());
-
-        try {
-            int affectedRows = pstmt.executeUpdate();
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return true;
-    }
-
-    public static boolean UpdateNegativeScoreEpisode(Episode ep) throws SQLException {
-
-        try {
-            UpdateVoteEpisode(ep);
-        }catch (Exception e)
-        {
-            System.out.println("Error updating Negative Score");
-            return false;
-        }
-
-        return true;
-    }
-
-    public static long getScoreEpisode(Episode ep) throws SQLException {
-
-        long score = -1;
-
-        String sql = "SELECT SCORE from EPISODES WHERE ID = ?";
-
-        PreparedStatement pstmt = null;
-
-        pstmt = conn.prepareStatement(sql);
-
-        pstmt.setLong(1,ep.getID());
-
-        ResultSet rs = null;
-
-        try {
-            rs = pstmt.executeQuery();
-            if (rs.next()) {
-                score = rs.getLong("SCORE");
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-            return -1;
-        }
-        return score;
-    }
-
-    public static long getVotesEpisode(Episode ep) throws SQLException {
-
-        long votes = -1;
-
-        String sql = "SELECT VOTES from EPISODES WHERE ID = ?";
-
-        PreparedStatement pstmt = null;
-
-        pstmt = conn.prepareStatement(sql);
-
-        pstmt.setLong(1,ep.getID());
-
-        ResultSet rs = null;
-
-        try {
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                votes = rs.getLong("VOTES");
-            }
-        }catch (Exception e)
-        {
-            return -1;
-        }
-        return votes;
-    }
-
-
-    public static boolean UpdatePositiveScoreEpisode(Episode ep) throws SQLException {
-
-        long score = getScoreEpisode(ep);
-        long votes = getVotesEpisode(ep);
-
-
-        if (score == -1)
-        {
-            System.out.println("Error retrieving Score in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-        if (votes == -1)
-        {
-            System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-
-//        long posVotes = (long) Math.ceil(((score/100)*votes));
-        long posVotes = (long) Math.ceil(((float)score/100.0)*votes);
-        System.out.println("PosVotes Before Increase "+ posVotes);
-        votes++;
-        posVotes++;
-        System.out.println("PosVotes After Increase "+ posVotes);
-
-
-//        long Newscore = (long) Math.ceil(((float)(posVotes+1)/(votes+1))*100);
-        long Newscore = (long) (((float)posVotes*100.0)/votes);
-
-        UpdateVoteEpisode(ep);
-
-//        System.out.println("New score is "+Newscore);
-
-        String sql = "update EPISODES set SCORE = ? where ID = ?";
-
-        PreparedStatement pstmt = null;
-
-        pstmt = conn.prepareStatement(sql);
-
-        pstmt.setLong(1,Newscore);
-        pstmt.setLong(2,ep.getID());
-
-        ResultSet rs = null;
-
-        try {
-            rs = pstmt.executeQuery();
-
-        }catch (Exception e)
-        {
-            System.out.println("Error Setting Score in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-
-        return true;
-
     }
 
 
