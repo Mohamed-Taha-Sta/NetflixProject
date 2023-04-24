@@ -122,7 +122,6 @@ public class SeasonViewController implements Initializable {
         if (selectedEpisode != null) {
             try {
                 DataHolderEpisode.setSelectedEpisode(EpisodeController.FindEpisodeID(selectedEpisode.getID()).get(0));
-                System.out.println(selectedEpisode);
                 HelloApplication.SetRoot("EpisodeView");
             } catch (Exception e) {
                 throw new RuntimeException(e);

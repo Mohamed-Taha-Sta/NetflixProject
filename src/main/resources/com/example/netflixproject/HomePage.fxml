@@ -65,7 +65,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT" fillHeight="false">
                                              <children>
-                                                <SearchableComboBox fx:id="searchBar" minHeight="35.0" minWidth="220.0" stylesheets="@../../../Style.css">
+                                                <SearchableComboBox id="HomeBar" fx:id="searchBar" minHeight="35.0" minWidth="220.0" stylesheets="@../../../Style.css">
                                                    <HBox.margin>
                                                       <Insets />
                                                    </HBox.margin>

@@ -146,7 +146,7 @@ public class EpisodeDAO2 {
                 System.out.println("Error Handelling the Synopsis");
             }
             File fileSynopsis = new File("src/main/java/Temp/SynopsisEp" + ID + ".mp4");
-
+            System.out.println("EpisodeIDin episodedao " +ID);
             episode = new Episode(ID, seasonID,Description, EpisodeName, episodeNumber, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImage, fileSynopsis, file);
 
             episodeList.add(episode);

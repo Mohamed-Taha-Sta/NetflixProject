@@ -3,9 +3,6 @@
 
 }
 
-.SearchableComboBox {
-    -fx-background-color: #000;
-}
 
 .label {
     -fx-font-family: Calibri;
@@ -14,12 +11,122 @@
     -fx-font-style: italic;
     -fx-text-fill: white;
 }
-/*.rating > .container > .button {
-    -fx-background-image: url("star.png");
+#HomeBar .text-field {
+    -fx-background-color: #000000;
+    -fx-background-insets: 0;
+    -fx-background-radius: 15px;
+    -fx-padding: 0.166667em;
+    -fx-font-size: 1em;
 }
-.rating > .container > .button.strong {
-    -fx-background-image: url("starfilled.png");
-}*/
+#HomeBar .combo-box{
+    -fx-background-color: black ;
+    -fx-background-radius: 15px;
+}
+
+
+#HomeBar .list-cell {
+    -fx-padding: 0.166667em;
+    -fx-font-size: 1em;
+}
+
+#HomeBar .list-cell:filled:selected {
+    -fx-background-color: #b70e0e;
+    -fx-text-fill: #ffffff;
+}
+
+#HomeBar .list-cell:filled:hover {
+    -fx-background-color: #7c1d40;
+}
+
+#HomeBar .list-view {
+    -fx-background-color: #2d142c;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.166667em;
+    -fx-font-size: 1em;
+}
+
+#HomeBar .list-cell:selected{
+    -fx-background-color: #000;
+    -fx-text-fill: white;
+}
+#HomeBar.scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+#HomeBar .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+#HomeBar .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+#HomeBar .scroll-bar > .increment-button:hover,
+#HomeBar.scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+#HomeBar .scroll-bar > .increment-button > .arrow,
+#HomeBar .scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+
+#HomeBar .scroll-bar > .increment-button:hover > .arrow,
+#HomeBar.scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
+
+
+#HomeBar .arrow-button {
+    -fx-border-color: #661332;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+#HomeBar .arrow-button > .arrow {
+    -fx-background-color: white;
+}
+
+#HomeBar .scroll-bar:vertical {
+    -fx-background-color: #B3253D;
+}
+
+#HomeBar .scroll-bar > .track {
+    -fx-background-color: #B3253D;
+}
+
+#HomeBar .scroll-bar > .thumb {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+}
+
+#HomeBar .scroll-bar > .increment-button:hover,
+#HomeBar .scroll-bar > .decrement-button:hover {
+    -fx-background-color: #ffffff;
+}
+
+#HomeBar.scroll-bar > .increment-button > .arrow,
+#HomeBar.scroll-bar > .decrement-button > .arrow {
+    -fx-background-color: #ffffff;
+}
+#HomeBar .scroll-bar > .increment-button:hover > .arrow,
+#HomeBar.scroll-bar > .decrement-button:hover > .arrow {
+    -fx-background-color: #B3253D;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .rating > .container > .button {
     -fx-background-image: url("star.png");

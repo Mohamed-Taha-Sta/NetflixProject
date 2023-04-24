@@ -127,10 +127,10 @@ public class EpisodeViewController implements Initializable {
 
     public void OnWatch() throws Exception{
         VideoPlayerController.SetPath(DataHolderEpisode.getSelectedEpisode().getMedia().getPath());
-        VideoPlayerController.setPageName("EpisodeView");
         if(!VuesEpisodeController.Vue_Exist(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser())){
             VuesEpisodeController.Add_Vues(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser());
         }
+        VideoPlayerController.setPageName("EpisodeView");
         HelloApplication.SetRoot("VideoPlayer");
     }
 

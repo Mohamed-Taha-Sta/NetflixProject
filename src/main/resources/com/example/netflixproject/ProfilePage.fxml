@@ -29,7 +29,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                      <children>
-                        <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#OnReturn" prefHeight="32.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                        <Button id="MenuBtn" fx:id="returnBtn" mnemonicParsing="false" onAction="#OnReturn" prefHeight="32.0" prefWidth="32.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

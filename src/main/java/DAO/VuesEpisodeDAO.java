@@ -13,7 +13,7 @@ public class VuesEpisodeDAO {
 
     private static final Connection conn = ConxDB.getInstance();
 
-    public static boolean Vue_Exist(Episode episode , User user){
+    public static boolean Vue_Exist(Episode episode, User user) {
         PreparedStatement pstmt = null;
         String sql;
         ResultSet rs = null;
@@ -28,7 +28,7 @@ public class VuesEpisodeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 if (rs != null) {
                     rs.close();
@@ -46,7 +46,7 @@ public class VuesEpisodeDAO {
         PreparedStatement pstmt = null;
         String sql;
         try {
-            sql = "INSERT INTO vues_episode (id_user,id_episode) VALUES (?,?)";
+            sql = "INSERT INTO VUES_EPISODE (ID_USER, ID_EPISODE) VALUES (?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, user.getID());
             pstmt.setLong(2, episode.getID());
@@ -55,7 +55,7 @@ public class VuesEpisodeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 if (pstmt != null) {
                     pstmt.close();
@@ -67,23 +67,23 @@ public class VuesEpisodeDAO {
 
     }
 
-    public static int GetEpisodeVues(Episode episode){
-        PreparedStatement pstmt=null;
-        ResultSet rs=null;
+    public static int GetEpisodeVues(Episode episode) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
         String sql;
-        int count=0;
-        try{
-            sql="Select Count(*) from vues_episode where id_episode=?";
-            pstmt=conn.prepareStatement(sql);
+        int count = 0;
+        try {
+            sql = "Select Count(*) from vues_episode where id_episode=?";
+            pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, episode.getID());
             rs = pstmt.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 count = rs.getInt(1);
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 if (rs != null) {
                     rs.close();

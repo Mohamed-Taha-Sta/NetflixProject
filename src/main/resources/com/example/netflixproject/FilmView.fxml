@@ -106,11 +106,11 @@
                               <HBox spacing="10.0">
                                  <children>
                                     <TextArea fx:id="FilmOpinion" editable="false" prefHeight="200.0" prefWidth="480.0" promptText="Opinion here.." wrapText="true" />
-                                    <VBox alignment="TOP_CENTER" spacing="10.0">
+                                    <VBox alignment="TOP_CENTER" spacing="15.0">
                                        <children>
-                                          <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" text="Edit" />
-                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSubmit" text="Submit" />
-                                          <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" text="Delete" />
+                                          <Button fx:id="EditBtn" mnemonicParsing="false" onAction="#OnEdit" prefHeight="22.0" prefWidth="55.0" text="Edit" />
+                                          <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#OnSubmit" prefHeight="22.0" prefWidth="55.0" text="Submit" />
+                                          <Button fx:id="DeleteBtn" mnemonicParsing="false" onAction="#OnDelete" prefHeight="22.0" prefWidth="55.0" text="Delete" />
                                        </children>
                                     </VBox>
                                  </children>
