@@ -10,7 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
@@ -18,6 +17,8 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static Utils.RepeatableFunction.isTextExceedingLength;
 
 public class LoginPageController implements Initializable {
 
@@ -29,9 +30,13 @@ public class LoginPageController implements Initializable {
     private TextField Password;
     @FXML
     protected  void onSignIn() throws Exception{
+
         if(mail.getText().isEmpty()||Password.getText().isEmpty()){
             showErrorMessage("Must fill all fields");
-        } else if (UserController.authenticate(mail.getText(),Password.getText())){
+        }else if(isTextExceedingLength(mail,100)|| isTextExceedingLength(Password,100)){
+            showErrorMessage("Text TOOOOO long");
+        }
+        else if (UserController.authenticate(mail.getText(),Password.getText())){
             DataHolder.setUserType("User");
             HelloApplication.SetRoot("HomePage");
         } else if (ActorController.authenticate(mail.getText(),Password.getText())) {

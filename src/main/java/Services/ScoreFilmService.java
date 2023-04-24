@@ -29,4 +29,7 @@ public class ScoreFilmService {
     public static double RetrieveUserScore(Film film, User user){
         return ScoreFilmDAO.RetrieveUserScore(film, user);
     }
+    public static int GetNumberVotesFilm(Film film){
+        return ScoreFilmDAO.GetNumberVotesFilm(film);
+    }
 }

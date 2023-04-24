@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -45,6 +46,10 @@ public class RepeatableFunction {
         imgView.setFitHeight(size);
         imgView.setFitWidth(size);
         btn.setGraphic(imgView);
+    }
+
+    public static boolean isTextExceedingLength(TextInputControl textInput, int maxLength) {
+        return textInput.getText().length() > maxLength;
     }
 
     public static ObservableList<Genre>  GetGenres(){

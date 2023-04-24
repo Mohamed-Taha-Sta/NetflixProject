@@ -17,7 +17,7 @@ public class ScoreEpisodeDAO {
     public static boolean Score_Exist(Episode episode, User user) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "Select * from score_episode where id_episode=? and id_user=?";
@@ -30,6 +30,17 @@ public class ScoreEpisodeDAO {
         } catch (SQLException e) {
 
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -37,7 +48,7 @@ public class ScoreEpisodeDAO {
     public static double RetrieveUserScore(Episode episode, User user) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "Select * from score_episode where id_episode=? and id_user=?";
@@ -51,6 +62,17 @@ public class ScoreEpisodeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return 0;
@@ -60,7 +82,7 @@ public class ScoreEpisodeDAO {
     public static boolean Add_Score(Episode episode, User user, double score) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         try {
             sql = "INSERT INTO score_episode (id_user,id_episode,score) VALUES (?,?,?)";
             pstmt = conn.prepareStatement(sql);
@@ -72,6 +94,17 @@ public class ScoreEpisodeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
@@ -80,7 +113,7 @@ public class ScoreEpisodeDAO {
     public static boolean Delete_Score(Episode episode, User user) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
 
         try {
             sql = "DELETE FROM score_episode WHERE id_user = ? AND id_episode = ?";
@@ -92,6 +125,17 @@ public class ScoreEpisodeDAO {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -120,7 +164,7 @@ public class ScoreEpisodeDAO {
     public static double GetEpisodeScore(Episode episode) {
         PreparedStatement pstmt = null;
         String sql;
-        ResultSet rs;
+        ResultSet rs = null;
         try {
             sql = "SELECT AVG(score) FROM score_episode WHERE id_episode = ?";
             pstmt = conn.prepareStatement(sql);
@@ -131,6 +175,17 @@ public class ScoreEpisodeDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return 0;
     }

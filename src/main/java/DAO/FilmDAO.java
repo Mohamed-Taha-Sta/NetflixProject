@@ -107,8 +107,6 @@ public class FilmDAO {
         return etat;
     }
 
-
-
     public static List<Film> FindByID(Long filmid) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -591,142 +589,6 @@ public class FilmDAO {
         }
 
 
-
-
-    }
-
-    public static boolean UpdatePositiveScoreFilm(Film film) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql;
-        long score = getscore(film);
-        long votes = getvote(film);
-
-
-        if (score == -1)
-        {
-            System.out.println("Error retrieving Score in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-        if (votes == -1)
-        {
-            System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-        try {
-            score = score + 1;
-            votes=votes+1;
-            sql = "UPDATE film SET score = '" + score + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-            sql = "UPDATE film SET vote = '" + votes + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            return false;
-        }
-        finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-    }
-    public static boolean UpdatenegativeScoreFilm(Film film) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql;
-        long votes = getvote(film);
-
-
-
-        if (votes == -1)
-        {
-            System.out.println("Error retrieving Votes in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-        try {
-            votes++;
-            sql = "UPDATE film SET vote = '" + votes + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            return false;
-        }
-        finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-
-    }
-    public static boolean UpdatevuenbrFilm(Film film) {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String sql;
-        long vuenbr = getnbrvue(film);
-
-
-
-        if (vuenbr == -1)
-        {
-            System.out.println("Error retrieving vuenbr in UpdatePositiveScoreEpisode Function ");
-            return false;
-        }
-        try {
-            vuenbr++;
-            sql = "UPDATE film SET vuenbr = '" + vuenbr + "' WHERE id_film = " + film.getId();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("error dans la connection de la base");
-            e.printStackTrace();
-            return false;
-        }finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 
 
     }
@@ -1457,6 +1319,7 @@ public class FilmDAO {
         stmt.close();
         return List;
     }
+
 
 
 }
