@@ -4,11 +4,9 @@ import Controllers.Avis_FilmController;
 import Controllers.ProducerController;
 import Controllers.ScoreFilmController;
 import Controllers.VuesFilmController;
-import Entities.Film;
 import Entities.Producer;
 import Utils.DataHolder;
 import Utils.DataHolderFilm;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.Rating;
 
@@ -24,7 +21,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.*;
-import static Utils.RepeatableFunction.IconSetter;
 
 public class FilmViewController implements Initializable {
     static String path="HomePage";
@@ -86,19 +82,23 @@ public class FilmViewController implements Initializable {
 
 
     public void OnBack() throws Exception {
+        prod=null;
         DataHolderFilm.setSelectedFilm(null);
         HelloApplication.SetRoot(path);
     }
     @FXML
     public void OnFilmClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("FilmPage");
     }
 
     public void OnSeriesClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("SeriesPage");
     }
 
     public void OnHomeClick() throws Exception {
+        prod=null;
         HelloApplication.SetRoot("HomePage");
     }
 
@@ -164,6 +164,9 @@ public class FilmViewController implements Initializable {
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", 40);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
+        if(prod==null){
+            ProducerController.getProdByID(DataHolderFilm.getSelectedFilm().getId_realisateur());
+        }
         InfoSetter();
     }
 }
