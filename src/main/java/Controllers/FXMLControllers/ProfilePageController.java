@@ -397,7 +397,7 @@ public class ProfilePageController implements Initializable {
             for (Serie s : series) {
                 System.out.println("there");
                 Label label = new Label();
-                label.setText("A new Episode of  " + s.getNom() + " has been released");
+                label.setText("A new Episode of  " + s.getNom() + "  released");
                 label.setTextFill(Color.WHITE);
                 label.setOpacity(1);
                 NotificationPane.getChildren().add(label);
