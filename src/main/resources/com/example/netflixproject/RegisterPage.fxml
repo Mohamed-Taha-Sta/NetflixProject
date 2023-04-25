@@ -26,12 +26,12 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="490.0" prefWidth="322.0" spacing="20.0" style="-fx-background-color: #510A32; -fx-background-radius: 15;">
                      <children>
-                        <Label text="Create Account">
+                        <Label id="Category" text="Create Account">
                            <font>
                               <Font name="Calibri Bold" size="36.0" />
                            </font>
                            <VBox.margin>
-                              <Insets bottom="40.0" />
+                              <Insets />
                            </VBox.margin>
                         </Label>
                         <ComboBox id="ComboBox" fx:id="identity" prefHeight="36.0" prefWidth="326.0" />
@@ -63,7 +63,7 @@
                               <Insets />
                            </VBox.margin>
                         </DatePicker>
-                        <Label fx:id="AlertText" text="Label" />
+                        <Label fx:id="AlertText" alignment="CENTER" opacity="0.0" prefHeight="18.0" prefWidth="340.0" text="Label" />
                         <HBox alignment="CENTER" spacing="40.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#OnSignIn" prefHeight="23.0" prefWidth="186.0" style="-fx-background-color: transparent;" text="Already have an account? Sign In!" textFill="WHITE" underline="true">

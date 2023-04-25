@@ -19,7 +19,7 @@
             <Image url="@../../../Images/Design/Background.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="4.0" layoutY="15.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="4.0" layoutY="15.0" minHeight="720.0" minWidth="1280.0" spacing="20.0" style="-fx-background-color: transparent;" stylesheets="@../../../Style.css">
          <children>
             <VBox alignment="CENTER" prefHeight="360.0" prefWidth="400.0" style="-fx-background-color: #801336; -fx-background-radius: 20;">
                <children>
@@ -27,12 +27,12 @@
                      <children>
                         <VBox alignment="TOP_RIGHT">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="283.0" text="We missed you!" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
+                              <Label id="Category" alignment="CENTER" contentDisplay="RIGHT" prefHeight="28.0" prefWidth="283.0" text="We missed you!" textAlignment="CENTER" textFill="WHITE" wrapText="true" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Calibri Bold" size="24.0" />
                                  </font>
                               </Label>
-                              <Label alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="205.0" text="   Hop on quick!" textFill="WHITE" wrapText="true">
+                              <Label alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="28.0" prefWidth="253.0" text="   Hop on quick!" textFill="WHITE" wrapText="true">
                                  <font>
                                     <Font name="Calibri Italic" size="12.0" />
                                  </font>
@@ -49,7 +49,7 @@
                               <Font name="Calibri" size="14.0" />
                            </font>
                         </PasswordField>
-                        <Label fx:id="AlertText" prefHeight="18.0" prefWidth="294.0" text="Label" />
+                        <Label fx:id="AlertText" alignment="CENTER" opacity="0.0" prefHeight="18.0" prefWidth="294.0" text="Label" textAlignment="CENTER" wrapText="true" />
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="229.0" spacing="40.0">
                            <children>
                               <Button fx:id="signup" alignment="CENTER" lineSpacing="5.0" mnemonicParsing="false" onAction="#onSignUp" style="-fx-background-color: transparent;" text="Don't have an account? Join us!" textAlignment="CENTER" textFill="WHITE" underline="true">
