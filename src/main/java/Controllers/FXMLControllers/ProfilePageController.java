@@ -379,28 +379,30 @@ public class ProfilePageController implements Initializable {
             OnNotibtn();
         }
         try {
-            series = SerieController.GetReleasedEpisode(EpisodeController.GetAllEpisodes(), DataHolder.getUser());
+//            series = SerieController.GetReleasedEpisode(EpisodeController.GetAllEpisodes(), DataHolder.getUser());
+            series = SerieController.GetReleasedEpisode(SerieController.GetAllSeries(), DataHolder.getUser());
             System.out.println("parsed all episodes");
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-        if (!series.isEmpty()) {
+        if (series == null || series.isEmpty())
+        {
+            Label label = new Label();
+            label.setText("No new Notifications");
+            label.setTextFill(Color.WHITE);
+            label.setOpacity(1);
+            NotificationPane.getChildren().add(label);
+        } else {
+            System.out.println("here");
             for (Serie s : series) {
+                System.out.println("there");
                 Label label = new Label();
                 label.setText("A new Episode of  " + s.getNom() + " has been released");
                 label.setTextFill(Color.WHITE);
                 label.setOpacity(1);
                 NotificationPane.getChildren().add(label);
             }
-        } else {
-            Label label = new Label();
-            label.setText("No new Notifications");
-            label.setTextFill(Color.WHITE);
-            label.setOpacity(1);
-            NotificationPane.getChildren().add(label);
         }
-
-
     }
 
 

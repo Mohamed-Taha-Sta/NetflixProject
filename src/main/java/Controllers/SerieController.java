@@ -122,8 +122,11 @@ public class SerieController {
     public static List<Serie> streamYear(List<Serie> uniqueSeries,LocalDate localDate) {
         return SerieService.streamYear(uniqueSeries,localDate);
     }
-    public static List<Serie> GetReleasedEpisode(List<Episode> episode, User user) {
-        return SerieService.GetReleasedEpisode(episode, user);
+//    public static List<Serie> GetReleasedEpisode(List<Episode> episode, User user) {
+//        return SerieService.GetReleasedEpisode(episode, user);
+//    }
+    public static List<Serie> GetReleasedEpisode(List<Serie> series, User user) throws SQLException, IOException {
+        return SerieService.GetReleasedEpisode(series, user);
     }
 
 
