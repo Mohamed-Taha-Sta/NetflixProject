@@ -17,6 +17,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.isTextExceedingLength;
+
 public class AddSeriesController implements Initializable {
 
     public TextField Name;
@@ -40,9 +42,11 @@ public class AddSeriesController implements Initializable {
         if(Name.getText().isEmpty()){
             AlertText.setText("Series must have a name");
             AlertText.setOpacity(1);
-        }
-        else if(Name.getText().length()<1){
+        } else if(Name.getText().length()<1){
             AlertText.setText("Series must have a valid name");
+            AlertText.setOpacity(1);
+        } else if(isTextExceedingLength(Name,50)){
+            AlertText.setText("Series name too long");
             AlertText.setOpacity(1);
         } else if (CountrySelector.getValue()==null) {
             AlertText.setText("Series must have a country");
@@ -61,6 +65,9 @@ public class AddSeriesController implements Initializable {
             AlertText.setOpacity(1);
         } else if (DescriptionBox.getText().isEmpty()) {
             AlertText.setText("Series must have a description");
+            AlertText.setOpacity(1);
+        } else if(isTextExceedingLength(DescriptionBox,150)){
+            AlertText.setText("Series description too long");
             AlertText.setOpacity(1);
         } else if (GenreSelector.getCheckModel().getCheckedItems() == null) {
             AlertText.setText("Series must have at least a genre");

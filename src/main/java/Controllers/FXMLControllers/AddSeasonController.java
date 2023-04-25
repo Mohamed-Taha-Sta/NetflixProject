@@ -20,6 +20,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.isTextExceedingLength;
+
 public class AddSeasonController implements Initializable {
 
     public TextField Name;
@@ -41,23 +43,29 @@ public class AddSeasonController implements Initializable {
         if(Name.getText().isEmpty()){
             AlertText.setText("Season must have a name");
             AlertText.setOpacity(1);
-        }
-        else if(Name.getText().length()<1){
+        } else if(Name.getText().length()<1){
             AlertText.setText("Season must have a valid name");
+            AlertText.setOpacity(1);
+        } else if(isTextExceedingLength(Name,50)){
+            AlertText.setText("Season name too long");
             AlertText.setOpacity(1);
         } else if (Description.getText().isEmpty()) {
             AlertText.setText("Season must have a description");
             AlertText.setOpacity(1);
         } else if (Description.getText().length()<1) {
             AlertText.setText("Season must have a valid description");
+            AlertText.setOpacity(1);
+        } else if(isTextExceedingLength(Description,150)){
+            AlertText.setText("Season description too long");
+            AlertText.setOpacity(1);
         } else if (Thumbnail.getText().isEmpty()) {
-            AlertText.setText("Series must have a thumbnail");
+            AlertText.setText("Season must have a thumbnail");
             AlertText.setOpacity(1);
         } else if (Synopsis.getText().isEmpty()) {
-            AlertText.setText("Series must have a synopsis");
+            AlertText.setText("Season must have a synopsis");
             AlertText.setOpacity(1);
         } else if (DebutDate.getValue() == null) {
-            AlertText.setText("Series must have a Debut Date");
+            AlertText.setText("Season must have a Debut Date");
             AlertText.setOpacity(1);
         }else{
             DataHolderSeason.setName(Name.getText());
@@ -82,10 +90,19 @@ public class AddSeasonController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
+            double targetAspectRatio = 16.0 / 9.0;
 
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
-            if (width <= 1920 && height <= 1080) {
+            double width = image.getWidth();
+            double height = image.getHeight();
+            double aspectRatio = width / height;
+
+            if (aspectRatio != targetAspectRatio) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Aspect Ratio");
+                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+                alert.showAndWait();
+            } else if (width <= 1920 && height <= 1080) {
                 DataHolderSeason.setThumbnail(selectedFile);
                 Thumbnail.setText(selectedFile.toURI().toString());
 

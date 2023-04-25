@@ -23,6 +23,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static Utils.RepeatableFunction.isTextExceedingLength;
+
 public class AddEpisodeController implements Initializable {
 
     public TextField Name;
@@ -52,13 +54,19 @@ public class AddEpisodeController implements Initializable {
         } else if(Name.getText().length()<1){
             AlertText.setText("Episode must have a valid name");
             AlertText.setOpacity(1);
+        } else if(isTextExceedingLength(Name,50)){
+            AlertText.setText("Episode name too long");
+            AlertText.setOpacity(1);
         } else if (DescriptionBox.getText().isEmpty()) {
             AlertText.setText("Episode must have a Description");
             AlertText.setOpacity(1);
         } else if (DescriptionBox.getText().length()<1) {
             AlertText.setText("Episode must have a valid Description");
             AlertText.setOpacity(1);
-        }  else if (PremiereDate.getValue() == null) {
+        } else if(isTextExceedingLength(DescriptionBox,150)){
+            AlertText.setText("Episode description too long");
+            AlertText.setOpacity(1);
+        } else if (PremiereDate.getValue() == null) {
             AlertText.setText("Episode must have a valid PremiereDate");
             AlertText.setOpacity(1);
         } else if (PremiereDate.getValue().isBefore(LocalDate.now())) {
@@ -94,10 +102,20 @@ public class AddEpisodeController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
+            double targetAspectRatio = 16.0 / 9.0;
 
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
-            if (width <= 1920 && height <= 1080) {
+            double width = image.getWidth();
+            double height = image.getHeight();
+            double aspectRatio = width / height;
+
+
+            if (aspectRatio != targetAspectRatio) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Aspect Ratio");
+                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+                alert.showAndWait();
+            } else if (width <= 1920 && height <= 1080) {
                 DataHolderEpisode.setThumbnail(selectedFile);
                 Thumbnail.setText(selectedFile.toURI().toString());
 

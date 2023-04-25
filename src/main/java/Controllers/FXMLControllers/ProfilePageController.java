@@ -262,6 +262,7 @@ public class ProfilePageController implements Initializable {
 
     public void OnLogOutBtn() throws Exception {
         DataHolder.setUser(null);
+        DataHolder.setImage(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
         DataHolder.setPassword(null);
@@ -290,7 +291,7 @@ public class ProfilePageController implements Initializable {
         } else if (isTextExceedingLength(prenameField,50)) {
             showErrorMessage(AlertText,"First Name field is too long");
         } else {
-            System.out.println(UserController.FirstName(prenameField.getText()));
+            UserController.FirstName(prenameField.getText());
             DataHolder.getUser().setPrename(prenameField.getText());
             PrenameLable.setText(prenameField.getText());
             ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
@@ -304,7 +305,7 @@ public class ProfilePageController implements Initializable {
         } else if (isTextExceedingLength(mailfield,50)) {
             showErrorMessage(AlertText,"Email field is too long");
         } else {
-            System.out.println(UserController.Mail(mailfield.getText()));
+            UserController.Mail(mailfield.getText());
             DataHolder.getUser().setMail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
             mailfield.setText("");
@@ -318,7 +319,7 @@ public class ProfilePageController implements Initializable {
             showErrorMessage(AlertText,"Last Name field is too long");
         }
         else {
-            System.out.println(UserController.LastName(namefield.getText()));
+            UserController.LastName(namefield.getText());
             DataHolder.getUser().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
             ProfileName.setText(DataHolder.getUser().getName() + " " + DataHolder.getUser().getPrename());
@@ -330,7 +331,7 @@ public class ProfilePageController implements Initializable {
         if (Birthdaypicker.getValue().equals(DataHolder.getUser().getBirthday())) {
             showErrorMessage(AlertText, "You didnt change your birthday");
         } else {
-            System.out.println(UserController.Birthday(Birthdaypicker.getValue()));
+            UserController.Birthday(Birthdaypicker.getValue());
             DataHolder.getUser().setBirthday(Birthdaypicker.getValue());
         }
     }
@@ -353,7 +354,7 @@ public class ProfilePageController implements Initializable {
         } else if (!OldPass.getText().equals(DataHolder.getUser().getPassword())) {
             showErrorMessage(passAlert,"Wrong Password!");
         } else {
-            System.out.println(UserController.Password(newPass.getText()));
+            UserController.Password(newPass.getText());
             showErrorMessage(passAlert,"Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");

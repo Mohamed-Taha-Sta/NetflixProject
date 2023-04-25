@@ -1,11 +1,9 @@
 package Controllers.FXMLControllers;
 
 import Controllers.*;
-import Entities.Episode;
 import Entities.Season;
 import Services.SerieService;
 import Utils.*;
-import javafx.event.EventHandler;
 import Entities.Film;
 import Entities.Serie;
 import com.example.netflixproject.HelloApplication;
@@ -18,17 +16,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
+
+import static Utils.RepeatableFunction.isTextExceedingLength;
 
 public class AdminLandingPageController implements Initializable {
 
@@ -82,6 +79,7 @@ public class AdminLandingPageController implements Initializable {
 
     public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
         HelloApplication.SetRoot("LoginPage");
+        DataHolder.setImage(null);
         DataHolder.setAdmin(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
@@ -148,16 +146,18 @@ public class AdminLandingPageController implements Initializable {
     }
 
 
-    public void OnConfirm(ActionEvent actionEvent) {
+    public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
             showMessage(passAlert, "Old Password Required!");
-        } else if (newPass.getText().isEmpty()) {
+        }
+        else if (newPass.getText().isEmpty()) {
             showMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showMessage(passAlert, "Please Confirm your Password!");
+        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+            showMessage(passAlert, "Password is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showMessage(passAlert, "Your confirm password is wrong!");
-
         } else if (newPass.getText().equals(OldPass.getText())) {
             showMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getAdmin().getPassword())) {

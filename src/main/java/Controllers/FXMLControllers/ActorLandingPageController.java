@@ -22,6 +22,8 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.*;
 
+import static Utils.RepeatableFunction.isTextExceedingLength;
+
 public class ActorLandingPageController implements Initializable {
 
 
@@ -68,6 +70,7 @@ public class ActorLandingPageController implements Initializable {
     public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setActor(null);
+        DataHolder.setImage(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
         DataHolder.setPassword(null);
@@ -91,6 +94,8 @@ public class ActorLandingPageController implements Initializable {
     public void OnPrenameBtn(ActionEvent actionEvent) {
         if (prenameField.getText().isEmpty()) {
             showMessage(AlertText,"Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField,50)) {
+            showMessage(AlertText,"FirstName field is too long");
         } else {
             ActorController.modifprenom(DataHolder.getActor().getID(),prenameField.getText());
             DataHolder.getActor().setPrename(prenameField.getText());
@@ -102,7 +107,9 @@ public class ActorLandingPageController implements Initializable {
     public void OnNameBtn(ActionEvent actionEvent) {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
             showMessage( AlertText,"Your LastName field is empty");
-        } else {
+        } else if (isTextExceedingLength(namefield,50)) {
+            showMessage(AlertText,"LastName field is too long");
+        } else{
             ActorController.modifnom(DataHolder.getActor().getID(),namefield.getText());
             DataHolder.getActor().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
@@ -114,6 +121,8 @@ public class ActorLandingPageController implements Initializable {
     public void OnMailBtn(ActionEvent actionEvent) {
         if (mailfield.getText().isEmpty()) {
             showMessage(AlertText, "Your Mail field is empty");
+        } else if (isTextExceedingLength(mailfield,50)) {
+            showMessage(AlertText,"Mail field is too long");
         } else {
             ActorController.modifmail(DataHolder.getActor().getID(),mailfield.getText());
             DataHolder.getActor().setMail(mailfield.getText());
@@ -121,18 +130,18 @@ public class ActorLandingPageController implements Initializable {
         }
     }
 
-
-    public void OnConfirm(ActionEvent actionEvent) {
-
+    public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
             showMessage(passAlert, "Old Password Required!");
-        } else if (newPass.getText().isEmpty()) {
+        }
+        else if (newPass.getText().isEmpty()) {
             showMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showMessage(passAlert, "Please Confirm your Password!");
+        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+            showMessage(passAlert, "Password is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showMessage(passAlert, "Your confirm password is wrong!");
-
         } else if (newPass.getText().equals(OldPass.getText())) {
             showMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getActor().getPassword())) {
@@ -144,8 +153,8 @@ public class ActorLandingPageController implements Initializable {
             OldPass.setText("");
             newPass.setText("");
         }
-
     }
+
 
     private void showMessage(Label label, String message) {
         label.setText(message);

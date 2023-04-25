@@ -116,6 +116,7 @@ public class ProducerLandingPageController implements Initializable {
     public void OnLogOutBtn() throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setProducer(null);
+        DataHolder.setImage(null);
         DataHolder.setUserType(null);
         DataHolder.setEmail(null);
         DataHolder.setPassword(null);
