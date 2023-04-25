@@ -237,16 +237,22 @@ public class SerieService {
         long cptSeasonScore = 0;
 
         for (Serie serie : series) {
+            noteSeason = 0;
+            sumSeasonScore = 0;
+            cptSeasonScore = 0;
             List<Season> seasonList = SeasonController.FindSeasonSerieID(serie.getId());
             for (Season season : seasonList) {
-
+                sumEpScore = 0;
+                cptEpScore = 0;
 
                 List<Episode> episodeList = EpisodeController.FindEpisodeSeasonID(season.getID());
                 for (Episode episode : episodeList) {
                     sumEpScore = sumEpScore + ScoreEpisodeController.RetrieveUserScore(episode, user);
                     cptEpScore = cptEpScore + 1;
+                    System.out.println("Note episode "+episode.getName()+" "+sumEpScore);
                 }
                 noteSeason = sumEpScore / cptEpScore;
+                System.out.println("Note seaosn "+noteSeason);
 
             }
             sumSeasonScore = sumSeasonScore + noteSeason;
@@ -255,8 +261,10 @@ public class SerieService {
             noteSerie = sumSeasonScore / cptSeasonScore;
             if (noteSerie > 2.5) {
                 auxListSer.add(serie);
+                System.out.println("Note serie "+serie.getNom()+" "+noteSerie);
             }
         }
+        System.out.println("here is the list "+auxListSer);
         return auxListSer;
     }
 }
