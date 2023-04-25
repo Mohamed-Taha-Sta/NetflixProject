@@ -205,6 +205,7 @@ public class SerieService {
 //    }
 
     public static boolean SeriesWithHighScoresByUser(List<Season> seasons, User user) {
+        System.out.println("Seasons after: "+ seasons);
         long highSeasons = seasons.stream()
                 .filter(season -> SeasonService.SeasonWithHighScoreByUser(season.getEpisodeList(), user))
                 .count();
@@ -212,6 +213,7 @@ public class SerieService {
     }
 
     public static List<Serie> GetReleasedEpisode(List<Episode> episode, User user) {
+
         return episode.stream()
                 .filter(episode1 -> ScoreEpisodeController.RetrieveUserScore(episode1, user) > 2.5)
                 .map(Episode::getSeasonParentID)

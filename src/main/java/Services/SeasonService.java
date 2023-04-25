@@ -35,7 +35,7 @@ public class SeasonService {
     }
 
     public static boolean SeasonWithHighScoreByUser(List<Episode> episodes, User user){
-
+        if(episodes==null||episodes.isEmpty()) return false;
         long highepisode= episodes.stream()
                 .filter(episode -> ScoreEpisodeController.RetrieveUserScore(episode,user)>2.5)
                 .count();
