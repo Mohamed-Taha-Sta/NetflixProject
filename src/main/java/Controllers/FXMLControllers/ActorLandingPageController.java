@@ -133,8 +133,7 @@ public class ActorLandingPageController implements Initializable {
     public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
             showMessage(passAlert, "Old Password Required!");
-        }
-        else if (newPass.getText().isEmpty()) {
+        } else if (newPass.getText().isEmpty()) {
             showMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showMessage(passAlert, "Please Confirm your Password!");

@@ -1,24 +1,19 @@
 package Controllers.FXMLControllers;
 
-import Controllers.FilmController;
-import Controllers.ProducerController;
-import Controllers.SerieController;
+import Controllers.*;
 import Entities.Film;
 import Entities.Serie;
 import Utils.*;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -152,13 +147,13 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-    public void OnMailBtn() {
+    public void OnMailBtn(ActionEvent actionEvent) {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
-        } else if (isTextExceedingLength(mailfield, 50)) {
-            showErrorMessage(AlertText, "Email field is too long");
+        } else if (isTextExceedingLength(mailfield,50)) {
+            showErrorMessage(AlertText,"Mail field is too long");
         } else {
-            ProducerController.modifmail(DataHolder.getProducer().getId(), mailfield.getText());
+            ProducerController.modifmail(DataHolder.getProducer().getId(),mailfield.getText());
             DataHolder.getProducer().setEmail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
         }
@@ -183,8 +178,7 @@ public class ProducerLandingPageController implements Initializable {
             showErrorMessage(passAlert, "Old Password Required!");
         } else if (isTextExceedingLength(OldPass,50)) {
             showErrorMessage(passAlert,"Your old password is too long");
-        }
-        else if (newPass.getText().isEmpty()) {
+        } else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (isTextExceedingLength(newPass,50)) {
             showErrorMessage(passAlert,"Your new pass is too long");

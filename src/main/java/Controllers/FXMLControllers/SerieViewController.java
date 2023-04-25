@@ -6,6 +6,7 @@ import Controllers.SeasonController;
 import Entities.Producer;
 import Entities.Season;
 import Utils.DataHolder;
+import Utils.DataHolderFilm;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -62,7 +63,7 @@ public class SerieViewController implements Initializable {
     static Producer prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
 
     public void OnBack() throws Exception {
-
+        DataHolderSeries.setSelectedSeries(null);
         HelloApplication.SetRoot(path);
     }
 

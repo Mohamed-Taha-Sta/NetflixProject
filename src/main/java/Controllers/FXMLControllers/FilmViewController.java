@@ -88,6 +88,7 @@ public class FilmViewController implements Initializable {
 
 
     public void OnBack() throws Exception {
+        DataHolderFilm.setSelectedFilm(null);
         HelloApplication.SetRoot(path);
     }
     @FXML

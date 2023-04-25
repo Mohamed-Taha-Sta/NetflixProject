@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class AdminLandingPageController implements Initializable {
 
@@ -101,33 +102,37 @@ public class AdminLandingPageController implements Initializable {
         DataHolderFilm.setAllTheActors(null);
     }
 
-    public void OnPrenameBtn(ActionEvent actionEvent) {
-        if (prenameField.getText().isEmpty()) {
-            showMessage(AlertText,"Your FirstName field is empty");
+    public void OnNameBtn() {
+        if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
+            showErrorMessage(AlertText, "Your LastName field is empty");
+        } else if (isTextExceedingLength(namefield, 50)) {
+            showErrorMessage(AlertText, "Last Name field is too long");
         } else {
-            AdminController.modifprenom(DataHolder.getAdmin().getID(),prenameField.getText());
+            AdminController.modifnom(DataHolder.getAdmin().getID(), namefield.getText());
+            DataHolder.getAdmin().setName(namefield.getText());
+            NameLabel.setText(namefield.getText());
+            ProfileName.setText(DataHolder.getAdmin().getName() + " " + DataHolder.getAdmin().getPrename());
+        }
+    }
+
+    public void OnPrenameBtn() {
+        if (prenameField.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField, 50)) {
+            showErrorMessage(AlertText, "First Name field is too long");
+        } else {
+            AdminController.modifprenom(DataHolder.getAdmin().getID(), prenameField.getText());
             DataHolder.getAdmin().setPrename(prenameField.getText());
             PrenameLable.setText(prenameField.getText());
             ProfileName.setText(DataHolder.getAdmin().getName() + " " + DataHolder.getAdmin().getPrename());
         }
     }
 
-    public void OnNameBtn(ActionEvent actionEvent) {
-
-        if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
-            showMessage( AlertText,"Your LastName field is empty");
-        } else {
-            AdminController.modifnom(DataHolder.getAdmin().getID(),namefield.getText());
-            DataHolder.getAdmin().setName(namefield.getText());
-            NameLabel.setText(namefield.getText());
-            ProfileName.setText(DataHolder.getAdmin().getName() + " " + DataHolder.getAdmin().getPrename());
-        }
-
-    }
-
     public void OnMailBtn(ActionEvent actionEvent) {
         if (mailfield.getText().isEmpty()) {
-            showMessage(AlertText, "Your Mail field is empty");
+            showErrorMessage(AlertText, "Your Mail field is empty");
+        } else if (isTextExceedingLength(mailfield,50)) {
+            showErrorMessage(AlertText,"Mail field is too long");
         } else {
             AdminController.modifmail(DataHolder.getAdmin().getID(),mailfield.getText());
             DataHolder.getAdmin().setMail(mailfield.getText());
