@@ -12,33 +12,6 @@ import java.util.List;
 
 public class ActorDAO {
 
-    //    public List<Long> CheckVues(Content content, Season season, Episode episode)
-//    {
-//        List<Long> vues=new ArrayList<>();
-//
-//        if (content instanceof Serie serie) {
-//            if (season != null) {
-//                Season seas;
-//                for (Season se : serie.getSeasonList()) {
-//                    if (se.equals(season)) {
-//                        seas =se;
-//                    }
-//                }
-//                if(episode !=null){
-//
-//                    for
-//                }
-//
-//            }
-//
-//        }
-//    }
-/*   protected long ID;
-    protected String Name;
-    protected String Prename;
-
-    protected String Mail;
-    protected String password;*/
     private static final Connection conn = ConxDB.getInstance();
 
     public static boolean ajout_acteur(Actor act) {

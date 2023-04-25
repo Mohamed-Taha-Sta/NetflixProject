@@ -29,11 +29,19 @@ public class SeasonService {
 
         List<Double> listScore = getScoreEpisodeList(episodeList);
         int numVotes = episodeList.stream()
-                .mapToInt(episode -> ScoreEpisodeService.GetNumberVotesEpisode(episode))
+                .mapToInt(ScoreEpisodeService::GetNumberVotesEpisode)
                 .sum();
         return Math.round(listScore.stream()
                 .collect(Collectors.averagingDouble(Double::doubleValue)));
     }
+
+    public static List<Double> getScoreEpisodeList(List<Episode> episodeList)  {
+
+        return episodeList.stream()
+                .map(ScoreEpisodeController::GetEpisodeScore)
+                .collect(Collectors.toList());
+    }
+
 
     public static boolean SeasonWithHighScoreByUser(List<Episode> episodes, User user){
       //  if(episodes==null||episodes.isEmpty()) return false;
@@ -54,12 +62,7 @@ public class SeasonService {
 //                .map(episode -> episode.getScore())
 //                .collect(Collectors.toList());
 //    }
-   public static List<Double> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
 
-        return episodeList.stream()
-                .map(ScoreEpisodeController::GetEpisodeScore)
-                .collect(Collectors.toList());
-    }
 
 
 

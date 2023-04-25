@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -99,8 +100,17 @@ public class SeasonViewController implements Initializable {
 
 
     public List<Episode> RetrieveEpisodes() {
+
+        List<Episode> alreadyReleased=new ArrayList<>();
         try {
-            return EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
+            for(Episode ep:EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID())){
+                if(ep.getPremiereDate().isBefore(LocalDate.now())||ep.getPremiereDate().equals(LocalDate.now())){
+                    alreadyReleased.add(ep);
+                }
+            }
+            return alreadyReleased;
+
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ArrayList<>();

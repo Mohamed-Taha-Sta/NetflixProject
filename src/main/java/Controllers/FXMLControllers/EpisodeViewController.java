@@ -57,6 +57,7 @@ public class EpisodeViewController implements Initializable {
     public Button SubmitBtn;
     public Button DeleteBtn;
     public Rating ratings;
+    public ImageView Preview;
 
     public void OnBack() throws Exception {
         HelloApplication.SetRoot("SeasonView");
@@ -106,6 +107,9 @@ public class EpisodeViewController implements Initializable {
         dateLabel.setText(DataHolderEpisode.getSelectedEpisode().getPremiereDate().format(formatter));
         Description.setText(DataHolderEpisode.getSelectedEpisode().getDescription());
         ImageSetter(Thumbnail,DataHolderEpisode.getSelectedEpisode().getImage().toURI().toString(),240,135);
+        ImageClipper(Thumbnail);
+        ImageSetter(Preview,DataHolderEpisode.getSelectedEpisode().getImage().toURI().toString(),480,270);
+        ImageClipper(Preview);
         if(Avis_EpisodeController.Avis_Exist(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser())){
            EpisodeOpinion.setText(Avis_EpisodeController.FIND_avis(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser()));
         }
@@ -117,9 +121,15 @@ public class EpisodeViewController implements Initializable {
     }
     public void OnRating(){
         if(ScoreEpisodeController.Score_Exist(DataHolderEpisode.getSelectedEpisode(),DataHolder.getUser())){
+            if(ratings.getRating()>5.0){
+                ratings.setRating(5.0);
+            }
             ScoreEpisodeController.Update_Score(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),ratings.getRating());
         }
         else {
+            if(ratings.getRating()>5.0){
+                ratings.setRating(5.0);
+            }
             ScoreEpisodeController.Add_Score(DataHolderEpisode.getSelectedEpisode(), DataHolder.getUser(),ratings.getRating());
             ratings.setUpdateOnHover(false);
         }
@@ -147,7 +157,6 @@ public class EpisodeViewController implements Initializable {
         IconSetter(homeButton, "src/main/resources/Images/HomePage/HomeButton.png", 40);
         IconSetter(seriesButoon, "src/main/resources/Images/HomePage/Series.png", 40);
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
-        ImageClipper(Thumbnail);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
     }
 }

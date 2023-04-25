@@ -77,7 +77,7 @@ public class ActorSeasonViewController implements Initializable {
         SeasonTitle.setText(DataHolderSeason.getSelectedSeason().getName());
 
         try {
-            ScoreLabel.setText(String.valueOf(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()))+"%");
+            ScoreLabel.setText(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()) +"%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

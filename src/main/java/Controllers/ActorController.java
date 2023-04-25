@@ -37,4 +37,7 @@ public class ActorController {
         ActorService.modifpassword(id,password);
     }
 
+    public static boolean Add_Actor(Actor act) {
+        return ActorService.ajout_acteur(act);
+    }
 }

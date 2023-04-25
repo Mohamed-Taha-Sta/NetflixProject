@@ -276,7 +276,7 @@ public class SerieService {
                     }
                 })
                 .flatMap(List::stream)
-                .filter(episode1 -> episode1.getPremiereDate().isAfter(LocalDate.now()) && episode1.getPremiereDate().isBefore(LocalDate.now().plusDays(14)))
+                .filter(episode1 -> episode1.getPremiereDate().isEqual(LocalDate.now()))
                 .map(Episode::getSeasonParentID)
                 .map(seasonId -> {
                     try {
@@ -289,7 +289,7 @@ public class SerieService {
                 .map(Season::getSERIE_ID)
                 .map(serieId -> {
                     try {
-                        return SerieController.GetSerieByID(serieId);
+                        return SerieService.GetSerieByIDNoActors(serieId);
                     } catch (SQLException | IOException e) {
                         throw new RuntimeException(e);
                     }

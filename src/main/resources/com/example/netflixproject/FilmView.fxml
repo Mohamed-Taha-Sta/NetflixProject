@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -63,7 +64,7 @@
                                        </HBox.margin></ImageView>
                                     <VBox alignment="CENTER_LEFT" prefHeight="156.0" prefWidth="630.0" spacing="25.0" HBox.hgrow="SOMETIMES">
                                        <children>
-                                          <Label id="Title" fx:id="FilmName" prefWidth="88.0" text="Title" />
+                                          <Label id="Title" fx:id="FilmName" prefHeight="55.0" prefWidth="612.0" text="Title" VBox.vgrow="SOMETIMES" />
                                           <HBox alignment="CENTER_LEFT" spacing="10.0">
                                              <children>
                                                 <Label id="Category" text="Produced by:" />
@@ -75,7 +76,10 @@
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="300.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="37.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
-                                          <Rating id="rating" fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
+                                          <Rating id="rating" fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="180.0" rating="0.0" updateOnHover="true">
+                                             <effect>
+                                                <Glow level="0.4" />
+                                             </effect></Rating>
                                           <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                              <children>
                                                 <Label id="Category" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />

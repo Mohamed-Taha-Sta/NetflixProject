@@ -3,6 +3,7 @@ package Controllers.FXMLControllers;
 import Controllers.ActorController;
 import Controllers.ProducerController;
 import Controllers.UserController;
+import Entities.Actor;
 import Entities.Producer;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
@@ -76,7 +77,13 @@ public class RegisterPage implements Initializable {
                 HelloApplication.SetRoot("ProducerLandingPage");
             } else if (identity.getValue().equals("User")) {
                 HelloApplication.SetRoot("ChoicesMenu");
-            } else if (identity.getValue().equals("Admin")) {
+            }else if (identity.getValue().equals("Actor")) {
+                Actor actor=new Actor(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword());
+                ActorController.Add_Actor(actor);
+                DataHolder.setActor(actor);
+                HelloApplication.SetRoot("ActorLandingPage");
+            }
+            else if (identity.getValue().equals("Admin")) {
                 System.out.println("FINISH THE ADMIN");
             }
 

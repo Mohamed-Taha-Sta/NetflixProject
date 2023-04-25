@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import org.controlsfx.control.Rating?>
@@ -76,7 +76,10 @@
                                                 <VBox alignment="TOP_CENTER" prefHeight="158.0" prefWidth="300.0" spacing="20.0" HBox.hgrow="NEVER">
                                                     <children>
                                                         <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="48.0" prefWidth="122.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
-                                          <Rating fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" rating="0.0" updateOnHover="true" />
+                                          <Rating fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" rating="0.0" updateOnHover="true">
+                                             <effect>
+                                                <Glow level="0.8" />
+                                             </effect></Rating>
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="DebutDate:" />
@@ -100,7 +103,7 @@
                                 <Insets bottom="8.0" left="8.0" />
                             </padding>
                         </VBox>
-                        <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 40px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
+                        <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 30px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
                             <children>
                                 <VBox fillWidth="false" spacing="10.0" HBox.hgrow="SOMETIMES">
                                     <children>
@@ -130,7 +133,7 @@
                                 <Line endX="-97.51477813720703" endY="206.3651580810547" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0" />
                         <VBox alignment="CENTER" prefHeight="502.0" prefWidth="528.0" spacing="30.0">
                            <children>
-                              <MediaView fitHeight="225.0" fitWidth="400.0" />
+                              <ImageView fx:id="Preview" fitHeight="270.0" fitWidth="480.0" pickOnBounds="true" preserveRatio="true" />
                               <Button id="SynopsisBtn" fx:id="watchBtn" mnemonicParsing="false" onAction="#OnWatch" prefHeight="42.0" prefWidth="114.0" text="Watch Now" />
                            </children>
                            <HBox.margin>

@@ -7,8 +7,6 @@ import Entities.Film;
 import Entities.Serie;
 import Utils.*;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,11 +16,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
+
 import java.net.URL;
 import java.util.*;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class ActorLandingPageController implements Initializable {
 
@@ -47,8 +46,6 @@ public class ActorLandingPageController implements Initializable {
     public TableView<Serie> SeriesTable = new TableView<>();
     public TableColumn<Film,String> SeriesName;
     public Label SeriesAlertText;
-    public Button AddMovie;
-    public Button AddSeries;
     public TextField OldPass;
     public TextField newPass;
     public TextField PassConf;
@@ -93,9 +90,9 @@ public class ActorLandingPageController implements Initializable {
 
     public void OnPrenameBtn(ActionEvent actionEvent) {
         if (prenameField.getText().isEmpty()) {
-            showMessage(AlertText,"Your FirstName field is empty");
+            showErrorMessage(AlertText,"Your FirstName field is empty");
         } else if (isTextExceedingLength(prenameField,50)) {
-            showMessage(AlertText,"FirstName field is too long");
+            showErrorMessage(AlertText,"FirstName field is too long");
         } else {
             ActorController.modifprenom(DataHolder.getActor().getID(),prenameField.getText());
             DataHolder.getActor().setPrename(prenameField.getText());
@@ -106,9 +103,9 @@ public class ActorLandingPageController implements Initializable {
 
     public void OnNameBtn(ActionEvent actionEvent) {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
-            showMessage( AlertText,"Your LastName field is empty");
+            showErrorMessage( AlertText,"Your LastName field is empty");
         } else if (isTextExceedingLength(namefield,50)) {
-            showMessage(AlertText,"LastName field is too long");
+            showErrorMessage(AlertText,"LastName field is too long");
         } else{
             ActorController.modifnom(DataHolder.getActor().getID(),namefield.getText());
             DataHolder.getActor().setName(namefield.getText());
@@ -120,9 +117,9 @@ public class ActorLandingPageController implements Initializable {
 
     public void OnMailBtn(ActionEvent actionEvent) {
         if (mailfield.getText().isEmpty()) {
-            showMessage(AlertText, "Your Mail field is empty");
+            showErrorMessage(AlertText, "Your Mail field is empty");
         } else if (isTextExceedingLength(mailfield,50)) {
-            showMessage(AlertText,"Mail field is too long");
+            showErrorMessage(AlertText,"Mail field is too long");
         } else {
             ActorController.modifmail(DataHolder.getActor().getID(),mailfield.getText());
             DataHolder.getActor().setMail(mailfield.getText());
@@ -132,22 +129,22 @@ public class ActorLandingPageController implements Initializable {
 
     public void OnConfirm()  {
         if (OldPass.getText().isEmpty()) {
-            showMessage(passAlert, "Old Password Required!");
+            showErrorMessage(passAlert, "Old Password Required!");
         } else if (newPass.getText().isEmpty()) {
-            showMessage(passAlert, "Your new Password is empty!");
+            showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
-            showMessage(passAlert, "Please Confirm your Password!");
+            showErrorMessage(passAlert, "Please Confirm your Password!");
         } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
-            showMessage(passAlert, "Password is too long");
+            showErrorMessage(passAlert, "Password is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
-            showMessage(passAlert, "Your confirm password is wrong!");
+            showErrorMessage(passAlert, "Your confirm password is wrong!");
         } else if (newPass.getText().equals(OldPass.getText())) {
-            showMessage(passAlert, "New Password already in use!");
+            showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getActor().getPassword())) {
-            showMessage(passAlert,"Wrong Password!");
+            showErrorMessage(passAlert,"Wrong Password!");
         } else {
             ActorController.modifpassword(DataHolder.getActor().getID(),newPass.getText());
-            showMessage(passAlert,"Your password was changed Successfully!");
+            showErrorMessage(passAlert,"Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");
             newPass.setText("");
@@ -155,15 +152,6 @@ public class ActorLandingPageController implements Initializable {
     }
 
 
-    private void showMessage(Label label, String message) {
-        label.setText(message);
-        label.setOpacity(1);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            label.setOpacity(0);
-        }));
-        timeline.play();
-    }
 
 
     public void OnClickSeries() throws Exception {
@@ -171,7 +159,7 @@ public class ActorLandingPageController implements Initializable {
         Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
         if (selectedSeries == null)
         {
-            showMessage(AlertText,"No Series was selected");
+            showErrorMessage(AlertText,"No Series was selected");
         }
         else
         {
@@ -186,7 +174,7 @@ public class ActorLandingPageController implements Initializable {
         Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
         if (selectedMovie == null)
         {
-            showMessage(MovieAlertText,"No movie was selected");
+            showErrorMessage(MovieAlertText,"No movie was selected");
         }
         else
         {

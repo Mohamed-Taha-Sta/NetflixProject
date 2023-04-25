@@ -24,17 +24,19 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class AddEpisodeController implements Initializable {
 
     public TextField Name;
-    public Text AlertText;
+
     public TextField Thumbnail;
     public TextField Synopsis;
     public TextField Video;
     public DatePicker PremiereDate;
     public DatePicker DebutDate;
     public TextArea DescriptionBox;
+    public Label AlertText;
 
     public void OnDone() throws Exception {
         HelloApplication.SetRoot("ProducerLandingPage");
@@ -48,43 +50,34 @@ public class AddEpisodeController implements Initializable {
 
 
     @FXML
-    protected  void onAdd() throws Exception{
-        if(Name.getText().isEmpty()){
-            AlertText.setText("Episode must have a name");
-            AlertText.setOpacity(1);
-        } else if(Name.getText().length()<1){
-            AlertText.setText("Episode must have a valid name");
-            AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(Name,50)){
-            AlertText.setText("Episode name too long");
-            AlertText.setOpacity(1);
+    protected void onAdd() throws Exception {
+        if (Name.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Episode must have a name");
+        } else if (Name.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Episode must have a valid name");
+        } else if (isTextExceedingLength(Name, 50)) {
+            showErrorMessage(AlertText, "Episode name too long");
         } else if (DescriptionBox.getText().isEmpty()) {
-            AlertText.setText("Episode must have a Description");
-            AlertText.setOpacity(1);
-        } else if (DescriptionBox.getText().length()<1) {
-            AlertText.setText("Episode must have a valid Description");
-            AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(DescriptionBox,150)){
-            AlertText.setText("Episode description too long");
-            AlertText.setOpacity(1);
-        } else if (PremiereDate.getValue() == null) {
-            AlertText.setText("Episode must have a valid PremiereDate");
-            AlertText.setOpacity(1);
-        } else if (PremiereDate.getValue().isBefore(LocalDate.now())) {
-            AlertText.setText("PremiereDate must be put in the future");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText, "Episode must have a Description");
+        } else if (DescriptionBox.getText().isEmpty()) {
+            showErrorMessage(AlertText, "Episode must have a valid Description");
+        } else if (isTextExceedingLength(DescriptionBox, 150)) {
+            showErrorMessage(AlertText, "Episode description too long");
         } else if (DebutDate.getValue() == null) {
-            AlertText.setText("Episode must have a valid DebutDate");
-            AlertText.setOpacity(1);
-        } else{
+            showErrorMessage(AlertText, "Episode must have a valid DebutDate");
+        } else if (PremiereDate.getValue() == null) {
+            showErrorMessage(AlertText, "Episode must have a valid PremiereDate");
+        } else if (PremiereDate.getValue().isBefore(DebutDate.getValue())) {
+            showErrorMessage(AlertText, "PremiereDate must be put after the Debut Date");
+        } else {
             DataHolderEpisode.setName(Name.getText());
             DataHolderEpisode.setDescription(DescriptionBox.getText());
             DataHolderEpisode.setPremiereDate(PremiereDate.getValue());
             DataHolderEpisode.setDebutDate(DebutDate.getValue());
 
-            long IdEpisode = EpisodeController.AddEpisode(new Episode(DataHolderSeason.getIDSeason(),DataHolderEpisode.getName(),
-                    DataHolderEpisode.getDescription(),DataHolderEpisode.getDebutDate(),DataHolderEpisode.getPremiereDate(),
-                    DataHolderEpisode.getSynopsis(),DataHolderEpisode.getVideo(),DataHolderEpisode.getThumbnail()));
+            long IdEpisode = EpisodeController.AddEpisode(new Episode(DataHolderSeason.getIDSeason(), DataHolderEpisode.getName(),
+                    DataHolderEpisode.getDescription(), DataHolderEpisode.getDebutDate(), DataHolderEpisode.getPremiereDate(),
+                    DataHolderEpisode.getSynopsis(), DataHolderEpisode.getVideo(), DataHolderEpisode.getThumbnail()));
 
             DataHolderEpisode.setIDEpisode(IdEpisode);
 
@@ -185,17 +178,6 @@ public class AddEpisodeController implements Initializable {
             }
         }
     }
-    private void showMessage(Text text, String message) {
-        text.setText(message);
-        text.setOpacity(1);
-
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-            text.setOpacity(0);
-        }));
-        timeline.play();
-    }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -224,7 +206,6 @@ public class AddEpisodeController implements Initializable {
                 e.printStackTrace();
             }
         });
-
 
 
     }

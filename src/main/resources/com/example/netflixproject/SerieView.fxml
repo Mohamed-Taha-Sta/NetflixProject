@@ -94,7 +94,7 @@
                                   <Insets bottom="8.0" left="8.0" />
                               </padding>
                           </VBox>
-                  <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 20px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
+                  <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 30px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
                      <children>
                         <VBox fillWidth="false" spacing="10.0" HBox.hgrow="SOMETIMES">
                            <children>
