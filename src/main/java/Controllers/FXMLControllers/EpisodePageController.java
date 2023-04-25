@@ -41,16 +41,14 @@ public class EpisodePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         Resume resume = new Entities.Text();
-        ((Entities.Text)resume).setTexte("This is an Episode");
+        ((Entities.Text) resume).setTexte("This is an Episode");
         List<Season> seasonList;
 
 
         List<Episode> episodeList = null;
         try {
             episodeList = EpisodeController.FindEpisodeID(83);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -58,14 +56,12 @@ public class EpisodePageController implements Initializable {
 
         try {
             seasonList = SeasonController.FindSeasonID(episode2.getSeasonParentID());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
-        SerieXXXX.setText("Serie "+seasonList.get(0).getSERIE_ID());
-        SeasonXXEpisodeYY.setText("Season "+episode2.getSeasonParentID()+" Episode "+episode2.getNumber());
+        SerieXXXX.setText("Serie " + seasonList.get(0).getSERIE_ID());
+        SeasonXXEpisodeYY.setText("Season " + episode2.getSeasonParentID() + " Episode " + episode2.getNumber());
 
         Descirption.setText(episode2.getDescription());
 

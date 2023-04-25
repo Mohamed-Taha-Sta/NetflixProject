@@ -6,7 +6,6 @@ import Controllers.VuesEpisodeController;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import com.example.netflixproject.HelloApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
@@ -21,7 +20,7 @@ public class AdminEpisodeViewController implements Initializable {
     public Label NumVoters;
     public Label NumViews;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(DataHolderEpisode.getSelectedEpisode().getSeasonParentID()).get(0));
 //        DataHolderEpisode.setEpisodeOBList(SeasonController.FindEpisodeSeasonID());
         DataHolderEpisode.setSelectedEpisode(null);
@@ -33,7 +32,7 @@ public class AdminEpisodeViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         EpisodeTitle.setText(DataHolderEpisode.getSelectedEpisode().getName());
 
-        ScoreLabel.setText(DataHolderEpisode.getSelectedEpisode().getScore()+"%");
+        ScoreLabel.setText(DataHolderEpisode.getSelectedEpisode().getScore() + "%");
         NumViews.setText(String.valueOf(VuesEpisodeController.GetEpisodeVues(DataHolderEpisode.getSelectedEpisode())));
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
         NumVoters.setText(String.valueOf(ScoreEpisodeController.GetNumberVotesEpisode(DataHolderEpisode.getSelectedEpisode())));

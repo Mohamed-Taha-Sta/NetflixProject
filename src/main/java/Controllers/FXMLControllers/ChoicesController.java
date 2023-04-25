@@ -34,12 +34,12 @@ public class ChoicesController implements Initializable {
     LocalDate date;
 
     public TableView<Actor> ActorTable = new TableView<>();
-    public TableView<Genre> GenreTable=new TableView<>();
+    public TableView<Genre> GenreTable = new TableView<>();
     @FXML
     //   public TableColumn<Actor, String> ActorColumn = new TableColumn<>();
     public TableColumn<Actor, CheckBox> SelectedActor = new TableColumn<>();
-    public TableColumn<Genre,String> GenreColumn=new TableColumn<>();
-    public TableColumn<Genre,CheckBox> SelectedGenre=new TableColumn<>();
+    public TableColumn<Genre, String> GenreColumn = new TableColumn<>();
+    public TableColumn<Genre, CheckBox> SelectedGenre = new TableColumn<>();
 
     @FXML
     protected void OnReturnBtn() throws Exception {
@@ -47,36 +47,37 @@ public class ChoicesController implements Initializable {
     }
 
     @FXML
-    protected void OnDone() throws Exception{
+    protected void OnDone() throws Exception {
         ArrayList<Long> selectedActors = new ArrayList<>();
         ArrayList<String> selectedGenres = new ArrayList<>();
-        for (Actor actor : actors ) {
+        for (Actor actor : actors) {
             if (actor.getSelect().isSelected()) {
                 selectedActors.add(actor.getID());
             }
         }
-        for (Genre genre: genres){
-            if(genre.getSelect().isSelected()){
+        for (Genre genre : genres) {
+            if (genre.getSelect().isSelected()) {
                 selectedGenres.add(genre.getNom());
             }
         }
-        date=LocalDate.parse(DataHolder.getBirthday(),formatter);
+        date = LocalDate.parse(DataHolder.getBirthday(), formatter);
         User user = new User(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword(), date, selectedActors, selectedGenres);
-        if(UserDAO.ajout_User(user)!=-1){
+        if (UserDAO.ajout_User(user) != -1) {
             HelloApplication.SetRoot("HomePage");
-        }
-        else{
+        } else {
             HelloApplication.SetRoot("RegisterPage");
         }
 
     }
+
     static ObservableList<Actor> actors;
-     ObservableList<Genre> genres = GetGenres();
+    ObservableList<Genre> genres = GetGenres();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        
-        actors= FXCollections.observableList(ActorController.GetAllActors(ActorSearch.getText()));
+
+        actors = FXCollections.observableList(ActorController.GetAllActors(ActorSearch.getText()));
 
         ActorNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ActorPrenameColumn.setCellValueFactory(new PropertyValueFactory<>("Prename"));

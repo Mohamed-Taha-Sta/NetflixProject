@@ -1,19 +1,16 @@
 package Controllers.FXMLControllers;
 
-import Controllers.*;
+import Controllers.Avis_EpisodeController;
+import Controllers.ScoreEpisodeController;
 import Utils.DataHolderEpisode;
-import Utils.DataHolderSeason;
 import com.example.netflixproject.HelloApplication;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,7 +26,7 @@ public class CheckStatsProdEpisodeController implements Initializable {
     private ListView<String> opinionList;
 
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         HelloApplication.SetRoot("ProducerEpisodeView");
     }
 
@@ -38,7 +35,7 @@ public class CheckStatsProdEpisodeController implements Initializable {
         opinionList.setPlaceholder(new Label("No opinions for this episode"));
 
         EpisodeTitle.setText(DataHolderEpisode.getSelectedEpisode().getName());
-        ScoreLabel.setText(String.valueOf(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode()) +"%"));
+        ScoreLabel.setText(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode()) + "%");
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
 
         List<String> opnions = Avis_EpisodeController.FindAll(DataHolderEpisode.getSelectedEpisode());

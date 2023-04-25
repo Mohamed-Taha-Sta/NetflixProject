@@ -61,24 +61,24 @@ public class ProfilePageController implements Initializable {
     public DatePicker Birthdaypicker;
     public Button BirthdayBtn;
     public Label AlertText;
-    public TableView<Actor> ActorTable=new TableView<>();
-    public TableColumn<Actor,String> ActorNameColumn;
-    public TableColumn<Actor,String> ActorPrenameColumn;
+    public TableView<Actor> ActorTable = new TableView<>();
+    public TableColumn<Actor, String> ActorNameColumn;
+    public TableColumn<Actor, String> ActorPrenameColumn;
     public TableColumn<Actor, CheckBox> SelectedActor;
     public Button UpdateActors;
     public Button UpdateGenres;
 
 
     public TableView<Genre> GenreTable;
-    public TableColumn<Genre,String> GenreColumn;
-    public TableColumn<Genre,String> SelectedGenre;
+    public TableColumn<Genre, String> GenreColumn;
+    public TableColumn<Genre, String> SelectedGenre;
 
 
     //Notification Menu Anchor
     public AnchorPane NotificationMenu;
     public VBox NotificationPane;
 
-    List<Serie> series=new ArrayList<>();
+    List<Serie> series = new ArrayList<>();
 
     //Password Menu
     public AnchorPane PassMenu;
@@ -90,23 +90,22 @@ public class ProfilePageController implements Initializable {
     public Label GenreAlertText;
     public Label ActorsAlertText;
 
-    public static boolean noti=false;
+    public static boolean noti = false;
 
     public static void setNoti(boolean noti) {
         ProfilePageController.noti = noti;
     }
 
-    
 
     ObservableList<Actor> actors;
     ObservableList<Genre> genres = GetGenres();
 
-    public void LoadSelectedActors(){
-        actors= FXCollections.observableList(ActorController.GetAllActors(""));
-        ArrayList<Long> userActors=DataHolder.getUser().getActorsList();
-        for(Long actorId : userActors){
-            for(Actor actor : actors){
-                if(actor.getID() == actorId){
+    public void LoadSelectedActors() {
+        actors = FXCollections.observableList(ActorController.GetAllActors(""));
+        ArrayList<Long> userActors = DataHolder.getUser().getActorsList();
+        for (Long actorId : userActors) {
+            for (Actor actor : actors) {
+                if (actor.getID() == actorId) {
                     actor.getSelect().setSelected(true);
                     break;
                 }
@@ -114,11 +113,11 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void LoadSelectedGenres(){
-        ArrayList<String > userGenre= DataHolder.getUser().getGenreList();
-        for(String genre:userGenre){
-            for(Genre genreName:genres){
-                if(genre.equals(genreName.getNom())){
+    public void LoadSelectedGenres() {
+        ArrayList<String> userGenre = DataHolder.getUser().getGenreList();
+        for (String genre : userGenre) {
+            for (Genre genreName : genres) {
+                if (genre.equals(genreName.getNom())) {
                     genreName.getSelect().setSelected(true);
                     break;
                 }
@@ -126,53 +125,50 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnUpdateActors(){
+    public void OnUpdateActors() {
         ArrayList<Long> selectedActors = new ArrayList<>();
-        for (Actor actor : actors ) {
+        for (Actor actor : actors) {
             if (actor.getSelect().isSelected()) {
                 selectedActors.add(actor.getID());
             }
         }
         String actorListString = String.join(",", selectedActors.stream().map(Object::toString).toArray(String[]::new));
-        String userActors= String.join(",", DataHolder.getUser().getActorsList().stream().map(Object::toString).toArray(String[]::new));
-        if(actorListString.equals(userActors)){
-            showErrorMessage(ActorsAlertText,"You didnt change anything!");
-        }
-        else if(actorListString.isEmpty()){
-            showErrorMessage(ActorsAlertText,"At least one Actor should be selected!");
-        }
-        else {
+        String userActors = String.join(",", DataHolder.getUser().getActorsList().stream().map(Object::toString).toArray(String[]::new));
+        if (actorListString.equals(userActors)) {
+            showErrorMessage(ActorsAlertText, "You didnt change anything!");
+        } else if (actorListString.isEmpty()) {
+            showErrorMessage(ActorsAlertText, "At least one Actor should be selected!");
+        } else {
             DataHolder.getUser().setActorsList(selectedActors);
             System.out.println(UserController.Actors(actorListString));
-            showErrorMessage(ActorsAlertText,"Actors list Updated Successfully");
+            showErrorMessage(ActorsAlertText, "Actors list Updated Successfully");
         }
 
     }
 
-    public void OnUpdateGenres(){
+    public void OnUpdateGenres() {
         ArrayList<String> selectedGenres = new ArrayList<>();
-        for (Genre genre: genres){
-            if(genre.getSelect().isSelected()){
+        for (Genre genre : genres) {
+            if (genre.getSelect().isSelected()) {
                 selectedGenres.add(genre.getNom());
             }
         }
-        String userGenres =String.join(",", DataHolder.getUser().getGenreList().stream().map(Object::toString).toArray(String[]::new));
-        System.out.println("User:"+userGenres);
+        String userGenres = String.join(",", DataHolder.getUser().getGenreList().stream().map(Object::toString).toArray(String[]::new));
+        System.out.println("User:" + userGenres);
         String genreListString = String.join(",", selectedGenres.stream().map(Object::toString).toArray(String[]::new));
-        System.out.println("Selec"+genreListString);
-        if(genreListString.equals(userGenres)){
-            showErrorMessage(GenreAlertText,"You didnt change anything!");
-        }
-        else if(genreListString.isEmpty()){
-            showErrorMessage(GenreAlertText,"At least one Genre should be selected!");
-        }
-        else{
+        System.out.println("Selec" + genreListString);
+        if (genreListString.equals(userGenres)) {
+            showErrorMessage(GenreAlertText, "You didnt change anything!");
+        } else if (genreListString.isEmpty()) {
+            showErrorMessage(GenreAlertText, "At least one Genre should be selected!");
+        } else {
             DataHolder.getUser().setGenreList(selectedGenres);
             System.out.println(UserController.Genres(genreListString));
-            showErrorMessage(GenreAlertText,"Genres list Updated Successfully");
+            showErrorMessage(GenreAlertText, "Genres list Updated Successfully");
         }
 
     }
+
     @FXML
     public void OnProfileImage() {
         FileChooser fileChooser = new FileChooser();
@@ -237,19 +233,19 @@ public class ProfilePageController implements Initializable {
         GenreTable.setItems(genres);
     }
 
-    public void OnProfilebtn()  {
+    public void OnProfilebtn() {
         ProfileMenu.setVisible(true);
         NotificationMenu.setVisible(false);
         PassMenu.setVisible(false);
     }
 
-    public void OnNotibtn()  {
+    public void OnNotibtn() {
         ProfileMenu.setVisible(false);
         NotificationMenu.setVisible(true);
         PassMenu.setVisible(false);
     }
 
-    public void OnPassbtn()  {
+    public void OnPassbtn() {
         ProfileMenu.setVisible(false);
         NotificationMenu.setVisible(false);
         PassMenu.setVisible(true);
@@ -282,9 +278,9 @@ public class ProfilePageController implements Initializable {
 
     public void OnPrenameBtn() {
         if (prenameField.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your FirstName field is empty");
-        } else if (isTextExceedingLength(prenameField,50)) {
-            showErrorMessage(AlertText,"First Name field is too long");
+            showErrorMessage(AlertText, "Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField, 50)) {
+            showErrorMessage(AlertText, "First Name field is too long");
         } else {
             UserController.FirstName(prenameField.getText());
             DataHolder.getUser().setPrename(prenameField.getText());
@@ -294,11 +290,11 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnMailBtn()  {
+    public void OnMailBtn() {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
-        } else if (isTextExceedingLength(mailfield,50)) {
-            showErrorMessage(AlertText,"Email field is too long");
+        } else if (isTextExceedingLength(mailfield, 50)) {
+            showErrorMessage(AlertText, "Email field is too long");
         } else {
             UserController.Mail(mailfield.getText());
             DataHolder.getUser().setMail(mailfield.getText());
@@ -307,13 +303,12 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnNameBtn()  {
+    public void OnNameBtn() {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
-            showErrorMessage( AlertText,"Your LastName field is empty");
-        }else if (isTextExceedingLength(namefield,50)){
-            showErrorMessage(AlertText,"Last Name field is too long");
-        }
-        else {
+            showErrorMessage(AlertText, "Your LastName field is empty");
+        } else if (isTextExceedingLength(namefield, 50)) {
+            showErrorMessage(AlertText, "Last Name field is too long");
+        } else {
             UserController.LastName(namefield.getText());
             DataHolder.getUser().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
@@ -322,7 +317,7 @@ public class ProfilePageController implements Initializable {
         }
     }
 
-    public void OnBirthdayBtn(){
+    public void OnBirthdayBtn() {
         if (Birthdaypicker.getValue().equals(DataHolder.getUser().getBirthday())) {
             showErrorMessage(AlertText, "You didnt change your birthday");
         } else {
@@ -332,25 +327,24 @@ public class ProfilePageController implements Initializable {
     }
 
 
-    public void OnConfirm()  {
+    public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
-        }
-        else if (newPass.getText().isEmpty()) {
+        } else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
-        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+        } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
             showErrorMessage(passAlert, "Password field is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showErrorMessage(passAlert, "Your confirm password is wrong!");
         } else if (newPass.getText().equals(OldPass.getText())) {
             showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getUser().getPassword())) {
-            showErrorMessage(passAlert,"Wrong Password!");
+            showErrorMessage(passAlert, "Wrong Password!");
         } else {
             UserController.Password(newPass.getText());
-            showErrorMessage(passAlert,"Your password was changed Successfully!");
+            showErrorMessage(passAlert, "Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");
             newPass.setText("");
@@ -381,26 +375,25 @@ public class ProfilePageController implements Initializable {
             throw new RuntimeException(e);
         }
         TableSetter();
-        if(noti){
+        if (noti) {
             OnNotibtn();
         }
         try {
-           series= SerieController.GetReleasedEpisode(EpisodeController.GetAllEpisodes(),DataHolder.getUser()) ;
+            series = SerieController.GetReleasedEpisode(EpisodeController.GetAllEpisodes(), DataHolder.getUser());
             System.out.println("parsed all episodes");
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
-        if(!series.isEmpty()){
-            for(Serie s:series){
-                Label label=new Label();
-                label.setText("A new Episode of  " + s.getNom()+ " has been released");
+        if (!series.isEmpty()) {
+            for (Serie s : series) {
+                Label label = new Label();
+                label.setText("A new Episode of  " + s.getNom() + " has been released");
                 label.setTextFill(Color.WHITE);
                 label.setOpacity(1);
                 NotificationPane.getChildren().add(label);
             }
-        }
-        else{
-            Label label=new Label();
+        } else {
+            Label label = new Label();
             label.setText("No new Notifications");
             label.setTextFill(Color.WHITE);
             label.setOpacity(1);

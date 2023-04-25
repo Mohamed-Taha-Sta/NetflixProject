@@ -1,17 +1,16 @@
 package Controllers.FXMLControllers;
 
 import Controllers.*;
+import Entities.Film;
 import Entities.Season;
+import Entities.Serie;
 import Services.SerieService;
 import Utils.*;
-import Entities.Film;
-import Entities.Serie;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -45,18 +45,16 @@ public class AdminLandingPageController implements Initializable {
     public Button MailBtn;
     public Label AlertText;
     public TableView<Film> MoviesTable = new TableView<>();
-    public TableColumn<Film,String> MovieName;
-    public TableColumn<Film,String> MovieScore;
-    public TableColumn<Film,String> MovieViews;
+    public TableColumn<Film, String> MovieName;
+    public TableColumn<Film, String> MovieScore;
+    public TableColumn<Film, String> MovieViews;
     public Label NameLabel;
     public TableView<Serie> SeriesTable = new TableView<>();
-    public TableColumn<Serie,String> SeriesName;
-    public TableColumn<Serie,String> numSaisons;
-    public TableColumn <Serie,String> numEp;
-    public TableColumn <Serie,Double> Score;
+    public TableColumn<Serie, String> SeriesName;
+    public TableColumn<Serie, String> numSaisons;
+    public TableColumn<Serie, String> numEp;
+    public TableColumn<Serie, Double> Score;
     public Label SeriesAlertText;
-    public Button AddMovie;
-    public Button AddSeries;
     public TextField OldPass;
     public TextField newPass;
     public TextField PassConf;
@@ -68,17 +66,17 @@ public class AdminLandingPageController implements Initializable {
     private static Set<Serie> serieSetAll = GetSeriesContainer();
 
 
-    public void OnProfilebtn(ActionEvent actionEvent) {
+    public void OnProfilebtn() {
         ProfileMenu.setVisible(true);
         PassMenu.setVisible(false);
     }
 
-    public void OnPassbtn(ActionEvent actionEvent) {
+    public void OnPassbtn() {
         ProfileMenu.setVisible(false);
         PassMenu.setVisible(true);
     }
 
-    public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
+    public void OnLogOutBtn() throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setImage(null);
         DataHolder.setAdmin(null);
@@ -128,13 +126,13 @@ public class AdminLandingPageController implements Initializable {
         }
     }
 
-    public void OnMailBtn(ActionEvent actionEvent) {
+    public void OnMailBtn() {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
-        } else if (isTextExceedingLength(mailfield,50)) {
-            showErrorMessage(AlertText,"Mail field is too long");
+        } else if (isTextExceedingLength(mailfield, 50)) {
+            showErrorMessage(AlertText, "Mail field is too long");
         } else {
-            AdminController.modifmail(DataHolder.getAdmin().getID(),mailfield.getText());
+            AdminController.modifmail(DataHolder.getAdmin().getID(), mailfield.getText());
             DataHolder.getAdmin().setMail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
         }
@@ -151,25 +149,24 @@ public class AdminLandingPageController implements Initializable {
     }
 
 
-    public void OnConfirm()  {
+    public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showMessage(passAlert, "Old Password Required!");
-        }
-        else if (newPass.getText().isEmpty()) {
+        } else if (newPass.getText().isEmpty()) {
             showMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showMessage(passAlert, "Please Confirm your Password!");
-        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+        } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
             showMessage(passAlert, "Password is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showMessage(passAlert, "Your confirm password is wrong!");
         } else if (newPass.getText().equals(OldPass.getText())) {
             showMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getAdmin().getPassword())) {
-            showMessage(passAlert,"Wrong Password!");
+            showMessage(passAlert, "Wrong Password!");
         } else {
-            AdminController.modifpass(DataHolder.getAdmin().getID(),newPass.getText());
-            showMessage(passAlert,"Your password was changed Successfully!");
+            AdminController.modifpass(DataHolder.getAdmin().getID(), newPass.getText());
+            showMessage(passAlert, "Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");
             newPass.setText("");
@@ -180,12 +177,9 @@ public class AdminLandingPageController implements Initializable {
     public void OnClickSeries() throws Exception {
 
         Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
-        if (selectedSeries == null)
-        {
-            showMessage(AlertText,"No Series was selected");
-        }
-        else
-        {
+        if (selectedSeries == null) {
+            showMessage(AlertText, "No Series was selected");
+        } else {
             DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(selectedSeries.getId()).get(0));
             HelloApplication.SetRoot("AdminSeriesView");
         }
@@ -194,9 +188,9 @@ public class AdminLandingPageController implements Initializable {
 
     ObservableList<String> yearList = FXCollections.observableArrayList
             ("All", "2010", "2011", "2012", "2013", "2014", "2015", "2016",
-            "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
+                    "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024");
 
-    public void OnloadProfile() throws Exception {
+    public void OnloadProfile() {
 
         ProfileName.setText(DataHolder.getAdmin().getName() + " " + DataHolder.getAdmin().getPrename());
         NameLabel.setText(DataHolder.getAdmin().getName());
@@ -214,7 +208,7 @@ public class AdminLandingPageController implements Initializable {
         if (YearSelect.getValue() != "All") {
             SeriesTable.getItems().addAll(SerieController.streamYear(uniqueSeries, LocalDate.of(Integer.parseInt(YearSelect.getValue()), 1, 1)));
             DataHolderSeries.setSeries(Series);
-        }else {
+        } else {
             SeriesTable.getItems().addAll(new ArrayList<>(serieSetAll));
         }
     }
@@ -252,10 +246,9 @@ public class AdminLandingPageController implements Initializable {
         Score.setCellValueFactory(new PropertyValueFactory<>("Score"));
 
 
-        if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
+        if (DataHolderSeries.getSeries() == null || DataHolderSeries.getSeries().isEmpty()) {
             List<Serie> uniqueSeries = new ArrayList<>(serieSetAll);
-            for (Serie serie:uniqueSeries)
-            {
+            for (Serie serie : uniqueSeries) {
                 try {
                     serie.setScore(SerieService.StreamAverageScore(serie));
                 } catch (SQLException | IOException e) {
@@ -265,11 +258,10 @@ public class AdminLandingPageController implements Initializable {
                 try {
                     serie.setSeasonNumber(SeasonController.StreamSpecificSeasons(serie.getId()));
                     List<Season> listSeason = SeasonController.FindSeasonSerieID(serie.getId());
-                    for(Season season: listSeason)
-                        {
-                            serie.setEpisodeNumber(EpisodeController.StreamSpecificEpisodes(season.getID()));
+                    for (Season season : listSeason) {
+                        serie.setEpisodeNumber(EpisodeController.StreamSpecificEpisodes(season.getID()));
 
-                        }
+                    }
                 } catch (SQLException | IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -279,8 +271,7 @@ public class AdminLandingPageController implements Initializable {
         }
 
 
-
-        if(DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
+        if (DataHolderFilm.getFilms() == null || DataHolderFilm.getFilms().isEmpty()) {
 
             List<Film> filmList = FilmController.GetAllFilms();
             Set<Film> filmSet = new HashSet<>(filmList);
@@ -300,8 +291,7 @@ public class AdminLandingPageController implements Initializable {
         SeriesTable.sort();
 
         YearSelect.setOnKeyPressed(ke -> {
-            if (ke.getCode().equals(KeyCode.ENTER))
-            {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
                 OnChangeOnYear(new ArrayList<>(serieSetAll));
                 SeriesTable.sort();
             }

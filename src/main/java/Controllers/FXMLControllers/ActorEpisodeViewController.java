@@ -1,8 +1,6 @@
 package Controllers.FXMLControllers;
 
 import Controllers.Avis_EpisodeController;
-import Controllers.Avis_SaisonController;
-import Controllers.EpisodeController;
 import Controllers.SeasonController;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
@@ -13,9 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,13 +22,12 @@ public class ActorEpisodeViewController implements Initializable {
     public Label ScoreLabel;
     public Label DebutDateLabel;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(DataHolderEpisode.getSelectedEpisode().getSeasonParentID()).get(0));
-//        DataHolderEpisode.setEpisodeOBList(SeasonController.FindEpisodeSeasonID());
+//      DataHolderEpisode.setEpisodeOBList(SeasonController.FindEpisodeSeasonID());
         DataHolderEpisode.setSelectedEpisode(null);
         HelloApplication.SetRoot("ActorSeasonView");
     }
-
 
 
     @Override
@@ -42,7 +37,7 @@ public class ActorEpisodeViewController implements Initializable {
 
         EpisodeTitle.setText(DataHolderEpisode.getSelectedEpisode().getName());
 
-        ScoreLabel.setText(String.valueOf(DataHolderEpisode.getSelectedEpisode().getScore())+"%");
+        ScoreLabel.setText(DataHolderEpisode.getSelectedEpisode().getScore() + "%");
 
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
 
@@ -50,15 +45,15 @@ public class ActorEpisodeViewController implements Initializable {
 
         opinionList.getItems().addAll(opnions);
 
-        opinionList.setCellFactory(param -> new ListCell<String>(){
+        opinionList.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item==null) {
+                if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
 
-                }else{
+                } else {
 
                     // set the width's
                     setMinWidth(getListView().getWidth());
@@ -74,7 +69,6 @@ public class ActorEpisodeViewController implements Initializable {
                 }
             }
         });
-
 
 
     }

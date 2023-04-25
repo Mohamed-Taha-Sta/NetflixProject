@@ -69,7 +69,7 @@
                                     <HBox>
                                        <children>
                                           <TextField id="SearchField" fx:id="searchBar" prefHeight="35.0" prefWidth="202.0" promptText="Search" />
-                                          <Button id="SearchBtn" fx:id="SearchButton" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onAction="#OnSearch" prefHeight="35.0" prefWidth="35.0" HBox.hgrow="ALWAYS">
+                                          <Button id="SearchBtn" fx:id="SearchButton" minHeight="34.0" minWidth="35.0" mnemonicParsing="false" onAction="#OnSearch" prefHeight="34.0" prefWidth="35.0" HBox.hgrow="ALWAYS">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>

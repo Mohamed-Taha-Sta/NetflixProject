@@ -49,8 +49,8 @@ public class AddFilmController implements Initializable {
             showErrorMessage(AlertText, "Name field too long");
         } else if (DescriptionBox.getText().isEmpty()) {
             showErrorMessage(AlertText, "Film must have a Description");
-        } else if (isTextExceedingLength(DescriptionBox,150)) {
-            showErrorMessage(AlertText,"Description is longer then the film");
+        } else if (isTextExceedingLength(DescriptionBox, 150)) {
+            showErrorMessage(AlertText, "Description is longer then the film");
         } else if (DebutDate.getValue() == null) {
             showErrorMessage(AlertText, "Film must have a valid DebutDate");
         } else if (CountrySelector.getValue() == null) {
@@ -73,7 +73,7 @@ public class AddFilmController implements Initializable {
     }
 
     @FXML
-    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void ThumbnailSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Thumbnail");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -95,8 +95,8 @@ public class AddFilmController implements Initializable {
                 alert.setContentText("Please select an image with an aspect ratio of 16:9.");
                 alert.showAndWait();
             } else if (width <= 1920 && height <= 1080) {
-                    DataHolderFilm.setThumbnail(selectedFile);
-                    Thumbnail.setText(selectedFile.toURI().toString());
+                DataHolderFilm.setThumbnail(selectedFile);
+                Thumbnail.setText(selectedFile.toURI().toString());
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -110,7 +110,7 @@ public class AddFilmController implements Initializable {
     }
 
     @FXML
-    public void SynopsisSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void SynopsisSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -136,7 +136,7 @@ public class AddFilmController implements Initializable {
     }
 
     @FXML
-    public void VideoSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void VideoSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Video");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -269,7 +269,7 @@ public class AddFilmController implements Initializable {
 
         Thumbnail.setOnMouseClicked(event -> {
             try {
-                ThumbnailSelect(event);
+                ThumbnailSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -277,7 +277,7 @@ public class AddFilmController implements Initializable {
 
         Synopsis.setOnMouseClicked(event -> {
             try {
-                SynopsisSelect(event);
+                SynopsisSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -285,7 +285,7 @@ public class AddFilmController implements Initializable {
 
         Video.setOnMouseClicked(event -> {
             try {
-                VideoSelect(event);
+                VideoSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -38,20 +38,20 @@ public class AddSeriesController implements Initializable {
     }
 
     @FXML
-    protected  void onAdd() throws Exception{
-        if(Name.getText().isEmpty()){
+    protected void onAdd() throws Exception {
+        if (Name.getText().isEmpty()) {
             AlertText.setText("Series must have a name");
             AlertText.setOpacity(1);
-        } else if(Name.getText().length()<1){
+        } else if (Name.getText().length() < 1) {
             AlertText.setText("Series must have a valid name");
             AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(Name,50)){
+        } else if (isTextExceedingLength(Name, 50)) {
             AlertText.setText("Series name too long");
             AlertText.setOpacity(1);
-        } else if (CountrySelector.getValue()==null) {
+        } else if (CountrySelector.getValue() == null) {
             AlertText.setText("Series must have a country");
             AlertText.setOpacity(1);
-        } else if (LanguageSelector.getValue()==null) {
+        } else if (LanguageSelector.getValue() == null) {
             AlertText.setText("Series must have a language");
             AlertText.setOpacity(1);
         } else if (GenreSelector.getCheckModel().isEmpty()) {
@@ -66,13 +66,13 @@ public class AddSeriesController implements Initializable {
         } else if (DescriptionBox.getText().isEmpty()) {
             AlertText.setText("Series must have a description");
             AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(DescriptionBox,150)){
+        } else if (isTextExceedingLength(DescriptionBox, 150)) {
             AlertText.setText("Series description too long");
             AlertText.setOpacity(1);
         } else if (GenreSelector.getCheckModel().getCheckedItems() == null) {
             AlertText.setText("Series must have at least a genre");
             AlertText.setOpacity(1);
-        }  else if (DebutDate.getValue() == null) {
+        } else if (DebutDate.getValue() == null) {
             AlertText.setText("Series must have a Debut Date");
             AlertText.setOpacity(1);
         } else {
@@ -89,89 +89,44 @@ public class AddSeriesController implements Initializable {
 
     }
 
-//    @FXML
-//    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Choose Thumbnail");
-//        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-//        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
-//        fileChooser.getExtensionFilters().add(imageFilter);
-//        File selectedFile = fileChooser.showOpenDialog(null);
-//        //Taha i added the ability of checking the aspect ration
-//        double targetAspectRatio = 16.0 / 9.0;
-//        if (selectedFile != null) {
-//            Image image = new Image(selectedFile.toURI().toString());
-//
-////            int width = (int) image.getWidth();
-////            int height = (int) image.getHeight();
-//            double width = image.getWidth();
-//            double height = image.getHeight();
-//            double aspectRatio = width / height;
-//            if(aspectRatio==targetAspectRatio){
-//                DataHolderSeries.setThumbnail(selectedFile);
-//                Thumbnail.setText(selectedFile.toURI().toString());
-//
-//            }
-//            else{
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Error");
-//                alert.setHeaderText("Invalid Image Aspect Ratio");
-//                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
-//                alert.showAndWait();
-//            }
-//            if (width <= 1920 && height <= 1080) {
-//                DataHolderSeries.setThumbnail(selectedFile);
-//                Thumbnail.setText(selectedFile.toURI().toString());
-//
-//            } else {
-//                // If the selected image does not have the required dimensions, display an error message
-//                Alert alert = new Alert(Alert.AlertType.ERROR);
-//                alert.setTitle("Error");
-//                alert.setHeaderText("Invalid Image Size");
-//                alert.setContentText("Please select an image with dimensions of 1920*1080 pixels.");
-//                alert.showAndWait();
-//            }
-//        }
-//    }
-    //Tiny changes
- public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Choose Thumbnail");
-    fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-    FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
-    fileChooser.getExtensionFilters().add(imageFilter);
-    File selectedFile = fileChooser.showOpenDialog(null);
 
-    if (selectedFile != null) {
-        Image image = new Image(selectedFile.toURI().toString());
-        double targetAspectRatio = 16.0 / 9.0;
-        double width = image.getWidth();
-        double height = image.getHeight();
-        double aspectRatio = width / height;
+    public void ThumbnailSelect() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Thumbnail");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image files", "*.jpg", "*.jpeg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+        File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (aspectRatio != targetAspectRatio) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Image Aspect Ratio");
-            alert.setContentText("Please select an image with an aspect ratio of 16:9.");
-            alert.showAndWait();
-        } else if (width > 1920 || height > 1080) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Image Size");
-            alert.setContentText("Please select an image with dimensions of 1920*1080 pixels or less.");
-            alert.showAndWait();
-        } else {
-            DataHolderSeries.setThumbnail(selectedFile);
-            Thumbnail.setText(selectedFile.toURI().toString());
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toString());
+            double targetAspectRatio = 16.0 / 9.0;
+            double width = image.getWidth();
+            double height = image.getHeight();
+            double aspectRatio = width / height;
+
+            if (aspectRatio != targetAspectRatio) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Aspect Ratio");
+                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+                alert.showAndWait();
+            } else if (width > 1920 || height > 1080) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Size");
+                alert.setContentText("Please select an image with dimensions of 1920*1080 pixels or less.");
+                alert.showAndWait();
+            } else {
+                DataHolderSeries.setThumbnail(selectedFile);
+                Thumbnail.setText(selectedFile.toURI().toString());
+            }
         }
     }
-}
-
 
 
     @FXML
-    public void SynopsisSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void SynopsisSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -301,7 +256,7 @@ public class AddSeriesController implements Initializable {
 
         Thumbnail.setOnMouseClicked(event -> {
             try {
-                ThumbnailSelect(event);
+                ThumbnailSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -309,7 +264,7 @@ public class AddSeriesController implements Initializable {
 
         Synopsis.setOnMouseClicked(event -> {
             try {
-                SynopsisSelect(event);
+                SynopsisSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }

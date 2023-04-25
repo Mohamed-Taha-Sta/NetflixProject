@@ -9,19 +9,19 @@ import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 import static Utils.RepeatableFunction.IconSetter;
 import static Utils.RepeatableFunction.ImageClipper;
 
@@ -45,16 +45,16 @@ public class ProducerEpisodeViewController implements Initializable {
     public Label AlertText;
     public Label RatingLabel;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(DataHolderEpisode.getSelectedEpisode().getSeasonParentID()).get(0));
         HelloApplication.SetRoot("ProducerSeasonView");
     }
 
-    public void EpisodeOverviewBtn(MouseEvent mouseEvent) throws Exception {
+    public void EpisodeOverviewBtn() throws Exception {
         HelloApplication.SetRoot("CheckStatsProdEpisode");
     }
 
-    public void onEditEpisodeImg(MouseEvent mouseEvent) throws SQLException {
+    public void onEditEpisodeImg() throws SQLException {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an Episode Thumbnail");
@@ -70,8 +70,8 @@ public class ProducerEpisodeViewController implements Initializable {
             int height = (int) image.getHeight();
             if (width <= 1920 && height <= 1080) {
                 Thumbnail.setImage(image);
-                EpisodeController.modifImg(DataHolderEpisode.getSelectedEpisode(),selectedFile);
-                showMessage(AlertText,"Thumbnail Changed successfully");
+                EpisodeController.modifImg(DataHolderEpisode.getSelectedEpisode(), selectedFile);
+                showMessage(AlertText, "Thumbnail Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -85,7 +85,7 @@ public class ProducerEpisodeViewController implements Initializable {
 
     }
 
-    public void onEdtSynosisBtn(ActionEvent actionEvent) throws SQLException {
+    public void onEdtSynosisBtn() throws SQLException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -97,8 +97,8 @@ public class ProducerEpisodeViewController implements Initializable {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
-                EpisodeController.modifSynopsis(DataHolderEpisode.getSelectedEpisode(),selectedFile);
-                showMessage(AlertText,"Synopsis Changed successfully");
+                EpisodeController.modifSynopsis(DataHolderEpisode.getSelectedEpisode(), selectedFile);
+                showMessage(AlertText, "Synopsis Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -112,7 +112,7 @@ public class ProducerEpisodeViewController implements Initializable {
 
     }
 
-    public void onEditVideo(ActionEvent actionEvent) throws SQLException {
+    public void onEditVideo() throws SQLException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Video");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -124,8 +124,8 @@ public class ProducerEpisodeViewController implements Initializable {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
-                EpisodeController.modifVideo(DataHolderEpisode.getSelectedEpisode(),selectedFile);
-                showMessage(AlertText,"Video Changed successfully");
+                EpisodeController.modifVideo(DataHolderEpisode.getSelectedEpisode(), selectedFile);
+                showMessage(AlertText, "Video Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -137,67 +137,67 @@ public class ProducerEpisodeViewController implements Initializable {
             }
         }
     }
-    
-    public void OnDebutDateBtn(ActionEvent actionEvent) throws SQLException {
+
+    public void OnDebutDateBtn() throws SQLException {
         if (DebutDatePicker.getValue().equals(DataHolderEpisode.getSelectedEpisode().getDebutDate())) {
             showMessage(AlertText, "You didnt change the DebutDate");
-        } else if (DebutDatePicker.getValue()==null) {
+        } else if (DebutDatePicker.getValue() == null) {
             showMessage(AlertText, "Your new DebutDate is Empty");
         } else {
-            EpisodeController.modifDebutDate(DataHolderEpisode.getSelectedEpisode(),DebutDatePicker.getValue());
+            EpisodeController.modifDebutDate(DataHolderEpisode.getSelectedEpisode(), DebutDatePicker.getValue());
             DataHolderEpisode.getSelectedEpisode().setDebutDate(DebutDatePicker.getValue());
             DebutDateLabel.setText(DebutDatePicker.getValue().toString());
-            showMessage(AlertText,"Attribute changed successfully");
+            showMessage(AlertText, "Attribute changed successfully");
         }
     }
 
-    public void OnPremiereDateBtn(ActionEvent actionEvent) throws SQLException {
-        if (PremiereDatePicker.getValue()==null) {
+    public void OnPremiereDateBtn() throws SQLException {
+        if (PremiereDatePicker.getValue() == null) {
             showMessage(AlertText, "Your new PremiereDate is Empty");
         } else if (PremiereDatePicker.getValue().equals(DataHolderEpisode.getSelectedEpisode().getPremiereDate())) {
             showMessage(AlertText, "You didnt change the PremiereDate");
         } else if (PremiereDatePicker.getValue().isBefore(LocalDate.now())) {
             showMessage(AlertText, "PremiereDate must be put in the future");
         } else {
-            EpisodeController.modifPremiereDate(DataHolderEpisode.getSelectedEpisode(),PremiereDatePicker.getValue());
+            EpisodeController.modifPremiereDate(DataHolderEpisode.getSelectedEpisode(), PremiereDatePicker.getValue());
             DataHolderEpisode.getSelectedEpisode().setPremiereDate(PremiereDatePicker.getValue());
             PremiereDateLabel.setText(PremiereDatePicker.getValue().toString());
-            showMessage(AlertText,"Attribute changed successfully");
+            showMessage(AlertText, "Attribute changed successfully");
         }
     }
 
-    public void ChangeDescriptionBtn(ActionEvent actionEvent) throws SQLException {
+    public void ChangeDescriptionBtn() throws SQLException {
         if (New_Description.getText().isEmpty()) {
-            showMessage(AlertText,"Episode must have a description");
+            showMessage(AlertText, "Episode must have a description");
         } else if (New_Description.getText().equals(DataHolderEpisode.getSelectedEpisode().getDescription())) {
-            showMessage(AlertText,"You didn't change the description");
+            showMessage(AlertText, "You didn't change the description");
         } else {
-            EpisodeController.modifDescription(DataHolderEpisode.getSelectedEpisode(),New_Description.getText() );
-            DataHolderEpisode.getSelectedEpisode().setDescription(New_Description.getText() );
+            EpisodeController.modifDescription(DataHolderEpisode.getSelectedEpisode(), New_Description.getText());
+            DataHolderEpisode.getSelectedEpisode().setDescription(New_Description.getText());
             Old_Description.setText(New_Description.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
-    public void OnEpisodeNameBtn(ActionEvent actionEvent) throws SQLException {
+    public void OnEpisodeNameBtn() throws SQLException {
         if (EpisodeName.getText().isEmpty()) {
-            showMessage(AlertText,"Your New Episode Title field is empty");
+            showMessage(AlertText, "Your New Episode Title field is empty");
         } else {
-            EpisodeController.modifNom(DataHolderEpisode.getSelectedEpisode(),EpisodeName.getText());
+            EpisodeController.modifNom(DataHolderEpisode.getSelectedEpisode(), EpisodeName.getText());
             DataHolderEpisode.getSelectedEpisode().setName(EpisodeName.getText());
             Title.setText(EpisodeName.getText());
-            showMessage(AlertText,"Attribute changed successfully");
+            showMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
+        IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
 
         Title.setText(DataHolderEpisode.getSelectedEpisode().getName());
-        RatingLabel.setText(Math.round(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode()))+"%");
+        RatingLabel.setText(Math.round(ScoreEpisodeController.GetEpisodeScore(DataHolderEpisode.getSelectedEpisode())) + "%");
         DebutDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getDebutDate().toString());
         PremiereDateLabel.setText(DataHolderEpisode.getSelectedEpisode().getPremiereDate().toString());
         Old_Description.setText(DataHolderEpisode.getSelectedEpisode().getDescription());
@@ -218,7 +218,6 @@ public class ProducerEpisodeViewController implements Initializable {
         }));
         timeline.play();
     }
-
 
 
 }

@@ -6,21 +6,14 @@ import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
@@ -87,7 +80,7 @@ public class AddEpisodeController implements Initializable {
     }
 
     @FXML
-    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void ThumbnailSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Thumbnail");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -125,7 +118,7 @@ public class AddEpisodeController implements Initializable {
     }
 
     @FXML
-    public void SynopsisSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void SynopsisSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -151,7 +144,7 @@ public class AddEpisodeController implements Initializable {
     }
 
     @FXML
-    public void VideoSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void VideoSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Video");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -185,7 +178,7 @@ public class AddEpisodeController implements Initializable {
 
         Thumbnail.setOnMouseClicked(event -> {
             try {
-                ThumbnailSelect(event);
+                ThumbnailSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -193,7 +186,7 @@ public class AddEpisodeController implements Initializable {
 
         Synopsis.setOnMouseClicked(event -> {
             try {
-                SynopsisSelect(event);
+                SynopsisSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -201,7 +194,7 @@ public class AddEpisodeController implements Initializable {
 
         Video.setOnMouseClicked(event -> {
             try {
-                VideoSelect(event);
+                VideoSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }

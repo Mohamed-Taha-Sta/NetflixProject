@@ -41,10 +41,10 @@ public class ActorLandingPageController implements Initializable {
     public Button MailBtn;
     public Label AlertText;
     public TableView<Film> MoviesTable = new TableView<>();
-    public TableColumn<Film,String> MovieName;
+    public TableColumn<Film, String> MovieName;
     public Label NameLabel;
     public TableView<Serie> SeriesTable = new TableView<>();
-    public TableColumn<Film,String> SeriesName;
+    public TableColumn<Film, String> SeriesName;
     public Label SeriesAlertText;
     public TextField OldPass;
     public TextField newPass;
@@ -54,17 +54,17 @@ public class ActorLandingPageController implements Initializable {
     public AnchorPane PassMenu;
     public Label MovieAlertText;
 
-    public void OnProfilebtn(ActionEvent actionEvent) {
+    public void OnProfilebtn() {
         ProfileMenu.setVisible(true);
         PassMenu.setVisible(false);
     }
 
-    public void OnPassbtn(ActionEvent actionEvent) {
+    public void OnPassbtn() {
         ProfileMenu.setVisible(false);
         PassMenu.setVisible(true);
     }
 
-    public void OnLogOutBtn(ActionEvent actionEvent) throws Exception {
+    public void OnLogOutBtn() throws Exception {
         HelloApplication.SetRoot("LoginPage");
         DataHolder.setActor(null);
         DataHolder.setImage(null);
@@ -88,26 +88,26 @@ public class ActorLandingPageController implements Initializable {
         DataHolderFilm.setAllTheActors(null);
     }
 
-    public void OnPrenameBtn(ActionEvent actionEvent) {
+    public void OnPrenameBtn() {
         if (prenameField.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your FirstName field is empty");
-        } else if (isTextExceedingLength(prenameField,50)) {
-            showErrorMessage(AlertText,"FirstName field is too long");
+            showErrorMessage(AlertText, "Your FirstName field is empty");
+        } else if (isTextExceedingLength(prenameField, 50)) {
+            showErrorMessage(AlertText, "FirstName field is too long");
         } else {
-            ActorController.modifprenom(DataHolder.getActor().getID(),prenameField.getText());
+            ActorController.modifprenom(DataHolder.getActor().getID(), prenameField.getText());
             DataHolder.getActor().setPrename(prenameField.getText());
             PrenameLable.setText(prenameField.getText());
             ProfileName.setText(DataHolder.getActor().getName() + " " + DataHolder.getActor().getPrename());
         }
     }
 
-    public void OnNameBtn(ActionEvent actionEvent) {
+    public void OnNameBtn() {
         if (namefield.getText().isEmpty() || namefield.getText().equals("")) {
-            showErrorMessage( AlertText,"Your LastName field is empty");
-        } else if (isTextExceedingLength(namefield,50)) {
-            showErrorMessage(AlertText,"LastName field is too long");
-        } else{
-            ActorController.modifnom(DataHolder.getActor().getID(),namefield.getText());
+            showErrorMessage(AlertText, "Your LastName field is empty");
+        } else if (isTextExceedingLength(namefield, 50)) {
+            showErrorMessage(AlertText, "LastName field is too long");
+        } else {
+            ActorController.modifnom(DataHolder.getActor().getID(), namefield.getText());
             DataHolder.getActor().setName(namefield.getText());
             NameLabel.setText(namefield.getText());
             ProfileName.setText(DataHolder.getActor().getName() + " " + DataHolder.getActor().getPrename());
@@ -115,36 +115,36 @@ public class ActorLandingPageController implements Initializable {
 
     }
 
-    public void OnMailBtn(ActionEvent actionEvent) {
+    public void OnMailBtn() {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
-        } else if (isTextExceedingLength(mailfield,50)) {
-            showErrorMessage(AlertText,"Mail field is too long");
+        } else if (isTextExceedingLength(mailfield, 50)) {
+            showErrorMessage(AlertText, "Mail field is too long");
         } else {
-            ActorController.modifmail(DataHolder.getActor().getID(),mailfield.getText());
+            ActorController.modifmail(DataHolder.getActor().getID(), mailfield.getText());
             DataHolder.getActor().setMail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
         }
     }
 
-    public void OnConfirm()  {
+    public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
         } else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
-        } else if (isTextExceedingLength(OldPass,50)||isTextExceedingLength(newPass,50)||isTextExceedingLength(PassConf,50)) {
+        } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
             showErrorMessage(passAlert, "Password is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
             showErrorMessage(passAlert, "Your confirm password is wrong!");
         } else if (newPass.getText().equals(OldPass.getText())) {
             showErrorMessage(passAlert, "New Password already in use!");
         } else if (!OldPass.getText().equals(DataHolder.getActor().getPassword())) {
-            showErrorMessage(passAlert,"Wrong Password!");
+            showErrorMessage(passAlert, "Wrong Password!");
         } else {
-            ActorController.modifpassword(DataHolder.getActor().getID(),newPass.getText());
-            showErrorMessage(passAlert,"Your password was changed Successfully!");
+            ActorController.modifpassword(DataHolder.getActor().getID(), newPass.getText());
+            showErrorMessage(passAlert, "Your password was changed Successfully!");
             PassConf.setText("");
             OldPass.setText("");
             newPass.setText("");
@@ -152,17 +152,12 @@ public class ActorLandingPageController implements Initializable {
     }
 
 
-
-
     public void OnClickSeries() throws Exception {
 
         Serie selectedSeries = SeriesTable.getSelectionModel().getSelectedItem();
-        if (selectedSeries == null)
-        {
-            showErrorMessage(AlertText,"No Series was selected");
-        }
-        else
-        {
+        if (selectedSeries == null) {
+            showErrorMessage(AlertText, "No Series was selected");
+        } else {
             DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(selectedSeries.getId()).get(0));
             HelloApplication.SetRoot("ActorSeriesView");
         }
@@ -170,19 +165,15 @@ public class ActorLandingPageController implements Initializable {
     }
 
 
-    public void OnClickMovie(MouseEvent mouseEvent) throws Exception {
+    public void OnClickMovie() throws Exception {
         Film selectedMovie = MoviesTable.getSelectionModel().getSelectedItem();
-        if (selectedMovie == null)
-        {
-            showErrorMessage(MovieAlertText,"No movie was selected");
-        }
-        else
-        {
+        if (selectedMovie == null) {
+            showErrorMessage(MovieAlertText, "No movie was selected");
+        } else {
             DataHolderFilm.setSelectedFilm(selectedMovie);
             HelloApplication.SetRoot("ActorFilmView");
         }
     }
-
 
 
     public void OnloadProfile() throws Exception {
@@ -196,6 +187,7 @@ public class ActorLandingPageController implements Initializable {
 
     public static ObservableList<Serie> Series;
     public static ObservableList<Film> Films;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -210,7 +202,7 @@ public class ActorLandingPageController implements Initializable {
 
         SeriesName.setCellValueFactory(new PropertyValueFactory<>("nom"));
 
-        if (DataHolderSeries.getSeries()==null || DataHolderSeries.getSeries().isEmpty()) {
+        if (DataHolderSeries.getSeries() == null || DataHolderSeries.getSeries().isEmpty()) {
 
             List<Serie> seriesList = SerieController.FindSeriesByActor(DataHolder.getActor());
             Set<Serie> serieSet = new HashSet<>(seriesList);
@@ -219,7 +211,7 @@ public class ActorLandingPageController implements Initializable {
             DataHolderSeries.setSeries(Series);
         }
 
-        if(DataHolderFilm.getFilms()==null || DataHolderFilm.getFilms().isEmpty()) {
+        if (DataHolderFilm.getFilms() == null || DataHolderFilm.getFilms().isEmpty()) {
 
             List<Film> filmList = FilmController.FindByActor(DataHolder.getActor());
             Set<Film> filmSet = new HashSet<>(filmList);
@@ -231,9 +223,6 @@ public class ActorLandingPageController implements Initializable {
 
         MoviesTable.setItems(Films);
         SeriesTable.setItems(Series);
-
-
-
 
 
     }

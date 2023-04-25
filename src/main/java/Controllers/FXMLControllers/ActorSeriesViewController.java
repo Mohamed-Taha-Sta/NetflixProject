@@ -3,10 +3,7 @@ package Controllers.FXMLControllers;
 import Controllers.Avis_serieController;
 import Controllers.SeasonController;
 import Controllers.SerieController;
-import Entities.Film;
 import Entities.Season;
-import Entities.Serie;
-import Utils.DataHolder;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -31,9 +28,9 @@ public class ActorSeriesViewController implements Initializable {
     public Label ScoreLabel;
     public Label DebutDateLabel;
     public TableView<Season> SeasonTable = new TableView<>();
-    public TableColumn<Season,String> SeasonName;
+    public TableColumn<Season, String> SeasonName;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeries.setSelectedSeries(null);
         DataHolderSeason.setSeasonObservableList(null);
         DataHolderSeason.setSelectedSeason(null);
@@ -44,8 +41,7 @@ public class ActorSeriesViewController implements Initializable {
     public void OnClickSeason() throws Exception {
 
         Season selectedSeasons = SeasonTable.getSelectionModel().getSelectedItem();
-        if (selectedSeasons != null)
-        {
+        if (selectedSeasons != null) {
             DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(selectedSeasons.getID()).get(0));
             HelloApplication.SetRoot("ActorSeasonView");
         }
@@ -61,7 +57,7 @@ public class ActorSeriesViewController implements Initializable {
         SeasonName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 
-        if (DataHolderSeason.getSeasonObservableList()==null || DataHolderSeason.getSeasonObservableList().isEmpty()) {
+        if (DataHolderSeason.getSeasonObservableList() == null || DataHolderSeason.getSeasonObservableList().isEmpty()) {
 
             List<Season> seasonList = null;
             try {
@@ -82,7 +78,7 @@ public class ActorSeriesViewController implements Initializable {
         SeriesTitle.setText(DataHolderSeries.getSelectedSeries().getNom());
 
         try {
-            ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+"%");
+            ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries())) + "%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -96,15 +92,15 @@ public class ActorSeriesViewController implements Initializable {
 
         opinionList.getItems().addAll(opnions);
 
-        opinionList.setCellFactory(param -> new ListCell<String>(){
+        opinionList.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item==null) {
+                if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
 
-                }else{
+                } else {
 
                     // set the width's
                     setMinWidth(getListView().getWidth());

@@ -9,13 +9,11 @@ import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +30,7 @@ public class AdminSeriesViewController implements Initializable {
     public TableColumn<Season,String> SeasonName;
     public Label NumberOfVoters;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeries.setSelectedSeries(null);
         DataHolderSeason.setSeasonObservableList(null);
         DataHolderSeason.setSelectedSeason(null);
@@ -41,7 +39,7 @@ public class AdminSeriesViewController implements Initializable {
 
 
 
-    public void OnClickSeason(MouseEvent mouseEvent) throws Exception {
+    public void OnClickSeason() throws Exception {
 
         Season selectedSeasons = SeasonTable.getSelectionModel().getSelectedItem();
         if (selectedSeasons != null)
@@ -79,7 +77,7 @@ public class AdminSeriesViewController implements Initializable {
 //        NumberOfVoters.setText();
 
         try {
-            ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+"%");
+            ScoreLabel.setText(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()) +"%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

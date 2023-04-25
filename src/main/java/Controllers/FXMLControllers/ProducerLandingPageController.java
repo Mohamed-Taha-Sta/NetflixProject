@@ -1,19 +1,20 @@
 package Controllers.FXMLControllers;
 
-import Controllers.*;
+import Controllers.FilmController;
+import Controllers.ProducerController;
+import Controllers.SerieController;
 import Entities.Film;
 import Entities.Serie;
 import Utils.*;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,7 +27,6 @@ import static Utils.RepeatableFunction.showErrorMessage;
 public class ProducerLandingPageController implements Initializable {
 
     //LeftMenu Vars
-    public ImageView Profile_Image;
     public Text ProfileName;
     public Button ProfileBtn;
 
@@ -147,13 +147,13 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-    public void OnMailBtn(ActionEvent actionEvent) {
+    public void OnMailBtn() {
         if (mailfield.getText().isEmpty()) {
             showErrorMessage(AlertText, "Your Mail field is empty");
-        } else if (isTextExceedingLength(mailfield,50)) {
-            showErrorMessage(AlertText,"Mail field is too long");
+        } else if (isTextExceedingLength(mailfield, 50)) {
+            showErrorMessage(AlertText, "Mail field is too long");
         } else {
-            ProducerController.modifmail(DataHolder.getProducer().getId(),mailfield.getText());
+            ProducerController.modifmail(DataHolder.getProducer().getId(), mailfield.getText());
             DataHolder.getProducer().setEmail(mailfield.getText());
             MailLabel.setText(mailfield.getText());
         }
@@ -176,16 +176,16 @@ public class ProducerLandingPageController implements Initializable {
     public void OnConfirm() {
         if (OldPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Old Password Required!");
-        } else if (isTextExceedingLength(OldPass,50)) {
-            showErrorMessage(passAlert,"Your old password is too long");
+        } else if (isTextExceedingLength(OldPass, 50)) {
+            showErrorMessage(passAlert, "Your old password is too long");
         } else if (newPass.getText().isEmpty()) {
             showErrorMessage(passAlert, "Your new Password is empty!");
-        } else if (isTextExceedingLength(newPass,50)) {
-            showErrorMessage(passAlert,"Your new pass is too long");
+        } else if (isTextExceedingLength(newPass, 50)) {
+            showErrorMessage(passAlert, "Your new pass is too long");
         } else if (PassConf.getText().isEmpty()) {
             showErrorMessage(passAlert, "Please Confirm your Password!");
-        } else if (isTextExceedingLength(PassConf,50)) {
-            showErrorMessage(AlertText,"your confirmation pass is too long");
+        } else if (isTextExceedingLength(PassConf, 50)) {
+            showErrorMessage(AlertText, "your confirmation pass is too long");
         } else if (isTextExceedingLength(OldPass, 50) || isTextExceedingLength(newPass, 50) || isTextExceedingLength(PassConf, 50)) {
             showErrorMessage(passAlert, "Password field is too long");
         } else if (!newPass.getText().equals(PassConf.getText())) {
@@ -204,14 +204,14 @@ public class ProducerLandingPageController implements Initializable {
     }
 
 
-    public ProducerLandingPageController() throws SQLException, IOException {
+    public ProducerLandingPageController() {
     }
 
     public static ObservableList<Serie> Series;
     public static ObservableList<Film> Films;
 
 
-    public void OnloadProfile() throws Exception {
+    public void OnloadProfile() {
 
         ProfileName.setText(DataHolder.getProducer().getNom() + " " + DataHolder.getProducer().getPrenom());
         NameLabel.setText(DataHolder.getProducer().getNom());
@@ -240,9 +240,7 @@ public class ProducerLandingPageController implements Initializable {
             try {
                 seriesList = SerieController.GetSeriesByProducer(DataHolder.getProducer());
                 System.out.println(seriesList);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
+            } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
             Series = FXCollections.observableArrayList(seriesList);
@@ -264,8 +262,6 @@ public class ProducerLandingPageController implements Initializable {
         SeriesTable.setItems(Series);
 
     }
-
-
 
 
 }

@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,7 +21,7 @@ public class ActorFilmViewController implements Initializable {
     public Label ScoreLabel;
     public Label DebutDateLabel;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderFilm.setSelectedFilm(null);
         HelloApplication.SetRoot("ActorLandingPage");
     }
@@ -35,7 +36,7 @@ public class ActorFilmViewController implements Initializable {
 
         //MAKE SURE POURCENTAGE
 
-        ScoreLabel.setText(FilmController.getscorepourcantage(DataHolderFilm.getSelectedFilm())+"%");
+        ScoreLabel.setText(FilmController.getscorepourcantage(DataHolderFilm.getSelectedFilm()) + "%");
 
         DebutDateLabel.setText(DataHolderFilm.getSelectedFilm().getAnnerdesortie().toString());
 
@@ -44,15 +45,15 @@ public class ActorFilmViewController implements Initializable {
         System.out.println("Ya salah");
         opinionList.getItems().addAll(opnions);
 
-        opinionList.setCellFactory(param -> new ListCell<String>(){
+        opinionList.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item==null) {
+                if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
 
-                }else{
+                } else {
 
                     // set the width's
                     setMinWidth(getListView().getWidth());
@@ -68,7 +69,6 @@ public class ActorFilmViewController implements Initializable {
                 }
             }
         });
-
 
 
     }

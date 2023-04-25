@@ -63,23 +63,22 @@ public class AddActorsController implements Initializable {
             }
         }
 
-        if (selectedMainActors.isEmpty())
-        {
+        if (selectedMainActors.isEmpty()) {
             AlertText.setText("Must select at least 1 main Actor");
-        }else {
+        } else {
             DataHolderSeries.setMainActorsList(selectedMainActors);
             DataHolderSeries.setSuppActorsList(selectedSupportingActors);
             //PickUp constructor Here
             long idSeries = SerieController.AddSerie(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
-                    DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
-                    DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
-                    DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
+                    DataHolderSeries.getDescription(), DataHolderSeries.getDebutDate(), DataHolderSeries.getLanguage(),
+                    DataHolderSeries.getCountryOfOrigin(), DataHolderSeries.getGenreList(), DataHolderSeries.getThumbnail(),
+                    DataHolderSeries.getSynopsis(), DataHolderSeries.getMainActorsList(), DataHolderSeries.getSuppActorsList()));
 
             DataHolderSeries.setIDSerie(idSeries);
             DataHolderSeries.getSeries().add(new Serie(DataHolderSeries.getSeriesName(), DataHolder.getProducer().getId(),
-                    DataHolderSeries.getDescription(),DataHolderSeries.getDebutDate(),DataHolderSeries.getLanguage(),
-                    DataHolderSeries.getCountryOfOrigin(),DataHolderSeries.getGenreList(),DataHolderSeries.getThumbnail(),
-                    DataHolderSeries.getSynopsis(),DataHolderSeries.getMainActorsList(),DataHolderSeries.getSuppActorsList()));
+                    DataHolderSeries.getDescription(), DataHolderSeries.getDebutDate(), DataHolderSeries.getLanguage(),
+                    DataHolderSeries.getCountryOfOrigin(), DataHolderSeries.getGenreList(), DataHolderSeries.getThumbnail(),
+                    DataHolderSeries.getSynopsis(), DataHolderSeries.getMainActorsList(), DataHolderSeries.getSuppActorsList()));
 
             HelloApplication.SetRoot("AddSeason");
         }

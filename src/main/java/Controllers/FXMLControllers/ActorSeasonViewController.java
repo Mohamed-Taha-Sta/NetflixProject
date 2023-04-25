@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class ActorSeasonViewController implements Initializable {
     public Label DebutDateLabel;
     public Label ScoreLabel;
     public TableView<Episode> EpisodesTable = new TableView<>();
-    public TableColumn<Episode,String> EpisodeName;
+    public TableColumn<Episode, String> EpisodeName;
 
 
     public void onBack(ActionEvent actionEvent) throws Exception {
@@ -38,11 +39,9 @@ public class ActorSeasonViewController implements Initializable {
     public void OnClickEpisode() throws Exception {
 
         Episode selectedEpisodes = EpisodesTable.getSelectionModel().getSelectedItem();
-        if (selectedEpisodes == null)
-        {
+        if (selectedEpisodes == null) {
             System.out.println("Episode selected is null");
-        } else
-        {
+        } else {
             System.out.println("Selected Episode");
             DataHolderEpisode.setSelectedEpisode(EpisodeController.FindEpisodeID(selectedEpisodes.getID()).get(0));
             HelloApplication.SetRoot("ActorEpisodeView");
@@ -57,7 +56,7 @@ public class ActorSeasonViewController implements Initializable {
 
         EpisodeName.setCellValueFactory(new PropertyValueFactory<>("name")); //Try name
 
-        if (DataHolderEpisode.getEpisodeOBList()==null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
+        if (DataHolderEpisode.getEpisodeOBList() == null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
             List<Episode> episodeList = null;
             try {
                 episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
@@ -77,7 +76,7 @@ public class ActorSeasonViewController implements Initializable {
         SeasonTitle.setText(DataHolderSeason.getSelectedSeason().getName());
 
         try {
-            ScoreLabel.setText(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()) +"%");
+            ScoreLabel.setText(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()) + "%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -91,15 +90,15 @@ public class ActorSeasonViewController implements Initializable {
 
         opinionList.getItems().addAll(opnions);
 
-        opinionList.setCellFactory(param -> new ListCell<String>(){
+        opinionList.setCellFactory(param -> new ListCell<String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty || item==null) {
+                if (empty || item == null) {
                     setGraphic(null);
                     setText(null);
 
-                }else{
+                } else {
 
                     // set the width's
                     setMinWidth(getListView().getWidth());
@@ -117,8 +116,6 @@ public class ActorSeasonViewController implements Initializable {
         });
 
     }
-    
-    
-    
-    
+
+
 }

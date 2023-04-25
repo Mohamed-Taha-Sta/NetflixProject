@@ -874,8 +874,8 @@
 }
 
 .date-picker-popup .week-number-cell {
-    -fx-text-fill: #2510d2;
-    -fx-background-color: #2510d2;
+    -fx-text-fill: #650b3d;
+    -fx-background-color: #812b3c;
 }
 
 .date-picker-popup .spinner .button .left-arrow,
@@ -884,7 +884,8 @@
 }
 
 .hbox {
-    -fx-background-color: linear-gradient(#100552, #0b0077);
+    -fx-background-color: linear-gradient(#801336, #650b3d);
+    -fx-background-radius: 5PX;
 
 }
 
@@ -893,10 +894,22 @@
 }
 
 .slider {
-    -fx-background-color: #566ed3;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15px;
+    -fx-cursor: HAND;
+    -fx-background-insets: 10px;
+}
+
+.slider .track {
+    -fx-background-color: #ffffff;
 
 }
 
-.slider .filled {
-    -fx-selection-color: green;
+
+.slider .track:selected {
+    -fx-background-color: red;
+}
+
+.slider .thumb {
+    -fx-background-color: #b70e0e;
 }

@@ -14,7 +14,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,23 +45,23 @@ public class RegisterPage implements Initializable {
         if (UserName.getText().isEmpty() || UserPrename.getText().isEmpty() || UserEmail.getText().isEmpty() || UserPassword.getText().isEmpty()) {
             showErrorMessage(AlertText, "Must fill all the fields!");
         } else if (isTextExceedingLength(UserName, 50)) {
-            showErrorMessage(AlertText,"Last Name field is too long");
+            showErrorMessage(AlertText, "Last Name field is too long");
         } else if (isTextExceedingLength(UserPrename, 50)) {
-            showErrorMessage(AlertText,"First Name field is too long");
+            showErrorMessage(AlertText, "First Name field is too long");
         } else if (isTextExceedingLength(UserEmail, 50)) {
             showErrorMessage(AlertText, "Email field is too long");
         } else if (isTextExceedingLength(UserPassword, 50)) {
             showErrorMessage(AlertText, "Password field is too long");
         } else if (!UserController.isEmail(UserEmail.getText())) {
-            showErrorMessage(AlertText,"This email address is not recognized!");
+            showErrorMessage(AlertText, "This email address is not recognized!");
         } else if (!UserController.check_Mail(UserEmail.getText())) {
-            showErrorMessage(AlertText,"Another user with same mail exists!");
+            showErrorMessage(AlertText, "Another user with same mail exists!");
         } else if (!ProducerController.check_Mail(UserEmail.getText())) {
-            showErrorMessage(AlertText,"Another producer with same mail exists!");
+            showErrorMessage(AlertText, "Another producer with same mail exists!");
         } else if (!ActorController.check_Mail(UserEmail.getText())) {
-            showErrorMessage(AlertText,"Another actor with same mail exists!");
+            showErrorMessage(AlertText, "Another actor with same mail exists!");
         } else if (identity.getValue().equals("User") && UserBirthday.getValue() == null) {
-            showErrorMessage(AlertText,"Must fill all the fields!");
+            showErrorMessage(AlertText, "Must fill all the fields!");
         } else {
             DataHolder.setName(UserName.getText());
             DataHolder.setPrename(UserPrename.getText());
@@ -77,13 +76,12 @@ public class RegisterPage implements Initializable {
                 HelloApplication.SetRoot("ProducerLandingPage");
             } else if (identity.getValue().equals("User")) {
                 HelloApplication.SetRoot("ChoicesMenu");
-            }else if (identity.getValue().equals("Actor")) {
-                Actor actor=new Actor(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword());
+            } else if (identity.getValue().equals("Actor")) {
+                Actor actor = new Actor(DataHolder.getName(), DataHolder.getPrename(), DataHolder.getEmail(), DataHolder.getPassword());
                 ActorController.Add_Actor(actor);
                 DataHolder.setActor(actor);
                 HelloApplication.SetRoot("ActorLandingPage");
-            }
-            else if (identity.getValue().equals("Admin")) {
+            } else if (identity.getValue().equals("Admin")) {
                 System.out.println("FINISH THE ADMIN");
             }
 

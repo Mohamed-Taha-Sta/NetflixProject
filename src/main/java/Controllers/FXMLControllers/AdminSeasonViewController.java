@@ -1,7 +1,6 @@
 package Controllers.FXMLControllers;
 
 import Controllers.EpisodeController;
-import Controllers.ScoreEpisodeController;
 import Controllers.ScoreSeasonController;
 import Controllers.SeasonController;
 import Entities.Episode;
@@ -10,7 +9,6 @@ import Utils.DataHolderSeason;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -29,10 +27,10 @@ public class AdminSeasonViewController implements Initializable {
     public Label DebutDateLabel;
     public Label ScoreLabel;
     public TableView<Episode> EpisodesTable = new TableView<>();
-    public TableColumn<Episode,String> EpisodeName;
+    public TableColumn<Episode, String> EpisodeName;
     public Label NumVoters;
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderEpisode.setEpisodeOBList(null);
         //        DataHolderEpisode.setSelectedEpisode(null); //Try this
         HelloApplication.SetRoot("AdminSeriesView");
@@ -41,11 +39,9 @@ public class AdminSeasonViewController implements Initializable {
     public void OnClickEpisode() throws Exception {
 
         Episode selectedEpisodes = EpisodesTable.getSelectionModel().getSelectedItem();
-        if (selectedEpisodes == null)
-        {
+        if (selectedEpisodes == null) {
             System.out.println("Episode selected is null");
-        } else
-        {
+        } else {
             System.out.println("Selected Episode");
             DataHolderEpisode.setSelectedEpisode(EpisodeController.FindEpisodeID(selectedEpisodes.getID()).get(0));
             HelloApplication.SetRoot("AdminEpisodeView");
@@ -61,7 +57,7 @@ public class AdminSeasonViewController implements Initializable {
 
         EpisodeName.setCellValueFactory(new PropertyValueFactory<>("name")); //Try name
 
-        if (DataHolderEpisode.getEpisodeOBList()==null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
+        if (DataHolderEpisode.getEpisodeOBList() == null || DataHolderEpisode.getEpisodeOBList().isEmpty()) {
             List<Episode> episodeList = null;
             try {
                 episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
@@ -77,7 +73,7 @@ public class AdminSeasonViewController implements Initializable {
         SeasonTitle.setText(DataHolderSeason.getSelectedSeason().getName());
 
         try {
-            ScoreLabel.setText(String.valueOf(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()))+"%");
+            ScoreLabel.setText(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()) + "%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

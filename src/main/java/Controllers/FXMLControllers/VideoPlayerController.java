@@ -1,6 +1,5 @@
 package Controllers.FXMLControllers;
 
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -57,13 +56,15 @@ public class VideoPlayerController implements Initializable {
     private ImageView ivFullScreen;
     private ImageView ivExit;
 
-    static  String pageName;
+    static String pageName;
     static String path;
-    public static void SetPath(String PATH){
-        path=PATH;
+
+    public static void SetPath(String PATH) {
+        path = PATH;
     }
-    public static void setPageName(String page){
-        pageName=page;
+
+    public static void setPageName(String page) {
+        pageName = page;
     }
 
 
@@ -71,7 +72,7 @@ public class VideoPlayerController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_Size = 25;
         //setting up player
-        IconSetter(ReturnBtn,"src/main/resources/Images/HomePage/BackArrow.png",IV_Size);
+        IconSetter(ReturnBtn, "src/main/resources/Images/HomePage/BackArrow.png", IV_Size);
         File file = new File(path);
         mediaVideo = new Media(file.toURI().toString());
         mpVideo = new MediaPlayer(mediaVideo);
@@ -150,6 +151,7 @@ public class VideoPlayerController implements Initializable {
                 isPlaying = true;
             }
         });
+
 
         SliderVolume.valueProperty().addListener(observable -> {
             mpVideo.setVolume(SliderVolume.getValue());

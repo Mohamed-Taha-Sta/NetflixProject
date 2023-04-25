@@ -6,16 +6,12 @@ import Controllers.ProducerController;
 import Controllers.UserController;
 import Utils.DataHolder;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,11 +35,11 @@ public class LoginPageController implements Initializable {
     protected void onSignIn() throws Exception {
 
         if (mail.getText().isEmpty() || Password.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Must fill all fields");
+            showErrorMessage(AlertText, "Must fill all fields");
         } else if (isTextExceedingLength(mail, 50)) {
-            showErrorMessage(AlertText,"Mail field is too long");
+            showErrorMessage(AlertText, "Mail field is too long");
         } else if (isTextExceedingLength(Password, 50)) {
-            showErrorMessage(AlertText,"Password field is too long");
+            showErrorMessage(AlertText, "Password field is too long");
         } else if (UserController.authenticate(mail.getText(), Password.getText())) {
             DataHolder.setUserType("User");
             HelloApplication.SetRoot("HomePage");
@@ -75,15 +71,6 @@ public class LoginPageController implements Initializable {
         HelloApplication.SetRoot("RegisterPage");
     }
 
-//    private void showErrorMessage(String message) {
-//        AlertText.setText(message);
-//        AlertText.setOpacity(1);
-//
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> {
-//            AlertText.setOpacity(0);
-//        }));
-//        timeline.play();
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -32,30 +32,29 @@ public class AddSeasonController implements Initializable {
     public DatePicker DebutDate;
 
 
-
     @FXML
     protected void OnBack() throws Exception {
         HelloApplication.SetRoot(DataHolderSeason.getPreviousPage());
     }
 
     @FXML
-    protected  void onAdd() throws Exception{
-        if(Name.getText().isEmpty()){
+    protected void onAdd() throws Exception {
+        if (Name.getText().isEmpty()) {
             AlertText.setText("Season must have a name");
             AlertText.setOpacity(1);
-        } else if(Name.getText().length()<1){
+        } else if (Name.getText().length() < 1) {
             AlertText.setText("Season must have a valid name");
             AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(Name,50)){
+        } else if (isTextExceedingLength(Name, 50)) {
             AlertText.setText("Season name too long");
             AlertText.setOpacity(1);
         } else if (Description.getText().isEmpty()) {
             AlertText.setText("Season must have a description");
             AlertText.setOpacity(1);
-        } else if (Description.getText().length()<1) {
+        } else if (Description.getText().length() < 1) {
             AlertText.setText("Season must have a valid description");
             AlertText.setOpacity(1);
-        } else if(isTextExceedingLength(Description,150)){
+        } else if (isTextExceedingLength(Description, 150)) {
             AlertText.setText("Season description too long");
             AlertText.setOpacity(1);
         } else if (Thumbnail.getText().isEmpty()) {
@@ -67,12 +66,12 @@ public class AddSeasonController implements Initializable {
         } else if (DebutDate.getValue() == null) {
             AlertText.setText("Season must have a Debut Date");
             AlertText.setOpacity(1);
-        }else{
+        } else {
             DataHolderSeason.setName(Name.getText());
             DataHolderSeason.setDescription(Description.getText());
             DataHolderSeason.setDebutDate(DebutDate.getValue());
-            long idSeason = SeasonController.AddSeason(new Season(DataHolderSeries.getIDSerie(),DataHolderSeason.getDescription(),
-                    DataHolderSeason.getName(),DataHolderSeason.getDebutDate(),DataHolderSeason.getThumbnail(),
+            long idSeason = SeasonController.AddSeason(new Season(DataHolderSeries.getIDSerie(), DataHolderSeason.getDescription(),
+                    DataHolderSeason.getName(), DataHolderSeason.getDebutDate(), DataHolderSeason.getThumbnail(),
                     DataHolderSeason.getSynopsis()));
             DataHolderSeason.setIDSeason(idSeason);
             DataHolderEpisode.setPreviousPage("AddSeason");
@@ -81,7 +80,7 @@ public class AddSeasonController implements Initializable {
     }
 
     @FXML
-    public void ThumbnailSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void ThumbnailSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Thumbnail");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -119,7 +118,7 @@ public class AddSeasonController implements Initializable {
 
 
     @FXML
-    public void SynopsisSelect(javafx.scene.input.MouseEvent event) throws Exception {
+    public void SynopsisSelect() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -150,7 +149,7 @@ public class AddSeasonController implements Initializable {
 
         Thumbnail.setOnMouseClicked(event -> {
             try {
-                ThumbnailSelect(event);
+                ThumbnailSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -158,7 +157,7 @@ public class AddSeasonController implements Initializable {
 
         Synopsis.setOnMouseClicked(event -> {
             try {
-                SynopsisSelect(event);
+                SynopsisSelect();
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -7,8 +7,6 @@ import Entities.Season;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,8 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
 import org.controlsfx.control.CheckComboBox;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -37,9 +35,9 @@ public class ProducerSeriesViewController implements Initializable {
     public Button seriesButoon;
     public Button filmButton;
     public Label AlertText;
-    public CheckComboBox GenreSelector;
-    public ComboBox CountrySelector;
-    public ComboBox LanguageSelector;
+    public CheckComboBox<String> GenreSelector;
+    public ComboBox<String> CountrySelector;
+    public ComboBox<String> LanguageSelector;
     public TextField SeriesName;
     public Label Title;
     public DatePicker DebutDatePicker;
@@ -57,12 +55,6 @@ public class ProducerSeriesViewController implements Initializable {
     public HBox SeasonViewer = new HBox();
     public Button SynopsisBtn;
 
-
-//    public void OnDebutDateBtn(ActionEvent actionEvent) {
-//    }
-//
-//    public void OnSeriesNameBtn(ActionEvent actionEvent) {
-//    }
 
     ObservableList<Genre> genres = observableArrayList(
             new Genre("Action"),
@@ -116,8 +108,6 @@ public class ProducerSeriesViewController implements Initializable {
 
 
     public void onBack() throws Exception {
-        DataHolderSeries.setSelectedSeries(null);
-        DataHolderSeries.setSeries(null);
         HelloApplication.SetRoot("ProducerLandingPage");
     }
 
@@ -131,24 +121,24 @@ public class ProducerSeriesViewController implements Initializable {
 
     public void OnSeriesNameBtn() throws SQLException {
         if (SeriesName.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your New Series Title field is empty");
-        } else if (isTextExceedingLength(SeriesName,50)) {
-            showErrorMessage(AlertText,"Your New Series Title field is Toooo long");
+            showErrorMessage(AlertText, "Your New Series Title field is empty");
+        } else if (isTextExceedingLength(SeriesName, 50)) {
+            showErrorMessage(AlertText, "Your New Series Title field is Toooo long");
         } else {
-            SerieController.modifnom(DataHolderSeries.getSelectedSeries(),SeriesName.getText());
+            SerieController.modifnom(DataHolderSeries.getSelectedSeries(), SeriesName.getText());
             DataHolderSeries.getSelectedSeries().setNom(SeriesName.getText());
             Title.setText(SeriesName.getText());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
-    public void LoadSelectedGenres(){
-        List<String> seriesGenre= DataHolderSeries.getSelectedSeries().getListegenre();
-        System.out.println("GENRES LIST"+seriesGenre);
-        for(String genre:seriesGenre){
-            for(Genre genreName:genres){
-                if(genre.equals(genreName.getNom())){
+    public void LoadSelectedGenres() {
+        List<String> seriesGenre = DataHolderSeries.getSelectedSeries().getListegenre();
+        System.out.println("GENRES LIST" + seriesGenre);
+        for (String genre : seriesGenre) {
+            for (Genre genreName : genres) {
+                if (genre.equals(genreName.getNom())) {
                     genreName.getSelect().setSelected(true);
                     break;
                 }
@@ -164,55 +154,55 @@ public class ProducerSeriesViewController implements Initializable {
     public void OnDebutDateBtn() throws SQLException {
         if (DebutDatePicker.getValue().equals(DataHolderSeries.getSelectedSeries().getAnnerdesortie())) {
             showErrorMessage(AlertText, "You didnt change the Debut Date");
-        } else if (DebutDatePicker.getValue()==null) {
+        } else if (DebutDatePicker.getValue() == null) {
             showErrorMessage(AlertText, "Your new DebutDate is Empty");
         } else {
             System.out.println(DebutDatePicker.getValue());
-            SerieController.modifAnnerdesoritie(DataHolderSeries.getSelectedSeries(),DebutDatePicker.getValue());
+            SerieController.modifAnnerdesoritie(DataHolderSeries.getSelectedSeries(), DebutDatePicker.getValue());
             DataHolderSeries.getSelectedSeries().setAnnerdesortie(DebutDatePicker.getValue());
             DebutDateLabel.setText(DebutDatePicker.getValue().toString());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
     public void onGenreBtn() throws SQLException {
         if (GenreSelector.getCheckModel().getCheckedItems().isEmpty()) {
-            showErrorMessage(AlertText,"Series must have at least a genre");
+            showErrorMessage(AlertText, "Series must have at least a genre");
         } else if (GenreSelector.getCheckModel().getCheckedItems().equals(DataHolderSeries.getSelectedSeries().getListegenre())) {
-            showErrorMessage(AlertText,"You didn't change the genre");
+            showErrorMessage(AlertText, "You didn't change the genre");
         } else {
-            SerieController.modiflistegenre(DataHolderSeries.getSelectedSeries(),GenreSelector.getCheckModel().getCheckedItems());
+            SerieController.modiflistegenre(DataHolderSeries.getSelectedSeries(), GenreSelector.getCheckModel().getCheckedItems());
             DataHolderSeries.getSelectedSeries().setListegenre(GenreSelector.getCheckModel().getCheckedItems());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
     public void onCountryBtn() throws SQLException {
-        if (CountrySelector.getValue()==null) {
-            showErrorMessage(AlertText,"New Series must have a country");
+        if (CountrySelector.getValue() == null) {
+            showErrorMessage(AlertText, "New Series must have a country");
         } else if (CountrySelector.getValue().equals(DataHolderSeries.getSelectedSeries().getPaysorigine())) {
-            showErrorMessage(AlertText,"You didn't change the country");
+            showErrorMessage(AlertText, "You didn't change the country");
         } else {
-            SerieController.modifpaysoregine(DataHolderSeries.getSelectedSeries(), (String) CountrySelector.getValue());
-            DataHolderSeries.getSelectedSeries().setPaysorigine((String) CountrySelector.getValue());
+            SerieController.modifpaysoregine(DataHolderSeries.getSelectedSeries(), CountrySelector.getValue());
+            DataHolderSeries.getSelectedSeries().setPaysorigine(CountrySelector.getValue());
             CountryOfOrigin.setText(DataHolderSeries.getSelectedSeries().getPaysorigine());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
 
     public void onLanguageBtn() throws SQLException {
-        if (LanguageSelector.getValue()==null) {
-            showErrorMessage(AlertText,"Series must have a language");
+        if (LanguageSelector.getValue() == null) {
+            showErrorMessage(AlertText, "Series must have a language");
         } else if (LanguageSelector.getValue().equals(DataHolderSeries.getSelectedSeries().getLangue())) {
-            showErrorMessage(AlertText,"You didn't change the language");
+            showErrorMessage(AlertText, "You didn't change the language");
         } else {
-            SerieController.modiflangues(DataHolderSeries.getSelectedSeries(), (String) LanguageSelector.getValue());
-            DataHolderSeries.getSelectedSeries().setLangue((String) LanguageSelector.getValue());
+            SerieController.modiflangues(DataHolderSeries.getSelectedSeries(), LanguageSelector.getValue());
+            DataHolderSeries.getSelectedSeries().setLangue(LanguageSelector.getValue());
             Language.setText(DataHolderSeries.getSelectedSeries().getLangue());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
@@ -220,16 +210,16 @@ public class ProducerSeriesViewController implements Initializable {
 
     public void ChangeDescriptionBtn() throws SQLException {
         if (New_Description.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Series must have a description");
-        } else if (isTextExceedingLength(New_Description,150)) {
-            showErrorMessage(AlertText,"Your Description is longer than the series");
+            showErrorMessage(AlertText, "Series must have a description");
+        } else if (isTextExceedingLength(New_Description, 150)) {
+            showErrorMessage(AlertText, "Your Description is longer than the series");
         } else if (New_Description.getText().equals(DataHolderSeries.getDescription())) {
-            showErrorMessage(AlertText,"You didn't change the Description");
+            showErrorMessage(AlertText, "You didn't change the Description");
         } else {
-            SerieController.modifdescription(DataHolderSeries.getSelectedSeries(),New_Description.getText() );
-            DataHolderSeries.getSelectedSeries().setDescription(New_Description.getText() );
+            SerieController.modifdescription(DataHolderSeries.getSelectedSeries(), New_Description.getText());
+            DataHolderSeries.getSelectedSeries().setDescription(New_Description.getText());
             Old_Description.setText(New_Description.getText());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
@@ -260,6 +250,11 @@ public class ProducerSeriesViewController implements Initializable {
                     alert.setContentText("Please select an image with an aspect ratio of 16:9 or smaller.");
                     alert.showAndWait();
                 }
+                Thumbnail.setImage(image);
+                SerieController.modifimg(DataHolderSeries.getSelectedSeries(), selectedFile);
+                showErrorMessage(AlertText, "Thumbnail Changed successfully");
+
+
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -286,8 +281,8 @@ public class ProducerSeriesViewController implements Initializable {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
-                SerieController.ModifSynopsisSerie(DataHolderSeries.getSelectedSeries(),selectedFile);
-                showErrorMessage(AlertText,"Synopsis Changed successfully");
+                SerieController.ModifSynopsisSerie(DataHolderSeries.getSelectedSeries(), selectedFile);
+                showErrorMessage(AlertText, "Synopsis Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -300,7 +295,6 @@ public class ProducerSeriesViewController implements Initializable {
         }
 
     }
-
 
 
     @Override
@@ -410,19 +404,13 @@ public class ProducerSeriesViewController implements Initializable {
 
         try {
             seasonList = SeasonController.FindSeasonSerieID(DataHolderSeries.getSelectedSeries().getId());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
-        for (Season season : seasonList)
-        {
+        for (Season season : seasonList) {
             ImageView imageView = new ImageView();
-//            imageView.setFitHeight(100);
-//            imageView.setFitWidth(150);
-            System.out.println(season.getThumbnail().toURI());
-            ImageSetter(imageView,season.getThumbnail().toURI().toString(),150,100);
+            ImageSetter(imageView, season.getThumbnail().toURI().toString(), 150, 100);
             ImageClipper(imageView);
             imageView.setOnMouseClicked(this::handleImageClick);
             SeasonViewer.getChildren().add(imageView);
@@ -437,20 +425,17 @@ public class ProducerSeriesViewController implements Initializable {
         Old_Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
         DebutDateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().toString());
         try {
-            RatingLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+" %");
+            RatingLabel.setText(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()) + " %");
         } catch (SQLException e) {
             System.out.println("SQL Error getting the Rating");
         } catch (IOException e) {
             System.out.println("IO Error getting the Rating");
         }
         ImageClipper(Thumbnail);
-        IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
+        IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
 
 
     }
-
-
-
 
 
 }

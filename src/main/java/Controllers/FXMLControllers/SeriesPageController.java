@@ -118,16 +118,14 @@ public class SeriesPageController implements Initializable {
     }
 
 
-
-
-
-
     public void OnSearch(){
         List<Serie> filteredSeries;
         filteredSeries=searchSeries(series,searchBar.getText(),GenresSelector.getCheckModel().getCheckedItems(),YearSelect.getValue());
         SeriesViewer.getChildren().clear();
         ShowSeries(filteredSeries);
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         IconSetter(SearchButton,"src/main/resources/Images/HomePage/search.png",20);

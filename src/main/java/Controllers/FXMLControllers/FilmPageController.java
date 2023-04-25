@@ -1,15 +1,11 @@
 package Controllers.FXMLControllers;
 
 import Controllers.FilmController;
-import Controllers.SerieController;
 import Entities.Film;
-import Entities.Serie;
 import Utils.DataHolderFilm;
-import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -24,16 +20,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.controlsfx.control.CheckComboBox;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.*;
-import static Utils.RepeatableFunction.IconSetter;
 
 public class FilmPageController implements Initializable {
     @FXML
@@ -134,9 +127,10 @@ public class FilmPageController implements Initializable {
         }
         return filteredList;
     }
-    public void OnSearch(){
+
+    public void OnSearch() {
         List<Film> filteredFilms;
-        filteredFilms=searchSeries(films,searchBar.getText(),GenresSelector.getCheckModel().getCheckedItems(),YearSelect.getValue());
+        filteredFilms = searchSeries(films, searchBar.getText(), GenresSelector.getCheckModel().getCheckedItems(), YearSelect.getValue());
         FilmsViewer.getChildren().clear();
         ShowFilms(filteredFilms);
     }

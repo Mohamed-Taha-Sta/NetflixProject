@@ -1,8 +1,6 @@
 package Controllers;
 
 import Entities.Actor;
-import DAO.ActorDAO;
-import DAO.UserDAO;
 import Services.ActorService;
 
 import java.util.List;

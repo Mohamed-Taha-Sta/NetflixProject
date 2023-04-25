@@ -38,7 +38,7 @@ import static Utils.RepeatableFunction.*;
 
 public class HomePageController implements Initializable {
 
-    public static List<Content> latestStuff ;
+    public static List<Content> latestStuff;
     public static List<Serie> series;
 
     public static List<Serie> getSeries() {
@@ -109,13 +109,16 @@ public class HomePageController implements Initializable {
     public void OnProfileClick() throws Exception {
         HelloApplication.SetRoot("ProfilePage");
     }
+
     @FXML
     public void OnFilmClick() throws Exception {
         HelloApplication.SetRoot("FilmPage");
     }
+
     public void OnSeriesClick() throws Exception {
         HelloApplication.SetRoot("SeriesPage");
     }
+
     public void SetUserImage() {
         UserDAO.retrieve_Image((int) DataHolder.getUser().getID());
         File imageFile = DataHolder.getImage();
@@ -128,6 +131,7 @@ public class HomePageController implements Initializable {
             System.out.println("No image found for user.");
         }
     }
+
     public SearchableComboBox<Content> searchBar;
 
     public void navigateToPage(Content selectedItem) throws Exception {
@@ -204,8 +208,8 @@ public class HomePageController implements Initializable {
         }
 
         try {
-            latestFilms= FilmController.getMostRecentFilm(3);
-        }catch (SQLException | IOException e) {
+            latestFilms = FilmController.getMostRecentFilm(3);
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
         items.addAll(latestSeries);
@@ -215,19 +219,19 @@ public class HomePageController implements Initializable {
     }
 
 
-    public List<Content> Prefrences(){
-        List<Serie> prefSeries=new ArrayList<>();
-        List<Film> prefFilms=new ArrayList<>();
+    public List<Content> Prefrences() {
+        List<Serie> prefSeries = new ArrayList<>();
+        List<Film> prefFilms = new ArrayList<>();
         List<Content> items = new ArrayList<>();
         try {
-            prefSeries=SerieController.searchSeriesOR(DataHolder.getUser().getGenreList());
-        }catch (Exception e){
+            prefSeries = SerieController.searchSeriesOR(DataHolder.getUser().getGenreList());
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         try {
-            prefFilms= FilmController.searchFilm(DataHolder.getUser().getGenreList());
-            System.out.println("filmPrefere: "+prefFilms);
-        }catch (Exception e){
+            prefFilms = FilmController.searchFilm(DataHolder.getUser().getGenreList());
+            System.out.println("filmPrefere: " + prefFilms);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         items.addAll(prefFilms);
@@ -238,10 +242,10 @@ public class HomePageController implements Initializable {
     }
 
 
-    public void LoadAllSeries(){
-        if(series==null){
+    public void LoadAllSeries() {
+        if (series == null) {
             try {
-                series=new ArrayList<>();
+                series = new ArrayList<>();
                 series = SerieController.GetAllSeries();
             } catch (SQLException | IOException e) {
                 throw new RuntimeException(e);
@@ -250,17 +254,16 @@ public class HomePageController implements Initializable {
         }
     }
 
-    public void LoadAllFilms(){
+    public void LoadAllFilms() {
         if (films == null || films.isEmpty()) {
             films = new ArrayList<>();
             films = FilmController.GetAllFilms();
-        }
-        else {
+        } else {
             System.out.println("films already loaded");
         }
     }
 
-    public void LoadLatestReleases(){
+    public void LoadLatestReleases() {
         Collections.shuffle(latestStuff);
         for (Content c : latestStuff) {
             ImageView imgView = new ImageView();
@@ -273,10 +276,10 @@ public class HomePageController implements Initializable {
     }
 
 
-    public void LoadPreferredReleases(){
-        if(!sFByGENRE.isEmpty()){
+    public void LoadPreferredReleases() {
+        if (!sFByGENRE.isEmpty()) {
             Collections.shuffle(sFByGENRE);
-            int num=0;
+            int num = 0;
             for (Content c : sFByGENRE) {
                 ImageView imgView = new ImageView();
                 ImageSetter(imgView, c.getImg().toURI().toString(), 176, 99);
@@ -285,12 +288,11 @@ public class HomePageController implements Initializable {
                 imgView.setOnMouseClicked(this::handleImageClick);
                 PrefrencesViewer.getChildren().add(imgView);
                 num++;
-                if(num==6){
+                if (num == 6) {
                     break;
                 }
             }
-        }
-        else{
+        } else {
             Collections.shuffle(latestStuff);
             for (Content c : latestStuff) {
                 ImageView imgView = new ImageView();
@@ -303,8 +305,8 @@ public class HomePageController implements Initializable {
         }
 
 
-
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set user image and welcoming text
@@ -321,15 +323,15 @@ public class HomePageController implements Initializable {
 
 
         //load latest Releases bar
-        if (latestStuff==null) {
-            latestStuff=new ArrayList<>();
+        if (latestStuff == null) {
+            latestStuff = new ArrayList<>();
             latestStuff.addAll(LatestInit());
         }
         LoadLatestReleases();
 
         //load Preferred Releases
-        if(sFByGENRE==null){
-            sFByGENRE=new ArrayList<>();
+        if (sFByGENRE == null) {
+            sFByGENRE = new ArrayList<>();
             sFByGENRE.addAll(Prefrences());
         }
         LoadPreferredReleases();
@@ -337,16 +339,13 @@ public class HomePageController implements Initializable {
         //SETTING UP SEARCH bar
         LoadAllSeries();
         LoadAllFilms();
-        if(items==null||items.isEmpty()){
-            items=new ArrayList<>();
+        if (items == null || items.isEmpty()) {
+            items = new ArrayList<>();
             items.addAll(series);
             items.addAll(films);
         }
 
         searchBarInit(series, films);
-
-
-
 
 
     }

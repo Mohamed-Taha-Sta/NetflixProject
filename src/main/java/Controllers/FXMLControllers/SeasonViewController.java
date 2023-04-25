@@ -101,10 +101,10 @@ public class SeasonViewController implements Initializable {
 
     public List<Episode> RetrieveEpisodes() {
 
-        List<Episode> alreadyReleased=new ArrayList<>();
+        List<Episode> alreadyReleased = new ArrayList<>();
         try {
-            for(Episode ep:EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID())){
-                if(ep.getPremiereDate().isBefore(LocalDate.now())||ep.getPremiereDate().equals(LocalDate.now())){
+            for (Episode ep : EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID())) {
+                if (ep.getPremiereDate().isBefore(LocalDate.now()) || ep.getPremiereDate().equals(LocalDate.now())) {
                     alreadyReleased.add(ep);
                 }
             }
@@ -203,8 +203,7 @@ public class SeasonViewController implements Initializable {
                 Avis_SaisonController.modif_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser(), SeasonOpinion.getText());
                 System.out.println("submission on top");
                 SeasonOpinion.setEditable(false);
-            }
-            else{
+            } else {
                 Avis_SaisonController.add_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser(), SeasonOpinion.getText());
                 System.out.println("new submission");
                 SeasonOpinion.setEditable(false);
@@ -214,8 +213,8 @@ public class SeasonViewController implements Initializable {
     }
 
     public void OnDelete() {
-            SeasonOpinion.setText("");
-            Avis_SaisonController.delete_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser());
-            SeasonOpinion.setEditable(false);
+        SeasonOpinion.setText("");
+        Avis_SaisonController.delete_avis(DataHolderSeason.getSelectedSeason(), DataHolder.getUser());
+        SeasonOpinion.setEditable(false);
     }
 }

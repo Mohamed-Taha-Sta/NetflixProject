@@ -65,10 +65,9 @@ public class AddActorsFilmController implements Initializable {
             }
         }
 
-        if (selectedMainActors.isEmpty())
-        {
+        if (selectedMainActors.isEmpty()) {
             AlertText.setText("Must select at least 1 main Actor");
-        }else {
+        } else {
             DataHolderFilm.setMainActorsList(selectedMainActors);
             DataHolderFilm.setSuppActorsList(selectedSupportingActors);
             ArrayList<Actor> auxList = new ArrayList<>();
@@ -76,15 +75,15 @@ public class AddActorsFilmController implements Initializable {
             auxList.addAll(selectedSupportingActors);
             DataHolderFilm.setAllTheActors(auxList);
             //PickUp constructor Here
-            FilmController.Add(new Film(DataHolderFilm.getName(),DataHolderFilm.getDescription(),
-                    DataHolderFilm.getDebutDate(),DataHolderFilm.getLanguage(),DataHolderFilm.getCountryOfOrigin(),
-                    DataHolderFilm.getGenreList(),DataHolderFilm.getThumbnail(),DataHolderFilm.getDuration(),
-                    DataHolderFilm.getSynopsis(),DataHolderFilm.getVideo(), DataHolder.getProducer().getId(),DataHolderFilm.getAllTheActors()));
+            FilmController.Add(new Film(DataHolderFilm.getName(), DataHolderFilm.getDescription(),
+                    DataHolderFilm.getDebutDate(), DataHolderFilm.getLanguage(), DataHolderFilm.getCountryOfOrigin(),
+                    DataHolderFilm.getGenreList(), DataHolderFilm.getThumbnail(), DataHolderFilm.getDuration(),
+                    DataHolderFilm.getSynopsis(), DataHolderFilm.getVideo(), DataHolder.getProducer().getId(), DataHolderFilm.getAllTheActors()));
 
-            DataHolderFilm.getFilms().add(new Film(DataHolderFilm.getName(),DataHolderFilm.getDescription(),
-                    DataHolderFilm.getDebutDate(),DataHolderFilm.getLanguage(),DataHolderFilm.getCountryOfOrigin(),
-                    DataHolderFilm.getGenreList(),DataHolderFilm.getThumbnail(),DataHolderFilm.getDuration(),
-                    DataHolderFilm.getSynopsis(),DataHolderFilm.getVideo(), DataHolder.getProducer().getId(),DataHolderFilm.getAllTheActors()));
+            DataHolderFilm.getFilms().add(new Film(DataHolderFilm.getName(), DataHolderFilm.getDescription(),
+                    DataHolderFilm.getDebutDate(), DataHolderFilm.getLanguage(), DataHolderFilm.getCountryOfOrigin(),
+                    DataHolderFilm.getGenreList(), DataHolderFilm.getThumbnail(), DataHolderFilm.getDuration(),
+                    DataHolderFilm.getSynopsis(), DataHolderFilm.getVideo(), DataHolder.getProducer().getId(), DataHolderFilm.getAllTheActors()));
 
             HelloApplication.SetRoot("ProducerLandingPage");
         }

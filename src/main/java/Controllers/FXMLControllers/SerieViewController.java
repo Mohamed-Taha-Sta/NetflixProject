@@ -6,7 +6,6 @@ import Controllers.SeasonController;
 import Entities.Producer;
 import Entities.Season;
 import Utils.DataHolder;
-import Utils.DataHolderFilm;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
@@ -59,21 +58,20 @@ public class SerieViewController implements Initializable {
     List<Season> seasons;
 
 
-
     public void OnBack() throws Exception {
-        prod=null;
+        prod = null;
         DataHolderSeries.setSelectedSeries(null);
         HelloApplication.SetRoot(path);
     }
 
     @FXML
     public void OnFilmClick() throws Exception {
-        prod=null;
+        prod = null;
         HelloApplication.SetRoot("FilmPage");
     }
 
     public void OnSeriesClick() throws Exception {
-        prod=null;
+        prod = null;
         HelloApplication.SetRoot("SeriesPage");
     }
 
@@ -148,10 +146,11 @@ public class SerieViewController implements Initializable {
             }
         }
     }
+
     static Producer prod;
 
     public void OnHomeClick() throws Exception {
-        prod=null;
+        prod = null;
         HelloApplication.SetRoot("HomePage");
     }
 
@@ -187,8 +186,7 @@ public class SerieViewController implements Initializable {
                 season2.setAlignment(Pos.CENTER);
             }
         }
-        if(prod == null)
-        {
+        if (prod == null) {
             prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
         }
 

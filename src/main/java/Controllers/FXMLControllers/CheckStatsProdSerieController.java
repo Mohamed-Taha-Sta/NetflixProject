@@ -37,7 +37,7 @@ public class CheckStatsProdSerieController implements Initializable {
 
         SeriesTitle.setText(DataHolderSeries.getSelectedSeries().getNom());
         try {
-            ScoreLabel.setText(String.valueOf(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()))+"%");
+            ScoreLabel.setText(SerieController.StreamAverageScore(DataHolderSeries.getSelectedSeries()) +"%");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

@@ -8,9 +8,6 @@ import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
 import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -19,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
-import javafx.util.Duration;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -49,12 +46,12 @@ public class ProducerSeasonViewController implements Initializable {
     public HBox EpisodeViewer;
 
 
-    public void onBack(ActionEvent actionEvent) throws Exception {
+    public void onBack() throws Exception {
         DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeason.getSelectedSeason().getSERIE_ID()).get(0));
         HelloApplication.SetRoot("ProducerSeriesView");
     }
 
-    public void onEditSeasonImg(MouseEvent mouseEvent) throws SQLException {
+    public void onEditSeasonImg() throws SQLException {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose a Season Thumbnail");
@@ -73,8 +70,8 @@ public class ProducerSeasonViewController implements Initializable {
                 double aspectRatio = (double) width / (double) height;
                 if (aspectRatio <= 16.0 / 9.0) {
                     Thumbnail.setImage(image);
-                    SeasonController.modifimg(DataHolderSeason.getSelectedSeason(),selectedFile);
-                    showErrorMessage(AlertText,"Thumbnail Changed successfully");
+                    SeasonController.modifimg(DataHolderSeason.getSelectedSeason(), selectedFile);
+                    showErrorMessage(AlertText, "Thumbnail Changed successfully");
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
@@ -115,7 +112,7 @@ public class ProducerSeasonViewController implements Initializable {
     }
 
 
-    public void onEdtSynosisBtn(ActionEvent actionEvent) throws SQLException {
+    public void onEdtSynosisBtn() throws SQLException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Synopsis");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -127,8 +124,8 @@ public class ProducerSeasonViewController implements Initializable {
             String fileName = selectedFile.getName();
             String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
             if (extension.equals("mp4")) {
-                SeasonController.ModifSynopsisSeason(DataHolderSeason.getSelectedSeason(),selectedFile);
-                showErrorMessage(AlertText,"Synopsis Changed successfully");
+                SeasonController.ModifSynopsisSeason(DataHolderSeason.getSelectedSeason(), selectedFile);
+                showErrorMessage(AlertText, "Synopsis Changed successfully");
 
             } else {
                 // If the selected image does not have the required dimensions, display an error message
@@ -141,79 +138,77 @@ public class ProducerSeasonViewController implements Initializable {
         }
     }
 
-    public void SeasonOverviewBtn(MouseEvent mouseEvent) throws Exception {
+    public void SeasonOverviewBtn() throws Exception {
         HelloApplication.SetRoot("CheckStatsProdSeason");
     }
 
-    public void onAddEpisode(ActionEvent actionEvent) throws Exception {
+    public void onAddEpisode() throws Exception {
         DataHolderEpisode.setPreviousPage("ProducerSeasonView");
         DataHolderSeason.setIDSeason(DataHolderSeason.getSelectedSeason().getID());
         HelloApplication.SetRoot("AddEpisode");
     }
 
-    public void OnSeasonNameBtn(ActionEvent actionEvent) throws SQLException {
+    public void OnSeasonNameBtn() throws SQLException {
         if (SeasonName.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Your New Season Title field is empty");
-        } else if (isTextExceedingLength(SeasonName,50)) {
-            showErrorMessage(AlertText,"Your New Season Title field is too long");
+            showErrorMessage(AlertText, "Your New Season Title field is empty");
+        } else if (isTextExceedingLength(SeasonName, 50)) {
+            showErrorMessage(AlertText, "Your New Season Title field is too long");
         } else {
-            SeasonController.modifnom(DataHolderSeason.getSelectedSeason(),SeasonName.getText());
+            SeasonController.modifnom(DataHolderSeason.getSelectedSeason(), SeasonName.getText());
             DataHolderSeason.getSelectedSeason().setName(SeasonName.getText());
             Title.setText(SeasonName.getText());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
-    public void OnDebutDateBtn(ActionEvent actionEvent) throws SQLException {
+
+    public void OnDebutDateBtn() throws SQLException {
         if (DebutDatePicker.getValue().equals(DataHolderSeason.getSelectedSeason().getDebutDate())) {
             showErrorMessage(AlertText, "You didnt change the Debut Date");
-        } else if (DebutDatePicker.getValue()==null) {
+        } else if (DebutDatePicker.getValue() == null) {
             showErrorMessage(AlertText, "Your new DebutDate is Empty");
         } else {
-            SeasonController.modifAnnerdesoritie(DataHolderSeason.getSelectedSeason(),DebutDatePicker.getValue());
+            SeasonController.modifAnnerdesoritie(DataHolderSeason.getSelectedSeason(), DebutDatePicker.getValue());
             DataHolderSeason.getSelectedSeason().setDebutDate(DebutDatePicker.getValue());
             DebutDateLabel.setText(DebutDatePicker.getValue().toString());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
         }
     }
 
-    public void ChangeDescriptionBtn(ActionEvent actionEvent) throws SQLException {
+    public void ChangeDescriptionBtn() throws SQLException {
         if (New_Description.getText().isEmpty()) {
-            showErrorMessage(AlertText,"Season must have a description");
-        } else if (isTextExceedingLength(New_Description,150)) {
-            showErrorMessage(AlertText,"Season's new description is too long");
+            showErrorMessage(AlertText, "Season must have a description");
+        } else if (isTextExceedingLength(New_Description, 150)) {
+            showErrorMessage(AlertText, "Season's new description is too long");
         } else if (New_Description.getText().equals(DataHolderSeason.getSelectedSeason().getDescription())) {
-            showErrorMessage(AlertText,"You didn't change the Description");
+            showErrorMessage(AlertText, "You didn't change the Description");
         } else {
-            SeasonController.modifdescription(DataHolderSeason.getSelectedSeason(),New_Description.getText() );
-            DataHolderSeason.getSelectedSeason().setDescription(New_Description.getText() );
+            SeasonController.modifdescription(DataHolderSeason.getSelectedSeason(), New_Description.getText());
+            DataHolderSeason.getSelectedSeason().setDescription(New_Description.getText());
             Old_Description.setText(New_Description.getText());
-            showErrorMessage(AlertText,"Attribute changed successfully");
+            showErrorMessage(AlertText, "Attribute changed successfully");
 
         }
     }
-
-
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         EpisodeViewer.setSpacing(15);
-        IconSetter(BackBtn,"src/main/resources/Images/Design/BackButton.png",70);
+        IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
         try {
             episodeList = EpisodeController.FindEpisodeSeasonID(DataHolderSeason.getSelectedSeason().getID());
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
 
-        for (Episode episode : episodeList)
-        {
+        for (Episode episode : episodeList) {
             ImageView imageView = new ImageView();
 //            imageView.setFitHeight(100);
 //            imageView.setFitWidth(150);
             System.out.println(episode.getImage().toURI());
-            ImageSetter(imageView,episode.getImage().toURI().toString(),150,100);
+            ImageSetter(imageView, episode.getImage().toURI().toString(), 150, 100);
             ImageClipper(imageView);
             imageView.setOnMouseClicked(this::handleImageClick);
             EpisodeViewer.getChildren().add(imageView);
@@ -222,7 +217,7 @@ public class ProducerSeasonViewController implements Initializable {
 
         Title.setText(DataHolderSeason.getSelectedSeason().getName());
         try {
-            RatingLabel.setText(String.valueOf(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason())+"%"));
+            RatingLabel.setText(SeasonController.StreamAverageScore(DataHolderSeason.getSelectedSeason()) + "%");
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
