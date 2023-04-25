@@ -42,6 +42,7 @@ public class AddEpisodeController implements Initializable {
 
     @FXML
     protected void OnBack() throws Exception {
+        DataHolderSeries.setSelectedSeries(null);
         HelloApplication.SetRoot(DataHolderEpisode.getPreviousPage());
     }
 

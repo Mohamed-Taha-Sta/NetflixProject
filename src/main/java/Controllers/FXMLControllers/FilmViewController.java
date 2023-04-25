@@ -7,6 +7,7 @@ import Controllers.VuesFilmController;
 import Entities.Producer;
 import Utils.DataHolder;
 import Utils.DataHolderFilm;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -130,7 +131,7 @@ public class FilmViewController implements Initializable {
         FilmName.setText(DataHolderFilm.getSelectedFilm().getNom());
         DirectLabel.setText(prod.getNom()+" "+prod.getPrenom());
         dateLabel.setText(DataHolderFilm.getSelectedFilm().getAnnerdesortie().format(formatter));
-        genreLabel.setText((DataHolderFilm.getSelectedFilm().getListegenre()).toString());
+        genreLabel.setText(String.join(",", DataHolderFilm.getSelectedFilm().getListegenre().stream().map(Object::toString).toArray(String[]::new)));
         ImageSetter(Thumbnail, DataHolderFilm.getSelectedFilm().getImg().toURI().toString(), 240, 135);
         ImageClipper(Thumbnail);
         Description.setText(DataHolderFilm.getSelectedFilm().getDescription());
@@ -158,6 +159,8 @@ public class FilmViewController implements Initializable {
 
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         IconSetter(homeButton, "src/main/resources/Images/HomePage/HomeButton.png", 40);
@@ -167,6 +170,18 @@ public class FilmViewController implements Initializable {
         if(prod==null){
             prod = ProducerController.getProdByID(DataHolderFilm.getSelectedFilm().getId_realisateur());
         }
+
+//        mediaPlayer.currentTimeProperty().addListener(ov -> {
+//            if (!slTime.isValueChanging()) {
+//
+//                double total = mediaPlayer.getTotalDuration().toMillis();
+//                double current = mediaPlayer.getCurrentTime().toMillis();
+//                slTime.setMax(total);
+//                slTime.setValue(current);
+//                lbTime.setText(getTimeString(current) + "/" + getTimeString(total));
+//            }
+//        });
+
         InfoSetter();
     }
 }

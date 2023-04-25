@@ -76,8 +76,8 @@
                                           <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsisClick" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                           <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="SOMETIMES">
                                              <children>
-                                                <Label id="Category" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />
-                                                <Label id="Category" fx:id="dateLabel" text="Label" wrapText="true" HBox.hgrow="NEVER" />
+                                                <Label id="Category" prefHeight="26.0" prefWidth="111.0" text="DebutDate:" wrapText="true" HBox.hgrow="NEVER" />
+                                                <Label id="Category" fx:id="dateLabel" prefHeight="26.0" prefWidth="154.0" text="Label" wrapText="true" HBox.hgrow="NEVER" />
                                              </children>
                                           </HBox>
                                        </children>
@@ -94,7 +94,7 @@
                                   <Insets bottom="8.0" left="8.0" />
                               </padding>
                           </VBox>
-                  <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 40px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
+                  <HBox alignment="CENTER" spacing="10.0" style="-fx-background-radius: 20px; -fx-background-color: #510A32;" VBox.vgrow="SOMETIMES">
                      <children>
                         <VBox fillWidth="false" spacing="10.0" HBox.hgrow="SOMETIMES">
                            <children>

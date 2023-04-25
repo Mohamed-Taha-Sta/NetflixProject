@@ -90,7 +90,7 @@ public class SerieViewController implements Initializable {
         System.out.println(DataHolderSeries.getSelectedSeries().getDescription());
         Description.setText(DataHolderSeries.getSelectedSeries().getDescription());
         dateLabel.setText(DataHolderSeries.getSelectedSeries().getAnnerdesortie().format(formatter));
-        genreLabel.setText(DataHolderSeries.getSelectedSeries().getListegenre().toString());
+        genreLabel.setText(String.join(",", DataHolderSeries.getSelectedSeries().getListegenre().stream().map(Object::toString).toArray(String[]::new)));
         if (Avis_serieController.Avis_Exist(DataHolderSeries.getSelectedSeries(), DataHolder.getUser())) {
             SerieOpinion.setText(Avis_serieController.FIND_avis(DataHolderSeries.getSelectedSeries(), DataHolder.getUser()));
         }

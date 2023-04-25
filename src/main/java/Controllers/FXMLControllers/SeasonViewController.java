@@ -183,6 +183,10 @@ public class SeasonViewController implements Initializable {
         System.out.println("Your are editing");
     }
 
+    public void OnHomeClick() throws Exception {
+        HelloApplication.SetRoot("HomePage");
+    }
+
     public void OnSubmit() {
         if (SeasonOpinion.isEditable()) {
             if (Avis_SaisonController.Avis_Exist(DataHolderSeason.getSelectedSeason(), DataHolder.getUser())) {

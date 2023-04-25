@@ -64,14 +64,14 @@
                            </VBox.margin>
                         </DatePicker>
                         <Label fx:id="AlertText" alignment="CENTER" opacity="0.0" prefHeight="18.0" prefWidth="340.0" text="Label" />
-                        <HBox alignment="CENTER" spacing="40.0">
+                        <HBox alignment="CENTER" spacing="30.0">
                            <children>
                               <Button mnemonicParsing="false" onAction="#OnSignIn" prefHeight="23.0" prefWidth="186.0" style="-fx-background-color: transparent;" text="Already have an account? Sign In!" textFill="WHITE" underline="true">
                                  <font>
                                     <Font name="Calibri Italic" size="12.0" />
                                  </font>
                               </Button>
-                              <Button id="button" mnemonicParsing="false" onAction="#OnSignUp" stylesheets="@../../../Style.css" text="Sign Up" textFill="WHITE">
+                              <Button id="button" mnemonicParsing="false" onAction="#OnSignUp" prefHeight="33.0" prefWidth="69.0" stylesheets="@../../../Style.css" text="Sign Up" textFill="WHITE">
                                  <font>
                                     <Font name="Lucida Bright" size="14.0" />
                                  </font>

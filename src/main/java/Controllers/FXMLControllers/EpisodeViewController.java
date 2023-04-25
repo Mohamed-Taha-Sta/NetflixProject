@@ -134,6 +134,11 @@ public class EpisodeViewController implements Initializable {
         HelloApplication.SetRoot("VideoPlayer");
     }
 
+    public void OnHomeClick() throws Exception {
+        prod=null;
+        HelloApplication.SetRoot("HomePage");
+    }
+
 
 
     @Override

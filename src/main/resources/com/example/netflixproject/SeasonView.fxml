@@ -31,7 +31,7 @@
                         </ImageView>
                         <VBox alignment="TOP_CENTER" spacing="20.0">
                             <children>
-                                <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" />
+                                <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnHomeClick" />
                                 <VBox alignment="CENTER">
                                     <children>
                                         <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />
@@ -78,13 +78,13 @@
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
                                                                 <Label id="Category" text="DebutDate:" />
-                                                                <Label id="Category" fx:id="dateLabel" text="Label" />
+                                                                <Label id="Category" fx:id="dateLabel" prefHeight="26.0" prefWidth="165.0" text="Label" />
                                                             </children>
                                                         </HBox>
                                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                                             <children>
-                                                                <Label id="Category" text="Number of Episode:" />
-                                                                <Label id="Category" fx:id="genreLabel" text="Label" />
+                                                                <Label id="Category" text="Num of Eps:" />
+                                                                <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="91.0" text="Label" />
                                                             </children>
                                                         </HBox>
                                                     </children>

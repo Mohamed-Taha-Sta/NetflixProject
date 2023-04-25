@@ -93,7 +93,7 @@
                               <Insets />
                            </VBox.margin>
                         </VBox>
-                        <Label fx:id="AlertText" text="Label" />
+                        <Label fx:id="AlertText" style="-fx-text-fill: white;" stylesheets="@../../../Style.css" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Button id="button" fx:id="Back" mnemonicParsing="false" onAction="#onBack" prefHeight="28.0" prefWidth="70.0" stylesheets="@../../../Style.css" text="Back" textAlignment="CENTER" textFill="WHITE">

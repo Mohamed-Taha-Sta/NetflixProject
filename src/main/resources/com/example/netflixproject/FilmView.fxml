@@ -63,7 +63,7 @@
                                        </HBox.margin></ImageView>
                                     <VBox alignment="CENTER_LEFT" prefHeight="156.0" prefWidth="630.0" spacing="25.0" HBox.hgrow="SOMETIMES">
                                        <children>
-                                          <Label id="Title" fx:id="FilmName" text="Title" />
+                                          <Label id="Title" fx:id="FilmName" prefWidth="88.0" text="Title" />
                                           <HBox alignment="CENTER_LEFT" spacing="10.0">
                                              <children>
                                                 <Label id="Category" text="Produced by:" />
@@ -74,7 +74,7 @@
                                     </VBox>
                                     <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="300.0" spacing="10.0" HBox.hgrow="SOMETIMES">
                                        <children>
-                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="50.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
+                                          <Button id="SynopsisBtn" fx:id="SynopsisBtn" mnemonicParsing="false" onAction="#OnSynopsis" prefHeight="37.0" prefWidth="120.0" stylesheets="@../../../Style.css" text="Watch Synopsis" />
                                           <Rating id="rating" fx:id="ratings" onMouseClicked="#OnRating" partialRating="true" prefHeight="0.0" prefWidth="176.0" rating="0.0" />
                                           <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
                                              <children>
@@ -126,15 +126,15 @@
                         <Line endX="-97.51477813720703" endY="206.3651580810547" startX="-98.3431625366211" startY="-230.42063903808594" stroke="#d62e4a" strokeWidth="2.0" />
                         <ScrollPane id="scroll-pane" hbarPolicy="NEVER" stylesheets="@../../../Style.css">
                            <content>
-                              <VBox fx:id="SeasonView" alignment="CENTER" prefHeight="460.0" prefWidth="500.0" spacing="10.0">
+                              <VBox fx:id="SeasonView" alignment="CENTER" prefHeight="145.0" prefWidth="500.0" spacing="10.0">
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="545.0" spacing="5.0" VBox.vgrow="ALWAYS">
+                                    <HBox prefHeight="68.0" prefWidth="500.0" spacing="5.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label id="Category" graphicTextGap="2.0" prefHeight="50.0" prefWidth="134.0" text="Genre:" wrapText="true" HBox.hgrow="NEVER" />
-                                          <Label id="Category" fx:id="genreLabel" prefHeight="26.0" prefWidth="473.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
+                                          <Label id="Category" graphicTextGap="2.0" prefHeight="50.0" prefWidth="74.0" text="Genres:" wrapText="true" HBox.hgrow="NEVER" />
+                                          <Label id="Category" fx:id="genreLabel" prefHeight="49.0" prefWidth="417.0" text="Label" wrapText="true" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
-                                    <Button id="SynopsisBtn" fx:id="WatchBtn" mnemonicParsing="false" onAction="#OnWatch" prefHeight="54.0" prefWidth="110.0" text="Watch Now" />
+                                    <Button id="SynopsisBtn" fx:id="WatchBtn" mnemonicParsing="false" onAction="#OnWatch" prefHeight="34.0" prefWidth="99.0" text="Watch Now" />
                                  </children></VBox>
                            </content>
                            <HBox.margin>

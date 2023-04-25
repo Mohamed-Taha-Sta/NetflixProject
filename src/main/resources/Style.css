@@ -13,16 +13,16 @@
 }
 
 #EditBtn{
-    -fx-background-color: #212121;
+    -fx-background-color: #2D142C;
     -fx-background-radius: 15px 15px 0 0;
     -fx-text-fill: white;
 }
 #SubmitBtn{
-    -fx-background-color: #212121;
+    -fx-background-color: #2D142C;
     -fx-text-fill: white;
 }
 #DeleteBtn{
-    -fx-background-color: #212121;
+    -fx-background-color: #2D142C;
     -fx-background-radius:  0 0 15px 15px;
     -fx-text-fill: white;
 }
@@ -226,6 +226,7 @@
     -fx-text-fill: White;
     -fx-font-size: 14px;
     -fx-prompt-text-fill: white;
+    -fx-font-weight: Bold;
 }
 
 #SearchField {
@@ -234,6 +235,7 @@
     -fx-text-fill: White;
     -fx-font-size: 14px;
     -fx-prompt-text-fill: white;
+    -fx-font-weight: Bold;
 }
 
 #SearchBtn {
@@ -262,11 +264,13 @@
 
 #ComboBox .text-field {
     -fx-prompt-text-fill: rgba(255, 0, 0, 0.5);
+    -fx-font-weight: Bold;
     -fx-text-fill: white;
 }
 
 #ComboBox .text-field:focused {
     -fx-prompt-text-fill: transparent;
+    -fx-font-weight: Bold;
 }
 
 #ComboBox .list-view {
@@ -493,6 +497,7 @@
     -fx-wrap-text: true;
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
+    -fx-font-weight: Bold;
 }
 
 #DescriptionBox .content {
@@ -714,6 +719,7 @@
 #modifyDescp{
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
+    -fx-font-weight: Bold;
 }
 
 #modifyDescp .scroll-bar:vertical {
@@ -813,6 +819,7 @@
     -fx-font-size: 14px;
     -fx-text-fill: white;
     -fx-prompt-text-fill: white;
+    -fx-font-weight: Bold;
 
 }
 

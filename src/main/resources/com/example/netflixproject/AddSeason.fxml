@@ -42,12 +42,12 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField id="TextFields" fx:id="Thumbnail" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
+                                          <TextField id="TextFields" fx:id="Thumbnail" editable="false" prefHeight="35.0" prefWidth="258.0" promptText="Thumbnail" stylesheets="@../../../Style.css">
                                              <font>
                                                 <Font name="Lucida Bright" size="14.0" />
                                              </font>
                                           </TextField>
-                                          <TextField id="TextFields" fx:id="Synopsis" prefHeight="35.0" prefWidth="258.0" promptText="Synopsis" stylesheets="@../../../Style.css">
+                                          <TextField id="TextFields" fx:id="Synopsis" editable="false" prefHeight="35.0" prefWidth="258.0" promptText="Synopsis" stylesheets="@../../../Style.css">
                                              <font>
                                                 <Font name="Lucida Bright" size="14.0" />
                                              </font>

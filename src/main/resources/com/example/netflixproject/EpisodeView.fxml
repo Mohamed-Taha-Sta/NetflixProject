@@ -32,7 +32,7 @@
                         </ImageView>
                         <VBox alignment="TOP_CENTER" spacing="30.0">
                             <children>
-                                <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" />
+                                <Button id="MenuBtn" fx:id="homeButton" mnemonicParsing="false" onAction="#OnHomeClick" />
                                 <VBox alignment="CENTER">
                                     <children>
                                         <Button id="MenuBtn" fx:id="seriesButoon" mnemonicParsing="false" onAction="#OnSeriesClick" />

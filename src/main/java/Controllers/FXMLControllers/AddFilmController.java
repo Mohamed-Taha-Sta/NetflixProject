@@ -37,6 +37,7 @@ public class AddFilmController implements Initializable {
 
     @FXML
     protected void onBack() throws Exception {
+        DataHolderFilm.setSelectedFilm(null);
         HelloApplication.SetRoot("ProducerLandingPage");
     }
 
@@ -81,22 +82,21 @@ public class AddFilmController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
+            double targetAspectRatio = 16.0 / 9.0;
 
-            int width = (int) image.getWidth();
-            int height = (int) image.getHeight();
-            if (width <= 1920 && height <= 1080) {
-                double currentAspectRatio = (double) width / height;
-                if (currentAspectRatio != (16.0 / 9.0)) {
+            double width = image.getWidth();
+            double height = image.getHeight();
+            double aspectRatio = width / height;
+
+            if (aspectRatio != targetAspectRatio) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Image Aspect Ratio");
+                alert.setContentText("Please select an image with an aspect ratio of 16:9.");
+                alert.showAndWait();
+            } else if (width <= 1920 && height <= 1080) {
                     DataHolderFilm.setThumbnail(selectedFile);
                     Thumbnail.setText(selectedFile.toURI().toString());
-                } else {
-                    // If the selected image does not have the required aspect ratio, display an error message
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Invalid Aspect Ratio");
-                    alert.setContentText("Please select an image with an aspect ratio of 16:9.");
-                    alert.showAndWait();
-                }
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
