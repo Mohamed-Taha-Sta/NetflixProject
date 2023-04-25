@@ -59,6 +59,10 @@ public class VideoPlayerController implements Initializable {
     static String pageName;
     static String path;
 
+    public static String getPath() {
+        return path;
+    }
+
     public static void SetPath(String PATH) {
         path = PATH;
     }
@@ -122,6 +126,7 @@ public class VideoPlayerController implements Initializable {
 
         ReturnBtn.setOnAction(actionEvent -> {
             mpVideo.pause();
+            path = "";
             ButtonPPR.setGraphic(ivPause);
             Button label = (Button) actionEvent.getSource();
             Stage stage = (Stage) label.getScene().getWindow();
