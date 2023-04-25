@@ -247,9 +247,14 @@ public class SerieService {
 
                 List<Episode> episodeList = EpisodeController.FindEpisodeSeasonID(season.getID());
                 for (Episode episode : episodeList) {
-                    sumEpScore = sumEpScore + ScoreEpisodeController.RetrieveUserScore(episode, user);
-                    cptEpScore = cptEpScore + 1;
-                    System.out.println("Note episode "+episode.getName()+" "+sumEpScore);
+                    if (((episode.getPremiereDate().isAfter(LocalDate.now()) || episode.getPremiereDate().isEqual(LocalDate.now())) &&
+                            episode.getPremiereDate().isBefore(LocalDate.now().plusDays(14)))
+                            && (ScoreEpisodeController.Score_Exist(episode, user)))
+                    {
+                        sumEpScore = sumEpScore + ScoreEpisodeController.RetrieveUserScore(episode, user);
+                        cptEpScore = cptEpScore + 1;
+                        System.out.println("Note episode "+episode.getName()+" "+sumEpScore);
+                    }
                 }
                 noteSeason = sumEpScore / cptEpScore;
                 System.out.println("Note seaosn "+noteSeason);
