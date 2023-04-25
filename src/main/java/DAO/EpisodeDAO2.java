@@ -234,7 +234,6 @@ public class EpisodeDAO2 {
             }
 
             episode = new Episode(ID, seasonID, EpisodeName, diffusionDate.toLocalDate(), premiereDate.toLocalDate(), fileImg);
-
             episodeList.add(episode);
 
         }

@@ -250,6 +250,73 @@ public class SerieDAO {
         return serieList;
     }
 
+
+    public static List<Serie> GetSerieByIDNoActors(long ID) throws SQLException, IOException {
+
+        Serie serie = null;
+
+        List<Serie> serieList = new ArrayList<>();
+
+        String sql = "SELECT * FROM SERIE WHERE ID_SERIE = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, ID);
+
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+
+            String SerieName = rs.getString("Name");
+            long ID_PROD = rs.getLong("ID_PROD");
+            String DESCRIPTION = rs.getString("DESCRIPTION");
+            Date DebutDate = rs.getDate("DEBUT_DATE");
+            String Language = rs.getString("LANGUAGE");
+            String Country = rs.getString("COUNTRY");
+            Blob Thumbnail = rs.getBlob("IMAGE");
+            int numsSeasons= rs.getInt("NUM_SEASONS");
+            String StringGenre = rs.getString("LISTEGENRE");
+            String[] genreArray = StringGenre.split(",");
+            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
+            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
+            InputStream SerieSynopsis = rs.getBinaryStream("SYNOPSIS");
+
+            //Converting Blob Image to Jpeg File
+            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+            OutputStream outS = new FileOutputStream(fileThumb);
+            byte[] bufferImg = new byte[1024];
+            int length;
+            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
+                outS.write(bufferImg, 0, length);
+            }
+
+            //Converting Blob Synopsis to video File .mp4
+            Path outputFilePathSynopsis = Paths.get("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            try (OutputStream outputStreamSynopsis = Files.newOutputStream(outputFilePathSynopsis)) {
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = SerieSynopsis.read(buffer)) != -1) {
+                    outputStreamSynopsis.write(buffer, 0, bytesRead);
+                }
+            } catch (IOException e) {
+                System.out.println("Error Handelling the Synopsis");
+            }
+            File fileSynopsis = new File("src/main/java/Temp/SynopsisSerie"+ID+".mp4");
+            File fileThumbnail = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
+
+            List<Season> seasonList = SeasonDAO.FindSeasonSerieID(ID);
+
+
+            serie = new Serie(ID,ID_PROD,SerieName,DESCRIPTION,DebutDate.toLocalDate(),Language,Country,genreList,fileThumbnail,numsSeasons,fileSynopsis,seasonList,null);
+
+            serieList.add(serie);
+        }
+        rs.close();
+        pstmt.close();
+//        conn.close();
+        return serieList;
+    }
+
     public static List<Long> getPrincActorIDSerie(long IDSerie) throws SQLException {
 
         List<Long> listIDActor = new ArrayList<>();
@@ -266,7 +333,7 @@ public class SerieDAO {
             long IDActeurPrinc = rs.getLong("ID_ACT");
             listIDActor.add(IDActeurPrinc);
         }
-        System.out.println("Got Main Actors = "+listIDActor);
+
         rs.close();
         pstmtGetID.close();
 //        conn.close();
@@ -289,7 +356,7 @@ public class SerieDAO {
             long IDActeurSupp = rs.getLong("ID_ACT");
             listIDActor.add(IDActeurSupp);
         }
-        System.out.println("Got Support Actors = "+listIDActor);
+
         rs.close();
         pstmtGetID.close();
 //        conn.close();
@@ -311,7 +378,7 @@ public class SerieDAO {
 
             if (rs.next())
             {
-                Long IDactor = rs.getLong(1);
+                long IDactor = rs.getLong(1);
                 String Nom = rs.getString(2);
                 String Prenom = rs.getString(3);
                 String Email = rs.getString(4);
@@ -323,9 +390,9 @@ public class SerieDAO {
             }
 //
         }
-        assert rs != null;
-            rs.close();
-        pstmtGetID.close();
+//        assert rs != null;
+//            rs.close();
+//        pstmtGetID.close();
 //        conn.close();
         return actorList;
 

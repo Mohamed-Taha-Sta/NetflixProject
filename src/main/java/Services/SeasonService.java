@@ -1,5 +1,6 @@
 package Services;
 
+import Controllers.EpisodeController;
 import Controllers.ScoreEpisodeController;
 import Controllers.SeasonController;
 import DAO.SeasonDAO;
@@ -35,13 +36,16 @@ public class SeasonService {
     }
 
     public static boolean SeasonWithHighScoreByUser(List<Episode> episodes, User user){
-        if(episodes==null||episodes.isEmpty()) return false;
-        long highepisode= episodes.stream()
+      //  if(episodes==null||episodes.isEmpty()) return false;
+        long highepisode=episodes.stream()
                 .filter(episode -> ScoreEpisodeController.RetrieveUserScore(episode,user)>2.5)
+                .distinct()
                 .count();
-        return highepisode > (episodes.size() / 2);
+
+       return highepisode > (episodes.size() / 2);
 
     }
+
 
 
 //    public static List<Long> getScoreEpisodeList(List<Episode> episodeList) throws SQLException, IOException {
