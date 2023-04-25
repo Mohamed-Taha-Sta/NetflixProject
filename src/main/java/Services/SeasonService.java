@@ -5,6 +5,7 @@ import Controllers.SeasonController;
 import DAO.SeasonDAO;
 import Entities.Episode;
 import Entities.Season;
+import Entities.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,15 @@ public class SeasonService {
                 .sum();
         return Math.round(listScore.stream()
                 .collect(Collectors.averagingDouble(Double::doubleValue)));
+    }
+
+    public static boolean SeasonWithHighScoreByUser(List<Episode> episodes, User user){
+
+        long highepisode= episodes.stream()
+                .filter(episode -> ScoreEpisodeController.RetrieveUserScore(episode,user)>2.5)
+                .count();
+        return highepisode > (episodes.size() / 2);
+
     }
 
 
