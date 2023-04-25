@@ -39,12 +39,12 @@ public class AddEpisodeController implements Initializable {
     public Label AlertText;
 
     public void OnDone() throws Exception {
+        DataHolderSeries.setSeries(null);
         HelloApplication.SetRoot("ProducerLandingPage");
     }
 
     @FXML
     protected void OnBack() throws Exception {
-        DataHolderSeries.setSelectedSeries(null);
         HelloApplication.SetRoot(DataHolderEpisode.getPreviousPage());
     }
 

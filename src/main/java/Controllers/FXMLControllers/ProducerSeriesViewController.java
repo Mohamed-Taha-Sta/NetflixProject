@@ -116,6 +116,8 @@ public class ProducerSeriesViewController implements Initializable {
 
 
     public void onBack() throws Exception {
+        DataHolderSeries.setSelectedSeries(null);
+        DataHolderSeries.setSeries(null);
         HelloApplication.SetRoot("ProducerLandingPage");
     }
 
@@ -246,11 +248,18 @@ public class ProducerSeriesViewController implements Initializable {
             int width = (int) image.getWidth();
             int height = (int) image.getHeight();
             if (width <= 1920 && height <= 1080) {
-                Thumbnail.setImage(image);
-                SerieController.modifimg(DataHolderSeries.getSelectedSeries(),selectedFile);
-                showErrorMessage(AlertText,"Thumbnail Changed successfully");
-
-
+                double aspectRatio = (double) width / (double) height;
+                if (aspectRatio <= 16.0 / 9.0){
+                    Thumbnail.setImage(image);
+                    SerieController.modifimg(DataHolderSeries.getSelectedSeries(),selectedFile);
+                    showErrorMessage(AlertText,"Thumbnail Changed successfully");
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Invalid Aspect Ratio");
+                    alert.setContentText("Please select an image with an aspect ratio of 16:9 or smaller.");
+                    alert.showAndWait();
+                }
             } else {
                 // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);

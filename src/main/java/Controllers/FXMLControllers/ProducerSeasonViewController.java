@@ -2,9 +2,11 @@ package Controllers.FXMLControllers;
 
 import Controllers.EpisodeController;
 import Controllers.SeasonController;
+import Controllers.SerieController;
 import Entities.Episode;
 import Utils.DataHolderEpisode;
 import Utils.DataHolderSeason;
+import Utils.DataHolderSeries;
 import com.example.netflixproject.HelloApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -48,6 +50,7 @@ public class ProducerSeasonViewController implements Initializable {
 
 
     public void onBack(ActionEvent actionEvent) throws Exception {
+        DataHolderSeries.setSelectedSeries(SerieController.GetSerieByID(DataHolderSeason.getSelectedSeason().getSERIE_ID()).get(0));
         HelloApplication.SetRoot("ProducerSeriesView");
     }
 
