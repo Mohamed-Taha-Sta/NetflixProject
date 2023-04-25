@@ -23,10 +23,8 @@ import org.controlsfx.control.CheckComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static Utils.RepeatableFunction.*;
 
@@ -112,18 +110,14 @@ public class SeriesPageController implements Initializable {
         if (searchText.isEmpty() && selectedGenres.isEmpty() && (selectedYear == null || selectedYear.equals("All"))) {
             return seriesList;
         }
-        List<Serie> filteredList = new ArrayList<>();
-        for (Serie serie : seriesList) {
-            int serieYear = serie.getAnnerdesortie().getYear();
-            int selectedYearInt = selectedYear == null || selectedYear.equals("All") ? -1 : Integer.parseInt(selectedYear);
-            if ((searchText.isEmpty() || serie.getNom().toLowerCase().contains(searchText.toLowerCase())) &&
-                    (selectedGenres.isEmpty() || new HashSet<>(serie.getListegenre()).contains(selectedGenres)) &&
-                    (selectedYearInt == -1 || serieYear == selectedYearInt)) {
-                filteredList.add(serie);
-            }
-        }
-        return filteredList;
+        return seriesList.stream()
+                .filter(serie -> searchText.isEmpty() || serie.getNom().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(serie -> selectedGenres.isEmpty() || !Collections.disjoint(new HashSet<>(serie.getListegenre()), selectedGenres))
+                .filter(serie -> selectedYear == null || selectedYear.equals("All") || serie.getAnnerdesortie().getYear() == Integer.parseInt(selectedYear))
+                .collect(Collectors.toList());
     }
+
+
 
 
 
