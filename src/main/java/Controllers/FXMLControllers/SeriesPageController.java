@@ -117,7 +117,7 @@ public class SeriesPageController implements Initializable {
             int serieYear = serie.getAnnerdesortie().getYear();
             int selectedYearInt = selectedYear == null || selectedYear.equals("All") ? -1 : Integer.parseInt(selectedYear);
             if ((searchText.isEmpty() || serie.getNom().toLowerCase().contains(searchText.toLowerCase())) &&
-                    (selectedGenres.isEmpty() || new HashSet<>(serie.getListegenre()).containsAll(selectedGenres)) &&
+                    (selectedGenres.isEmpty() || new HashSet<>(serie.getListegenre()).contains(selectedGenres)) &&
                     (selectedYearInt == -1 || serieYear == selectedYearInt)) {
                 filteredList.add(serie);
             }

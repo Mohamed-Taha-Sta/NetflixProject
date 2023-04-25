@@ -59,7 +59,6 @@ public class SerieViewController implements Initializable {
     List<Season> seasons;
 
 
-    static Producer prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
 
     public void OnBack() throws Exception {
         prod=null;
@@ -149,6 +148,7 @@ public class SerieViewController implements Initializable {
             }
         }
     }
+    static Producer prod;
 
     public void OnHomeClick() throws Exception {
         prod=null;
@@ -186,6 +186,10 @@ public class SerieViewController implements Initializable {
                 season2.setSpacing(10);
                 season2.setAlignment(Pos.CENTER);
             }
+        }
+        if(prod == null)
+        {
+            prod = ProducerController.getProdByID(DataHolderSeries.getSelectedSeries().getID_PROD());
         }
 
         if (seasonNbr > 0) {

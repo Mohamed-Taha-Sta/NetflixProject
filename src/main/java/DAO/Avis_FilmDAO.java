@@ -93,9 +93,9 @@ public class Avis_FilmDAO {
 
 
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, avis);
             pstmt.setLong(2,user.getID() );
             pstmt.setLong(3, film.getId());
-            pstmt.setString(1, avis);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -153,8 +153,8 @@ public class Avis_FilmDAO {
 
 
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(2,user.getID() );
             pstmt.setLong(1, film.getId());
+            pstmt.setLong(2, user.getID());
             rs=pstmt.executeQuery();
             rs.next();
             return rs.getString(1);

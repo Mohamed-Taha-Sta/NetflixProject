@@ -95,9 +95,9 @@ public class Avis_SeasonDAO {
 
 
             pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, avis);
             pstmt.setLong(2,user.getID() );
             pstmt.setLong(3, s.getID());
-            pstmt.setString(1, avis);
             pstmt.executeUpdate();
             return true;
         } catch (SQLException ex) {

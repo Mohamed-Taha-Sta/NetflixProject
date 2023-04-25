@@ -165,7 +165,7 @@ public class FilmViewController implements Initializable {
         IconSetter(filmButton, "src/main/resources/Images/HomePage/Movie.png", 40);
         IconSetter(BackBtn, "src/main/resources/Images/Design/BackButton.png", 70);
         if(prod==null){
-            ProducerController.getProdByID(DataHolderFilm.getSelectedFilm().getId_realisateur());
+            prod = ProducerController.getProdByID(DataHolderFilm.getSelectedFilm().getId_realisateur());
         }
         InfoSetter();
     }

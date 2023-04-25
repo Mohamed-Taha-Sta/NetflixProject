@@ -149,10 +149,10 @@ public class ProducerEpisodeViewController implements Initializable {
     }
 
     public void OnPremiereDateBtn(ActionEvent actionEvent) throws SQLException {
-        if (PremiereDatePicker.getValue().equals(DataHolderEpisode.getSelectedEpisode().getPremiereDate())) {
-            showMessage(AlertText, "You didnt change the PremiereDate");
-        } else if (PremiereDatePicker.getValue()==null) {
+        if (PremiereDatePicker.getValue()==null) {
             showMessage(AlertText, "Your new PremiereDate is Empty");
+        } else if (PremiereDatePicker.getValue().equals(DataHolderEpisode.getSelectedEpisode().getPremiereDate())) {
+            showMessage(AlertText, "You didnt change the PremiereDate");
         } else if (PremiereDatePicker.getValue().isBefore(LocalDate.now())) {
             showMessage(AlertText, "PremiereDate must be put in the future");
         } else {

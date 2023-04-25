@@ -57,7 +57,6 @@ public class Avis_EpisodeDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,user.getID() );
             pstmt.setLong(2, ep.getID());
-
             pstmt.setString(3, avis);
             pstmt.executeUpdate();
             return true;
@@ -141,19 +140,18 @@ public class Avis_EpisodeDAO {
         ResultSet rs = null;
 
         try {
-            sql = "SELECT avis FROM avis_episodes WHERE id_user = ? and id_episode=?";
-
+            sql = "SELECT * FROM avis_episodes WHERE id_user = ? and id_episode=?";
 
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(2,user.getID() );
-            pstmt.setLong(1, ep.getID());
+            pstmt.setLong(1,user.getID());
+            pstmt.setLong(2,ep.getID());
             rs=pstmt.executeQuery();
             rs.next();
-            return rs.getString(1);
+            String avis = rs.getString("avis");
+            return avis;
         } catch (SQLException ex) {
-            System.out.println("tu dois avoid un commentaire pour le supprimer");
-            String s="tu dois avoid un commentaire pour le supprimer";
-            return s;
+            ex.printStackTrace();
+            return "";
         }finally {
             if (rs != null) {
                 try {

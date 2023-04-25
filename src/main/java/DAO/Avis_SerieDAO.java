@@ -151,15 +151,14 @@ public class Avis_SerieDAO {
 
 
             pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(2,user.getID() );
             pstmt.setLong(1, serie.getId());
+            pstmt.setLong(2,user.getID() );
             rs=pstmt.executeQuery();
             rs.next();
             return rs.getString(1);
         } catch (SQLException ex) {
-            System.out.println("tu dois avoid un commentaire pour le supprimer");
-            String s="tu dois avoid un commentaire pour le supprimer";
-            return s;
+            ex.printStackTrace();
+            return "";
         }finally {
             if (rs != null) {
                 try {
