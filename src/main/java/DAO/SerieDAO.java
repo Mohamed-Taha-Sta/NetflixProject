@@ -83,14 +83,11 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }
         pstmt.close();
@@ -113,18 +110,15 @@ public class SerieDAO {
         } catch(SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
-//            pstmt.close();
-//            conn.close();
+
             return false;
         } catch(Exception e) {
             // Handle errors for Class.forName
             e.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return false;
         }
         pstmt.close();
-//        conn.close();
+
         return true;
     }
 
@@ -174,7 +168,6 @@ public class SerieDAO {
         }
         rs.close();
         pstmt.close();
-//        conn.close();
         return serieList;
     }
 
@@ -313,7 +306,6 @@ public class SerieDAO {
         }
         rs.close();
         pstmt.close();
-//        conn.close();
         return serieList;
     }
 
@@ -336,7 +328,6 @@ public class SerieDAO {
 
         rs.close();
         pstmtGetID.close();
-//        conn.close();
         return listIDActor;
     }
 
@@ -359,7 +350,6 @@ public class SerieDAO {
 
         rs.close();
         pstmtGetID.close();
-//        conn.close();
         return listIDActor;
     }
 
@@ -388,12 +378,9 @@ public class SerieDAO {
 
                 actorList.add(actor);
             }
-//
+
         }
-//        assert rs != null;
-//            rs.close();
-//        pstmtGetID.close();
-//        conn.close();
+
         return actorList;
 
     }
@@ -426,10 +413,9 @@ public class SerieDAO {
             }
 
         }
-//        assert rs != null;
-//            rs.close();
+
+
         pstmtGetID.close();
-//        conn.close();
         return actorList;
 
     }
@@ -484,7 +470,7 @@ public class SerieDAO {
         }
         rs.close();
         pstmt.close();
-//        conn.close();
+
         return serieList;
     }
 
@@ -536,7 +522,6 @@ public class SerieDAO {
 
         rs.close();
         pstmt.close();
-//        conn.close();
         return serieList;
 
     }
@@ -591,7 +576,7 @@ public class SerieDAO {
         }
         rs.close();
         pstmt.close();
-//        conn.close();
+
         return serieList;
     }
 
@@ -614,7 +599,6 @@ public class SerieDAO {
             e.printStackTrace();
             assert pstmt != null;
             pstmt.close();
-//            conn.close();
             return false;
         }
     }
@@ -629,7 +613,6 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
-//            conn.close();
             return false;
         }finally {
             if (pstmt != null) {
@@ -652,8 +635,6 @@ public class SerieDAO {
             pstmt.executeUpdate();
             return true;
         }catch (Exception e){
-//            pstmt.close();
-//            conn.close();
             return false;
         }finally {
             if (pstmt != null) {
@@ -687,8 +668,6 @@ public class SerieDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("Erreur lors de la connexion à la base de données : " + e.getMessage());
-//            pstmt.close();
-//            conn.close();
             return false;
         } catch (IOException e) {
             throw new RuntimeException("Erreur lors de la lecture du fichier : " + e.getMessage());
@@ -703,7 +682,7 @@ public class SerieDAO {
         }
     }
 
-    public static boolean ModifSynopsisSerie(Serie serie,File NewSynopsis) throws SQLException {
+    public static boolean ModifSynopsisSerie(Serie serie,File NewSynopsis) {
         PreparedStatement pstmt = null;
         String sql;
 
@@ -714,14 +693,11 @@ public class SerieDAO {
             pstmt.setBlob(1,inputStreamSynopsisSerie);
             pstmt.setLong(2,serie.getId());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
+
 
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return false;
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -748,14 +724,11 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Name = '" + nom + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -779,14 +752,11 @@ public class SerieDAO {
             pstmt.setString(1,description);
             pstmt.setLong(2,serie.getId());
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -807,13 +777,11 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Language = '" + langue + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
+
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -834,14 +802,12 @@ public class SerieDAO {
             sql = "UPDATE Serie SET Country = '" + paysorgine + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
+
 
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -868,8 +834,7 @@ public class SerieDAO {
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -882,7 +847,7 @@ public class SerieDAO {
         }
     }
 
-    public static boolean modiflistegenre(Serie serie,List<String> listegenre ) throws SQLException {
+    public static boolean modiflistegenre(Serie serie,List<String> listegenre ) {
         PreparedStatement pstmt = null;
         String sql;
 
@@ -892,13 +857,11 @@ public class SerieDAO {
             sql = "UPDATE Serie SET listegenre = '" + genreListString + "' WHERE ID_SERIE = " + serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-//            pstmt.close();
-//            conn.close();
+
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -911,7 +874,7 @@ public class SerieDAO {
         }
     }
 
-    public static boolean deleteSerie_actsec(Serie serie,Actor act) throws SQLException {
+    public static boolean deleteSerie_actsec(Serie serie,Actor act) {
         PreparedStatement pstmt = null;
         String sql;
         try {
@@ -921,14 +884,12 @@ public class SerieDAO {
             pstmt.setLong(2, act.getID());
 
             pstmt.executeUpdate();
-//            pstmt.close();
-//            conn.close();
+
             return true;
 
         } catch (Exception e) {
             System.out.println("acteur n'exite pas");
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -942,7 +903,7 @@ public class SerieDAO {
 
     }
 
-    public static boolean deleteSerie_actprinc(Serie serie,Actor act) throws SQLException {
+    public static boolean deleteSerie_actprinc(Serie serie,Actor act) {
         PreparedStatement pstmt = null;
         String sql;
         try {
@@ -952,13 +913,11 @@ public class SerieDAO {
             pstmt.setLong(2, act.getID());
 
             pstmt.executeUpdate();
-//            pstmt.close();
-//            conn.close();
+
             return true;
 
         } catch (Exception e) {
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -971,7 +930,7 @@ public class SerieDAO {
         }
     }
 
-    public static boolean ajoutSerie_actprinc(Serie serie,Actor act) throws SQLException {
+    public static boolean ajoutSerie_actprinc(Serie serie,Actor act) {
         PreparedStatement pstmt = null;
         String sql;
 
@@ -984,13 +943,11 @@ public class SerieDAO {
             pstmt.setLong(2, serie.getId());
 
             pstmt.executeUpdate();
-//            pstmt.close();
-//            conn.close();
+
             return true;
 
         } catch (Exception e) {
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
 
@@ -1005,7 +962,7 @@ public class SerieDAO {
 
 
     }
-    public static boolean ajoutSerie_actsec(Serie serie,Actor act) throws SQLException {
+    public static boolean ajoutSerie_actsec(Serie serie,Actor act) {
         PreparedStatement pstmt = null;
         String sql;
         try {
@@ -1017,13 +974,11 @@ public class SerieDAO {
 
 
             pstmt.executeUpdate();
-//            pstmt.close();
-//            conn.close();
+
             return true;
 
         } catch (Exception e) {
-//            pstmt.close();
-//            conn.close();
+
             return false;
         }finally {
             if (pstmt != null) {
@@ -1086,63 +1041,8 @@ public class SerieDAO {
 
             serieList.add(serie);
         }
-        // Close the ResultSet, PreparedStatement, and database connection
         rs.close();
         stmt.close();
-//        conn.close();
-        return serieList;
-    }
-
-    public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
-        StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("SELECT * FROM SERIE WHERE ");
-        List<Serie> serieList = new ArrayList<>();
-        for (int i = 0; i < searchTerms.size(); i++) {
-            if (i > 0) {
-                sqlBuilder.append(" OR ");
-            }
-            sqlBuilder.append("LISTEGENRE LIKE ?");
-        }
-        String sql = sqlBuilder.toString();
-
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        for (int i = 0; i < searchTerms.size(); i++) {
-            stmt.setString(i + 1, "%" + searchTerms.get(i) + "%");
-        }
-
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            long ID = rs.getLong("ID_SERIE");
-            long ID_PROD = rs.getLong("ID_PROD");
-            String SerieName = rs.getString("NAME");
-            Blob Thumbnail = rs.getBlob("IMAGE");
-            String StringGenre = rs.getString("LISTEGENRE");
-            String[] genreArray = StringGenre.split(",");
-            ArrayList<String> genreList = new ArrayList<>(Arrays.asList(genreArray));
-            Date DebutDate = rs.getDate("DEBUT_DATE");
-            InputStream SerieThumbnail = Thumbnail.getBinaryStream();
-
-            //Converting Blob Image to Jpeg File
-            File fileThumb = new File("src/main/java/Temp/ImgSerie"+ID+".jpeg");
-            OutputStream outS = new FileOutputStream(fileThumb);
-            byte[] bufferImg = new byte[1024];
-            int length;
-            while ((length = SerieThumbnail.read(bufferImg)) != -1) {
-                outS.write(bufferImg, 0, length);
-            }
-            List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
-            List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
-            ActorList.addAll(SuppActorList);
-            Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
-            serieList.add(serie);
-
-        }
-
-        // Close the ResultSet, PreparedStatement, and database connection
-        rs.close();
-        stmt.close();
-//        conn.close();
         return serieList;
     }
 
@@ -1182,9 +1082,6 @@ public class SerieDAO {
             ActorList.addAll(SuppActorList);
             Serie serie = new Serie(ID,ID_PROD,SerieName,fileThumb,genreList,DebutDate.toLocalDate(),ActorList);
             serieList.add(serie);
-        // Close the ResultSet, PreparedStatement, and database connection
-
-//        connection.close();
             }
         rs.close();
         stmt.close();

@@ -127,7 +127,7 @@ public class UserDAO {
                 maxID = rs.getInt(1);
             }
             newID = maxID + 1;
-            if (user.getImage()== null)
+            if (user.getImage() == null)
                 sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription) VALUES (?,?,?,?,?,?,?,?,?)";
             else
                 sql = "INSERT INTO Utilisateurs (id,Last_name,first_name,birthday,actorlist,genrelist,password,mail,subscription,IMAGE) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -143,10 +143,9 @@ public class UserDAO {
             pstmt.setString(7, user.getPassword());
             pstmt.setString(8, user.getMail());
             pstmt.setDate(9, java.sql.Date.valueOf(today));
-            if (user.getImage()!=null)
-            {
+            if (user.getImage() != null) {
                 InputStream inputStream = new FileInputStream(user.getImage());
-                pstmt.setBlob(10,inputStream);
+                pstmt.setBlob(10, inputStream);
             }
             pstmt.executeUpdate();
             authenticate(user.getMail(), user.getPassword());
@@ -209,7 +208,7 @@ public class UserDAO {
 
     }
 
-    public static boolean changeMail(String newMail){
+    public static boolean changeMail(String newMail) {
         PreparedStatement pstmt;
         String sql;
 
@@ -226,7 +225,7 @@ public class UserDAO {
         }
     }
 
-    public static boolean changeBirthday(LocalDate date){
+    public static boolean changeBirthday(LocalDate date) {
         PreparedStatement pstmt;
         String sql;
 
@@ -243,7 +242,7 @@ public class UserDAO {
         }
     }
 
-    public static boolean changeActors(String actors){
+    public static boolean changeActors(String actors) {
         PreparedStatement pstmt;
         String sql;
         try {
@@ -259,7 +258,7 @@ public class UserDAO {
         }
     }
 
-    public static boolean changeGenres(String genres){
+    public static boolean changeGenres(String genres) {
         PreparedStatement pstmt;
         String sql;
         try {
@@ -274,7 +273,8 @@ public class UserDAO {
             return false;
         }
     }
-    public static boolean changePass(String pass){
+
+    public static boolean changePass(String pass) {
         PreparedStatement pstmt;
         String sql;
         try {
@@ -289,6 +289,7 @@ public class UserDAO {
             return false;
         }
     }
+
     public static void adding_Image(File imageFile) {
         PreparedStatement pstmt = null;
         String sql;
@@ -361,7 +362,6 @@ public class UserDAO {
             }
         }
     }
-
 
 
 }

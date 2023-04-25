@@ -92,23 +92,23 @@ public class SerieService {
         return SerieDAO.modifAnnerdesoritie(serie, date);
     }
 
-    public static boolean modiflistegenre(Serie serie, List<String> listegenre) throws SQLException {
+    public static boolean modiflistegenre(Serie serie, List<String> listegenre) {
         return SerieDAO.modiflistegenre(serie, listegenre);
     }
 
-    public static boolean deleteSerie_actsec(Serie serie, Actor act) throws SQLException {
+    public static boolean deleteSerie_actsec(Serie serie, Actor act) {
         return SerieDAO.deleteSerie_actsec(serie, act);
     }
 
-    public static boolean deleteSerie_actprinc(Serie serie, Actor act) throws SQLException {
+    public static boolean deleteSerie_actprinc(Serie serie, Actor act) {
         return SerieDAO.deleteSerie_actprinc(serie, act);
     }
 
-    public static boolean ajoutSerie_actprinc(Serie serie, Actor act) throws SQLException {
+    public static boolean ajoutSerie_actprinc(Serie serie, Actor act) {
         return SerieDAO.ajoutSerie_actprinc(serie, act);
     }
 
-    public static boolean ajoutSerie_actsec(Serie serie, Actor act) throws SQLException {
+    public static boolean ajoutSerie_actsec(Serie serie, Actor act) {
         return SerieDAO.ajoutSerie_actsec(serie, act);
     }
 
@@ -116,9 +116,6 @@ public class SerieService {
         return SerieDAO.searchSeries(searchTerms);
     }
 
-    public static List<Serie> searchSeriesOR(List<String> searchTerms) throws SQLException, IOException {
-        return SerieDAO.searchSeries(searchTerms);
-    }
 
     public static List<Serie> GetSerieByID(long ID) throws SQLException, IOException {
         return SerieDAO.GetSerieByID(ID);

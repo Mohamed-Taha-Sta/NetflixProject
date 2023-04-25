@@ -1,12 +1,13 @@
 package DAO;
 
-import Entities.*;
+import Entities.Actor;
 import Utils.ConxDB;
 import Utils.DataHolder;
 
-import java.io.File;
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,27 +19,17 @@ public class ActorDAO {
         boolean etat = true;
         PreparedStatement pstmt = null;
         String sql;
-        Long compteur = act.getID();
-
         try {
 
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-                sql = "INSERT INTO Actor (nom,prenome,mail,password) VALUES (?,?,?,?)";
-
-                // sql = "INSERT INTO mainactor (id_act,nom,prenome,mail,password) VALUES (" + Long.toString(Actor.getID()) + "," + act.getName() + "," + act.getPrename() + "," + act.getMail() + "," + act.getPassword() + ")";
-
+            sql = "INSERT INTO Actor (nom,prenome,mail,password) VALUES (?,?,?,?)";
 
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, act.getName());
             pstmt.setString(2, act.getPrename());
             pstmt.setString(3, act.getMail());
             pstmt.setString(4, act.getPassword());
-
-
-            //pstmt = conn.prepareStatement(sql);
-
             pstmt.executeUpdate();
-
+            pstmt.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             etat = false;
@@ -46,33 +37,6 @@ public class ActorDAO {
         return etat;
     }
 
-    /*public static long getactid(String nom, String prenom) {/*pour le recherche des film avec nom acteur saisie*/
-       /* PreparedStatement pstmt = null;
-        String sql1;
-        ResultSet rs;
-        try {
-
-
-                sql1 = "SELECT id_act FROM ACTOR WHERE ACTOR.nom='%" + nom + "%' or ACTOR.prenome='%" + prenom + "%'";
-                pstmt = conn.prepareStatement(sql1);
-                rs = pstmt.executeQuery();
-
-
-                rs.next();
-
-                return rs.getLong(1);
-
-
-
-
-        } catch (Exception ex) {
-            System.out.println("acteur nexiste pas");
-
-
-        }
-        return -1;
-
-    }*/
     public static long getActId(String nom, String prenom) {
         PreparedStatement pstmt = null;
         String sql;
@@ -80,8 +44,8 @@ public class ActorDAO {
         try {
             sql = "SELECT id_act FROM ACTOR WHERE nom LIKE ? OR prenome LIKE ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,  nom  );
-            pstmt.setString(2,  prenom  );
+            pstmt.setString(1, nom);
+            pstmt.setString(2, prenom);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 return rs.getLong(1);
@@ -99,15 +63,14 @@ public class ActorDAO {
         }
         return -1;
     }
+
     public static List<Actor> recherche_actjasser(String something) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Actor> list = new ArrayList<>();
-        //  ArrayList<String>list1=new ArrayList<>();
         Actor act = null;
         try {
-            // String sql = "INSERT INTO Client (ID, FIRSTNAME) VALUES (3, 'Jesser')";
-            if(something.isEmpty()){
+            if (something.isEmpty()) {
                 String sql = "select id_act,nom,prenome,Mail,password from Actor";
 
                 pstmt = conn.prepareStatement(sql);
@@ -117,13 +80,12 @@ public class ActorDAO {
                     act = new Actor(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                     list.add(act);
                 }
-            }
-            else{
+            } else {
                 String sql = "select id_act,nom,prenome,Mail,password from Actor where Nom like ? or Prenome like ?";
 
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1,"%"+something+"%");
-                pstmt.setString(2,"%"+something+"%");
+                pstmt.setString(1, "%" + something + "%");
+                pstmt.setString(2, "%" + something + "%");
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
                     act = new Actor(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
@@ -132,21 +94,30 @@ public class ActorDAO {
             }
 
 
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
+
         }
-
-
         return list;
     }
 
 
-    public static ArrayList<Actor> getact(String nom, String prenom) {/*pour le recherche des film avec nom acteur saisie*/
+    public static ArrayList<Actor> getact(String nom, String prenom) {
         PreparedStatement pstmt = null;
         String sql1;
-        ResultSet rs=null;
-        ArrayList<Actor>list=new ArrayList<>();
+        ResultSet rs = null;
+        ArrayList<Actor> list = new ArrayList<>();
         try {
 
             try {
@@ -160,16 +131,17 @@ public class ActorDAO {
             } catch (Exception e) {
 
             }
-            try{
-            while (rs.next()) {
-                Long id_act=rs.getLong("id_act");
-                String name=rs.getString("nom");
-                String prenome=rs.getString("prenome");
-                String mail=rs.getString("mail");
-                String pass=rs.getString("password");
-                Actor ACT=new Actor(id_act,name,prenome,mail,pass);
-                list.add( ACT);
-            }}catch (Exception e){
+            try {
+                while (rs.next()) {
+                    Long id_act = rs.getLong("id_act");
+                    String name = rs.getString("nom");
+                    String prenome = rs.getString("prenome");
+                    String mail = rs.getString("mail");
+                    String pass = rs.getString("password");
+                    Actor ACT = new Actor(id_act, name, prenome, mail, pass);
+                    list.add(ACT);
+                }
+            } catch (Exception e) {
                 System.out.println("there are no main actor with that name");
             }
 
@@ -179,63 +151,75 @@ public class ActorDAO {
 
 
             throw new RuntimeException(e);
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
-
-    return list;
+        return list;
     }
 
 
-
-    public static void modifnom(Long id,String nom){
+    public static void modifnom(Long id, String nom) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE ACTOR SET nom = '"+nom+"' WHERE id_act = "+id;
+        String sql = "UPDATE ACTOR SET nom = '" + nom + "' WHERE id_act = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
-    public static void modifprenom(Long id,String prenom){
+
+    public static void modifprenom(Long id, String prenom) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE ACTOR SET prenome = '"+prenom+"' WHERE id_act = "+id;
+        String sql = "UPDATE ACTOR SET prenome = '" + prenom + "' WHERE id_act = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public static void modifmail(Long id,String mail){
+
+    public static void modifmail(Long id, String mail) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE actor SET mail = '"+mail+"' WHERE id_act = "+id;
+        String sql = "UPDATE actor SET mail = '" + mail + "' WHERE id_act = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("ActorDAO Error");
 
         }
     }
-    public static void modifpassword(Long id,String password){
+
+    public static void modifpassword(Long id, String password) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE actor SET password = '"+password+"' WHERE id_act = "+id;
+        String sql = "UPDATE actor SET password = '" + password + "' WHERE id_act = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("ActorDAO Error");
 
         }
@@ -258,7 +242,7 @@ public class ActorDAO {
                 String Nom = rs.getString("NOM");
                 String Prenom = rs.getString("PRENOME");
 
-                Actor actor = new Actor(ActId,Nom,Prenom,mail,pass);
+                Actor actor = new Actor(ActId, Nom, Prenom, mail, pass);
 
                 DataHolder.setActor(actor);
                 return true;
@@ -271,6 +255,7 @@ public class ActorDAO {
             return false;
         }
     }
+
     public static boolean check_Mail(String mail) {
         PreparedStatement pstmt;
         String sql;
@@ -286,15 +271,11 @@ public class ActorDAO {
                 return false;
             }
         } catch (Exception e) {
-            System.out.println(e.toString());
+            System.out.println(e);
             return false;
         }
 
     }
-
-
-
-
 
 
 }

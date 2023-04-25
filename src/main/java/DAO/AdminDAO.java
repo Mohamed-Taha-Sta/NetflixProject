@@ -16,29 +16,6 @@ import java.sql.SQLException;
 public class AdminDAO {
     private static final Connection conn = ConxDB.getInstance();
 
-    //The creation of Admins has been suspended in Favour of creating them in the DB directly.
-
-//    public static void createadmin(Admin admin) {
-//        boolean etat = true;
-//        PreparedStatement pstmt = null;
-//        String sql;
-//
-//        try {
-//            sql = "INSERT INTO Admin (nom,prenom,mail,password) VALUES (?,?,?,?)";
-//
-//            pstmt = conn.prepareStatement(sql);
-//            pstmt.setString(1, admin.getName());
-//            pstmt.setString(2, admin.getPrename());
-//            pstmt.setString(3, admin.getMail());
-//            pstmt.setString(4, admin.getPrename());
-//            pstmt.executeUpdate();
-//
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//            etat = false;
-//        }
-//    }
-
 
     public static void modifnom(Long id,String nom){
 

@@ -1,8 +1,6 @@
 package Services;
 
-import DAO.Avis_FilmDAO;
 import DAO.Avis_SerieDAO;
-import Entities.Film;
 import Entities.Serie;
 import Entities.User;
 
