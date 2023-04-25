@@ -107,6 +107,7 @@ public class SeasonViewController implements Initializable {
                 if (ep.getPremiereDate().isBefore(LocalDate.now()) || ep.getPremiereDate().equals(LocalDate.now())) {
                     alreadyReleased.add(ep);
                 }
+                else System.out.println("episode not retrived: "+ep);
             }
             return alreadyReleased;
 

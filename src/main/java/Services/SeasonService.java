@@ -26,11 +26,16 @@ public class SeasonService {
 
     public static double StreamAverageScore(Season season) throws SQLException, IOException {
         List<Episode> episodeList = SeasonController.FindEpisodeSeasonID(season);
+//        List<Double> listScore = getScoreEpisodeList(episodeList);
+//        int numVotes = episodeList.stream()
+//                .filter(episode -> episode.getPremiereDate().isBefore(LocalDate.now()) || episode.getPremiereDate().isEqual(LocalDate.now()))
+//                .mapToInt(ScoreEpisodeService::GetNumberVotesEpisode)
+//                .sum();
+        List<Double> listScore = episodeList.stream()
+                .filter(episode -> episode.getPremiereDate().isBefore(LocalDate.now()) || episode.getPremiereDate().isEqual(LocalDate.now()))
+                .map(ScoreEpisodeController::GetEpisodeScore)
+                .collect(Collectors.toList());
 
-        List<Double> listScore = getScoreEpisodeList(episodeList);
-        int numVotes = episodeList.stream()
-                .mapToInt(ScoreEpisodeService::GetNumberVotesEpisode)
-                .sum();
         return Math.round(listScore.stream()
                 .collect(Collectors.averagingDouble(Double::doubleValue)));
     }
