@@ -17,7 +17,7 @@ import java.util.List;
 public class ProducerDAO {
     private static final Connection conn = ConxDB.getInstance();
 
-    public static  long createprod(Producer prod){
+    public static long createprod(Producer prod) {
         boolean etat = true;
         PreparedStatement pstmt = null;
         String sql;
@@ -25,7 +25,7 @@ public class ProducerDAO {
         Long compteur = prod.getId();
 
         try {
-             sql = "INSERT INTO Producer (NOM,PRENOM,EMAIL,PASSWORD) VALUES (?,?,?,?)";
+            sql = "INSERT INTO Producer (NOM,PRENOM,EMAIL,PASSWORD) VALUES (?,?,?,?)";
 
             pstmt = conn.prepareStatement(sql, new String[]{"ID_PROD"});
             pstmt.setString(1, prod.getNom());
@@ -44,146 +44,193 @@ public class ProducerDAO {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             return id;
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
         return id;
     }
-    public static void ajoutFilm(Film film){
+
+    public static void ajoutFilm(Film film) {
         FilmDAO.Add(film);
     }
-    public static void deleteFilm(Film film){
+
+    public static void deleteFilm(Film film) {
         FilmDAO.deleteFilm(film);
     }
-    public static void modifnom(Long id,String nom){
+
+    public static void modifnom(Long id, String nom) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE producer SET nom = '"+nom+"' WHERE id_prod = "+id;
+        String sql = "UPDATE producer SET nom = '" + nom + "' WHERE id_prod = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
     }
-    public static void modifprenom(Long id,String prenom){
+
+    public static void modifprenom(Long id, String prenom) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE producer SET prenom = '"+prenom+"' WHERE id_prod = "+id;
+        String sql = "UPDATE producer SET prenom = '" + prenom + "' WHERE id_prod = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
     }
-    public static void modifmail(Long id,String mail){
+
+    public static void modifmail(Long id, String mail) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE producer SET email = '"+mail+"' WHERE id_prod = "+id;
+        String sql = "UPDATE producer SET email = '" + mail + "' WHERE id_prod = " + id;
         try {
 
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
     }
-    public static void modifpassword(Long id,String password){
+
+    public static void modifpassword(Long id, String password) {
         /**/
         PreparedStatement pstmt = null;
-        String sql = "UPDATE producer SET password = '"+password+"' WHERE id_prod = "+id;
+        String sql = "UPDATE producer SET password = '" + password + "' WHERE id_prod = " + id;
         try {
-
 
             pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate();
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Error closing ResultSet and PreparedStatement: " + e.toString());
+            }
         }
     }
 
 
-    public static void modifnom(Film film,String nom) {
-    FilmDAO.modifnom(film,nom);
+    public static void modifnom(Film film, String nom) {
+        FilmDAO.modifnom(film, nom);
 
     }
-    public static void modifdescription(Film film,String description) {
 
-        FilmDAO.modifdescription(film,description);
+    public static void modifdescription(Film film, String description) {
 
-
-    }
-    public static void modiflangues(Film film,String langue) {
-        FilmDAO.modiflangues(film,langue);
-
+        FilmDAO.modifdescription(film, description);
 
 
     }
-    public static void modifpaysoregine(Film film,String paysoegine) {
-       FilmDAO.modifpaysoregine(film,paysoegine);
+
+    public static void modiflangues(Film film, String langue) {
+        FilmDAO.modiflangues(film, langue);
+
 
     }
+
+    public static void modifpaysoregine(Film film, String paysoegine) {
+        FilmDAO.modifpaysoregine(film, paysoegine);
+
+    }
+
     public static void modifAnnerdesoritie(Film film, LocalDate date) {
-        FilmDAO.modifAnnerdesoritie(film,date);
-
-
-
-    }
-    public static void modiflistegenre(Film film, List<String> listegenre ) {
-        FilmDAO.modiflistegenre(film,listegenre);
+        FilmDAO.modifAnnerdesoritie(film, date);
 
 
     }
-    public static void modifduree(Film film,String duree ) {
-        FilmDAO.modifduree(film,duree);
 
-
-
-    }
-    public static void modifimg(Film film, File img ) {
-        FilmDAO.modifimg(film,img);
-
+    public static void modiflistegenre(Film film, List<String> listegenre) {
+        FilmDAO.modiflistegenre(film, listegenre);
 
 
     }
-    public static void modifsynop(Film film,File synop ) {
-        FilmDAO.modifsynop(film,synop);
+
+    public static void modifduree(Film film, String duree) {
+        FilmDAO.modifduree(film, duree);
 
 
     }
-    public static void modiffilmvedio(Film film,File vid ) {
-        FilmDAO.Editvideo(film,vid);
 
+    public static void modifimg(Film film, File img) {
+        FilmDAO.modifimg(film, img);
 
 
     }
+
+    public static void modifsynop(Film film, File synop) {
+        FilmDAO.modifsynop(film, synop);
+
+
+    }
+
+    public static void modiffilmvedio(Film film, File vid) {
+        FilmDAO.Editvideo(film, vid);
+
+
+    }
+
     public static void deleteFilm_actsec(Film film, Actor act) {
-        FilmDAO.deleteFilm_actsec(film,act);
-
-
-
-
-    }
-    public static void deleteFilm_actprinc(Film film,Actor act) {
-        FilmDAO.deleteFilm_actprinc(film,act);
-
-
-
+        FilmDAO.deleteFilm_actsec(film, act);
 
 
     }
-    public static void ajoutFilm_actprinc(Film film,Actor act) {
-        FilmDAO.ajoutFilm_actprinc(film,act);
+
+    public static void deleteFilm_actprinc(Film film, Actor act) {
+        FilmDAO.deleteFilm_actprinc(film, act);
 
 
     }
-    public static void ajoutFilm_actsec(Film film,Actor act) {
-        FilmDAO.ajoutFilm_actsec(film,act);
 
+    public static void ajoutFilm_actprinc(Film film, Actor act) {
+        FilmDAO.ajoutFilm_actprinc(film, act);
+
+
+    }
+
+    public static void ajoutFilm_actsec(Film film, Actor act) {
+        FilmDAO.ajoutFilm_actsec(film, act);
 
 
     }
@@ -196,8 +243,8 @@ public class ProducerDAO {
         try {
             sql = "SELECT id_prod FROM producer WHERE nom LIKE ? OR prenome LIKE ?";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,  nom  );
-            pstmt.setString(2,  prenom  );
+            pstmt.setString(1, nom);
+            pstmt.setString(2, prenom);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 return rs.getLong(1);
@@ -238,7 +285,7 @@ public class ProducerDAO {
                 mail = rs.getString(4);
                 password = rs.getString(5);
 
-                producer = new Producer(ID_PROD,Name,LName,mail,password);
+                producer = new Producer(ID_PROD, Name, LName, mail, password);
 
                 return producer;
 
@@ -258,8 +305,6 @@ public class ProducerDAO {
     }
 
 
-
-
     public static boolean authenticate(String mail, String pass) {
         PreparedStatement pstmt;
         String sql;
@@ -277,7 +322,7 @@ public class ProducerDAO {
                 String Nom = rs.getString("NOM");
                 String Prenom = rs.getString("PRENOM");
 
-                Producer producer = new Producer(Prod_ID,Nom,Prenom,mail,pass);
+                Producer producer = new Producer(Prod_ID, Nom, Prenom, mail, pass);
 
                 DataHolder.setProducer(producer);
                 return true;

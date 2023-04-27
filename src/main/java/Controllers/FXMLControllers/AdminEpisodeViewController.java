@@ -22,7 +22,6 @@ public class AdminEpisodeViewController implements Initializable {
 
     public void onBack() throws Exception {
         DataHolderSeason.setSelectedSeason(SeasonController.FindSeasonID(DataHolderEpisode.getSelectedEpisode().getSeasonParentID()).get(0));
-//        DataHolderEpisode.setEpisodeOBList(SeasonController.FindEpisodeSeasonID());
         DataHolderEpisode.setSelectedEpisode(null);
         HelloApplication.SetRoot("AdminSeasonView");
     }

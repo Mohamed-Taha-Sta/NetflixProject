@@ -176,7 +176,7 @@ public class ActorLandingPageController implements Initializable {
     }
 
 
-    public void OnloadProfile() throws Exception {
+    public void OnloadProfile() {
 
         ProfileName.setText(DataHolder.getActor().getName() + " " + DataHolder.getActor().getPrename());
         NameLabel.setText(DataHolder.getActor().getName());

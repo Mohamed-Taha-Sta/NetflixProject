@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import org.controlsfx.control.CheckComboBox;
 
@@ -18,11 +17,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static Utils.RepeatableFunction.isTextExceedingLength;
+import static Utils.RepeatableFunction.showErrorMessage;
 
 public class AddSeriesController implements Initializable {
 
     public TextField Name;
-    public Text AlertText;
+
     public TextField Thumbnail;
     public TextArea DescriptionBox;
     public TextField Synopsis;
@@ -31,6 +31,7 @@ public class AddSeriesController implements Initializable {
     public CheckComboBox<String> GenreSelector;
     public ComboBox<String> CountrySelector;
     public ComboBox<String> LanguageSelector;
+    public Label AlertText;
 
     @FXML
     protected void onBack() throws Exception {
@@ -40,41 +41,29 @@ public class AddSeriesController implements Initializable {
     @FXML
     protected void onAdd() throws Exception {
         if (Name.getText().isEmpty()) {
-            AlertText.setText("Series must have a name");
-            AlertText.setOpacity(1);
-        } else if (Name.getText().length() < 1) {
-            AlertText.setText("Series must have a valid name");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a name");
+        } else if (isTextExceedingLength(Name,50)) {
+            showErrorMessage(AlertText,"Series name is tooo long");
         } else if (isTextExceedingLength(Name, 50)) {
-            AlertText.setText("Series name too long");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series name too long");
         } else if (CountrySelector.getValue() == null) {
-            AlertText.setText("Series must have a country");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a country");
         } else if (LanguageSelector.getValue() == null) {
-            AlertText.setText("Series must have a language");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a language");
         } else if (GenreSelector.getCheckModel().isEmpty()) {
-            AlertText.setText("Series must have at least 1 genre");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have at least 1 genre");
         } else if (Thumbnail.getText().isEmpty()) {
-            AlertText.setText("Series must have a thumbnail");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a thumbnail");
         } else if (Synopsis.getText().isEmpty()) {
-            AlertText.setText("Series must have a synopsis");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a synopsis");
         } else if (DescriptionBox.getText().isEmpty()) {
-            AlertText.setText("Series must have a description");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a description");
         } else if (isTextExceedingLength(DescriptionBox, 150)) {
-            AlertText.setText("Series description too long");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series description is longer than series");
         } else if (GenreSelector.getCheckModel().getCheckedItems() == null) {
-            AlertText.setText("Series must have at least a genre");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have at least a genre");
         } else if (DebutDate.getValue() == null) {
-            AlertText.setText("Series must have a Debut Date");
-            AlertText.setOpacity(1);
+            showErrorMessage(AlertText,"Series must have a Debut Date");
         } else {
             DataHolderSeries.setSeriesName(Name.getText());
             DataHolderSeries.setCountryOfOrigin(CountrySelector.getValue());

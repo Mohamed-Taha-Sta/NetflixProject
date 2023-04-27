@@ -73,9 +73,7 @@ public class AddEpisodeController implements Initializable {
                     DataHolderEpisode.getSynopsis(), DataHolderEpisode.getVideo(), DataHolderEpisode.getThumbnail()));
 
             DataHolderEpisode.setIDEpisode(IdEpisode);
-
             HelloApplication.SetRoot("AddEpisode");
-
         }
     }
 
@@ -107,7 +105,6 @@ public class AddEpisodeController implements Initializable {
                 Thumbnail.setText(selectedFile.toURI().toString());
 
             } else {
-                // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Image Size");
@@ -133,7 +130,6 @@ public class AddEpisodeController implements Initializable {
                 Synopsis.setText(selectedFile.toURI().toString());
 
             } else {
-                // If the selected image does not have the required dimensions, display an error message
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Synopsis Size");
