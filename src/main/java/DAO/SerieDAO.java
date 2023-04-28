@@ -705,7 +705,6 @@ public class SerieDAO {
 
     }
 
-
     public static boolean modifnom(Serie Serie,String nom) throws SQLException {
         PreparedStatement pstmt = null;
         String sql;
