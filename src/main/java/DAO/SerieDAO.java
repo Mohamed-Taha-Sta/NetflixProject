@@ -48,22 +48,15 @@ public class SerieDAO {
             }
 
         } catch(SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return -1;
         } catch(Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
-//            pstmt.close();
-//            conn.close();
             return -1;
         }
         InsertMainActSerie(id,Serie.getIDMainactorList());
         InsertSuppActSerie(id,Serie.getIDSuppactorList());
         pstmt.close();
-//        conn.close();
         return id;
     }
 
@@ -108,12 +101,10 @@ public class SerieDAO {
 
             }
         } catch(SQLException se) {
-            // Handle errors for JDBC
             se.printStackTrace();
 
             return false;
         } catch(Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
             return false;
         }
@@ -720,11 +711,9 @@ public class SerieDAO {
         String sql;
 
         try {
-
             sql = "UPDATE Serie SET Name = '" + nom + "' WHERE ID_SERIE = " + Serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
@@ -853,15 +842,12 @@ public class SerieDAO {
 
         try {
             String genreListString = String.join(",", listegenre.stream().map(Object::toString).toArray(String[]::new));
-
             sql = "UPDATE Serie SET listegenre = '" + genreListString + "' WHERE ID_SERIE = " + serie.getId();
             pstmt = conn.prepareStatement(sql);
             pstmt.executeQuery();
-
             return true;
         } catch (SQLException e) {
             System.out.println("error dans la connection de la base");
-
             return false;
         }finally {
             if (pstmt != null) {
@@ -882,14 +868,10 @@ public class SerieDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, serie.getId());
             pstmt.setLong(2, act.getID());
-
             pstmt.executeUpdate();
-
             return true;
-
         } catch (Exception e) {
             System.out.println("acteur n'exite pas");
-
             return false;
         }finally {
             if (pstmt != null) {
@@ -911,11 +893,8 @@ public class SerieDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, serie.getId());
             pstmt.setLong(2, act.getID());
-
             pstmt.executeUpdate();
-
             return true;
-
         } catch (Exception e) {
 
             return false;
@@ -971,8 +950,6 @@ public class SerieDAO {
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, act.getID());
             pstmt.setLong(2, serie.getId());
-
-
             pstmt.executeUpdate();
 
             return true;
@@ -1075,7 +1052,6 @@ public class SerieDAO {
             while ((length = SerieThumbnail.read(bufferImg)) != -1) {
                 outS.write(bufferImg, 0, length);
             }
-
             List<Actor> ActorList = getPrincActorSerie(getPrincActorIDSerie(ID));
             List<Actor> SuppActorList = getSuppActorSerie(getSuppActorIDSerie(ID));
 
@@ -1139,14 +1115,6 @@ public class SerieDAO {
             }
         }
         return serieList;
-
     }
-
-
-
-
-
-
-
 
 }
