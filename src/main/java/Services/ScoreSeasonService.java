@@ -2,7 +2,6 @@ package Services;
 
 import Controllers.ScoreEpisodeController;
 import Entities.Episode;
-import Entities.Season;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -11,7 +11,6 @@ public class Film extends Content{
     private String duree;
     private ArrayList<Actor>acteur;
 
-//private ArrayList<String>genre;
     private long VueNbr;
     private long Score;
     private long Votes;
@@ -114,13 +113,7 @@ public class Film extends Content{
     {
         super(id);
     }
-   /* public ArrayList<String> getGenre() {
-        return genre;
-    }
 
-    public void setGenre(ArrayList<String> genre) {
-        this.genre = genre;
-    }*/
 
 
     public Film(String nom, String desc, LocalDate annerdesortie, String langue, String paysorigine,

@@ -1,8 +1,6 @@
 package Services;
 
-import Controllers.ScoreEpisodeController;
 import Controllers.ScoreSeasonController;
-import Entities.Episode;
 import Entities.Season;
 
 import java.io.IOException;

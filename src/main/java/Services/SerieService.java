@@ -3,18 +3,14 @@ package Services;
 import Controllers.EpisodeController;
 import Controllers.ScoreEpisodeController;
 import Controllers.SeasonController;
-import Controllers.SerieController;
 import DAO.SerieDAO;
 import Entities.*;
-
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
